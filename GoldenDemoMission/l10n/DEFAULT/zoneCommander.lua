@@ -166,6 +166,14 @@ do
 		end
 	end
 	
+	function Utils.isGroupActive(group)
+		if group and group:getSize()>0 and group:getController():hasTask() then 
+			return not Utils.allGroupIsLanded(group, true)
+		else
+			return false
+		end
+	end
+	
 	function Utils.isInAir(unit)
 		--return Utils.getAGL(unit)>5
 		return unit:inAir()
@@ -883,6 +891,47 @@ do
 				cnt:pushTask(task)
 			end
 		end
+	end
+	
+	function BattleCommander:jamRadarsAtZone(groupname, zonename)
+		local gr = Group.getByName(groupname)
+		local zn = self:getZoneByName(zonename)
+		if not gr then return 'EW group dead' end
+		if not zn then return 'Zone not found' end
+		if zn.side == gr:getCoalition() then return 'Can not jam friendly zone' end
+		
+		timer.scheduleFunction(function (param, time)
+			local gr = Group.getByName(param.ewgroup)
+			local zn = param.context:getZoneByName(param.target)
+			if not Utils.isGroupActive(gr) or zn.side == gr:getCoalition() then
+				for i,v in pairs(zn.built) do
+					local g = Group.getByName(v)
+					if g then
+						for i2,v2 in ipairs(g:getUnits()) do
+							if v2:hasAttribute('SAM SR') or v2:hasAttribute('SAM TR') then
+								v2:getController():setOption(0,2)
+								v2:getController():setOption(9,2)
+							end
+						end
+					end
+				end
+				return nil
+			else
+				for i,v in pairs(zn.built) do
+					local g = Group.getByName(v)
+					if g then
+						for i2,v2 in ipairs(g:getUnits()) do
+							if v2:hasAttribute('SAM SR') or v2:hasAttribute('SAM TR') then
+								v2:getController():setOption(0,4)
+								v2:getController():setOption(9,1)
+							end
+						end
+					end
+				end
+			end
+			
+			return time+10
+		end, {ewgroup = groupname, target = zonename, context = self}, timer.getTime()+10)
 	end
 	
 	function BattleCommander:startFiringAtZone(groupname, zonename, minutes)
@@ -1663,6 +1712,7 @@ do
 		local zone = CustomZone:getByName(self.zone)
 		if not zone then
 			trigger.action.outText('ERROR: zone ['..self.zone..'] can not be found in the mission', 60)
+			env.info('ERROR: zone ['..self.zone..'] can not be found in the mission')
 		end
 		
 		local color = {0.7,0.7,0.7,0.3}
@@ -2017,9 +2067,8 @@ do
 			self.side = gr:getCoalition()
 			gr:destroy()
 		else
-			if not zone then
-				trigger.action.outText('ERROR: group ['..self.name..'] can not be found in the mission', 60)
-			end
+			trigger.action.outText('ERROR: group ['..self.name..'] can not be found in the mission', 60)
+			env.info('ERROR: group ['..self.name..'] can not be found in the mission')
 		end
 	end
 	
@@ -2268,7 +2317,7 @@ do
 		end
 	end
 	
-	function EventCommander:chooseAndStart()
+	function EventCommander:chooseAndStart(time)
 		local canRun = {}
 		for i,v in ipairs(self.events) do
 			if v:canExecute() then
@@ -2285,13 +2334,14 @@ do
 		end
 	end
 	
-	function EventCommander:scheduleDecission()
+	function EventCommander:scheduleDecission(time)
 		local variance = math.random(1, self.decissionVariance)
-		mist.scheduleFunction(self.chooseAndStart, {self}, timer.getTime() + variance)
+		timer.scheduleFunction(self.chooseAndStart, self, time + variance)
+		return time + self.decissionFrequency + variance
 	end
 	
 	function EventCommander:init()
-		mist.scheduleFunction(self.scheduleDecission, {self}, timer.getTime() + self.decissionFrequency, self.decissionFrequency)
+		timer.scheduleFunction(self.scheduleDecission, self, timer.getTime() + self.decissionFrequency)
 	end
 end
 

@@ -119,7 +119,6 @@ four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, cr
 gelianjike = ZoneCommander:new({zone='Gelianjike', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
 xinluo = ZoneCommander:new({zone='Xinluo', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
 mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
-krasnodar2 = ZoneCommander:new({zone='Krasnodar2', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
 kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
 
 radio:addCriticalObject('RadioTower')
@@ -238,9 +237,7 @@ dispatch = {
 	},
 	oilfields={
 		GroupCommander:new({name='oil-krymsk-supply', mission='supply', targetzone='Krymsk', type='surface'})
-	}, -- Edited: Add a comma
-	-- Edited: More manually added zones
-
+	}
 }
 
 
@@ -278,7 +275,6 @@ bc:addZone(four)
 bc:addZone(gelianjike)
 bc:addZone(xinluo)
 bc:addZone(mikehans)
-bc:addZone(krasnodar2)
 bc:addZone(kelasinuodaer)
 
 bc:addConnection("Anapa","Alpha")
@@ -308,19 +304,16 @@ bc:addConnection("Apple","Gelianjike")
 bc:addConnection("Apple","Foxtrot")
 bc:addConnection("Banana","Four")
 bc:addConnection("Banana","Krasnodar")
-bc:addConnection("Banana","Krasnodar2")
 bc:addConnection("Banana","Apple")
 bc:addConnection("Banana","Foxtrot")
 bc:addConnection("Famer","Anapa")
 bc:addConnection("Famer","Alpha")
 bc:addConnection("Famer","Xinluo")
 bc:addConnection("Four","Krasnodar")
-bc:addConnection("Four","Krasnodar2")
 bc:addConnection("Four","Foxtrot")
 bc:addConnection("Mikehans","Four")
 bc:addConnection("Mikehans","Banana")
 bc:addConnection("Kelasinuodaer","Krasnodar")
-bc:addConnection("Kelasinuodaer","Krasnodar2")
 bc:addConnection("Kelasinuodaer","Echo")
 bc:addConnection("Kelasinuodaer","Foxtrot")
 bc:addConnection("Xinluo","Gelianjike")
