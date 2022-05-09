@@ -1,0 +1,9 @@
+mapResource = 
+{
+    ["ResKey_Action_6"] = "mist_4_5_107.lua",
+    ["ResKey_Action_25"] = "Advanced_SAM_Operators.lua",
+    ["ResKey_Action_21"] = "zoneSetup.lua",
+    ["ResKey_ImageBriefing_29"] = "pic_title.jpg",
+    ["ResKey_Action_20"] = "zoneCommander.lua",
+    ["ResKey_Action_26"] = "Splash_Damage_2_0.lua",
+} -- end of mapResource
