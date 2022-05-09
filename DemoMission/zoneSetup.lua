@@ -377,6 +377,7 @@ local checkMissionComplete = function (event, sender)
 	
 	if done then
 		trigger.action.outText("Enemy has been defeated. \n\nMission Complete.", 120)
+		trigger.action.setUserFlag("TriggerFlagMissionComplete", true) -- Edited: Set flag to make mission restart
 	end
 end
 
