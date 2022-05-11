@@ -19,40 +19,47 @@ function allExcept(tbls, except)
 	return merge(tomerge)
 end
 
+-- Edited: Spawn more units on zones & add new spawn types
 carrier = {
-	blue = { "bShip","bShip"},
+	blue = { "bShip", "bShip", "bShip" },
 	red = {}
 }
 
 airfield = {
-	blue = { "bInfantry", "bArmor", "bSam", "bSam2", "bSam3"},
-	red = {"rInfantry", "rArmor", "rSam", "rSam2", "rSam3" }
+	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSam", "bSam2", "bSam3", "bSamIR" },
+	red = {"rInfantry", "rInfantry", "rArmor", "rArmor", "rSam", "rSam2", "rSam3", "rSamIR" }
 }
 
 farp = {
-	blue = {"bInfantry", "bArmor", "bSam"},
-	red = {"rInfantry", "rArmor", "rSam" }
+	blue = {"bInfantry", "bArmor", "bArmor", "bSam", "bSamIR" },
+	red = {"rInfantry", "rArmor", "rArmor", "rSam", "rSamIR" }
 }
 
 regularzone = {
-	blue = {"bInfantry", "bArmor", "bSamIR"},
-	red = {"rInfantry", "rArmor", "rSamIR" }
+	blue = {"bInfantry", "bArmor", "bArmor", "bSam", "bSam2", "bSamIR" },
+	red = {"rInfantry", "rArmor", "rArmor", "rSam", "rSam2", "rSamIR" }
 }
 
 specialSAM = {
-	blue = {"bInfantry", "bSamIR","bInfantry", "bInfantry", "bSamBig" },
-	red = {"rInfantry", "rSamIR", "rInfantry", "rInfantry", "rSamBig" }
+	blue = {"bInfantry", "bSamIR", "bSam", "bSam2", "bSamBig" },
+	red = {"rInfantry", "rSamIR", "rSam", "rSam2", "rSamBig" }
 }
 
 specialKrasnodar = {
-	blue = {"bInfantry", "bSamIR","bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = {"rInfantry", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
+	blue = {"bInfantry", "bArmor", "bSamIR","bSam2", "bSam3", "bSamBig", "bSamBig", "bSamFinal", "bSamFinal" },
+	red = {"rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal" }
 }
 
 convoy = {
-	blue = {"bInfantry", "bInfantry", "bArmor"},
-	red = {"rInfantry", "rInfantry", "rArmor"}
+	blue = {"bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR"},
+	red = {"rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR"}
 }
+
+specialSuhumi = {
+	blue = {},
+	red = {"rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal", "Suhumi001", "Suhumi001-1", "Suhumi001-2", "Suhumi001-3"}
+}
+-- Edited: Done
 
 cargoSpawns = {
 	["Anapa"] = {"c1","c2","c3"},
@@ -94,32 +101,46 @@ flavor = {
 	krasnodar='WPT 14\nAirbase next to the city of Krasnodar.\nThe home base of our enemy. Capture it to deprive them of their most valuable asset.'
 }
 
-bc = BattleCommander:new('foothold_1.3.3.lua')
-anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
-carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=2, upgrades=carrier, crates={}, flavorText=flavor.carrier})
-alpha = ZoneCommander:new({zone='Alpha', side=0, level=0, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+bc = BattleCommander:new('foothold_1.3.3.lua') -- Edited: Set all zones to enemy occupied and upgrade their initial levels
+anapa = ZoneCommander:new({zone='Anapa', side=2, level=3, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
+carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=3, upgrades=carrier, crates={}, flavorText=flavor.carrier})
+alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
 bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.bravo, flavorText=flavor.bravo})
-charlie = ZoneCommander:new({zone='Charlie', side=0, level=0, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.charlie})
+charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.charlie})
 convoy = ZoneCommander:new({zone='Convoy', side=1, level=3, upgrades=convoy, crates=cargoAccepts.general, flavorText=flavor.convoy})
-krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=5, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=flavor.krymsk})
+krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=6, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=flavor.krymsk})
 oilfields = ZoneCommander:new({zone='Oil Fields', side=1, level=3, upgrades=farp, crates=cargoAccepts.general, flavorText=flavor.oilfields, income=2})
-radio = ZoneCommander:new({zone='Radio Tower', side=1, level=1, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.radio})
-delta = ZoneCommander:new({zone='Delta', side=1, level=1, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.delta})
-factory = ZoneCommander:new({zone='Factory', side=1, level=1, upgrades=regularzone, crates=cargoAccepts.factory, flavorText=flavor.factory, income=2})
-samsite = ZoneCommander:new({zone='SAM Site', side=0, level=0, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.samsite})
+radio = ZoneCommander:new({zone='Radio Tower', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.radio})
+delta = ZoneCommander:new({zone='Delta', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.delta})
+factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.factory, flavorText=flavor.factory, income=2})
+samsite = ZoneCommander:new({zone='SAM Site', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.samsite})
 foxtrot = ZoneCommander:new({zone='Foxtrot', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.foxtrot})
 echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.echo, flavorText=flavor.echo})
 krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
 
--- Edited: More manually added zones
-famer = ZoneCommander:new({zone='Famer', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+-- Edited: Add new zones
+-- Friendly zones
+xinluo = ZoneCommander:new({zone='Xinluo', side=2, level=3, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
+-- Regular zones
 apple = ZoneCommander:new({zone='Apple', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
 banana = ZoneCommander:new({zone='Banana', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+famer = ZoneCommander:new({zone='Famer', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
 four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-gelianjike = ZoneCommander:new({zone='Gelianjike', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
-xinluo = ZoneCommander:new({zone='Xinluo', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
+fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+ever = ZoneCommander:new({zone='Ever', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+-- SAM sites: specialSAM
+finish = ZoneCommander:new({zone='Finish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.alpha})
+cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.alpha})
+-- Airfields
+suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.general, flavorText=flavor.krymsk})
+gelianjike = ZoneCommander:new({zone='Gelianjike', side=1, level=5, upgrades=airfield, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
+kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
+-- Enhanced airfields: specialKrasnodar
 mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
-kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
+-- Final target: specialSuhumi
+suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=6, upgrades=specialSuhumi, crates=cargoAccepts.general, flavorText=flavor.krymsk})
+-- Edited: Done
 
 radio:addCriticalObject('RadioTower')
 samsite:addCriticalObject('CommandCenter')
@@ -136,6 +157,88 @@ for i,v in ipairs(oilbuildings) do
 end
 
 dispatch = {
+	-- Edited: Add dispatches for more zones
+	xinluo = {
+		GroupCommander:new({name='Xinluo1', mission='supply', targetzone='Gelianjike'}),
+		GroupCommander:new({name='Xinluo2', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='Xinluo3', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='Xinluo-J17', mission='patrol', targetzone='Famer'}),
+	},
+	gelianjike = {
+		GroupCommander:new({name='Gelianjike1', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='Gelianjike2', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='Gelianjike3', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='Gelianjike4', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='Gelianjike5', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='Gelianjike6', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='Gelianjike-15C', mission='patrol', targetzone='Four'}),
+		GroupCommander:new({name='Gelianjike-16C', mission='patrol', targetzone='Apple'}),
+		GroupCommander:new({name='Gelianjike-A10C', mission='attack', targetzone='Anapa'}),
+		GroupCommander:new({name='Gelianjike-SU33', mission='patrol', targetzone='Radio Tower'}),
+		GroupCommander:new({name='Gelianjike-AJS37', mission='attack', targetzone='Bravo'}),
+	},
+	carrier = {
+		GroupCommander:new({name='CVN-73-3', mission='patrol', targetzone='Anapa'}),
+		GroupCommander:new({name='CVN-74-3', mission='patrol', targetzone='Bravo'}),
+		GroupCommander:new({name='CVN-61-2', mission='patrol', targetzone='Gelianjike'}),
+	},
+	famer = {
+		GroupCommander:new({name='Famer1', mission='supply', targetzone='Alpha', type='surface'}),
+	},
+	kelasinuodaer = {
+		GroupCommander:new({name='Kelasinuodaer1', mission='supply', targetzone='Ever'}),
+		GroupCommander:new({name='Kelasinuodaer15C', mission='patrol', targetzone='Anapa'}),
+		GroupCommander:new({name='Kelasinuodaer16', mission='patrol', targetzone='Krymsk'}),
+		GroupCommander:new({name='Kelasinuodaer14', mission='patrol', targetzone='Four'}),
+		GroupCommander:new({name='Kelasinuodaer15C-1', mission='patrol', targetzone='Ever'}),
+		GroupCommander:new({name='Kelasinuodaer1-1', mission='patrol', targetzone='Delta'}),
+		GroupCommander:new({name='Kelasinuodaer2-4', mission='supply', targetzone='Krasnodar'}),
+	},
+	banana = {
+		GroupCommander:new({name='Mikehans60A-11', mission='supply', targetzone='Mikehans'}),
+	},
+	mikehans = {
+		GroupCommander:new({name='Mikehans15', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='Mikehans15-1', mission='patrol', targetzone='Finish'}),
+		GroupCommander:new({name='Mikehans15-2', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans15-3', mission='patrol', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans15-4', mission='patrol', targetzone='Suoqi'}),
+		GroupCommander:new({name='Mikehans15-5', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans15-6', mission='patrol', targetzone='Fish'}),
+		GroupCommander:new({name='Mikehans60A', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='Mikehans60A-1', mission='supply', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans60A-2', mission='supply', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans60A-3', mission='supply', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans60A-4', mission='supply', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans60A-5', mission='supply', targetzone='Finish'}),
+		GroupCommander:new({name='Mikehans60A-6', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='Mikehans60A-7', mission='supply', targetzone='Finish'}),
+	},
+	fine = {
+		GroupCommander:new({name='Fine1', mission='supply', targetzone='Suoqi'}),
+	},
+	suoqi = {
+		GroupCommander:new({name='Suoqi60A-3', mission='supply', targetzone='Fine'}),
+		GroupCommander:new({name='Suoqi60A-2', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Mikehans15-7', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='Mikehans60A-8', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Suoqi60A-4', mission='supply', targetzone='Suhumi'}),
+		GroupCommander:new({name='Suoqi60A', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Suoqi60A-1', mission='supply', targetzone='Cool'}),
+		GroupCommander:new({name='Suoqi111', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='Suoqi111-1', mission='patrol', targetzone='Cool'}),
+		GroupCommander:new({name='Suoqi111-2', mission='patrol', targetzone='Fish'}),
+	},
+	suhumi = {
+		GroupCommander:new({name='Suhumi60A', mission='supply', targetzone='Suoqi'}),
+		GroupCommander:new({name='Suhumi60A-1', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Suhumi0', mission='patrol', targetzone='Suoqi'}),
+		GroupCommander:new({name='Suhumi0-1', mission='patrol', targetzone='Fish'}),
+		GroupCommander:new({name='Suhumi0-2', mission='patrol', targetzone='Apple'}),
+		GroupCommander:new({name='Suhumi111', mission='attack', targetzone='Mikehans'}),
+		GroupCommander:new({name='Suhumi11', mission='attack', targetzone='Mikehans'}),
+		GroupCommander:new({name='Suhumi11-1', mission='attack', targetzone='Suoqi'}),
+	},
 	krymsk = {
 		GroupCommander:new({name='krym1', mission='supply', targetzone='Bravo'}),
 		GroupCommander:new({name='krym2', mission='attack', targetzone='Bravo'}),
@@ -161,7 +264,7 @@ dispatch = {
 		GroupCommander:new({name='krym22', mission='supply', targetzone='Oil Fields'}),
 		GroupCommander:new({name='krym23', mission='supply', targetzone='Oil Fields'}),
 		GroupCommander:new({name='krym24', mission='attack', targetzone='Oil Fields'}),
-		GroupCommander:new({name='krym25', mission='attack', targetzone='Bravo', type='surface'})
+		GroupCommander:new({name='krym25', mission='attack', targetzone='Bravo', type='surface'}),
 	},
 	bravo = {
 		GroupCommander:new({name='bravo1', mission='supply', targetzone='Alpha'}),
@@ -175,13 +278,16 @@ dispatch = {
 		GroupCommander:new({name='bravo9', mission='supply', targetzone='Alpha'}),
 		GroupCommander:new({name='bravo11', mission='supply', targetzone='Oil Fields'}),
 		GroupCommander:new({name='bravo12', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='bravo13', mission='attack', targetzone='Oil Fields'})
+		GroupCommander:new({name='bravo13', mission='attack', targetzone='Oil Fields'}),
 	},
+	-- Edited: Done
 	anapa = {
 		GroupCommander:new({name='anapa1', mission='supply', targetzone='Alpha'}),
 		GroupCommander:new({name='anapa3', mission='supply', targetzone='Bravo'}),
 		GroupCommander:new({name='anapa2', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='anapa5', mission='patrol', targetzone='Bravo'})
+		GroupCommander:new({name='anapa5', mission='patrol', targetzone='Bravo'}),
+		-- Edited: New fleets are added below
+		GroupCommander:new({name='Anapa1', mission='supply', targetzone='Famer'}),
 	},
 	charlie={
 		GroupCommander:new({name='anapa6', mission='attack', targetzone='Bravo'})
@@ -214,7 +320,9 @@ dispatch = {
 		GroupCommander:new({name='echo11', mission='attack', targetzone='Foxtrot'}),
 		GroupCommander:new({name='echo12', mission='supply', targetzone='Krasnodar'}),
 		GroupCommander:new({name='echo13', mission='supply', targetzone='Krasnodar'}),
-		GroupCommander:new({name='echo14', mission='supply', targetzone='Krasnodar'})
+		GroupCommander:new({name='echo14', mission='supply', targetzone='Krasnodar'}),
+		-- Edited: New fleets are added below
+		GroupCommander:new({name='Echo0', mission='supply', targetzone='Ever'}),
 	},
 	krasnodar={
 		GroupCommander:new({name='kras1', mission='supply', targetzone='Echo'}),
@@ -229,11 +337,17 @@ dispatch = {
 		GroupCommander:new({name='kras10', mission='attack', targetzone='Foxtrot'}),
 		GroupCommander:new({name='kras11', mission='patrol', targetzone='Echo'}),
 		GroupCommander:new({name='kras12', mission='patrol', targetzone='Delta'}),
-		GroupCommander:new({name='kras13', mission='patrol', targetzone='Factory'})
+		GroupCommander:new({name='kras13', mission='patrol', targetzone='Factory'}),
+		-- Edited: New fleets are added below
+		GroupCommander:new({name='kras332', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='kras332-1', mission='supply', targetzone='Apple'}),
 	},
 	foxtrot={
 		GroupCommander:new({name='foxtrot-krymsk-attack', mission='attack', targetzone='Krymsk', type='surface'}),
-		GroupCommander:new({name='foxtrot-echo-attack', mission='attack', targetzone='Echo', type='surface'})
+		GroupCommander:new({name='foxtrot-echo-attack', mission='attack', targetzone='Echo', type='surface'}),
+		-- Edited: New fleets are added below
+		GroupCommander:new({name='Foxtrot1', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='Foxtrot1-1', mission='supply', targetzone='Apple'}),
 	},
 	oilfields={
 		GroupCommander:new({name='oil-krymsk-supply', mission='supply', targetzone='Krymsk', type='surface'})
@@ -250,6 +364,20 @@ echo:addGroups(dispatch.echo)
 krasnodar:addGroups(dispatch.krasnodar)
 foxtrot:addGroups(dispatch.foxtrot)
 oilfields:addGroups(dispatch.oilfields)
+-- Edited: Bind new zones with new fleets
+xinluo:addGroups(dispatch.xinluo)
+gelianjike:addGroups(dispatch.gelianjike)
+carrier:addGroups(dispatch.carrier)
+famer:addGroups(dispatch.famer)
+kelasinuodaer:addGroups(dispatch.kelasinuodaer)
+banana:addGroups(dispatch.banana)
+mikehans:addGroups(dispatch.mikehans)
+fine:addGroups(dispatch.fine)
+suoqi:addGroups(dispatch.suoqi)
+suhumi:addGroups(dispatch.suhumi)
+krymsk:addGroups(dispatch.krymsk)
+bravo:addGroups(dispatch.bravo)
+-- Edited: Done
 
 bc:addZone(anapa)
 bc:addZone(carrier)
@@ -266,16 +394,23 @@ bc:addZone(samsite)
 bc:addZone(foxtrot)
 bc:addZone(echo)
 bc:addZone(krasnodar)
-
--- Edited: More manually added zones
-bc:addZone(famer)
+-- Edited: Add new zones
+bc:addZone(xinluo)
 bc:addZone(apple)
 bc:addZone(banana)
+bc:addZone(famer)
 bc:addZone(four)
+bc:addZone(fine)
+bc:addZone(fish)
+bc:addZone(ever)
+bc:addZone(finish)
+bc:addZone(cool)
+bc:addZone(suoqi)
 bc:addZone(gelianjike)
-bc:addZone(xinluo)
-bc:addZone(mikehans)
 bc:addZone(kelasinuodaer)
+bc:addZone(mikehans)
+bc:addZone(suhumi)
+-- Edited: Done
 
 bc:addConnection("Anapa","Alpha")
 bc:addConnection("Alpha","Bravo")
@@ -296,27 +431,74 @@ bc:addConnection("Foxtrot","Krasnodar")
 bc:addConnection("Echo","Krasnodar")
 bc:addConnection("Echo","SAM Site")
 bc:addConnection("Krymsk","SAM Site")
-
--- Edited: More manually added zones
-bc:addConnection("Apple","Factory")
-bc:addConnection("Apple","Foxtrot")
-bc:addConnection("Apple","Gelianjike")
-bc:addConnection("Apple","Foxtrot")
-bc:addConnection("Banana","Four")
-bc:addConnection("Banana","Krasnodar")
-bc:addConnection("Banana","Apple")
-bc:addConnection("Banana","Foxtrot")
-bc:addConnection("Famer","Anapa")
-bc:addConnection("Famer","Alpha")
+-- Edited: Add new zones
+bc:addConnection("Anapa","Famer")
+bc:addConnection("Alpha","Famer")
 bc:addConnection("Famer","Xinluo")
-bc:addConnection("Four","Krasnodar")
-bc:addConnection("Four","Foxtrot")
-bc:addConnection("Mikehans","Four")
-bc:addConnection("Mikehans","Banana")
-bc:addConnection("Kelasinuodaer","Krasnodar")
-bc:addConnection("Kelasinuodaer","Echo")
-bc:addConnection("Kelasinuodaer","Foxtrot")
+bc:addConnection("Famer","Bravo")
+bc:addConnection("Famer","Krymsk")
+bc:addConnection("Famer","Radio Tower")
+bc:addConnection("Xinluo","Alpha")
+bc:addConnection("Xinluo","Bravo")
+bc:addConnection("Xinluo","Krymsk")
+bc:addConnection("Xinluo","Radio Tower")
 bc:addConnection("Xinluo","Gelianjike")
+bc:addConnection("Xinluo","Factory")
+bc:addConnection("Xinluo","Four")
+bc:addConnection("Gelianjike","Radio Tower")
+bc:addConnection("Gelianjike","Factory")
+bc:addConnection("Gelianjike","Four")
+bc:addConnection("Gelianjike","Bravo")
+bc:addConnection("Gelianjike","Alpha")
+bc:addConnection("Gelianjike","Krymsk")
+bc:addConnection("Gelianjike","Fine")
+bc:addConnection("Ever","Oil Fields")
+bc:addConnection("Ever","SAM Site")
+bc:addConnection("Ever","Echo")
+bc:addConnection("Ever","Foxtrot")
+bc:addConnection("Ever","Kelasinuodaer")
+bc:addConnection("Ever","Krasnodar")
+bc:addConnection("Ever","Banana")
+bc:addConnection("Four","Famer")
+bc:addConnection("Four","Alpha")
+bc:addConnection("Four","Bravo")
+bc:addConnection("Four","Radio Tower")
+bc:addConnection("Four","Factory")
+bc:addConnection("Four","Echo")
+bc:addConnection("Four","Foxtrot")
+bc:addConnection("Four","Apple")
+bc:addConnection("Four","Fine")
+bc:addConnection("Four","Suoqi")
+bc:addConnection("Apple","Suoqi")
+bc:addConnection("Apple","Foxtrot")
+bc:addConnection("Apple","Factory")
+bc:addConnection("Apple","Banana")
+bc:addConnection("Apple","Krasnodar")
+bc:addConnection("Apple","Mikehans")
+bc:addConnection("Apple","Fine")
+bc:addConnection("Krasnodar","Banana")
+bc:addConnection("Krasnodar","Four")
+bc:addConnection("Krasnodar","Mikehans")
+bc:addConnection("Banana","Mikehans")
+bc:addConnection("Banana","Foxtrot")
+bc:addConnection("Mikehans","Finish")
+bc:addConnection("Mikehans","Cool")
+bc:addConnection("Mikehans","Fine")
+bc:addConnection("Fine","Suoqi")
+bc:addConnection("Fine","Finish")
+bc:addConnection("Fine","Cool")
+bc:addConnection("Fine","Fish")
+bc:addConnection("Finish","Cool")
+bc:addConnection("Finish","Fish")
+bc:addConnection("Finish","Suoqi")
+bc:addConnection("Cool","Fish")
+bc:addConnection("Cool","Suoqi")
+bc:addConnection("Cool","Suhumi")
+bc:addConnection("Suoqi","Suhumi")
+bc:addConnection("Suoqi","Gelianjike")
+bc:addConnection("Suoqi","Fish")
+bc:addConnection("Fish","Suhumi")
+-- Edited: Done
 
 convoy:registerTrigger('lost', function (event, sender)
 	local convoyItems = {'convoy1','convoy2','convoy3', 'convoy4'}
