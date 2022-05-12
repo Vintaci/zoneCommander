@@ -21,43 +21,43 @@ end
 
 -- Edited: Spawn more units on zones & add new spawn types
 carrier = {
-	blue = { "bShip", "bShip", "bShip" },
+	blue = { "bShip", "bShip", "bShip", "bShip", "bShip", "bShip" },
 	red = {}
 }
 
 airfield = {
-	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSam", "bSam2", "bSam3", "bSamIR" },
-	red = {"rInfantry", "rInfantry", "rArmor", "rArmor", "rSam", "rSam2", "rSam3", "rSamIR" }
+	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
+	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam", "rSam2", "rSam3", "bSamBig", "bSamFinal" }
 }
 
-farp = {
-	blue = {"bInfantry", "bArmor", "bArmor", "bSam", "bSamIR" },
-	red = {"rInfantry", "rArmor", "rArmor", "rSam", "rSamIR" }
+airfieldEnhanced = {
+	blue = { "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam2", "bSam3", "bSamBig", "bSamBig", "bSamFinal", "bSamFinal" },
+	red = { "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal" }
+}
+
+airfieldFinal = {
+	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
+	red = { "rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal", "Suhumi001", "Suhumi001-1", "Suhumi001-2", "Suhumi001-3" }
 }
 
 regularzone = {
-	blue = {"bInfantry", "bArmor", "bArmor", "bSam", "bSam2", "bSamIR" },
-	red = {"rInfantry", "rArmor", "rArmor", "rSam", "rSam2", "rSamIR" }
+	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam" },
+	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam" }
+}
+
+farp = {
+	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSamIR", "bSam" },
+	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSamIR", "rSam" }
 }
 
 specialSAM = {
-	blue = {"bInfantry", "bSamIR", "bSam", "bSam2", "bSamBig" },
-	red = {"rInfantry", "rSamIR", "rSam", "rSam2", "rSamBig" }
-}
-
-specialKrasnodar = {
-	blue = {"bInfantry", "bArmor", "bSamIR","bSam2", "bSam3", "bSamBig", "bSamBig", "bSamFinal", "bSamFinal" },
-	red = {"rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal" }
+	blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig" },
+	red = { "rInfantry", "rArmor", "rSamIR", "rSam", "rSam2", "rSam3", "rSamBig" }
 }
 
 convoy = {
-	blue = {"bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR"},
-	red = {"rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR"}
-}
-
-specialSuhumi = {
-	blue = {},
-	red = {"rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal", "Suhumi001", "Suhumi001-1", "Suhumi001-2", "Suhumi001-3"}
+	blue = { "bInfantry", "bArmor", "bArmor", "bArmor", "bSamIR", "bSamIR" },
+	red = { "rInfantry", "rArmor", "rArmor", "rArmor", "rSamIR", "rSamIR" }
 }
 -- Edited: Done
 
@@ -82,7 +82,7 @@ cargoAccepts = {
 	factory =  allExcept(cargoSpawns, 'Factory'),
 	echo =  allExcept(cargoSpawns, 'Echo'),
 	novoro = allExcept(cargoSpawns, 'Novoro'),
-	general = allExcept(cargoSpawns)
+	all = allExcept(cargoSpawns)
 }
 
 flavor = {
@@ -103,45 +103,47 @@ flavor = {
 	krasnodar='WPT 14\nAirbase next to the city of Krasnodar.\nThe home base of our enemy. Capture it to deprive them of their most valuable asset.'
 }
 
-bc = BattleCommander:new('foothold_1.3.3.lua') -- Edited: Set all zones to enemy occupied and upgrade their initial levels
-anapa = ZoneCommander:new({zone='Anapa', side=2, level=3, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
-carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=3, upgrades=carrier, crates={}, flavorText=flavor.carrier})
-alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.bravo, flavorText=flavor.bravo})
-charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.charlie})
-convoy = ZoneCommander:new({zone='Convoy', side=1, level=3, upgrades=convoy, crates=cargoAccepts.general, flavorText=flavor.convoy})
-krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=6, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=flavor.krymsk})
-oilfields = ZoneCommander:new({zone='Oil Fields', side=1, level=3, upgrades=farp, crates=cargoAccepts.general, flavorText=flavor.oilfields, income=2})
-radio = ZoneCommander:new({zone='Radio Tower', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.radio})
-delta = ZoneCommander:new({zone='Delta', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.delta})
-factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.factory, flavorText=flavor.factory, income=2})
-samsite = ZoneCommander:new({zone='SAM Site', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.samsite})
-foxtrot = ZoneCommander:new({zone='Foxtrot', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.foxtrot})
-echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.echo, flavorText=flavor.echo})
-krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
-
--- Edited: Add new zones
+bc = BattleCommander:new('foothold_1.3.3.lua')
+-- Edited: Change zone settings
 -- Friendly airfields
-novoro = ZoneCommander:new({zone='Novoro', side=2, level=3, upgrades=airfield, crates=cargoAccepts.novoro, flavorText=flavor.anapa})
+anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
+novoro = ZoneCommander:new({zone='Novoro', side=2, level=5, upgrades=airfield, crates=cargoAccepts.novoro, flavorText=flavor.anapa})
+-- Friendly carriers
+carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=5, upgrades=carrier, crates={}, flavorText=flavor.carrier})
 -- Regular zones
-apple = ZoneCommander:new({zone='Apple', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-banana = ZoneCommander:new({zone='Banana', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-famer = ZoneCommander:new({zone='Famer', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
-ever = ZoneCommander:new({zone='Ever', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.general, flavorText=flavor.alpha})
+alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
+charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.charlie})
+radio = ZoneCommander:new({zone='Radio Tower', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.radio})
+delta = ZoneCommander:new({zone='Delta', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.delta})
+foxtrot = ZoneCommander:new({zone='Foxtrot', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.foxtrot})
+famer = ZoneCommander:new({zone='Famer', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
+four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
+finish = ZoneCommander:new({zone='Finish', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha, income=1})
+ever = ZoneCommander:new({zone='Ever', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
+-- FARPs
+bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.bravo, flavorText=flavor.bravo, income=1})
+echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.echo, flavorText=flavor.echo, income=1})
+factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=farp, crates=cargoAccepts.factory, flavorText=flavor.factory, income=1})
+oilfields = ZoneCommander:new({zone='Oil Fields', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=flavor.oilfields, income=1})
+-- Convoys
+convoy = ZoneCommander:new({zone='Convoy', side=1, level=3, upgrades=convoy, crates=cargoAccepts.all, flavorText=flavor.convoy, income=1})
 -- SAM sites: specialSAM
-finish = ZoneCommander:new({zone='Finish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.alpha})
-cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.general, flavorText=flavor.alpha})
+samsite = ZoneCommander:new({zone='SAM Site', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.samsite, income=1})
+apple = ZoneCommander:new({zone='Apple', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
+banana = ZoneCommander:new({zone='Banana', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
+fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
+fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
+cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha, income=1})
 -- Airfields
-suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.general, flavorText=flavor.krymsk})
-gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
-kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
--- Enhanced airfields: specialKrasnodar
-mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=6, upgrades=specialKrasnodar, crates=cargoAccepts.general, flavorText=flavor.krasnodar, income=2})
--- Final target: specialSuhumi
-suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=6, upgrades=specialSuhumi, crates=cargoAccepts.general, flavorText=flavor.krymsk})
+krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=6, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=flavor.krymsk, income=2})
+suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=flavor.krymsk, income=2})
+gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=2})
+kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=2})
+-- Airfields enhanced
+krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=3})
+mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=3})
+-- Airfields final
+suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=10, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=flavor.krymsk, income=5})
 -- Edited: Done
 
 radio:addCriticalObject('RadioTower')
