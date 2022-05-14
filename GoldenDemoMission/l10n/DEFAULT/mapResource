@@ -1,11 +1,11 @@
 mapResource = 
 {
-    ["ResKey_ImageBriefing_34"] = "pic_title.jpg",
+    ["ResKey_Action_28"] = "Advanced_SAM_Operators.lua",
     ["ResKey_Action_6"] = "mist_4_5_107.lua",
     ["ResKey_ImageBriefing_32"] = "pic_title.jpg",
     ["ResKey_Action_21"] = "zoneSetup.lua",
-    ["ResKey_Action_28"] = "Advanced_SAM_Operators.lua",
+    ["ResKey_Action_29"] = "Splash_Damage_2_0.lua",
     ["ResKey_ImageBriefing_35"] = "pic_title.jpg",
     ["ResKey_Action_20"] = "zoneCommander.lua",
-    ["ResKey_Action_29"] = "Splash_Damage_2_0.lua",
+    ["ResKey_ImageBriefing_34"] = "pic_title.jpg",
 } -- end of mapResource
