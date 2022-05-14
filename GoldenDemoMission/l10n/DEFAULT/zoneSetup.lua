@@ -161,6 +161,20 @@ for i,v in ipairs(oilbuildings) do
 end
 
 dispatch = { -- Edited: Add dispatches for more zones
+	-- Friendly airfields
+	anapa = {
+		GroupCommander:new({name='anapa1', mission='supply', targetzone='Alpha'}),
+		GroupCommander:new({name='anapa3', mission='supply', targetzone='Bravo'}),
+		GroupCommander:new({name='anapa2', mission='supply', targetzone='Charlie'}),
+		GroupCommander:new({name='anapa5', mission='patrol', targetzone='Bravo'}),
+		GroupCommander:new({name='b-supply-anapa-famer-uh60a', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='b-supply-anapa-convoy-uh60a', mission='supply', targetzone='Convoy'}),
+		GroupCommander:new({name='b-supply-anapa-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='b-attack-anapa-krymsk-asj37', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='b-patrol-anapa-gelend-f15c', mission='supply', targetzone='Gelend'}),
+		GroupCommander:new({name='b-patrol-anapa-bravo-f15c', mission='supply', targetzone='bravo'}),
+		GroupCommander:new({name='b-patrol-anapa-oilfileds-f15c', mission='supply', targetzone='Oil Fields'}),
+	},
 	novoro = {
 		GroupCommander:new({name='b-supply-novoro-gelend-uh60a', mission='supply', targetzone='Gelend'}),
 		GroupCommander:new({name='b-supply-novoro-four-uh60a', mission='supply', targetzone='Four'}),
@@ -176,85 +190,83 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-patrol-novoro-apple-f14b', mission='patrol', targetzone='Novoro'}),
 		GroupCommander:new({name='b-attack-novoro-krasnodar-a10c', mission='attack', targetzone='Krasnodar'}),
 	},
-	gelend = {
-		GroupCommander:new({name='r-supply-gelend-famer-uh60a', mission='supply', targetzone='Famer'}),
-		GroupCommander:new({name='r-supply-gelend-four-uh60a', mission='supply', targetzone='Four'}),
-		GroupCommander:new({name='r-supply-gelend-apple-uh60a', mission='supply', targetzone='Apple'}),
-		GroupCommander:new({name='b-supply-gelend-four-uh60a', mission='supply', targetzone='Four'}),
-		GroupCommander:new({name='b-supply-gelend-apple-uh60a', mission='supply', targetzone='Apple'}),
-		GroupCommander:new({name='b-supply-gelend-banana-uh60a', mission='supply', targetzone='Banana'}),
-		GroupCommander:new({name='b-supply-gelend-novoro-uh60a', mission='supply', targetzone='Novoro'}),
-		GroupCommander:new({name='r-patrol-gelend-four-f15c', mission='patrol', targetzone='Four'}),
-		GroupCommander:new({name='r-patrol-gelend-apple-f16c', mission='patrol', targetzone='Apple'}),
-		GroupCommander:new({name='r-attack-gelend-anapa-a10c', mission='attack', targetzone='Anapa'}),
-		GroupCommander:new({name='r-patrol-gelend-radiotower-su33', mission='patrol', targetzone='Radio Tower'}),
-		GroupCommander:new({name='r-attack-gelend-bravo-asj37', mission='attack', targetzone='Bravo'}),
-	},
+	-- Friendly carriers
 	carrier = {
 		GroupCommander:new({name='CVN-73-3', mission='patrol', targetzone='Anapa'}),
 		GroupCommander:new({name='CVN-74-3', mission='patrol', targetzone='Bravo'}),
 		GroupCommander:new({name='CVN-61-2', mission='patrol', targetzone='Gelend'}),
 	},
+	-- Regular zones
+	charlie={
+		GroupCommander:new({name='anapa6', mission='attack', targetzone='Bravo'})
+	},
+	foxtrot={
+		GroupCommander:new({name='foxtrot-krymsk-attack', mission='attack', targetzone='Krymsk', type='surface'}),
+		GroupCommander:new({name='foxtrot-echo-attack', mission='attack', targetzone='Echo', type='surface'}),
+		GroupCommander:new({name='b-supply-foxtrot-four-uh60a', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='b-supply-foxtrot-apple-uh60a', mission='supply', targetzone='Apple'}),
+	},
 	famer = {
 		GroupCommander:new({name='Famer1', mission='supply', targetzone='Alpha', type='surface'}),
 	},
-	kelasinuodaer = {
-		GroupCommander:new({name='Kelasinuodaer1', mission='supply', targetzone='Ever'}),
-		GroupCommander:new({name='Kelasinuodaer15C', mission='patrol', targetzone='Anapa'}),
-		GroupCommander:new({name='Kelasinuodaer16', mission='patrol', targetzone='Krymsk'}),
-		GroupCommander:new({name='Kelasinuodaer14', mission='patrol', targetzone='Four'}),
-		GroupCommander:new({name='Kelasinuodaer15C-1', mission='patrol', targetzone='Ever'}),
-		GroupCommander:new({name='Kelasinuodaer1-1', mission='patrol', targetzone='Delta'}),
-		GroupCommander:new({name='Kelasinuodaer2-4', mission='supply', targetzone='Krasnodar'}),
+	-- FARPs
+	bravo = {
+		GroupCommander:new({name='bravo1', mission='supply', targetzone='Alpha'}),
+		GroupCommander:new({name='bravo2', mission='attack', targetzone='Alpha'}),
+		GroupCommander:new({name='bravo6', mission='supply', targetzone='Charlie'}),
+		GroupCommander:new({name='bravo7', mission='attack', targetzone='Charlie'}),
+		GroupCommander:new({name='bravo4', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='bravo5', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='bravo8', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='bravo10', mission='supply', targetzone='Charlie'}),
+		GroupCommander:new({name='bravo9', mission='supply', targetzone='Alpha'}),
+		GroupCommander:new({name='bravo11', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='bravo12', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='bravo13', mission='attack', targetzone='Oil Fields'}),
 	},
+	echo={
+		GroupCommander:new({name='echo1', mission='supply', targetzone='SAM Site'}),
+		GroupCommander:new({name='echo2', mission='supply', targetzone='SAM Site'}),
+		GroupCommander:new({name='echo3', mission='attack', targetzone='Delta'}),
+		GroupCommander:new({name='echo4', mission='supply', targetzone='Delta'}),
+		GroupCommander:new({name='echo5', mission='supply', targetzone='Delta'}),
+		GroupCommander:new({name='echo6', mission='supply', targetzone='Factory'}),
+		GroupCommander:new({name='echo7', mission='supply', targetzone='Factory'}),
+		GroupCommander:new({name='echo8', mission='attack', targetzone='Factory'}),
+		GroupCommander:new({name='echo9', mission='supply', targetzone='Foxtrot'}),
+		GroupCommander:new({name='echo10', mission='supply', targetzone='Foxtrot'}),
+		GroupCommander:new({name='echo11', mission='attack', targetzone='Foxtrot'}),
+		GroupCommander:new({name='echo12', mission='supply', targetzone='Krasnodar'}),
+		GroupCommander:new({name='echo13', mission='supply', targetzone='Krasnodar'}),
+		GroupCommander:new({name='echo14', mission='supply', targetzone='Krasnodar'}),
+		GroupCommander:new({name='Echo0', mission='supply', targetzone='Ever'}),
+	},
+	factory={
+		GroupCommander:new({name='factory1', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='factory2', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='factory3', mission='supply', targetzone='Delta'}),
+		GroupCommander:new({name='factory4', mission='supply', targetzone='Delta'}),
+		GroupCommander:new({name='factory5', mission='supply', targetzone='Foxtrot'}),
+		GroupCommander:new({name='factory6', mission='supply', targetzone='Foxtrot'}),
+		GroupCommander:new({name='factory7', mission='supply', targetzone='Echo'}),
+		GroupCommander:new({name='factory8', mission='supply', targetzone='Echo'}),
+		GroupCommander:new({name='factory-krymsk-supply', mission='supply', targetzone='Krymsk', type='surface'}),
+		GroupCommander:new({name='factory-delta-supply', mission='supply', targetzone='Delta', type='surface'}),
+		GroupCommander:new({name='factory-echo-supply', mission='supply', targetzone='Echo', type='surface'}),
+		GroupCommander:new({name='factory-foxtrot-supply', mission='supply', targetzone='Foxtrot', type='surface'})
+	},
+	oilfields={
+		GroupCommander:new({name='oil-krymsk-supply', mission='supply', targetzone='Krymsk', type='surface'})
+	},
+	-- Convoys
+	-- SAM sites
 	banana = {
 		GroupCommander:new({name='Mikehans60A-11', mission='supply', targetzone='Mikehans'}),
-	},
-	mikehans = {
-		GroupCommander:new({name='Mikehans15', mission='supply', targetzone='Banana'}),
-		GroupCommander:new({name='Mikehans15-1', mission='patrol', targetzone='Finish'}),
-		GroupCommander:new({name='Mikehans15-2', mission='patrol', targetzone='Fine'}),
-		GroupCommander:new({name='Mikehans15-3', mission='patrol', targetzone='Cool'}),
-		GroupCommander:new({name='Mikehans15-4', mission='patrol', targetzone='Suoqi'}),
-		GroupCommander:new({name='Mikehans15-5', mission='patrol', targetzone='Fine'}),
-		GroupCommander:new({name='Mikehans15-6', mission='patrol', targetzone='Fish'}),
-		GroupCommander:new({name='b-patrol-mikehans-fine-f18c', mission='patrol', targetzone='Fine'}),
-		GroupCommander:new({name='b-patrol-mikehans-cool-f16c', mission='patrol', targetzone='Cool'}),
-		GroupCommander:new({name='Mikehans60A', mission='supply', targetzone='Banana'}),
-		GroupCommander:new({name='Mikehans60A-1', mission='supply', targetzone='Fine'}),
-		GroupCommander:new({name='Mikehans60A-2', mission='supply', targetzone='Fine'}),
-		GroupCommander:new({name='Mikehans60A-3', mission='supply', targetzone='Cool'}),
-		GroupCommander:new({name='Mikehans60A-4', mission='supply', targetzone='Cool'}),
-		GroupCommander:new({name='Mikehans60A-5', mission='supply', targetzone='Finish'}),
-		GroupCommander:new({name='Mikehans60A-6', mission='supply', targetzone='Apple'}),
-		GroupCommander:new({name='Mikehans60A-7', mission='supply', targetzone='Finish'}),
 	},
 	fine = {
 		GroupCommander:new({name='Fine1', mission='supply', targetzone='Suoqi'}),
 	},
-	suoqi = {
-		GroupCommander:new({name='Suoqi60A-3', mission='supply', targetzone='Fine'}),
-		GroupCommander:new({name='Suoqi60A-2', mission='supply', targetzone='Fish'}),
-		GroupCommander:new({name='Mikehans15-7', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='Mikehans60A-8', mission='supply', targetzone='Fish'}),
-		GroupCommander:new({name='Suoqi60A-4', mission='supply', targetzone='Suhumi'}),
-		GroupCommander:new({name='Suoqi60A', mission='supply', targetzone='Fish'}),
-		GroupCommander:new({name='Suoqi60A-1', mission='supply', targetzone='Cool'}),
-		GroupCommander:new({name='Suoqi111', mission='patrol', targetzone='Fine'}),
-		GroupCommander:new({name='Suoqi111-1', mission='patrol', targetzone='Cool'}),
-		GroupCommander:new({name='Suoqi111-2', mission='patrol', targetzone='Fish'}),
-		GroupCommander:new({name='b-patrol-suoqi-fish-f14b', mission='patrol', targetzone='Fish'}),
-	},
-	suhumi = {
-		GroupCommander:new({name='Suhumi60A', mission='supply', targetzone='Suoqi'}),
-		GroupCommander:new({name='Suhumi60A-1', mission='supply', targetzone='Fish'}),
-		GroupCommander:new({name='Suhumi0', mission='patrol', targetzone='Suoqi'}),
-		GroupCommander:new({name='Suhumi0-1', mission='patrol', targetzone='Fish'}),
-		GroupCommander:new({name='Suhumi0-2', mission='patrol', targetzone='Apple'}),
-		GroupCommander:new({name='Suhumi111', mission='attack', targetzone='Mikehans'}),
-		GroupCommander:new({name='Suhumi11', mission='attack', targetzone='Mikehans'}),
-		GroupCommander:new({name='Suhumi11-1', mission='attack', targetzone='Suoqi'}),
-	},
+	-- Airfields
 	krymsk = {
 		GroupCommander:new({name='krym1', mission='supply', targetzone='Bravo'}),
 		GroupCommander:new({name='krym2', mission='attack', targetzone='Bravo'}),
@@ -287,67 +299,43 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-krymsk-echo-uh60a', mission='supply', targetzone='Echo'}),
 		GroupCommander:new({name='b-supply-krymsk-kelasinuodaer-uh60a', mission='supply', targetzone='Kelasinuodaer'}),
 	},
-	bravo = {
-		GroupCommander:new({name='bravo1', mission='supply', targetzone='Alpha'}),
-		GroupCommander:new({name='bravo2', mission='attack', targetzone='Alpha'}),
-		GroupCommander:new({name='bravo6', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='bravo7', mission='attack', targetzone='Charlie'}),
-		GroupCommander:new({name='bravo4', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='bravo5', mission='attack', targetzone='Krymsk'}),
-		GroupCommander:new({name='bravo8', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='bravo10', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='bravo9', mission='supply', targetzone='Alpha'}),
-		GroupCommander:new({name='bravo11', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='bravo12', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='bravo13', mission='attack', targetzone='Oil Fields'}),
+	suoqi = {
+		GroupCommander:new({name='Suoqi60A-3', mission='supply', targetzone='Fine'}),
+		GroupCommander:new({name='Suoqi60A-2', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Mikehans15-7', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='Mikehans60A-8', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Suoqi60A-4', mission='supply', targetzone='Suhumi'}),
+		GroupCommander:new({name='Suoqi60A', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Suoqi60A-1', mission='supply', targetzone='Cool'}),
+		GroupCommander:new({name='Suoqi111', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='Suoqi111-1', mission='patrol', targetzone='Cool'}),
+		GroupCommander:new({name='Suoqi111-2', mission='patrol', targetzone='Fish'}),
+		GroupCommander:new({name='b-patrol-suoqi-fish-f14b', mission='patrol', targetzone='Fish'}),
 	},
-	anapa = {
-		GroupCommander:new({name='anapa1', mission='supply', targetzone='Alpha'}),
-		GroupCommander:new({name='anapa3', mission='supply', targetzone='Bravo'}),
-		GroupCommander:new({name='anapa2', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='anapa5', mission='patrol', targetzone='Bravo'}),
-		GroupCommander:new({name='b-supply-anapa-famer-uh60a', mission='supply', targetzone='Famer'}),
-		GroupCommander:new({name='b-supply-anapa-convoy-uh60a', mission='supply', targetzone='Convoy'}),
-		GroupCommander:new({name='b-supply-anapa-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='b-attack-anapa-krymsk-asj37', mission='attack', targetzone='Krymsk'}),
-		GroupCommander:new({name='b-patrol-anapa-gelend-f15c', mission='supply', targetzone='Gelend'}),
-		GroupCommander:new({name='b-patrol-anapa-bravo-f15c', mission='supply', targetzone='bravo'}),
-		GroupCommander:new({name='b-patrol-anapa-oilfileds-f15c', mission='supply', targetzone='Oil Fields'}),
+	gelend = {
+		GroupCommander:new({name='r-supply-gelend-famer-uh60a', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='r-supply-gelend-four-uh60a', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='r-supply-gelend-apple-uh60a', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='b-supply-gelend-four-uh60a', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='b-supply-gelend-apple-uh60a', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='b-supply-gelend-banana-uh60a', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='b-supply-gelend-novoro-uh60a', mission='supply', targetzone='Novoro'}),
+		GroupCommander:new({name='r-patrol-gelend-four-f15c', mission='patrol', targetzone='Four'}),
+		GroupCommander:new({name='r-patrol-gelend-apple-f16c', mission='patrol', targetzone='Apple'}),
+		GroupCommander:new({name='r-attack-gelend-anapa-a10c', mission='attack', targetzone='Anapa'}),
+		GroupCommander:new({name='r-patrol-gelend-radiotower-su33', mission='patrol', targetzone='Radio Tower'}),
+		GroupCommander:new({name='r-attack-gelend-bravo-asj37', mission='attack', targetzone='Bravo'}),
 	},
-	charlie={
-		GroupCommander:new({name='anapa6', mission='attack', targetzone='Bravo'})
+	kelasinuodaer = {
+		GroupCommander:new({name='Kelasinuodaer1', mission='supply', targetzone='Ever'}),
+		GroupCommander:new({name='Kelasinuodaer15C', mission='patrol', targetzone='Anapa'}),
+		GroupCommander:new({name='Kelasinuodaer16', mission='patrol', targetzone='Krymsk'}),
+		GroupCommander:new({name='Kelasinuodaer14', mission='patrol', targetzone='Four'}),
+		GroupCommander:new({name='Kelasinuodaer15C-1', mission='patrol', targetzone='Ever'}),
+		GroupCommander:new({name='Kelasinuodaer1-1', mission='patrol', targetzone='Delta'}),
+		GroupCommander:new({name='Kelasinuodaer2-4', mission='supply', targetzone='Krasnodar'}),
 	},
-	factory={
-		GroupCommander:new({name='factory1', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='factory2', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='factory3', mission='supply', targetzone='Delta'}),
-		GroupCommander:new({name='factory4', mission='supply', targetzone='Delta'}),
-		GroupCommander:new({name='factory5', mission='supply', targetzone='Foxtrot'}),
-		GroupCommander:new({name='factory6', mission='supply', targetzone='Foxtrot'}),
-		GroupCommander:new({name='factory7', mission='supply', targetzone='Echo'}),
-		GroupCommander:new({name='factory8', mission='supply', targetzone='Echo'}),
-		GroupCommander:new({name='factory-krymsk-supply', mission='supply', targetzone='Krymsk', type='surface'}),
-		GroupCommander:new({name='factory-delta-supply', mission='supply', targetzone='Delta', type='surface'}),
-		GroupCommander:new({name='factory-echo-supply', mission='supply', targetzone='Echo', type='surface'}),
-		GroupCommander:new({name='factory-foxtrot-supply', mission='supply', targetzone='Foxtrot', type='surface'})
-	},
-	echo={
-		GroupCommander:new({name='echo1', mission='supply', targetzone='SAM Site'}),
-		GroupCommander:new({name='echo2', mission='supply', targetzone='SAM Site'}),
-		GroupCommander:new({name='echo3', mission='attack', targetzone='Delta'}),
-		GroupCommander:new({name='echo4', mission='supply', targetzone='Delta'}),
-		GroupCommander:new({name='echo5', mission='supply', targetzone='Delta'}),
-		GroupCommander:new({name='echo6', mission='supply', targetzone='Factory'}),
-		GroupCommander:new({name='echo7', mission='supply', targetzone='Factory'}),
-		GroupCommander:new({name='echo8', mission='attack', targetzone='Factory'}),
-		GroupCommander:new({name='echo9', mission='supply', targetzone='Foxtrot'}),
-		GroupCommander:new({name='echo10', mission='supply', targetzone='Foxtrot'}),
-		GroupCommander:new({name='echo11', mission='attack', targetzone='Foxtrot'}),
-		GroupCommander:new({name='echo12', mission='supply', targetzone='Krasnodar'}),
-		GroupCommander:new({name='echo13', mission='supply', targetzone='Krasnodar'}),
-		GroupCommander:new({name='echo14', mission='supply', targetzone='Krasnodar'}),
-		GroupCommander:new({name='Echo0', mission='supply', targetzone='Ever'}),
-	},
+	-- Airfields enhanced
 	krasnodar={
 		GroupCommander:new({name='kras1', mission='supply', targetzone='Echo'}),
 		GroupCommander:new({name='kras2', mission='supply', targetzone='Echo'}),
@@ -367,41 +355,66 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-krasnodar-banana-uh60a', mission='supply', targetzone='Banana'}),
 		GroupCommander:new({name='b-supply-krasnodar-mikehans-uh60a', mission='supply', targetzone='Mikehans'}),
 	},
-	foxtrot={
-		GroupCommander:new({name='foxtrot-krymsk-attack', mission='attack', targetzone='Krymsk', type='surface'}),
-		GroupCommander:new({name='foxtrot-echo-attack', mission='attack', targetzone='Echo', type='surface'}),
-		GroupCommander:new({name='b-supply-foxtrot-four-uh60a', mission='supply', targetzone='Four'}),
-		GroupCommander:new({name='b-supply-foxtrot-apple-uh60a', mission='supply', targetzone='Apple'}),
+	mikehans = {
+		GroupCommander:new({name='Mikehans15', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='Mikehans15-1', mission='patrol', targetzone='Finish'}),
+		GroupCommander:new({name='Mikehans15-2', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans15-3', mission='patrol', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans15-4', mission='patrol', targetzone='Suoqi'}),
+		GroupCommander:new({name='Mikehans15-5', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans15-6', mission='patrol', targetzone='Fish'}),
+		GroupCommander:new({name='b-patrol-mikehans-fine-f18c', mission='patrol', targetzone='Fine'}),
+		GroupCommander:new({name='b-patrol-mikehans-cool-f16c', mission='patrol', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans60A', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='Mikehans60A-1', mission='supply', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans60A-2', mission='supply', targetzone='Fine'}),
+		GroupCommander:new({name='Mikehans60A-3', mission='supply', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans60A-4', mission='supply', targetzone='Cool'}),
+		GroupCommander:new({name='Mikehans60A-5', mission='supply', targetzone='Finish'}),
+		GroupCommander:new({name='Mikehans60A-6', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='Mikehans60A-7', mission='supply', targetzone='Finish'}),
 	},
-	oilfields={
-		GroupCommander:new({name='oil-krymsk-supply', mission='supply', targetzone='Krymsk', type='surface'})
-	}
+	
+	suhumi = {
+		GroupCommander:new({name='Suhumi60A', mission='supply', targetzone='Suoqi'}),
+		GroupCommander:new({name='Suhumi60A-1', mission='supply', targetzone='Fish'}),
+		GroupCommander:new({name='Suhumi0', mission='patrol', targetzone='Suoqi'}),
+		GroupCommander:new({name='Suhumi0-1', mission='patrol', targetzone='Fish'}),
+		GroupCommander:new({name='Suhumi0-2', mission='patrol', targetzone='Apple'}),
+		GroupCommander:new({name='Suhumi111', mission='attack', targetzone='Mikehans'}),
+		GroupCommander:new({name='Suhumi11', mission='attack', targetzone='Mikehans'}),
+		GroupCommander:new({name='Suhumi11-1', mission='attack', targetzone='Suoqi'}),
+	},
 }
 
-
+-- Friendly airfields
 anapa:addGroups(dispatch.anapa)
-bravo:addGroups(dispatch.bravo)
-krymsk:addGroups(dispatch.krymsk)
-charlie:addGroups(dispatch.charlie)
-factory:addGroups(dispatch.factory)
-echo:addGroups(dispatch.echo)
-krasnodar:addGroups(dispatch.krasnodar)
-foxtrot:addGroups(dispatch.foxtrot)
-oilfields:addGroups(dispatch.oilfields)
--- Edited: Bind new zones with new fleets
 novoro:addGroups(dispatch.novoro)
-gelend:addGroups(dispatch.gelend)
+-- Friendly carriers
 carrier:addGroups(dispatch.carrier)
+-- Regular zones
+charlie:addGroups(dispatch.charlie)
+foxtrot:addGroups(dispatch.foxtrot)
 famer:addGroups(dispatch.famer)
-kelasinuodaer:addGroups(dispatch.kelasinuodaer)
-banana:addGroups(dispatch.banana)
-mikehans:addGroups(dispatch.mikehans)
-fine:addGroups(dispatch.fine)
-suoqi:addGroups(dispatch.suoqi)
-suhumi:addGroups(dispatch.suhumi)
-krymsk:addGroups(dispatch.krymsk)
+-- FARPs
 bravo:addGroups(dispatch.bravo)
--- Edited: Done
+echo:addGroups(dispatch.echo)
+factory:addGroups(dispatch.factory)
+oilfields:addGroups(dispatch.oilfields)
+-- Convoys
+-- SAM sites
+banana:addGroups(dispatch.banana)
+fine:addGroups(dispatch.fine)
+-- Airfields
+krymsk:addGroups(dispatch.krymsk)
+suoqi:addGroups(dispatch.suoqi)
+gelend:addGroups(dispatch.gelend)
+kelasinuodaer:addGroups(dispatch.kelasinuodaer)
+-- Airfields enhanced
+krasnodar:addGroups(dispatch.krasnodar)
+mikehans:addGroups(dispatch.mikehans)
+-- Airfields final
+suhumi:addGroups(dispatch.suhumi)
 
 bc:addZone(anapa)
 bc:addZone(carrier)
@@ -1128,7 +1141,11 @@ budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequenc
 budgetAI:init()
 --end red support
 
-lc = LogisticCommander:new({battleCommander = bc, supplyZones = {'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group'}})
+lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
+	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
+	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana', 'Fine', -- Edited: Add more zones
+	'Suoqi', 'Gelend', 'Kelasinuodaer', 'Krasnodar', 'Mikehans', 'Suhumi'
+}}) 
 lc:init()
 
 
