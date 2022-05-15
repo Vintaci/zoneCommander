@@ -85,65 +85,51 @@ cargoAccepts = {
 	all = allExcept(cargoSpawns)
 }
 
-flavor = {
-	anapa = 'WPT 1\nHome base',
-	carrier = 'Carrier group',
-	alpha='WPT 2\nDefensive position next to the town of Natuhaevskaya',
-	bravo='WPT 3\nFARP next to the town of Damanka.\nWill let us launch helicopter attacks from a bit closer to the action.',
-	charlie='WPT 4\nDefensive position next to an old TV tower.\nWill provide allied air patrol to help capture Bravo',
-	convoy='WPT 5\nSupply convoy detained north of Bravo.\nKeep damage to the trucks to a minimum while liberating this area.\nWe could really use the supplies.',
-	krymsk='WPT 7\nAirbase next to the city of Krymsk.\nCapturing it will provide us with valuable aircraft to use for our cause.',
-	radio='WPT 8\nRadio atenna on the outskirts of Krymsk.\nIf we capture it, we can launch AWACS from the nearby airport\nto get some much needed intel on the enemy.',
-	oilfields='WPT 6\nOil extraction and Refinery north of Krymsk.\nCapture it to get a steady stream of income, or just destroy it to put a hole in the enemy wallet.',
-	delta='WPT 10\nDefensive position out in the middle of nowhere',
-	factory='WPT 9\nWeapon factory next to the town of Homskiy.\nWe can use it to resupply nearby bases.\nIt will also provide a steady stream of income.',
-	samsite='WPT 11\nHome to an old SA-2 site.\nIf we capture it, we might be able to get some use out of it.',
-	foxtrot='WPT 13\nDefensive position with a nice view of a lake',
-	echo='WPT 12\nFARP next to the city of Krasnodar.\nCapturing it will let us operate our helicopters in the area.',
-	krasnodar='WPT 14\nAirbase next to the city of Krasnodar.\nThe home base of our enemy. Capture it to deprive them of their most valuable asset.'
+hint = {
+	general = 'You need to capture all the zones to win the battle.',
 }
 
 bc = BattleCommander:new('foothold_1.3.3.lua')
 -- Edited: Change zone settings
 -- Friendly airfields
-anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=flavor.anapa})
-novoro = ZoneCommander:new({zone='Novoro', side=2, level=5, upgrades=airfield, crates=cargoAccepts.novoro, flavorText=flavor.anapa})
+anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=hint.general})
+novoro = ZoneCommander:new({zone='Novoro', side=2, level=5, upgrades=airfield, crates=cargoAccepts.novoro, flavorText=hint.general})
 -- Friendly carriers
-carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=5, upgrades=carrier, crates={}, flavorText=flavor.carrier})
+carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=5, upgrades=carrier, crates={}, flavorText=hint.general})
 -- Regular zones
-alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
-charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.charlie})
-radio = ZoneCommander:new({zone='Radio Tower', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.radio})
-delta = ZoneCommander:new({zone='Delta', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.delta})
-foxtrot = ZoneCommander:new({zone='Foxtrot', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.foxtrot})
-famer = ZoneCommander:new({zone='Famer', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
-four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
-finish = ZoneCommander:new({zone='Finish', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha, income=1})
-ever = ZoneCommander:new({zone='Ever', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=flavor.alpha})
+alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+radio = ZoneCommander:new({zone='Radio Tower', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+delta = ZoneCommander:new({zone='Delta', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+foxtrot = ZoneCommander:new({zone='Foxtrot', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+famer = ZoneCommander:new({zone='Famer', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+finish = ZoneCommander:new({zone='Finish', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general, income=1})
+ever = ZoneCommander:new({zone='Ever', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
 -- FARPs
-bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.bravo, flavorText=flavor.bravo, income=1})
-echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.echo, flavorText=flavor.echo, income=1})
-factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=farp, crates=cargoAccepts.factory, flavorText=flavor.factory, income=1})
-oilfields = ZoneCommander:new({zone='Oil Fields', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=flavor.oilfields, income=1})
+bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.bravo, flavorText=hint.general, income=1})
+echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.echo, flavorText=hint.general, income=1})
+factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=farp, crates=cargoAccepts.factory, flavorText=hint.general, income=1})
+oilfields = ZoneCommander:new({zone='Oil Fields', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- Convoys
-convoy = ZoneCommander:new({zone='Convoy', side=1, level=3, upgrades=convoy, crates=cargoAccepts.all, flavorText=flavor.convoy, income=1})
+convoy = ZoneCommander:new({zone='Convoy', side=1, level=3, upgrades=convoy, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- SAM sites: specialSAM
-samsite = ZoneCommander:new({zone='SAM Site', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.samsite, income=1})
-apple = ZoneCommander:new({zone='Apple', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
-banana = ZoneCommander:new({zone='Banana', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
-fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
-fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha})
-cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=flavor.alpha, income=1})
+samsite = ZoneCommander:new({zone='SAM Site', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general, income=1})
+apple = ZoneCommander:new({zone='Apple', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
+banana = ZoneCommander:new({zone='Banana', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
+fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
+fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
+cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- Airfields
-krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=6, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=flavor.krymsk, income=2})
-suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=flavor.krymsk, income=2})
-gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=2})
-kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=2})
+krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=6, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=2})
+suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
+gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
+kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
 -- Airfields enhanced
-krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=3})
-mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=flavor.krasnodar, income=3})
+krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
+mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Airfields final
-suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=10, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=flavor.krymsk, income=5})
+suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=10, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=hint.general, income=5})
 -- Edited: Done
 
 radio:addCriticalObject('RadioTower')
@@ -374,7 +360,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='Mikehans60A-6', mission='supply', targetzone='Apple'}),
 		GroupCommander:new({name='Mikehans60A-7', mission='supply', targetzone='Finish'}),
 	},
-	
+	-- Airfields final
 	suhumi = {
 		GroupCommander:new({name='Suhumi60A', mission='supply', targetzone='Suoqi'}),
 		GroupCommander:new({name='Suhumi60A-1', mission='supply', targetzone='Fish'}),
@@ -911,233 +897,19 @@ bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
 
 --red support
-Group.getByName('redcas1'):destroy()
-bc:registerShopItem('redcas1', 'Red Cas', 1000, function(sender) 
-	local gr = Group.getByName('redcas1')
+Group.getByName('r-cap-cclockwise-m2000c'):destroy()
+bc:registerShopItem('r-cap-cclockwise-m2000c', 'Red Combat Air Patrol Counter-Clockwise M-2000C', 100, function(sender) 
+	local gr = Group.getByName('r-cap-cclockwise-m2000c')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
 		return 'still alive'
 	end
-	mist.respawnGroup('redcas1', true)
-	trigger.action.outTextForCoalition(2,'The enemy has deployed a couple of Su-34 against our ground forces',15)
+	mist.respawnGroup('r-cap-cclockwise-m2000c', true)
+	trigger.action.outTextForCoalition(2,'Enemy M-2000C is executing Combat Air Patrol missions.',15)
 end)
 
-Group.getByName('redcap1'):destroy()
-bc:registerShopItem('redcap1', 'Red Cap', 1000, function(sender) 
-	local gr = Group.getByName('redcap1')
-	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'still alive'
-	end
-	mist.respawnGroup('redcap1', true)
-	trigger.action.outTextForCoalition(2,'Enemy MiG-31 interceptors, coming in from the South-East',15)
-end)
+bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
 
-Group.getByName('redsead1'):destroy()
-bc:registerShopItem('redsead1', 'Red Sead', 1000, function(sender) 
-	local gr = Group.getByName('redsead1')
-	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'still alive'
-	end
-	mist.respawnGroup('redsead1', true)
-	trigger.action.outTextForCoalition(2,'The enemy has launched an attack from the North-East on our air defenses',15)
-end)
-
-Group.getByName('redmlrs1'):destroy()
-bc:registerShopItem('redmlrs1', 'spawn Red mlrs', 1000, function(sender) 
-	local zn = bc:getZoneByName('Foxtrot')
-	if zn.side == 1 and zn.active then
-		local gr = Group.getByName('redmlrs1')
-		if gr then
-			local full = true
-			for i,v in ipairs(gr:getUnits()) do
-				for i2,v2 in ipairs(v:getAmmo()) do
-					if v2.count < 3 then
-						full = false
-						break
-					end
-				end
-				
-				if not full then 
-					break
-				end
-			end
-			
-			if full and gr:getSize()==gr:getInitialSize() then
-				return 'ammo full'
-			end
-			
-			trigger.action.outTextForCoalition(2,'The enemy has resupplied its artillery near Foxtrot',15)
-		else
-			trigger.action.outTextForCoalition(2,'The enemy has deployed artillery near Foxtrot',15)
-		end
-		
-		mist.respawnGroup('redmlrs1')
-		bc:removeShopItem(1,'redmlrs1fire')
-		bc:addShopItem(1, 'redmlrs1fire', 3)
-	else
-		return 'zone not red'
-	end
-end)
-
-bc:registerShopItem('redmlrs1fire', 'fire red mlrs', 200, function(sender) 
-	local gr = Group.getByName('redmlrs1')
-	if gr then
-		local targetzones = {'Echo', 'Delta', 'SAM Site', 'Factory', 'Radio Tower', 'Krymsk'}
-		local viabletargets = {}
-		for i,v in ipairs(targetzones) do
-			local z = bc:getZoneByName(v)
-			
-			if z and z.side == 2 then
-				table.insert(viabletargets, v)
-			end
-		end
-
-		if #viabletargets==0 then
-			return 'no targets'
-		end
-		
-		local targetzn = viabletargets[math.random(1,#viabletargets)]
-		
-		local err = bc:fireAtZone(targetzn, 'redmlrs1', true, 3, 6)
-		
-		if not err then
-			trigger.action.outTextForCoalition(2,'Enemy artillery near Foxtrot has begun preparations to fire on '..targetzn,15)
-		else
-			return err
-		end
-	else
-		return 'buy first'
-	end
-end)
-
-
-Group.getByName('intercept1'):destroy()
-Group.getByName('intercept2'):destroy()
-local cargoDieEvent = nil
-bc:registerShopItem('intercept1', 'Red intercept', 1000, function(sender) 
-	local grt = Group.getByName('intercept1')
-	local gre = Group.getByName('intercept2')
-	if gre and gre:getSize()>0 and gre:getController():hasTask() then 
-		return 'still alive'
-	end
-	
-	if grt and grt:getSize()>0 and grt:getController():hasTask() then 
-		return 'still alive'
-	end
-	
-	mist.respawnGroup('intercept1', true)
-	mist.respawnGroup('intercept2', true)
-	
-	if not cargoDieEvent then
-		local cargoPlaneDied = function(event)
-			if event.id==28 then
-				if event.initiator and event.initiator:getCoalition()==2 and event.target and event.target.getName then
-					if event.target:getName()=='intercept1' then
-						trigger.action.outTextForCoalition(2,'Enemy cargo transport destroyed.\n+500 credits',15)
-						bc:addFunds(2,500)
-						mist.removeEventHandler(cargoDieEvent)
-						cargoDieEvent = nil
-					elseif not Unit.getByName('intercept1') then
-						mist.removeEventHandler(cargoDieEvent)
-						cargoDieEvent = nil
-					end
-				end
-			end
-		end
-		
-		cargoDieEvent = mist.addEventHandler(cargoPlaneDied)
-	end
-	
-	trigger.action.outTextForCoalition(2,'Enemy cargo transport has entered the airspace from the south.',15)
-end)
-
-Group.getByName('escort1'):destroy()
-Group.getByName('antiescort1'):destroy()
-Group.getByName('antiescort2'):destroy()
-bc:registerShopItem('escort1', 'Red antiescort', 1000, function(sender) 
-	local gr = Group.getByName('escort1')
-	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'still alive'
-	end
-	
-	mist.respawnGroup('escort1', true)
-	
-	local spawnIntercept = function(groupname)
-		if Group.getByName('escort1') then
-			local g = Group.getByName(groupname)
-			if not g then
-				if math.random(1,100) > 30 then
-					if math.random(1,100) > 50 then
-						trigger.action.outTextForCoalition(2,'Enemy interceptor spotted heading for our cargo transport.',15)
-					else
-						trigger.action.outTextForCoalition(2,'The enemy has launched an intercept mission against our cargo transport',15)
-					end
-					mist.respawnGroup(groupname, true)
-				end
-			end
-		end
-	end
-	
-	local timers = {math.random(3*60,15*60), math.random(8*60,15*60)}
-	mist.scheduleFunction(spawnIntercept, {'antiescort1'}, timer.getTime()+timers[1])
-	mist.scheduleFunction(spawnIntercept, {'antiescort2'}, timer.getTime()+timers[2])
-	
-	
-	trigger.action.outTextForCoalition(2,'Friendly cargo transport has entered the airspace from the south.',15)
-end)
-
-krymskForce = {
-	'krymsk-force-1',
-	'krymsk-force-2',
-	'krymsk-force-3',
-	'krymsk-gforce-1',
-	'krymsk-gforce-2',
-	'krymsk-gforce-3',
-	'krymsk-tforce-1',
-	'krymsk-aforce-1',
-	'krymsk-aforce-2',
-	'krymsk-aforce-3',
-}
-
-for _,v in ipairs(krymskForce) do Group.getByName(v):destroy() end
-
-bc:registerShopItem('krymskForce', 'Krymsk Assault', 1000, function(sender) 
-	for _,v in ipairs(krymskForce) do
-		local gr = Group.getByName(v)
-		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-			return 'still alive'
-		end
-	end
-	
-	if bc:getZoneByName('Echo').side==1 and bc:getZoneByName('Krymsk').side==2 then
-		for _,v in ipairs(krymskForce) do
-			mist.respawnGroup('krymsk-force-1', true)
-			mist.respawnGroup('krymsk-force-2', true)
-			mist.respawnGroup('krymsk-force-3', true)
-			
-			if bc:getZoneByName('Delta').side==1 then
-				mist.respawnGroup('krymsk-tforce-1', true)
-			end
-			
-			mist.respawnGroup('krymsk-aforce-1', true)
-			mist.respawnGroup('krymsk-aforce-2', true)
-			mist.respawnGroup('krymsk-aforce-3', true)
-		end
-	
-		trigger.action.outTextForCoalition(2,'Enemy is starting an assault on Krymsk',15)
-	else
-		return 'zone no match'
-	end
-end)
-
-bc:addShopItem(1, 'redcas1', -1)
-bc:addShopItem(1, 'redcap1', -1)
-bc:addShopItem(1, 'redsead1', -1)
-bc:addShopItem(1, 'redmlrs1', -1)
-bc:addShopItem(1, 'intercept1', -1)
-bc:addShopItem(1, 'escort1', -1)
-bc:addShopItem(1, 'krymskForce', -1)
-
-budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=20*60, decissionVariance=10*60, skipChance = 10})
+budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=5*60, decissionVariance=10*60, skipChance = 25})
 budgetAI:init()
 --end red support
 
