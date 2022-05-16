@@ -62,26 +62,22 @@ convoy = {
 -- Edited: Done
 
 cargoSpawns = {
-	["Anapa"] = {"c1","c2","c3"},
-	["Bravo"] = {"c6","c7"},
-	["Krymsk"] = {"c8","c9","c10"},
-	["Factory"] = {"c4","c5","c11"},
-	["Echo"] = {"c12","c13"},
-	["Novoro"] = {"c14","c15","c16"}
-}
-
-farpSupply = {
-	["Bravo"] = {"bravoFuelAndAmmo"},
-	["Echo"] = {"echoFuelAndAmmo"}
+	["Anapa"] = {"cargo-anapa-ammo","cargo-anapa-crate","cargo-anapa-fuel"},
+	["Krymsk"] = {"cargo-krymsk-ammo","cargo-krymsk-crate","cargo-krymsk-fuel"},
+	["Novoro"] = {"cargo-novoro-ammo","cargo-novoro-crate","cargo-novoro-fuel"},
+	["Gelend"] = {"cargo-gelend-ammo","cargo-gelend-crate","cargo-gelend-fuel"},
+	-- ["Kelasinuodaer"] = {"cargo-kelas-ammo","cargo-kelas-crate","cargo-kelas-fuel"},
+	-- ["Krasnodar"] = {"cargo-krasno-ammo","cargo-krasno-crate","cargo-krasno-fuel"},
+	-- ["Mikehans"] = {"cargo-mikehans-ammo","cargo-mikehans-crate","cargo-mikehans-fuel"},
+	-- ["Suoqi"] = {"cargo-suoqi-ammo","cargo-suoqi-crate","cargo-suoqi-fuel"},
+	-- ["Suhumi"] = {"cargo-suhumi-ammo","cargo-suhumi-crate","cargo-suhumi-fuel"},
 }
 
 cargoAccepts = {
 	anapa = allExcept(cargoSpawns, 'Anapa'),
-	bravo =  allExcept(cargoSpawns, 'Bravo'),
 	krymsk =  allExcept(cargoSpawns, 'Krymsk'),
-	factory =  allExcept(cargoSpawns, 'Factory'),
-	echo =  allExcept(cargoSpawns, 'Echo'),
 	novoro = allExcept(cargoSpawns, 'Novoro'),
+	gelend = allExcept(cargoSpawns, 'Gelend'),
 	all = allExcept(cargoSpawns)
 }
 
@@ -95,7 +91,7 @@ bc = BattleCommander:new('foothold_1.3.3.lua')
 anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=airfield, crates=cargoAccepts.anapa, flavorText=hint.general})
 novoro = ZoneCommander:new({zone='Novoro', side=2, level=5, upgrades=airfield, crates=cargoAccepts.novoro, flavorText=hint.general})
 -- Friendly carriers
-carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=5, upgrades=carrier, crates={}, flavorText=hint.general})
+carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=5, upgrades=carrier, crates=cargoAccepts.all, flavorText=hint.general})
 -- Regular zones
 alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
 charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
@@ -107,9 +103,9 @@ four = ZoneCommander:new({zone='Four', side=1, level=3, upgrades=regularzone, cr
 finish = ZoneCommander:new({zone='Finish', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 ever = ZoneCommander:new({zone='Ever', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
 -- FARPs
-bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.bravo, flavorText=hint.general, income=1})
-echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.echo, flavorText=hint.general, income=1})
-factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=farp, crates=cargoAccepts.factory, flavorText=hint.general, income=1})
+bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general, income=1})
+echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general, income=1})
+factory = ZoneCommander:new({zone='Factory', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 oilfields = ZoneCommander:new({zone='Oil Fields', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- Convoys
 convoy = ZoneCommander:new({zone='Convoy', side=1, level=3, upgrades=convoy, crates=cargoAccepts.all, flavorText=hint.general, income=1})
@@ -123,7 +119,7 @@ cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, cra
 -- Airfields
 krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=6, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=2})
 suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
-gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
+gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.gelend, flavorText=hint.general, income=2})
 kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
 -- Airfields enhanced
 krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
@@ -930,28 +926,28 @@ function respawnStatics()
 		end
 	end
 	
-	for i,v in pairs(farpSupply) do
-		local farp = bc:getZoneByName(i)
-		if farp then
-			if farp.side==2 then
-				for ix,vx in ipairs(v) do
-					local gr = Group.getByName(vx)
-					if not gr then
-						mist.respawnGroup(vx)
-					elseif gr:getSize() < gr:getInitialSize() then
-						mist.respawnGroup(vx)
-					end
-				end
-			else
-				for ix,vx in ipairs(v) do
-					local cr = Group.getByName(vx)
-					if cr then
-						cr:destroy()
-					end
-				end
-			end
-		end
-	end
+	-- for i,v in pairs(farpSupply) do
+	-- 	local farp = bc:getZoneByName(i)
+	-- 	if farp then
+	-- 		if farp.side==2 then
+	-- 			for ix,vx in ipairs(v) do
+	-- 				local gr = Group.getByName(vx)
+	-- 				if not gr then
+	-- 					mist.respawnGroup(vx)
+	-- 				elseif gr:getSize() < gr:getInitialSize() then
+	-- 					mist.respawnGroup(vx)
+	-- 				end
+	-- 			end
+	-- 		else
+	-- 			for ix,vx in ipairs(v) do
+	-- 				local cr = Group.getByName(vx)
+	-- 				if cr then
+	-- 					cr:destroy()
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
