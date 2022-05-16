@@ -88,16 +88,16 @@ options =
         ["water"] = 2,
         ["motionBlur"] = 0,
         ["visibRange"] = "Extreme",
-        ["aspect"] = 1.1944444444444,
+        ["aspect"] = 2.3888888888889,
         ["lights"] = 2,
         ["shadows"] = 4,
         ["MSAA"] = 2,
         ["SSAA"] = 0,
-        ["civTraffic"] = "low",
+        ["civTraffic"] = "",
         ["forestDistanceFactor"] = 1,
         ["cockpitGI"] = 1,
         ["terrainTextures"] = "max",
-        ["multiMonitorSetup"] = "mfcds_on_upper_monitor",
+        ["multiMonitorSetup"] = "1camera",
         ["shadowTree"] = false,
         ["chimneySmokeDensity"] = 10,
         ["fullScreen"] = false,
@@ -118,7 +118,7 @@ options =
         ["effects"] = 3,
         ["scaleGui"] = 1,
         ["clutterMaxDistance"] = 1500,
-        ["height"] = 2880,
+        ["height"] = 1440,
     }, -- end of ["graphics"]
     ["plugins"] = 
     {
@@ -192,7 +192,7 @@ options =
             ["canopyReflections"] = 0,
             ["hmdEye"] = 2,
             ["CPLocalList"] = "chinese",
-            ["F18RealisticTDC"] = true,
+            ["F18RealisticTDC"] = false,
             ["mfdReflections"] = 0,
         }, -- end of ["F/A-18C"]
         ["FC3"] = 
