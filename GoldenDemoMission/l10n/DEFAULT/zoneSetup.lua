@@ -565,8 +565,9 @@ for i,v in ipairs(bc:getZones()) do
 	v:registerTrigger('lost', checkMissionComplete, 'missioncompleted')
 end
 
---bc:addFunds(1,0)
---bc:addFunds(2,0)
+-- Blue supports
+
+--bc:addFunds(2,5000)
 
 Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
@@ -871,7 +872,12 @@ bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
 
---red support
+-- Blue support end
+
+-- Red support
+
+-- bc:addFunds(1,5000)
+
 -- Group.getByName('r-cap-cclockwise-m2000c'):destroy()
 -- bc:registerShopItem('r-cap-cclockwise-m2000c', 'Red Combat Air Patrol Counter-Clockwise M-2000C', 100, function(sender) 
 -- 	local gr = Group.getByName('r-cap-cclockwise-m2000c')
@@ -884,9 +890,35 @@ bc:addShopItem(2, 'awacs', -1)
 
 -- bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
 
+Group.getByName('r-ship-patrol-destroyer052c'):destroy()
+bc:registerShopItem('r-ship-patrol-destroyer052c', 'Destroyer 052C Patrol', 100, function(sender) 
+	local gr = Group.getByName('r-ship-patrol-destroyer052c')
+	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+		return 'still alive'
+	end
+	mist.respawnGroup('r-ship-patrol-destroyer052c', true)
+	trigger.action.outTextForCoalition(2,'Enemy is dispatching a destroyer towards our aircraft carrier!',15)
+end)
+
+bc:addShopItem(1, 'r-ship-patrol-destroyer052c', -1)
+
+Group.getByName('r-ship-patrol-frigate054a'):destroy()
+bc:registerShopItem('r-ship-patrol-frigate054a', 'Frigate 054A Patrol', 100, function(sender) 
+	local gr = Group.getByName('r-ship-patrol-frigate054a')
+	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+		return 'still alive'
+	end
+	mist.respawnGroup('r-ship-patrol-frigate054a', true)
+	trigger.action.outTextForCoalition(2,'Enemy is dispatching a frigate towards our aircraft carrier!',15)
+end)
+
+bc:addShopItem(1, 'r-ship-patrol-frigate054a', -1)
+
+-- budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=1, decissionVariance=1, skipChance = 0})
 budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=5*60, decissionVariance=10*60, skipChance = 25})
 budgetAI:init()
---end red support
+
+-- Red support end
 
 lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
 	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
