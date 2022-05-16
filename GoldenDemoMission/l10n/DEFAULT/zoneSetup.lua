@@ -149,14 +149,14 @@ end
 dispatch = { -- Edited: Add dispatches for more zones
 	-- Friendly airfields
 	anapa = {
-		GroupCommander:new({name='anapa1', mission='supply', targetzone='Alpha'}),
-		GroupCommander:new({name='anapa3', mission='supply', targetzone='Bravo'}),
-		GroupCommander:new({name='anapa2', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='anapa5', mission='patrol', targetzone='Bravo'}),
+		GroupCommander:new({name='b-supply-anapa-alpha-uh60a', mission='supply', targetzone='Alpha'}),
+		GroupCommander:new({name='b-supply-anapa-bravo-uh60a', mission='supply', targetzone='Bravo'}),
+		GroupCommander:new({name='b-supply-anapa-charlie-uh60a', mission='supply', targetzone='Charlie'}),
+		GroupCommander:new({name='b-patrol-anapa-bravo-m2000c', mission='patrol', targetzone='Bravo'}),
 		GroupCommander:new({name='b-supply-anapa-famer-uh60a', mission='supply', targetzone='Famer'}),
 		GroupCommander:new({name='b-supply-anapa-convoy-uh60a', mission='supply', targetzone='Convoy'}),
 		GroupCommander:new({name='b-supply-anapa-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='b-attack-anapa-krymsk-asj37', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='b-attack-anapa-krymsk-a10c2', mission='attack', targetzone='Krymsk'}),
 		GroupCommander:new({name='b-patrol-anapa-gelend-f15c', mission='supply', targetzone='Gelend'}),
 		GroupCommander:new({name='b-patrol-anapa-bravo-f15c', mission='supply', targetzone='bravo'}),
 		GroupCommander:new({name='b-patrol-anapa-oilfileds-f15c', mission='supply', targetzone='Oil Fields'}),
@@ -183,17 +183,11 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='CVN-61-2', mission='patrol', targetzone='Gelend'}),
 	},
 	-- Regular zones
-	charlie={
-		GroupCommander:new({name='anapa6', mission='attack', targetzone='Bravo'})
-	},
 	foxtrot={
 		GroupCommander:new({name='foxtrot-krymsk-attack', mission='attack', targetzone='Krymsk', type='surface'}),
 		GroupCommander:new({name='foxtrot-echo-attack', mission='attack', targetzone='Echo', type='surface'}),
 		GroupCommander:new({name='b-supply-foxtrot-four-uh60a', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='b-supply-foxtrot-apple-uh60a', mission='supply', targetzone='Apple'}),
-	},
-	famer = {
-		GroupCommander:new({name='Famer1', mission='supply', targetzone='Alpha', type='surface'}),
 	},
 	-- FARPs
 	bravo = {
@@ -379,9 +373,7 @@ novoro:addGroups(dispatch.novoro)
 -- Friendly carriers
 carrier:addGroups(dispatch.carrier)
 -- Regular zones
-charlie:addGroups(dispatch.charlie)
 foxtrot:addGroups(dispatch.foxtrot)
-famer:addGroups(dispatch.famer)
 -- FARPs
 bravo:addGroups(dispatch.bravo)
 echo:addGroups(dispatch.echo)
@@ -560,19 +552,6 @@ end
 
 oilfields:registerTrigger('captured', showCredIncrease, 'oilfieldcaptured')
 factory:registerTrigger('captured', showCredIncrease, 'factorycaptured')
-
-krymsk:registerTrigger('captured', function(event,sender)
-	local kr = bc:getZoneByName('Krymsk')
-	if kr.side == 1 then
-		local krforces = { 'krymsk-gforce-1','krymsk-gforce-2','krymsk-gforce-3','krymsk-tforce-1' }
-		for _,v in ipairs(krforces) do
-			local g = Group.getByName(v)
-			if g then
-				g:destroy()
-			end
-		end
-	end
-end, 'krymskcaptured')
 
 local checkMissionComplete = function (event, sender)
 	local done = true
