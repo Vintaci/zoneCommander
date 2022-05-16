@@ -27,7 +27,7 @@ carrier = {
 
 airfield = {
 	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam", "rSam2", "rSam3", "bSamBig", "bSamFinal" }
+	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
 }
 
 airfieldEnhanced = {
@@ -37,7 +37,7 @@ airfieldEnhanced = {
 
 airfieldFinal = {
 	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = { "rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal", "Suhumi001", "Suhumi001-1", "Suhumi001-2", "Suhumi001-3" }
+	red = { "rInfantry", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal", "rShip1", "rShip2", "rShip3", "rShip4" }
 }
 
 regularzone = {
@@ -879,20 +879,20 @@ bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
 
 --red support
-Group.getByName('r-cap-cclockwise-m2000c'):destroy()
-bc:registerShopItem('r-cap-cclockwise-m2000c', 'Red Combat Air Patrol Counter-Clockwise M-2000C', 100, function(sender) 
-	local gr = Group.getByName('r-cap-cclockwise-m2000c')
-	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'still alive'
-	end
-	mist.respawnGroup('r-cap-cclockwise-m2000c', true)
-	trigger.action.outTextForCoalition(2,'Enemy M-2000C is executing Combat Air Patrol missions.',15)
-end)
+-- Group.getByName('r-cap-cclockwise-m2000c'):destroy()
+-- bc:registerShopItem('r-cap-cclockwise-m2000c', 'Red Combat Air Patrol Counter-Clockwise M-2000C', 100, function(sender) 
+-- 	local gr = Group.getByName('r-cap-cclockwise-m2000c')
+-- 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+-- 		return 'still alive'
+-- 	end
+-- 	mist.respawnGroup('r-cap-cclockwise-m2000c', true)
+-- 	trigger.action.outTextForCoalition(2,'Enemy M-2000C is executing Combat Air Patrol missions.',15)
+-- end)
 
-bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
+-- bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
 
-budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=5*60, decissionVariance=10*60, skipChance = 25})
-budgetAI:init()
+-- budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=5*60, decissionVariance=10*60, skipChance = 25})
+-- budgetAI:init()
 --end red support
 
 lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
