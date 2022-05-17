@@ -142,33 +142,36 @@ end
 dispatch = { -- Edited: Add dispatches for more zones
 	-- Friendly airfields
 	anapa = {
+		GroupCommander:new({name='b-attack-anapa-krymsk-a10c2', mission='attack', targetzone='Krymsk'}),
+
+		GroupCommander:new({name='b-patrol-anapa-bravo-f15c', mission='patrol', targetzone='Bravo'}),
+		GroupCommander:new({name='b-patrol-anapa-famer-f15c', mission='patrol', targetzone='Famer'}),
+		GroupCommander:new({name='b-patrol-anapa-oilfileds-f15c', mission='patrol', targetzone='Oil Fields'}),
+
 		GroupCommander:new({name='b-supply-anapa-alpha-uh60a', mission='supply', targetzone='Alpha'}),
 		GroupCommander:new({name='b-supply-anapa-bravo-uh60a', mission='supply', targetzone='Bravo'}),
 		GroupCommander:new({name='b-supply-anapa-charlie-uh60a', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='b-patrol-anapa-bravo-m2000c', mission='patrol', targetzone='Bravo'}),
 		GroupCommander:new({name='b-supply-anapa-famer-uh60a', mission='supply', targetzone='Famer'}),
 		GroupCommander:new({name='b-supply-anapa-convoy-uh60a', mission='supply', targetzone='Convoy'}),
 		GroupCommander:new({name='b-supply-anapa-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='b-attack-anapa-krymsk-a10c2', mission='attack', targetzone='Krymsk'}),
-		GroupCommander:new({name='b-patrol-anapa-gelend-f15c', mission='supply', targetzone='Gelend'}),
-		GroupCommander:new({name='b-patrol-anapa-bravo-f15c', mission='supply', targetzone='bravo'}),
-		GroupCommander:new({name='b-patrol-anapa-oilfileds-f15c', mission='supply', targetzone='Oil Fields'}),
 	},
 	novoro = {
-		GroupCommander:new({name='b-supply-novoro-gelend-uh60a', mission='supply', targetzone='Gelend'}),
-		GroupCommander:new({name='b-supply-novoro-four-uh60a', mission='supply', targetzone='Four'}),
-		GroupCommander:new({name='b-supply-novoro-apple-uh60a', mission='supply', targetzone='Apple'}),
-		GroupCommander:new({name='b-supply-novoro-radiotower-uh60a', mission='supply', targetzone='Radio Tower'}),
-		GroupCommander:new({name='b-supply-novoro-krymsk-uh60a', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='b-supply-novoro-anapa-uh60a', mission='supply', targetzone='Anapa'}),
-		GroupCommander:new({name='b-supply-novoro-factory-uh60a', mission='supply', targetzone='Factory'}),
-		GroupCommander:new({name='b-supply-novoro-gelend-uh60a', mission='supply', targetzone='Gelend'}),
-		GroupCommander:new({name='b-patrol-novoro-famer-jf17', mission='patrol', targetzone='Famer'}),
+		GroupCommander:new({name='b-attack-novoro-krymsk-a10c2', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='b-attack-novoro-gelend-a10c2', mission='attack', targetzone='Gelend'}),
+
+		GroupCommander:new({name='b-patrol-novoro-alpha-jf17', mission='patrol', targetzone='Aplha'}),
+		GroupCommander:new({name='b-patrol-novoro-krymsk-f15c', mission='patrol', targetzone='Krymsk'}),
 		GroupCommander:new({name='b-patrol-novoro-four-f15c', mission='patrol', targetzone='Four'}),
-		GroupCommander:new({name='b-patrol-novoro-gelend-f15c', mission='patrol', targetzone='Gelend'}),
-		GroupCommander:new({name='b-patrol-novoro-apple-f14b', mission='patrol', targetzone='Novoro'}),
-		GroupCommander:new({name='b-attack-novoro-krasnodar-a10c', mission='attack', targetzone='Krasnodar'}),
-	},
+
+		GroupCommander:new({name='b-supply-novoro-famer-uh60a', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='b-supply-novoro-alpha-uh60a', mission='supply', targetzone='Alpha'}),
+		GroupCommander:new({name='b-supply-novoro-bravo-uh60a', mission='supply', targetzone='Bravo'}),
+		GroupCommander:new({name='b-supply-novoro-krymsk-uh60a', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='b-supply-novoro-radiotower-uh60a', mission='supply', targetzone='Radio Tower'}),
+		GroupCommander:new({name='b-supply-novoro-factory-uh60a', mission='supply', targetzone='Factory'}),
+		GroupCommander:new({name='b-supply-novoro-four-uh60a', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='b-supply-novoro-gelend-uh60a', mission='supply', targetzone='Gelend'}),
+		},
 	-- Friendly carriers
 	carrier = {
 		GroupCommander:new({name='CVN-73-3', mission='patrol', targetzone='Anapa'}),
@@ -419,26 +422,30 @@ bc:addZone(mikehans)
 bc:addZone(suhumi)
 
 bc:addConnection("Anapa","Alpha")
+bc:addConnection("Anapa","Bravo")
 bc:addConnection("Anapa","Charlie")
 bc:addConnection("Anapa","Famer")
+bc:addConnection("Anapa","Convoy")
+bc:addConnection("Anapa","Oil Fields")
+
+bc:addConnection("Novoro","Famer")
+bc:addConnection("Novoro","Alpha")
+bc:addConnection("Novoro","Bravo")
+bc:addConnection("Novoro","Krymsk")
+bc:addConnection("Novoro","Radio Tower")
+bc:addConnection("Novoro","Factory")
+bc:addConnection("Novoro","Four")
+bc:addConnection("Novoro","Gelend")
 
 bc:addConnection("Alpha","Bravo")
-bc:addConnection("Alpha","Charlie")
 bc:addConnection("Alpha","Famer")
 bc:addConnection("Alpha","Novoro")
-bc:addConnection("Alpha","Radio Tower")
 
-bc:addConnection("Bravo","Charlie")
 bc:addConnection("Bravo","Convoy")
 bc:addConnection("Bravo","Krymsk")
-bc:addConnection("Bravo","Radio Tower")
 
 bc:addConnection("Charlie","Convoy")
 bc:addConnection("Charlie","Oil Fields")
-
-bc:addConnection("Novoro","Famer")
-bc:addConnection("Novoro","Gelend")
-bc:addConnection("Novoro","Radio Tower")
 
 bc:addConnection("Gelend","Four")
 bc:addConnection("Gelend","Suoqi")
@@ -556,7 +563,7 @@ local checkMissionComplete = function (event, sender)
 	end
 	
 	if done then
-		trigger.action.outText("Enemy has been defeated. \n\nMission Complete.", 120)
+		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于15秒后重启！", 120)
 		trigger.action.setUserFlag("TriggerFlagMissionComplete", true) -- Edited: Set flag to make mission restart
 	end
 end
@@ -957,3 +964,6 @@ function respawnStatics()
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
+
+GlobalSettings.setDifficultyScaling(7.5,1) --red
+GlobalSettings.setDifficultyScaling(7.5,2) --blue
