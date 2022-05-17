@@ -244,33 +244,34 @@ dispatch = { -- Edited: Add dispatches for more zones
 	},
 	-- Airfields
 	krymsk = {
-		GroupCommander:new({name='krym1', mission='supply', targetzone='Bravo'}),
-		GroupCommander:new({name='krym2', mission='attack', targetzone='Bravo'}),
-		GroupCommander:new({name='krym3', mission='patrol', targetzone='Bravo'}),
-		GroupCommander:new({name='krym4', mission='patrol', targetzone='Krymsk'}),
-		GroupCommander:new({name='krym5', mission='supply', targetzone='Radio Tower'}),
-		GroupCommander:new({name='krym6', mission='attack', targetzone='Radio Tower'}),
-		GroupCommander:new({name='krym7', mission='patrol', targetzone='Radio Tower'}),
-		GroupCommander:new({name='krym8', mission='patrol', targetzone='Bravo'}),
-		GroupCommander:new({name='krym9', mission='patrol', targetzone='Krymsk'}),
-		GroupCommander:new({name='krym10', mission='supply', targetzone='Bravo'}),
-		GroupCommander:new({name='krym11', mission='supply', targetzone='Radio Tower'}),
-		GroupCommander:new({name='krym12', mission='supply', targetzone='Delta'}),
-		GroupCommander:new({name='krym13', mission='attack', targetzone='Delta'}),
-		GroupCommander:new({name='krym14', mission='supply', targetzone='Factory'}),
-		GroupCommander:new({name='krym15', mission='attack', targetzone='Factory'}),
-		GroupCommander:new({name='krym16', mission='supply', targetzone='Delta'}),
-		GroupCommander:new({name='krym17', mission='supply', targetzone='Factory'}),
-		GroupCommander:new({name='krym18', mission='supply', targetzone='SAM Site'}),
-		GroupCommander:new({name='krym19', mission='supply', targetzone='SAM Site'}),
-		GroupCommander:new({name='krym20', mission='attack', targetzone='SAM Site'}),
-		GroupCommander:new({name='krym21', mission='patrol', targetzone='Delta'}),
-		GroupCommander:new({name='krym22', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='krym23', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='krym24', mission='attack', targetzone='Oil Fields'}),
-		GroupCommander:new({name='krym25', mission='attack', targetzone='Bravo', type='surface'}),
-		GroupCommander:new({name='b-supply-krymsk-samsite-uh60a', mission='supply', targetzone='SAM Site'}),
+		GroupCommander:new({name='r-attack-krymsk-bravo-armor', mission='attack', targetzone='Bravo', type='surface'}),
+
+		GroupCommander:new({name='r-attack-krymsk-factory-su25t', mission='attack', targetzone='Factory'}),
+		GroupCommander:new({name='r-attack-krymsk-samsite-su25t', mission='attack', targetzone='SAM Site'}),
+		GroupCommander:new({name='r-attack-krymsk-oilfields-su25t', mission='attack', targetzone='Oil Fields'}),
+		GroupCommander:new({name='r-attack-krymsk-radiotower-mi24v', mission='attack', targetzone='Radio Tower'}),
+		GroupCommander:new({name='r-attack-krymsk-anapa-mig21bis', mission='attack', targetzone='Anapa'}),
+		GroupCommander:new({name='r-attack-krymsk-novoro-a10c2', mission='attack', targetzone='Novoro'}),
+		
+		GroupCommander:new({name='r-patrol-krymsk-krymsk-mig21bis', mission='patrol', targetzone='Krymsk'}),
+		GroupCommander:new({name='r-patrol-krymsk-famer-f16c', mission='patrol', targetzone='Famer'}),
+
+		GroupCommander:new({name='r-supply-krymsk-bravo-mi8mtv2', mission='supply', targetzone='Bravo'}),
+		GroupCommander:new({name='r-supply-krymsk-delta-mi8mtv2', mission='supply', targetzone='Delta'}),
+		GroupCommander:new({name='r-supply-krymsk-factory-mi8mtv2', mission='supply', targetzone='Factory'}),
+		GroupCommander:new({name='r-supply-krymsk-samsite-mi8mtv2', mission='supply', targetzone='SAM Site'}),
+		GroupCommander:new({name='r-supply-krymsk-oilfields-mi8mtv2', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='r-supply-krymsk-radiotower-mi8mtv2', mission='supply', targetzone='Radio Tower'}),
+
+		GroupCommander:new({name='b-patrol-krymsk-krymsk-m2000c', mission='patrol', targetzone='Krymsk'}),
+		
+		GroupCommander:new({name='b-supply-krymsk-bravo-uh60a', mission='supply', targetzone='Bravo'}),
+		GroupCommander:new({name='b-supply-krymsk-radiotower-uh60a', mission='supply', targetzone='Radio Tower'}),
 		GroupCommander:new({name='b-supply-krymsk-delta-uh60a', mission='supply', targetzone='Delta'}),
+		GroupCommander:new({name='b-supply-krymsk-factory-uh60a', mission='supply', targetzone='Factory'}),
+		GroupCommander:new({name='b-supply-krymsk-samsite-uh60a', mission='supply', targetzone='SAM Site'}),
+		GroupCommander:new({name='b-supply-krymsk-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
+
 		GroupCommander:new({name='b-supply-krymsk-ever-uh60a', mission='supply', targetzone='Ever'}),
 		GroupCommander:new({name='b-supply-krymsk-echo-uh60a', mission='supply', targetzone='Echo'}),
 		GroupCommander:new({name='b-supply-krymsk-kelasinuodaer-uh60a', mission='supply', targetzone='Kelasinuodaer'}),
@@ -440,9 +441,16 @@ bc:addConnection("Novoro","Gelend")
 bc:addConnection("Alpha","Bravo")
 bc:addConnection("Alpha","Famer")
 bc:addConnection("Alpha","Novoro")
+bc:addConnection("Alpha","Charlie")
+bc:addConnection("Alpha","Convoy")
+bc:addConnection("Alpha","Radio Tower")
 
+bc:addConnection("Bravo","Radio Tower")
 bc:addConnection("Bravo","Convoy")
-bc:addConnection("Bravo","Krymsk")
+bc:addConnection("Bravo","Charlie")
+
+bc:addConnection("SAM Site","Convoy")
+bc:addConnection("SAM Site","Delta")
 
 bc:addConnection("Charlie","Convoy")
 bc:addConnection("Charlie","Oil Fields")
@@ -452,7 +460,10 @@ bc:addConnection("Gelend","Suoqi")
 bc:addConnection("Gelend","Factory")
 bc:addConnection("Gelend","Radio Tower")
 
+bc:addConnection("Krymsk","Alpha")
+bc:addConnection("Krymsk","Bravo")
 bc:addConnection("Krymsk","Delta")
+--bc:addConnection("Krymsk","Novoro")
 bc:addConnection("Krymsk","Convoy")
 bc:addConnection("Krymsk","Radio Tower")
 bc:addConnection("Krymsk","Factory")
@@ -468,11 +479,18 @@ bc:addConnection("Factory","Radio Tower")
 bc:addConnection("Delta","Echo")
 bc:addConnection("Delta","SAM Site")
 bc:addConnection("Delta","Factory")
+bc:addConnection("Delta","Ever")
+bc:addConnection("Delta","Foxtrot")
+bc:addConnection("Delta","Oil Fields")
+bc:addConnection("Delta","Radio Tower")
+
+bc:addConnection("Four","Radio Tower")
 
 bc:addConnection("Echo","Foxtrot")
 bc:addConnection("Echo","Kelasinuodaer")
 bc:addConnection("Echo","SAM Site")
 bc:addConnection("Echo","Factory")
+bc:addConnection("Echo","Four")
 
 bc:addConnection("Ever","Banana")
 bc:addConnection("Ever","Echo")
@@ -490,6 +508,8 @@ bc:addConnection("Krasnodar","Apple")
 bc:addConnection("Krasnodar","Banana")
 bc:addConnection("Krasnodar","Ever")
 bc:addConnection("Krasnodar","Kelasinuodaer")
+
+bc:addConnection("Kelasinuodaer","SAM Site")
 
 bc:addConnection("Apple","Banana")
 bc:addConnection("Apple","Fine")
