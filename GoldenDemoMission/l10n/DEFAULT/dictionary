@@ -67,7 +67,7 @@ TCN: 14X\
     ["DictKey_ActionText_30"] = "任务完成！服务器将于15秒后清档重启！",
     ["DictKey_descriptionNeutralsTask_4"] = "",
     ["DictKey_sortie_5"] = "",
-    ["DictKey_ActionText_36"] = "服务器即将重启",
+    ["DictKey_ActionText_36"] = "服务器即将定时重启！",
     ["DictKey_ActionText_19"] = "",
     ["DictKey_ActionText_31"] = "任务完成！",
     ["DictKey_descriptionRedTask_2"] = "",
