@@ -1,10 +1,15 @@
 mapResource = 
 {
+    ["ResKey_ImageBriefing_63"] = "donation.jpg",
     ["ResKey_Action_6"] = "mist_4_5_107.lua",
-    ["ResKey_Action_20"] = "zoneCommander.lua",
+    ["ResKey_ImageBriefing_55"] = "alipay.jpg",
     ["ResKey_Action_21"] = "zoneSetup.lua",
-    ["ResKey_ImageBriefing_34"] = "pic_title.jpg",
-    ["ResKey_ImageBriefing_35"] = "pic_title.jpg",
-    ["ResKey_ImageBriefing_32"] = "pic_title.jpg",
-    ["ResKey_Action_42"] = "Splash_Damage_2_0.lua",
+    ["ResKey_ImageBriefing_53"] = "alipay.jpg",
+    ["ResKey_Action_20"] = "zoneCommander.lua",
+    ["ResKey_ImageBriefing_61"] = "donation.jpg",
+    ["ResKey_ImageBriefing_57"] = "alipay.jpg",
+    ["ResKey_ImageBriefing_54"] = "wechat.png",
+    ["ResKey_ImageBriefing_52"] = "wechat.png",
+    ["ResKey_ImageBriefing_62"] = "donation.jpg",
+    ["ResKey_ImageBriefing_56"] = "wechat.png",
 } -- end of mapResource
