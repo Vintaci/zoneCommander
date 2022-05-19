@@ -20,48 +20,43 @@ function allExcept(tbls, except)
 end
 
 carrier = {
-	blue = { "bShip", "bShip", "bShip", "bShip", "bShip", "bShip" },
+	blue = { "bShip", "bShip", "bShip"},
 	red = {}
 }
 
 friendlyAirfield = {
-	blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
+	blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig" },
 	red = {}
 }
 
 airfield = {
-	blue = { "bInfantry", "bArmor", "bArmor", "bSamIR", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = { "rInfantry", "rArmor", "rArmor", "rSamIR", "rSamIR", "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
+	blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig" },
+	red = { "rArmor", "rSamIR", "rSam", "rSam2", "rSamBig" }
 }
 
 airfieldEnhanced = {
-	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam2", "rSam3", "rSamBig", "rSamBig", "rSamFinal" }
-}
-
-airfieldFinal = {
-	blue = { "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig", "bSamBig", "bSamFinal", "bSamFinal" },
-	red = { "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam", "rSam2", "rSamBig", "rSamBig", "rSamFinal", "rSamFinal" }
+	blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
+	red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
 }
 
 regularzone = {
-	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSam", "bSam", "bSam2" },
-	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSam", "rSam", "rSam2" }
+	blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2" },
+	red = { "rInfantry", "rArmor", "rSamIR", "rSam", "rSam2" }
 }
 
 farp = {
-	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR", "bSamIR", "bSam" },
-	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR", "rSamIR", "rSam" }
+	blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR" },
+	red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR" }
 }
 
 specialSAM = {
-	blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2", "bSam3", "bSamBig" },
-	red = { "rInfantry", "rArmor", "rSamIR", "rSam", "rSam2", "rSam3", "rSamBig" }
+	blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
+	red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
 }
 
 convoy = {
-	blue = { "bInfantry", "bArmor", "bArmor", "bArmor", "bSamIR", "bSamIR" },
-	red = { "rInfantry", "rArmor", "rArmor", "rArmor", "rSamIR", "rSamIR" }
+	blue = { "bArmor", "bArmor", "bSamIR", "bSamIR", "bSamIR" },
+	red = { "rArmor", "rArmor", "rSamIR", "rSamIR", "rSamIR" }
 }
 
 cargoSpawns = {
@@ -93,11 +88,11 @@ bc = BattleCommander:new('GameSave.lua')
 anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=friendlyAirfield, crates=cargoAccepts.anapa, flavorText=hint.general})
 novoro = ZoneCommander:new({zone='Novoro', side=2, level=5, upgrades=friendlyAirfield, crates=cargoAccepts.novoro, flavorText=hint.general})
 -- Friendly carriers
-carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=5, upgrades=carrier, crates=cargoAccepts.all, flavorText=hint.general})
+carrier = ZoneCommander:new({zone='Carrier Group', side=2, level=3, upgrades=carrier, crates=cargoAccepts.all, flavorText=hint.general})
 -- Regular zones
 alpha = ZoneCommander:new({zone='Alpha', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
-bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general})
-echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=farp, crates=cargoAccepts.all, flavorText=hint.general})
+bravo = ZoneCommander:new({zone='Bravo', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
+echo = ZoneCommander:new({zone='Echo', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
 charlie = ZoneCommander:new({zone='Charlie', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
 radio = ZoneCommander:new({zone='Radio Tower', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
 delta = ZoneCommander:new({zone='Delta', side=1, level=3, upgrades=regularzone, crates=cargoAccepts.all, flavorText=hint.general})
@@ -119,15 +114,15 @@ fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=specialSAM, cra
 fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
 cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
 -- Airfields
-gelend = ZoneCommander:new({zone='Gelend', side=1, level=5, upgrades=airfield, crates=cargoAccepts.gelend, flavorText=hint.general, income=2})
-krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=5, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=2})
-suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
-kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=5, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
+gelend = ZoneCommander:new({zone='Gelend', side=1, level=3, upgrades=airfield, crates=cargoAccepts.gelend, flavorText=hint.general, income=2})
+krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=3, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=2})
+suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
+kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
 -- Airfields enhanced
-krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
-mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=8, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
+krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
+mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Airfields final
-suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=10, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=hint.general, income=5})
+suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=5})
 -- Edited: Done
 
 radio:addCriticalObject('RadioTower')
@@ -153,12 +148,14 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-patrol-anapa-famer-f15c', mission='patrol', targetzone='Famer'}),
 		GroupCommander:new({name='b-patrol-anapa-oilfileds-f15c', mission='patrol', targetzone='Oil Fields'}),
 
-		GroupCommander:new({name='b-supply-anapa-alpha-uh60a', mission='supply', targetzone='Alpha'}),
-		GroupCommander:new({name='b-supply-anapa-bravo-uh60a', mission='supply', targetzone='Bravo'}),
-		GroupCommander:new({name='b-supply-anapa-charlie-uh60a', mission='supply', targetzone='Charlie'}),
 		GroupCommander:new({name='b-supply-anapa-famer-uh60a', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='b-supply-anapa-novoro-uh60a', mission='supply', targetzone='Novoro'}),
+		GroupCommander:new({name='b-supply-anapa-alpha-uh60a', mission='supply', targetzone='Alpha'}),
+		GroupCommander:new({name='b-supply-anapa-krymsk-uh60a', mission='supply', targetzone='Krymsk'}),
+		GroupCommander:new({name='b-supply-anapa-bravo-uh60a', mission='supply', targetzone='Bravo'}),
 		GroupCommander:new({name='b-supply-anapa-convoy-uh60a', mission='supply', targetzone='Convoy'}),
 		GroupCommander:new({name='b-supply-anapa-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='b-supply-anapa-charlie-uh60a', mission='supply', targetzone='Charlie'}),
 	},
 	novoro = {
 		GroupCommander:new({name='b-attack-novoro-krymsk-a10c2', mission='attack', targetzone='Krymsk'}),
@@ -169,6 +166,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-patrol-novoro-four-f15c', mission='patrol', targetzone='Four'}),
 
 		GroupCommander:new({name='b-supply-novoro-famer-uh60a', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='b-supply-novoro-anapa-uh60a', mission='supply', targetzone='Anapa'}),
 		GroupCommander:new({name='b-supply-novoro-alpha-uh60a', mission='supply', targetzone='Alpha'}),
 		GroupCommander:new({name='b-supply-novoro-bravo-uh60a', mission='supply', targetzone='Bravo'}),
 		GroupCommander:new({name='b-supply-novoro-krymsk-uh60a', mission='supply', targetzone='Krymsk'}),
@@ -433,6 +431,8 @@ bc:addConnection("Anapa","Charlie")
 bc:addConnection("Anapa","Famer")
 bc:addConnection("Anapa","Convoy")
 bc:addConnection("Anapa","Oil Fields")
+bc:addConnection("Anapa","Novoro")
+bc:addConnection("Anapa","Krymsk")
 
 bc:addConnection("Novoro","Famer")
 bc:addConnection("Novoro","Alpha")
@@ -468,7 +468,6 @@ bc:addConnection("Gelend","Radio Tower")
 bc:addConnection("Krymsk","Alpha")
 bc:addConnection("Krymsk","Bravo")
 bc:addConnection("Krymsk","Delta")
---bc:addConnection("Krymsk","Novoro")
 bc:addConnection("Krymsk","Convoy")
 bc:addConnection("Krymsk","Radio Tower")
 bc:addConnection("Krymsk","Factory")
@@ -923,31 +922,39 @@ bc:addShopItem(2, 'awacs', -1)
 -- bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
 
 Group.getByName('r-ship-patrol-frigate-1'):destroy()
-bc:registerShopItem('r-ship-patrol-frigate-1', 'Destroyer 052C Patrol', 2500, function(sender) 
-	local gr = Group.getByName('r-ship-patrol-frigate-1')
-	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'still alive'
+bc:registerShopItem('r-ship-patrol-frigate-1', 'Frigate Patrol 1', 5000, function(sender)
+	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Suhumi').side==1 then
+		local gr = Group.getByName('r-ship-patrol-frigate-1')
+		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+			return 'still alive'
+		end
+		mist.respawnGroup('r-ship-patrol-frigate-1', true)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！',15)
+	else
+		return 'zone no match'
 	end
-	mist.respawnGroup('r-ship-patrol-frigate-1', true)
-	trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！',15)
 end)
 
 bc:addShopItem(1, 'r-ship-patrol-frigate-1', -1)
 
 Group.getByName('r-ship-patrol-frigate-2'):destroy()
-bc:registerShopItem('r-ship-patrol-frigate-2', 'Frigate 054A Patrol', 2500, function(sender) 
-	local gr = Group.getByName('r-ship-patrol-frigate-2')
-	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'still alive'
+bc:registerShopItem('r-ship-patrol-frigate-2', 'Frigate Patrol 2', 5000, function(sender)
+	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Suhumi').side==1 then
+		local gr = Group.getByName('r-ship-patrol-frigate-2')
+		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+			return 'still alive'
+		end
+		mist.respawnGroup('r-ship-patrol-frigate-2', true)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！',15)
+	else
+		return 'zone no match'
 	end
-	mist.respawnGroup('r-ship-patrol-frigate-2', true)
-	trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！',15)
 end)
 
 bc:addShopItem(1, 'r-ship-patrol-frigate-2', -1)
 
 -- budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=1, decissionVariance=1, skipChance = 0})
-budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=15*60, decissionVariance=15*60, skipChance = 25})
+budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=30*60, decissionVariance=30*60, skipChance = 25})
 budgetAI:init()
 
 -- Red support end
@@ -990,5 +997,5 @@ end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
 
-GlobalSettings.setDifficultyScaling(3,1) --red
-GlobalSettings.setDifficultyScaling(5,2) --blue
+GlobalSettings.setDifficultyScaling(1.0,1) --red
+GlobalSettings.setDifficultyScaling(1.0,2) --blue
