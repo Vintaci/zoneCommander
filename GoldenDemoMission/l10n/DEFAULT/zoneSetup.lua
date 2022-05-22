@@ -907,8 +907,6 @@ bc:addShopItem(2, 'awacs', -1)
 
 -- Red support
 
--- bc:addFunds(1,100000)
-
 -- Group.getByName('r-cap-cclockwise-m2000c'):destroy()
 -- bc:registerShopItem('r-cap-cclockwise-m2000c', 'Red Combat Air Patrol Counter-Clockwise M-2000C', 100, function(sender) 
 -- 	local gr = Group.getByName('r-cap-cclockwise-m2000c')
@@ -921,39 +919,70 @@ bc:addShopItem(2, 'awacs', -1)
 
 -- bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
 
+-- Frigate Patrol
 Group.getByName('r-ship-patrol-frigate-1'):destroy()
-bc:registerShopItem('r-ship-patrol-frigate-1', 'Frigate Patrol 1', 5000, function(sender)
+Group.getByName('r-ship-patrol-frigate-2'):destroy()
+bc:registerShopItem('r-ship-patrol-frigate', 'Frigate Patrol', 7500, function(sender)
 	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Suhumi').side==1 then
-		local gr = Group.getByName('r-ship-patrol-frigate-1')
-		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+		-- Group 1
+		local gr1 = Group.getByName('r-ship-patrol-frigate-1')
+		local gr2 = Group.getByName('r-ship-patrol-frigate-2')
+		if (gr1 and gr1:getSize()>0 and gr1:getController():hasTask()) or
+			(gr2 and gr2:getSize()>0 and gr2:getController():hasTask()) then 
 			return 'still alive'
 		end
 		mist.respawnGroup('r-ship-patrol-frigate-1', true)
-		trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！',15)
+		mist.respawnGroup('r-ship-patrol-frigate-2', true)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！\n起点：苏呼米\n攻击目标：蓝方航母作战集群',15)
 	else
 		return 'zone no match'
 	end
 end)
+bc:addShopItem(1, 'r-ship-patrol-frigate', -1)
 
-bc:addShopItem(1, 'r-ship-patrol-frigate-1', -1)
-
-Group.getByName('r-ship-patrol-frigate-2'):destroy()
-bc:registerShopItem('r-ship-patrol-frigate-2', 'Frigate Patrol 2', 5000, function(sender)
-	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Suhumi').side==1 then
-		local gr = Group.getByName('r-ship-patrol-frigate-2')
-		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+-- Bomber Attack Suhumi to Novoro
+Group.getByName('r-bomber-attack-suhumi-novoro-tu22m3'):destroy()
+Group.getByName('r-bomber-attack-suhumi-novoro-f16c'):destroy()
+bc:registerShopItem('r-bomber-attack-suhumi-novoro', 'Bomber Attack Suhumi to Novoro', 7500, function(sender)
+	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('Suhumi').side==1 then
+		local gr1 = Group.getByName('r-bomber-attack-suhumi-novoro-tu22m3')
+		local gr2 = Group.getByName('r-bomber-attack-suhumi-novoro-f16c')
+		if (gr1 and gr1:getSize()>0 and gr1:getController():hasTask()) or
+			(gr2 and gr2:getSize()>0 and gr2:getController():hasTask()) then 
 			return 'still alive'
 		end
-		mist.respawnGroup('r-ship-patrol-frigate-2', true)
-		trigger.action.outTextForCoalition(2,'敌军正在派遣舰队攻击我方航母！',15)
+		mist.respawnGroup('r-bomber-attack-suhumi-novoro-tu22m3', true)
+		mist.respawnGroup('r-bomber-attack-suhumi-novoro-f16c', true)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣轰炸机机队攻击我方机场！\n起点：苏呼米\n攻击目标：新罗西斯克',15)
 	else
 		return 'zone no match'
 	end
 end)
+bc:addShopItem(1, 'r-bomber-attack-suhumi-novoro', -1)
 
-bc:addShopItem(1, 'r-ship-patrol-frigate-2', -1)
+-- Bomber Attack Kelas to Anapa
+Group.getByName('r-bomber-attack-kelas-anapa-tu22m3'):destroy()
+Group.getByName('r-bomber-attack-kelas-anapa-f16c'):destroy()
+bc:registerShopItem('r-bomber-attack-kelas-anapa', 'Bomber Attack Kelas to Anapa', 7500, function(sender)
+	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('Suhumi').side==1 then
+		local gr1 = Group.getByName('r-bomber-attack-kelas-anapa-tu22m3')
+		local gr2 = Group.getByName('r-bomber-attack-kelas-anapa-f16c')
+		if (gr1 and gr1:getSize()>0 and gr1:getController():hasTask()) or
+			(gr2 and gr2:getSize()>0 and gr2:getController():hasTask()) then 
+			return 'still alive'
+		end
+		mist.respawnGroup('r-bomber-attack-kelas-anapa-tu22m3', true)
+		mist.respawnGroup('r-bomber-attack-kelas-anapa-f16c', true)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣轰炸机机队攻击我方机场！\n起点：克拉斯诺达尔-中心区\n攻击目标：阿纳帕',15)
+	else
+		return 'zone no match'
+	end
+end)
+bc:addShopItem(1, 'r-bomber-attack-kelas-anapa', -1)
 
+-- bc:addFunds(1,100000)
 -- budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=1, decissionVariance=1, skipChance = 0})
+
 budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=30*60, decissionVariance=30*60, skipChance = 25})
 budgetAI:init()
 
