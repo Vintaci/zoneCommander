@@ -88,7 +88,7 @@ options =
         ["water"] = 2,
         ["motionBlur"] = 0,
         ["visibRange"] = "Extreme",
-        ["aspect"] = 2.3888888888889,
+        ["aspect"] = 1.1944444444444,
         ["lights"] = 2,
         ["shadows"] = 4,
         ["MSAA"] = 2,
@@ -97,7 +97,7 @@ options =
         ["forestDistanceFactor"] = 1,
         ["cockpitGI"] = 1,
         ["terrainTextures"] = "max",
-        ["multiMonitorSetup"] = "1camera",
+        ["multiMonitorSetup"] = "double_viewports_with_mfcds",
         ["shadowTree"] = false,
         ["chimneySmokeDensity"] = 10,
         ["fullScreen"] = false,
@@ -110,7 +110,7 @@ options =
         ["flatTerrainShadows"] = 0,
         ["width"] = 3440,
         ["SSLR"] = 1,
-        ["secondaryShadows"] = 0,
+        ["secondaryShadows"] = 1,
         ["SSAO"] = 1,
         ["heatBlr"] = 2,
         ["sync"] = false,
@@ -118,7 +118,7 @@ options =
         ["effects"] = 3,
         ["scaleGui"] = 1,
         ["clutterMaxDistance"] = 1500,
-        ["height"] = 1440,
+        ["height"] = 2880,
     }, -- end of ["graphics"]
     ["plugins"] = 
     {
@@ -126,21 +126,6 @@ options =
         {
             ["CPLocalList"] = "English",
         }, -- end of ["Su-25T"]
-        ["CLICKABLE-FC3_Module"] = 
-        {
-            ["Su33_enabled"] = true,
-            ["J11a_enabled"] = true,
-            ["Su25t_enabled"] = true,
-            ["Mig29a_enabled"] = true,
-            ["Mig29g_enabled"] = true,
-            ["dontuseit"] = false,
-            ["Su27_enabled"] = true,
-            ["Su25_enabled"] = true,
-            ["useit"] = true,
-            ["A10a_enabled"] = true,
-            ["F15c_enabled"] = true,
-            ["Mig29s_enabled"] = true,
-        }, -- end of ["CLICKABLE-FC3_Module"]
         ["CaptoGlove"] = 
         {
             ["shoulderJointZ_Right"] = 23,
@@ -169,6 +154,18 @@ options =
             ["shoulderJointY_Right"] = -23,
             ["yawOffsetGlove_Right"] = 0,
         }, -- end of ["CaptoGlove"]
+        ["FC3"] = 
+        {
+            ["CPLocalList_Su-25"] = "default",
+            ["CPLocalList_Su-27"] = "chinese",
+            ["CPLocalList_A-10A"] = "default",
+            ["CPLocalList_Su-33"] = "default",
+            ["CPLocalList_MiG-29S"] = "default",
+            ["CPLocalList_MiG-29A"] = "default",
+            ["CPLocalList_J-11A"] = "default",
+            ["CPLocalList_MiG-29G"] = "default",
+            ["CPLocalList_F-15C"] = "default",
+        }, -- end of ["FC3"]
         ["LeapMotion"] = 
         {
             ["handUseThrottle"] = false,
@@ -195,18 +192,21 @@ options =
             ["F18RealisticTDC"] = false,
             ["mfdReflections"] = 0,
         }, -- end of ["F/A-18C"]
-        ["FC3"] = 
+        ["RedK0d Clickable"] = 
         {
-            ["CPLocalList_Su-25"] = "default",
-            ["CPLocalList_Su-27"] = "chinese",
-            ["CPLocalList_A-10A"] = "default",
-            ["CPLocalList_Su-33"] = "default",
-            ["CPLocalList_MiG-29S"] = "default",
-            ["CPLocalList_MiG-29A"] = "default",
-            ["CPLocalList_J-11A"] = "default",
-            ["CPLocalList_MiG-29G"] = "default",
-            ["CPLocalList_F-15C"] = "default",
-        }, -- end of ["FC3"]
+            ["Su33_enabled"] = true,
+            ["J11a_enabled"] = true,
+            ["Su25t_enabled"] = true,
+            ["Mig29a_enabled"] = true,
+            ["Mig29g_enabled"] = true,
+            ["dontuseit"] = false,
+            ["Su27_enabled"] = true,
+            ["Su25_enabled"] = true,
+            ["useit"] = true,
+            ["A10a_enabled"] = true,
+            ["F15c_enabled"] = true,
+            ["Mig29s_enabled"] = true,
+        }, -- end of ["RedK0d Clickable"]
         ["UH-60L"] = 
         {
             ["aimingMarkRemove"] = false,
