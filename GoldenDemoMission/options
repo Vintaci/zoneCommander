@@ -4,7 +4,7 @@ options =
     ["miscellaneous"] = 
     {
         ["chat_window_at_start"] = true,
-        ["TrackIR_external_views"] = true,
+        ["TrackIR_external_views"] = false,
         ["f11_free_camera"] = true,
         ["f10_awacs"] = true,
         ["Coordinate_Display"] = "Precise Lat Long",
@@ -82,13 +82,13 @@ options =
         ["messagesFontScale"] = 1.5,
         ["forestDetailsFactor"] = 1,
         ["rainDroplets"] = true,
-        ["LensEffects"] = 3,
+        ["LensEffects"] = 1,
         ["box_mouse_cursor"] = false,
         ["anisotropy"] = 4,
         ["water"] = 2,
         ["motionBlur"] = 0,
         ["visibRange"] = "Extreme",
-        ["aspect"] = 1.1944444444444,
+        ["aspect"] = 1.7777777777778,
         ["lights"] = 2,
         ["shadows"] = 4,
         ["MSAA"] = 2,
@@ -97,7 +97,7 @@ options =
         ["forestDistanceFactor"] = 1,
         ["cockpitGI"] = 1,
         ["terrainTextures"] = "max",
-        ["multiMonitorSetup"] = "double_viewports_with_mfcds",
+        ["multiMonitorSetup"] = "1camera",
         ["shadowTree"] = false,
         ["chimneySmokeDensity"] = 10,
         ["fullScreen"] = false,
@@ -110,7 +110,7 @@ options =
         ["flatTerrainShadows"] = 0,
         ["width"] = 3440,
         ["SSLR"] = 1,
-        ["secondaryShadows"] = 1,
+        ["secondaryShadows"] = 0,
         ["SSAO"] = 1,
         ["heatBlr"] = 2,
         ["sync"] = false,
@@ -118,14 +118,10 @@ options =
         ["effects"] = 3,
         ["scaleGui"] = 1,
         ["clutterMaxDistance"] = 1500,
-        ["height"] = 2880,
+        ["height"] = 1440,
     }, -- end of ["graphics"]
     ["plugins"] = 
     {
-        ["Su-25T"] = 
-        {
-            ["CPLocalList"] = "English",
-        }, -- end of ["Su-25T"]
         ["CaptoGlove"] = 
         {
             ["shoulderJointZ_Right"] = 23,
@@ -154,27 +150,6 @@ options =
             ["shoulderJointY_Right"] = -23,
             ["yawOffsetGlove_Right"] = 0,
         }, -- end of ["CaptoGlove"]
-        ["FC3"] = 
-        {
-            ["CPLocalList_Su-25"] = "default",
-            ["CPLocalList_Su-27"] = "chinese",
-            ["CPLocalList_A-10A"] = "default",
-            ["CPLocalList_Su-33"] = "default",
-            ["CPLocalList_MiG-29S"] = "default",
-            ["CPLocalList_MiG-29A"] = "default",
-            ["CPLocalList_J-11A"] = "default",
-            ["CPLocalList_MiG-29G"] = "default",
-            ["CPLocalList_F-15C"] = "default",
-        }, -- end of ["FC3"]
-        ["LeapMotion"] = 
-        {
-            ["handUseThrottle"] = false,
-            ["mouseClickSrc"] = 0,
-            ["enable"] = false,
-            ["set_debug"] = false,
-            ["pointerUseType"] = 0,
-            ["handUseStick"] = false,
-        }, -- end of ["LeapMotion"]
         ["VRFree"] = 
         {
             ["handUseThrottle"] = false,
@@ -192,26 +167,20 @@ options =
             ["F18RealisticTDC"] = false,
             ["mfdReflections"] = 0,
         }, -- end of ["F/A-18C"]
-        ["RedK0d Clickable"] = 
-        {
-            ["Su33_enabled"] = true,
-            ["J11a_enabled"] = true,
-            ["Su25t_enabled"] = true,
-            ["Mig29a_enabled"] = true,
-            ["Mig29g_enabled"] = true,
-            ["dontuseit"] = false,
-            ["Su27_enabled"] = true,
-            ["Su25_enabled"] = true,
-            ["useit"] = true,
-            ["A10a_enabled"] = true,
-            ["F15c_enabled"] = true,
-            ["Mig29s_enabled"] = true,
-        }, -- end of ["RedK0d Clickable"]
         ["UH-60L"] = 
         {
             ["aimingMarkRemove"] = false,
             ["pedalTrimOption"] = false,
         }, -- end of ["UH-60L"]
+        ["LeapMotion"] = 
+        {
+            ["handUseThrottle"] = false,
+            ["mouseClickSrc"] = 0,
+            ["enable"] = false,
+            ["set_debug"] = false,
+            ["pointerUseType"] = 0,
+            ["handUseStick"] = false,
+        }, -- end of ["LeapMotion"]
     }, -- end of ["plugins"]
     ["format"] = 1,
     ["sound"] = 
@@ -244,7 +213,7 @@ options =
         {
             ["mirrors"] = false,
             ["reflections"] = false,
-            ["avionics"] = 4,
+            ["avionics"] = 3,
         }, -- end of ["cockpit"]
     }, -- end of ["views"]
 } -- end of options
