@@ -25,7 +25,7 @@ carrier = {
 }
 
 friendlyAirfield = {
-	blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig" },
+	blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSam3" },
 	red = {}
 }
 
@@ -114,15 +114,15 @@ fine = ZoneCommander:new({zone='Fine', side=1, level=3, upgrades=specialSAM, cra
 fish = ZoneCommander:new({zone='Fish', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
 cool = ZoneCommander:new({zone='Cool', side=1, level=3, upgrades=specialSAM, crates=cargoAccepts.all, flavorText=hint.general})
 -- Airfields
-gelend = ZoneCommander:new({zone='Gelend', side=1, level=3, upgrades=airfield, crates=cargoAccepts.gelend, flavorText=hint.general, income=2})
-krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=3, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=2})
-suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
-kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=2})
+gelend = ZoneCommander:new({zone='Gelend', side=1, level=3, upgrades=airfield, crates=cargoAccepts.gelend, flavorText=hint.general, income=1})
+krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=3, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=1})
+suoqi = ZoneCommander:new({zone='Suoqi', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=1})
+kelasinuodaer = ZoneCommander:new({zone='Kelasinuodaer', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- Airfields enhanced
-krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
-mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
+krasnodar = ZoneCommander:new({zone='Krasnodar', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=1})
+mikehans = ZoneCommander:new({zone='Mikehans', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- Airfields final
-suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=5})
+suhumi = ZoneCommander:new({zone='Suhumi', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=1})
 -- Edited: Done
 
 radio:addCriticalObject('RadioTower')
@@ -176,16 +176,6 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-patrol-cvn73-cvn73-f18c', mission='patrol', targetzone='Carrier Group'}),
 	},
 	-- FARPs
-	bravo = {
-		GroupCommander:new({name='bravo1', mission='supply', targetzone='Alpha'}),
-		GroupCommander:new({name='bravo2', mission='attack', targetzone='Alpha'}),
-		GroupCommander:new({name='bravo6', mission='supply', targetzone='Charlie'}),
-		GroupCommander:new({name='bravo7', mission='attack', targetzone='Charlie'}),
-		GroupCommander:new({name='bravo4', mission='supply', targetzone='Krymsk'}),
-		GroupCommander:new({name='bravo5', mission='attack', targetzone='Krymsk'}),
-		GroupCommander:new({name='bravo12', mission='supply', targetzone='Oil Fields'}),
-		GroupCommander:new({name='bravo13', mission='attack', targetzone='Oil Fields'}),
-	},
 	echo={
 		GroupCommander:new({name='echo1', mission='supply', targetzone='SAM Site'}),
 		GroupCommander:new({name='echo3', mission='attack', targetzone='Delta'}),
@@ -214,22 +204,36 @@ dispatch = { -- Edited: Add dispatches for more zones
 	krymsk = {
 		GroupCommander:new({name='r-attack-krymsk-bravo-armor', mission='attack', targetzone='Bravo', type='surface'}),
 
-		GroupCommander:new({name='r-attack-krymsk-factory-su25t', mission='attack', targetzone='Factory'}),
-		GroupCommander:new({name='r-attack-krymsk-samsite-su25t', mission='attack', targetzone='SAM Site'}),
-		GroupCommander:new({name='r-attack-krymsk-oilfields-su25t', mission='attack', targetzone='Oil Fields'}),
+		GroupCommander:new({name='r-attack-krymsk-alpha-mi24v', mission='attack', targetzone='Alpha'}),
+		GroupCommander:new({name='r-attack-krymsk-bravo-mi24v', mission='attack', targetzone='Bravo'}),
+		GroupCommander:new({name='r-attack-krymsk-convoy-mi24v', mission='attack', targetzone='Convoy'}),
+		GroupCommander:new({name='r-attack-krymsk-oilfields-mi24v', mission='attack', targetzone='Oil Fields'}),
 		GroupCommander:new({name='r-attack-krymsk-radiotower-mi24v', mission='attack', targetzone='Radio Tower'}),
+
+		GroupCommander:new({name='r-attack-krymsk-famer-a10c2', mission='attack', targetzone='Famer'}),
+		GroupCommander:new({name='r-attack-krymsk-alpha-a10c2', mission='attack', targetzone='Alpha'}),
+		GroupCommander:new({name='r-attack-krymsk-charlie-a10c2', mission='attack', targetzone='Charlie'}),
+		GroupCommander:new({name='r-attack-krymsk-factory-su25t', mission='attack', targetzone='Factory'}),
+		GroupCommander:new({name='r-attack-krymsk-oilfields-su25t', mission='attack', targetzone='Oil Fields'}),
 		GroupCommander:new({name='r-attack-krymsk-anapa-mig21bis', mission='attack', targetzone='Anapa'}),
 		GroupCommander:new({name='r-attack-krymsk-novoro-a10c2', mission='attack', targetzone='Novoro'}),
 		
-		GroupCommander:new({name='r-patrol-krymsk-krymsk-mig21bis', mission='patrol', targetzone='Krymsk'}),
+		GroupCommander:new({name='r-patrol-krymsk-krymsk-m2000c', mission='patrol', targetzone='Krymsk'}),
+		GroupCommander:new({name='r-patrol-krymsk-samsite-f14b', mission='patrol', targetzone='SAM Site'}),
 		GroupCommander:new({name='r-patrol-krymsk-famer-f16c', mission='patrol', targetzone='Famer'}),
 
+		GroupCommander:new({name='r-supply-krymsk-famer-uh60a', mission='supply', targetzone='Famer'}),
+		GroupCommander:new({name='r-supply-krymsk-alpha-uh60a', mission='supply', targetzone='Alpha'}),
 		GroupCommander:new({name='r-supply-krymsk-bravo-mi8mtv2', mission='supply', targetzone='Bravo'}),
+		GroupCommander:new({name='r-supply-krymsk-charlie-uh60a', mission='supply', targetzone='Charlie'}),
+		GroupCommander:new({name='r-supply-krymsk-convoy-uh60a', mission='supply', targetzone='Convoy'}),
+		GroupCommander:new({name='r-supply-krymsk-oilfields-mi8mtv2', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='r-supply-krymsk-samsite-mi8mtv2', mission='supply', targetzone='SAM Site'}),
+		GroupCommander:new({name='r-supply-krymsk-echo-uh60a', mission='supply', targetzone='Echo'}),
 		GroupCommander:new({name='r-supply-krymsk-delta-mi8mtv2', mission='supply', targetzone='Delta'}),
 		GroupCommander:new({name='r-supply-krymsk-factory-mi8mtv2', mission='supply', targetzone='Factory'}),
-		GroupCommander:new({name='r-supply-krymsk-samsite-mi8mtv2', mission='supply', targetzone='SAM Site'}),
-		GroupCommander:new({name='r-supply-krymsk-oilfields-mi8mtv2', mission='supply', targetzone='Oil Fields'}),
 		GroupCommander:new({name='r-supply-krymsk-radiotower-mi8mtv2', mission='supply', targetzone='Radio Tower'}),
+		GroupCommander:new({name='r-supply-krymsk-gelend-mi8mtv2', mission='supply', targetzone='Gelend'}),
 
 		GroupCommander:new({name='b-patrol-krymsk-krymsk-m2000c', mission='patrol', targetzone='Krymsk'}),
 		
@@ -239,9 +243,9 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-krymsk-factory-uh60a', mission='supply', targetzone='Factory'}),
 		GroupCommander:new({name='b-supply-krymsk-samsite-uh60a', mission='supply', targetzone='SAM Site'}),
 		GroupCommander:new({name='b-supply-krymsk-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
+		GroupCommander:new({name='b-supply-krymsk-echo-uh60a', mission='supply', targetzone='Echo'}),
 
 		GroupCommander:new({name='b-supply-krymsk-ever-uh60a', mission='supply', targetzone='Ever'}),
-		GroupCommander:new({name='b-supply-krymsk-echo-uh60a', mission='supply', targetzone='Echo'}),
 		GroupCommander:new({name='b-supply-krymsk-kelasinuodaer-uh60a', mission='supply', targetzone='Kelasinuodaer'}),
 	},
 	gelend = {
@@ -348,7 +352,6 @@ novoro:addGroups(dispatch.novoro)
 -- Friendly carriers
 carrier:addGroups(dispatch.carrier)
 -- FARPs
-bravo:addGroups(dispatch.bravo)
 echo:addGroups(dispatch.echo)
 oilfields:addGroups(dispatch.oilfields)
 samsite:addGroups(dispatch.samsite)
@@ -435,6 +438,7 @@ bc:addConnection("Gelend","Suoqi")
 bc:addConnection("Gelend","Factory")
 bc:addConnection("Gelend","Radio Tower")
 
+bc:addConnection("Krymsk","Famer")
 bc:addConnection("Krymsk","Alpha")
 bc:addConnection("Krymsk","Bravo")
 bc:addConnection("Krymsk","Delta")
@@ -574,7 +578,7 @@ end
 
 Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
-bc:registerShopItem('sead', 'F/A-18C SEAD mission', 250, function(sender) 
+bc:registerShopItem('sead', 'F/A-18C SEAD mission', 5000, function(sender) 
 	local gr = Group.getByName('sead1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
 		return 'SEAD mission still in progress'
@@ -628,7 +632,7 @@ function (sender, params)
 end)
 
 Group.getByName('sweep1'):destroy()
-bc:registerShopItem('sweep', 'F-14B Fighter Sweep', 150, function(sender) 
+bc:registerShopItem('sweep', 'F-14B Fighter Sweep', 2500, function(sender) 
 	local gr = Group.getByName('sweep1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
 		return 'Fighter sweep mission still in progress'
@@ -645,7 +649,7 @@ end)
 
 Group.getByName('cas1'):destroy()
 local casTargetMenu = nil
-bc:registerShopItem('cas', 'F-4 Ground Attack', 400, function(sender) 
+bc:registerShopItem('cas', 'F-4 Ground Attack', 5000, function(sender) 
 	local gr = Group.getByName('cas1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
 		return 'Ground attack mission still in progress'
@@ -703,7 +707,7 @@ end)
 
 bc:addMonitoredROE('bCruise1')
 local cruiseMissileTargetMenu = nil
-bc:registerShopItem('cruisemsl', 'Cruise Missile Strike', 800, function(sender)
+bc:registerShopItem('cruisemsl', 'Cruise Missile Strike', 10000, function(sender)
 	if cruiseMissileTargetMenu then
 		return 'Choose target zone from F10 menu'
 	end
@@ -738,7 +742,7 @@ function (sender, params)
 end)
 
 local upgradeMenu = nil
-bc:registerShopItem('supplies', 'Resupply friendly Zone', 200, function(sender)
+bc:registerShopItem('supplies', 'Resupply friendly Zone', 1000, function(sender)
 	if upgradeMenu then
 		return 'Choose zone from F10 menu'
 	end
@@ -771,7 +775,7 @@ end)
 Group.getByName('jtacDrone'):destroy()
 local jtacTargetMenu = nil
 drone = JTAC:new({name = 'jtacDrone'})
-bc:registerShopItem('jtac', 'MQ-1A Predator JTAC mission', 100, function(sender)
+bc:registerShopItem('jtac', 'MQ-1A Predator JTAC mission', 500, function(sender)
 	
 	if jtacTargetMenu then
 		return 'Choose target zone from F10 menu'
@@ -827,7 +831,7 @@ local smoketargets = function(tz)
 end
 
 local smokeTargetMenu = nil
-bc:registerShopItem('smoke', 'Smoke markers', 20, function(sender)
+bc:registerShopItem('smoke', 'Smoke markers', 500, function(sender)
 	if smokeTargetMenu then
 		return 'Choose target zone from F10 menu'
 	end
@@ -863,7 +867,7 @@ local spawnAwacs = function(sender)
 	trigger.action.outTextForCoalition(2,'Darkstar active on 252.00 MHz AM',15)
 end
 Group.getByName('awacs1'):destroy()
-bc:registerShopItem('awacs', 'AWACS', 100, spawnAwacs, spawnAwacs)
+bc:registerShopItem('awacs', 'AWACS', 500, spawnAwacs, spawnAwacs)
 
 
 bc:addShopItem(2, 'sead', -1)
@@ -962,7 +966,7 @@ budgetAI:init()
 
 lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
 	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
-	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana', 'Fine', -- Edited: Add more zones
+	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana', 'Fine',
 	'Suoqi', 'Gelend', 'Kelasinuodaer', 'Krasnodar', 'Mikehans', 'Suhumi'
 }}) 
 lc:init()
@@ -970,7 +974,7 @@ lc:init()
 
 bc:loadFromDisk() --will load and overwrite default zone levels, sides, funds and available shop items
 bc:init()
-bc:startRewardPlayerContribution(15,{infantry = 5, ground = 15, sam = 30, airplane = 30, ship = 200, helicopter=40, crate=100, rescue = 50})
+bc:startRewardPlayerContribution(15,{infantry = 5, ground = 15, sam = 25, airplane = 25, ship = 100, helicopter=15, crate=50, rescue = 50})
 
 HercCargoDropSupply.init(bc)
 
