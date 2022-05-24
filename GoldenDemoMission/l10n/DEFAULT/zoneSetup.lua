@@ -578,15 +578,15 @@ end
 
 Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
-bc:registerShopItem('sead', 'F/A-18C SEAD mission', 5000, function(sender) 
+bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 5000, function(sender) 
 	local gr = Group.getByName('sead1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'SEAD mission still in progress'
+		return '防空压制任务仍在进行中'
 	end
 	mist.respawnGroup('sead1', true)
 	
 	if seadTargetMenu then
-		return 'Choose target zone from F10 menu'
+		return '请使用 F10 菜单指派攻击目标'
 	end
 	
 	local launchAttack = function(target)
@@ -596,23 +596,23 @@ bc:registerShopItem('sead', 'F/A-18C SEAD mission', 5000, function(sender)
 				return err
 			end
 			
-			trigger.action.outTextForCoalition(2, 'F/A-18C Hornets engaging SAMs at '..target, 15)
+			trigger.action.outTextForCoalition(2, 'F/A-18C 正在进行防空压制：'..target, 15)
 		else
-			trigger.action.outTextForCoalition(2, 'Group has left the area or has been destroyed', 15)
+			trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 15)
 		end
 		
 		seadTargetMenu = nil
 	end
 	
-	seadTargetMenu = bc:showTargetZoneMenu(2, 'SEAD Target', launchAttack, 1)
+	seadTargetMenu = bc:showTargetZoneMenu(2, '指派 F/A-18C 防空压制目标', launchAttack, 1)
 	
-	trigger.action.outTextForCoalition(2, 'F/A-18C Hornets on route. Choose target zone from F10 menu', 15)
+	trigger.action.outTextForCoalition(2, 'F/A-18C 已就绪，请使用 F10 菜单指派攻击目标', 15)
 end,
 function (sender, params)
 	if params.zone and params.zone.side == 1 then
 		local gr = Group.getByName('sead1')
 		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-			return 'SEAD mission still in progress'
+			return '防空压制任务仍在进行中'
 		end
 		
 		mist.respawnGroup('sead1', true)
@@ -623,42 +623,42 @@ function (sender, params)
 					return err
 				end
 				
-				trigger.action.outTextForCoalition(2, 'F/A-18C Hornets engaging SAMs at '..target, 15)
+				trigger.action.outTextForCoalition(2, 'F/A-18C 正在进行防空压制：'..target, 15)
 			end
 		end,{params.zone.zone},timer.getTime()+2)
 	else
-		return 'Can only target enemy zone'
+		return '仅允许攻击敌方占领区'
 	end
 end)
 
 Group.getByName('sweep1'):destroy()
-bc:registerShopItem('sweep', 'F-14B Fighter Sweep', 2500, function(sender) 
+bc:registerShopItem('sweep', 'F-14B 战斗机扫荡任务', 2500, function(sender) 
 	local gr = Group.getByName('sweep1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'Fighter sweep mission still in progress'
+		return '战斗机扫荡任务仍在进行中'
 	end
 	mist.respawnGroup('sweep1', true)
 end,
 function (sender, params)
 	local gr = Group.getByName('sweep1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'Fighter sweep mission still in progress'
+		return '战斗机扫荡任务仍在进行中'
 	end
 	mist.respawnGroup('sweep1', true)
 end)
 
 Group.getByName('cas1'):destroy()
 local casTargetMenu = nil
-bc:registerShopItem('cas', 'F-4 Ground Attack', 5000, function(sender) 
+bc:registerShopItem('cas', 'F-4 对地攻击任务', 5000, function(sender) 
 	local gr = Group.getByName('cas1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'Ground attack mission still in progress'
+		return '对地攻击任务仍在进行中'
 	end
 	
 	mist.respawnGroup('cas1', true)
 	
 	if casTargetMenu then
-		return 'Choose target zone from F10 menu'
+		return '请使用 F10 菜单指派攻击目标'
 	end
 	
 	local launchAttack = function(target)
@@ -669,24 +669,24 @@ bc:registerShopItem('cas', 'F-4 Ground Attack', 5000, function(sender)
 					return err
 				end
 				
-				trigger.action.outTextForCoalition(2, 'F-4 Phantoms engaging groups at '..target, 15)
+				trigger.action.outTextForCoalition(2, 'F-4 正在进行对地攻击：'..target, 15)
 			else
-				trigger.action.outTextForCoalition(2, 'Group has left the area or has been destroyed', 15)
+				trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 15)
 			end
 			
 			casTargetMenu = nil
 		end
 	end
 	
-	casTargetMenu = bc:showTargetZoneMenu(2, 'F-4 Target', launchAttack, 1)
+	casTargetMenu = bc:showTargetZoneMenu(2, '指派 F-4 对地攻击目标', launchAttack, 1)
 	
-	trigger.action.outTextForCoalition(2, 'F-4 Phantoms on route. Choose target zone from F10 menu', 15)
+	trigger.action.outTextForCoalition(2, 'F-4 已就绪，请使用 F10 菜单指派攻击目标', 15)
 end,
 function (sender, params)
 	if params.zone and params.zone.side == 1 then
 		local gr = Group.getByName('cas1')
 		if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-			return 'Ground attack mission still in progress'
+			return '对地攻击任务仍在进行中'
 		end
 		
 		mist.respawnGroup('cas1', true)
@@ -697,19 +697,19 @@ function (sender, params)
 					return err
 				end
 				
-				trigger.action.outTextForCoalition(2, 'F-4 Phantoms engaging groups at '..target, 15)
+				trigger.action.outTextForCoalition(2, 'F-4 正在进行对地攻击：'..target, 15)
 			end
 		end,{params.zone.zone},timer.getTime()+2)
 	else
-		return 'Can only target enemy zone'
+		return '仅允许攻击敌方占领区'
 	end
 end)
 
 bc:addMonitoredROE('bCruise1')
 local cruiseMissileTargetMenu = nil
-bc:registerShopItem('cruisemsl', 'Cruise Missile Strike', 10000, function(sender)
+bc:registerShopItem('cruisemsl', '巡航导弹打击', 10000, function(sender)
 	if cruiseMissileTargetMenu then
-		return 'Choose target zone from F10 menu'
+		return '请使用 F10 菜单指派攻击目标'
 	end
 	
 	local launchAttack = function(target)
@@ -720,13 +720,13 @@ bc:registerShopItem('cruisemsl', 'Cruise Missile Strike', 10000, function(sender
 			end
 			
 			cruiseMissileTargetMenu = nil
-			trigger.action.outTextForCoalition(2, 'Launching cruise missiles at '..target, 15)
+			trigger.action.outTextForCoalition(2, '正在进行巡航导弹打击：'..target, 15)
 		end
 	end
 	
-	cruiseMissileTargetMenu = bc:showTargetZoneMenu(2, 'Cruise Missile Target', launchAttack, 1)
+	cruiseMissileTargetMenu = bc:showTargetZoneMenu(2, '指派巡航导弹打击目标', launchAttack, 1)
 	
-	trigger.action.outTextForCoalition(2, 'Cruise missiles ready. Choose target zone from F10 menu', 15)
+	trigger.action.outTextForCoalition(2, '巡航导弹已就绪，请使用 F10 菜单指派攻击目标', 15)
 end,
 function (sender, params)
 	if params.zone and params.zone.side == 1 then
@@ -735,16 +735,16 @@ function (sender, params)
 			return err
 		end
 		
-		trigger.action.outTextForCoalition(2, 'Launching cruise missiles at '..params.zone.zone, 15)
+		trigger.action.outTextForCoalition(2, '正在进行巡航导弹打击：'..params.zone.zone, 15)
 	else
-		return 'Can only target enemy zone'
+		return '仅允许攻击敌方占领区'
 	end
 end)
 
 local upgradeMenu = nil
-bc:registerShopItem('supplies', 'Resupply friendly Zone', 1000, function(sender)
+bc:registerShopItem('supplies', '补给友方占领区', 1000, function(sender)
 	if upgradeMenu then
-		return 'Choose zone from F10 menu'
+		return '请使用 F10 菜单指派补给区域'
 	end
 	
 	local upgradeZone = function(target)
@@ -753,32 +753,32 @@ bc:registerShopItem('supplies', 'Resupply friendly Zone', 1000, function(sender)
 			if zn and zn.side==2 then
 				zn:upgrade()
 			else
-				return 'Zone not friendly'
+				return '所选区域不是友方占领区'
 			end
 			
 			upgradeMenu = nil
 		end
 	end
 	
-	upgradeMenu = bc:showTargetZoneMenu(2, 'Select Zone to resupply', upgradeZone, 2)
+	upgradeMenu = bc:showTargetZoneMenu(2, '指派补给区域', upgradeZone, 2)
 	
-	trigger.action.outTextForCoalition(2, 'Supplies prepared. Choose zone from F10 menu', 15)
+	trigger.action.outTextForCoalition(2, '补给已就绪，请使用 F10 菜单指派补给区域', 15)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 2 then
 		params.zone:upgrade()
 	else
-		return 'Can only target friendly zone'
+		return '仅允许补给友方占领区'
 	end
 end)
 
 Group.getByName('jtacDrone'):destroy()
 local jtacTargetMenu = nil
 drone = JTAC:new({name = 'jtacDrone'})
-bc:registerShopItem('jtac', 'MQ-1A Predator JTAC mission', 500, function(sender)
+bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 500, function(sender)
 	
 	if jtacTargetMenu then
-		return 'Choose target zone from F10 menu'
+		return '请使用 F10 菜单指派侦查目标'
 	end
 	
 	local spawnAndOrbit = function(target)
@@ -786,22 +786,22 @@ bc:registerShopItem('jtac', 'MQ-1A Predator JTAC mission', 500, function(sender)
 			local zn = bc:getZoneByName(target)
 			drone:deployAtZone(zn)
 			drone:showMenu()
-			trigger.action.outTextForCoalition(2, 'Predator drone deployed over '..target, 15)
+			trigger.action.outTextForCoalition(2, 'MQ-1A 已部署于战区上空：'..target, 15)
 			jtacTargetMenu = nil
 		end
 	end
 	
-	jtacTargetMenu = bc:showTargetZoneMenu(2, 'Deploy JTAC', spawnAndOrbit, 1)
+	jtacTargetMenu = bc:showTargetZoneMenu(2, '部署 MQ-1A', spawnAndOrbit, 1)
 	
-	trigger.action.outTextForCoalition(2, 'Choose which zone to deploy JTAC at from F10 menu', 15)
+	trigger.action.outTextForCoalition(2, 'MQ-1A 已就绪，请使用 F10 菜单指派侦查区域', 15)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 1 then
 		drone:deployAtZone(params.zone)
 		drone:showMenu()
-		trigger.action.outTextForCoalition(2, 'Predator drone deployed over '..params.zone.zone, 15)
+		trigger.action.outTextForCoalition(2, 'MQ-1A 已部署于战区上空：'..params.zone.zone, 15)
 	else
-		return 'Can only target enemy zone'
+		return '仅允许侦查敌方占领区'
 	end
 end)
 
@@ -831,9 +831,9 @@ local smoketargets = function(tz)
 end
 
 local smokeTargetMenu = nil
-bc:registerShopItem('smoke', 'Smoke markers', 500, function(sender)
+bc:registerShopItem('smoke', '烟雾标记', 500, function(sender)
 	if smokeTargetMenu then
-		return 'Choose target zone from F10 menu'
+		return '请使用 F10 菜单指派标记区域'
 	end
 	
 	local launchAttack = function(target)
@@ -841,33 +841,33 @@ bc:registerShopItem('smoke', 'Smoke markers', 500, function(sender)
 			local tz = bc:getZoneByName(target)
 			smoketargets(tz)
 			smokeTargetMenu = nil
-			trigger.action.outTextForCoalition(2, 'Targets marked with RED smoke at '..target, 15)
+			trigger.action.outTextForCoalition(2, '目标已由红色烟雾标出：'..target, 15)
 		end
 	end
 	
-	smokeTargetMenu = bc:showTargetZoneMenu(2, 'Smoke marker target', launchAttack, 1)
+	smokeTargetMenu = bc:showTargetZoneMenu(2, '指派烟雾标记目标', launchAttack, 1)
 	
-	trigger.action.outTextForCoalition(2, 'Choose target zone from F10 menu', 15)
+	trigger.action.outTextForCoalition(2, '烟雾标记已就绪，请使用 F10 菜单指派标记区域', 15)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 1 then
 		smoketargets(params.zone)
-		trigger.action.outTextForCoalition(2, 'Targets marked with RED smoke at '..params.zone.zone, 15)
+		trigger.action.outTextForCoalition(2, '目标已由红色烟雾标出：'..params.zone.zone, 15)
 	else
-		return 'Can only target enemy zone'
+		return '仅允许标记敌方占领区'
 	end
 end)
 
 local spawnAwacs = function(sender) 
 	local gr = Group.getByName('awacs1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
-		return 'Darkstar still active on 252.00 MHz AM'
+		return '空中预警机仍在执行任务\n呼号：Darkstar\n无线电频率：252.00 MHz AM'
 	end
 	mist.respawnGroup('awacs1', true)
-	trigger.action.outTextForCoalition(2,'Darkstar active on 252.00 MHz AM',15)
+	trigger.action.outTextForCoalition(2,'空中预警机已上线\n呼号：Darkstar\n无线电频率：252.00 MHz AM', 15)
 end
 Group.getByName('awacs1'):destroy()
-bc:registerShopItem('awacs', 'AWACS', 500, spawnAwacs, spawnAwacs)
+bc:registerShopItem('awacs', 'AWACS 空中预警机', 500, spawnAwacs, spawnAwacs)
 
 
 bc:addShopItem(2, 'sead', -1)
