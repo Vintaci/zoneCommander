@@ -398,126 +398,6 @@ bc:addZone(kelasinuodaer)
 bc:addZone(mikehans)
 bc:addZone(suhumi)
 
-bc:addConnection("Anapa","Alpha")
-bc:addConnection("Anapa","Bravo")
-bc:addConnection("Anapa","Charlie")
-bc:addConnection("Anapa","Famer")
-bc:addConnection("Anapa","Convoy")
-bc:addConnection("Anapa","Oil Fields")
-bc:addConnection("Anapa","Novoro")
-bc:addConnection("Anapa","Krymsk")
-
-bc:addConnection("Novoro","Famer")
-bc:addConnection("Novoro","Alpha")
-bc:addConnection("Novoro","Bravo")
-bc:addConnection("Novoro","Krymsk")
-bc:addConnection("Novoro","Radio Tower")
-bc:addConnection("Novoro","Factory")
-bc:addConnection("Novoro","Four")
-bc:addConnection("Novoro","Gelend")
-
-bc:addConnection("Alpha","Bravo")
-bc:addConnection("Alpha","Famer")
-bc:addConnection("Alpha","Novoro")
-bc:addConnection("Alpha","Charlie")
-bc:addConnection("Alpha","Convoy")
-bc:addConnection("Alpha","Radio Tower")
-
-bc:addConnection("Bravo","Radio Tower")
-bc:addConnection("Bravo","Convoy")
-bc:addConnection("Bravo","Charlie")
-
-bc:addConnection("SAM Site","Convoy")
-bc:addConnection("SAM Site","Delta")
-
-bc:addConnection("Charlie","Convoy")
-bc:addConnection("Charlie","Oil Fields")
-
-bc:addConnection("Gelend","Four")
-bc:addConnection("Gelend","Suoqi")
-bc:addConnection("Gelend","Factory")
-bc:addConnection("Gelend","Radio Tower")
-
-bc:addConnection("Krymsk","Famer")
-bc:addConnection("Krymsk","Alpha")
-bc:addConnection("Krymsk","Bravo")
-bc:addConnection("Krymsk","Delta")
-bc:addConnection("Krymsk","Convoy")
-bc:addConnection("Krymsk","Radio Tower")
-bc:addConnection("Krymsk","Factory")
-bc:addConnection("Krymsk","SAM Site")
-bc:addConnection("Krymsk","Oil Fields")
-
-bc:addConnection("Oil Fields","Convoy")
-bc:addConnection("Oil Fields","SAM Site")
-
-bc:addConnection("Factory","Four")
-bc:addConnection("Factory","Radio Tower")
-
-bc:addConnection("Delta","Echo")
-bc:addConnection("Delta","SAM Site")
-bc:addConnection("Delta","Factory")
-bc:addConnection("Delta","Ever")
-bc:addConnection("Delta","Foxtrot")
-bc:addConnection("Delta","Oil Fields")
-bc:addConnection("Delta","Radio Tower")
-
-bc:addConnection("Four","Radio Tower")
-
-bc:addConnection("Echo","Foxtrot")
-bc:addConnection("Echo","Kelasinuodaer")
-bc:addConnection("Echo","SAM Site")
-bc:addConnection("Echo","Factory")
-bc:addConnection("Echo","Four")
-
-bc:addConnection("Ever","Banana")
-bc:addConnection("Ever","Echo")
-bc:addConnection("Ever","Kelasinuodaer")
-bc:addConnection("Ever","Oil Fields")
-bc:addConnection("Ever","SAM Site")
-
-bc:addConnection("Foxtrot","Kelasinuodaer")
-bc:addConnection("Foxtrot","Krasnodar")
-bc:addConnection("Foxtrot","Factory")
-bc:addConnection("Foxtrot","Four")
-bc:addConnection("Foxtrot","Apple")
-
-bc:addConnection("Krasnodar","Apple")
-bc:addConnection("Krasnodar","Banana")
-bc:addConnection("Krasnodar","Ever")
-bc:addConnection("Krasnodar","Kelasinuodaer")
-
-bc:addConnection("Kelasinuodaer","SAM Site")
-
-bc:addConnection("Apple","Banana")
-bc:addConnection("Apple","Fine")
-bc:addConnection("Apple","Four")
-
-bc:addConnection("Cool","Banana")
-bc:addConnection("Cool","Finish")
-bc:addConnection("Cool","Suhumi")
-
-bc:addConnection("Fine","Finish")
-bc:addConnection("Fine","Four")
-bc:addConnection("Fine","Fish")
-
-bc:addConnection("Mikehans","Apple")
-bc:addConnection("Mikehans","Banana")
-bc:addConnection("Mikehans","Cool")
-bc:addConnection("Mikehans","Fine")
-bc:addConnection("Mikehans","Fish")
-bc:addConnection("Mikehans","Finish")
-
-bc:addConnection("Suoqi","Four")
-bc:addConnection("Suoqi","Fine")
-bc:addConnection("Suoqi","Cool")
-bc:addConnection("Suoqi","Fish")
-bc:addConnection("Suoqi","Suhumi")
-
-bc:addConnection("Fish","Finish")
-bc:addConnection("Fish","Cool")
-bc:addConnection("Fish","Suhumi")
-
 convoy:registerTrigger('lost', function (event, sender)
 	local convoyItems = {'convoy1','convoy2','convoy3', 'convoy4'}
 	
@@ -573,8 +453,6 @@ for i,v in ipairs(bc:getZones()) do
 end
 
 -- Blue supports
-
---bc:addFunds(2,100000)
 
 Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
@@ -869,6 +747,16 @@ end
 Group.getByName('awacs1'):destroy()
 bc:registerShopItem('awacs', 'AWACS 空中预警机', 500, spawnAwacs, spawnAwacs)
 
+local spawnAirrefuel = function(sender) 
+	local gr = Group.getByName('airrefuel1')
+	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
+		return '空中加油机仍在执行任务'
+	end
+	mist.respawnGroup('airrefuel1', true)
+	trigger.action.outTextForCoalition(2,'空中加油机已上线', 15)
+end
+Group.getByName('airrefuel1'):destroy()
+bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 500, spawnAirrefuel, spawnAirrefuel)
 
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
@@ -878,6 +766,9 @@ bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
+bc:addShopItem(2, 'airrefuel', -1)
+
+-- bc:addFunds(2,100000)
 
 -- Blue support end
 
