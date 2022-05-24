@@ -398,6 +398,98 @@ bc:addZone(kelasinuodaer)
 bc:addZone(mikehans)
 bc:addZone(suhumi)
 
+-- Add lines between zones
+bc:addConnection("Anapa","Alpha")
+bc:addConnection("Anapa","Charlie")
+bc:addConnection("Anapa","Famer")
+
+bc:addConnection("Alpha","Bravo")
+bc:addConnection("Alpha","Charlie")
+bc:addConnection("Alpha","Famer")
+bc:addConnection("Alpha","Novoro")
+bc:addConnection("Alpha","Radio Tower")
+
+bc:addConnection("Bravo","Charlie")
+bc:addConnection("Bravo","Convoy")
+bc:addConnection("Bravo","Krymsk")
+bc:addConnection("Bravo","Radio Tower")
+
+bc:addConnection("Charlie","Convoy")
+bc:addConnection("Charlie","Oil Fields")
+
+bc:addConnection("Novoro","Famer")
+bc:addConnection("Novoro","Gelend")
+bc:addConnection("Novoro","Radio Tower")
+
+bc:addConnection("Gelend","Four")
+bc:addConnection("Gelend","Suoqi")
+bc:addConnection("Gelend","Factory")
+bc:addConnection("Gelend","Radio Tower")
+bc:addConnection("Gelend","Apple")
+bc:addConnection("Gelend","Fine")
+
+bc:addConnection("Krymsk","Delta")
+bc:addConnection("Krymsk","Convoy")
+bc:addConnection("Krymsk","Radio Tower")
+bc:addConnection("Krymsk","Factory")
+bc:addConnection("Krymsk","SAM Site")
+bc:addConnection("Krymsk","Oil Fields")
+
+bc:addConnection("Oil Fields","Convoy")
+bc:addConnection("Oil Fields","SAM Site")
+
+bc:addConnection("Factory","Four")
+bc:addConnection("Factory","Radio Tower")
+
+bc:addConnection("Delta","Echo")
+bc:addConnection("Delta","SAM Site")
+bc:addConnection("Delta","Factory")
+
+bc:addConnection("Echo","Foxtrot")
+bc:addConnection("Echo","Kelasinuodaer")
+bc:addConnection("Echo","SAM Site")
+bc:addConnection("Echo","Factory")
+
+bc:addConnection("Ever","Banana")
+bc:addConnection("Ever","Echo")
+bc:addConnection("Ever","Oil Fields")
+bc:addConnection("Ever","SAM Site")
+bc:addConnection("Ever","Kelasinuodaer")
+
+bc:addConnection("Foxtrot","Kelasinuodaer")
+bc:addConnection("Foxtrot","Krasnodar")
+bc:addConnection("Foxtrot","Factory")
+bc:addConnection("Foxtrot","Four")
+bc:addConnection("Foxtrot","Apple")
+
+bc:addConnection("Krasnodar","Apple")
+bc:addConnection("Krasnodar","Banana")
+bc:addConnection("Krasnodar","Kelasinuodaer")
+
+bc:addConnection("Apple","Banana")
+bc:addConnection("Apple","Fine")
+bc:addConnection("Apple","Four")
+
+bc:addConnection("Cool","Banana")
+bc:addConnection("Cool","Finish")
+
+bc:addConnection("Fine","Finish")
+bc:addConnection("Fine","Fish")
+
+bc:addConnection("Mikehans","Apple")
+bc:addConnection("Mikehans","Banana")
+bc:addConnection("Mikehans","Cool")
+bc:addConnection("Mikehans","Fine")
+bc:addConnection("Mikehans","Finish")
+
+bc:addConnection("Suoqi","Fine")
+bc:addConnection("Suoqi","Fish")
+bc:addConnection("Suoqi","Suhumi")
+
+bc:addConnection("Fish","Finish")
+bc:addConnection("Fish","Cool")
+bc:addConnection("Fish","Suhumi")
+
 convoy:registerTrigger('lost', function (event, sender)
 	local convoyItems = {'convoy1','convoy2','convoy3', 'convoy4'}
 	
