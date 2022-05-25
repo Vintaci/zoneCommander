@@ -16,7 +16,7 @@ options =
         ["backup"] = false,
         ["headmove"] = true,
         ["f5_nearest_ac"] = true,
-        ["F2_view_effects"] = 1,
+        ["F2_view_effects"] = 0,
         ["backupTime"] = 5,
         ["allow_server_screenshots"] = false,
         ["force_feedback_enabled"] = true,
@@ -88,7 +88,7 @@ options =
         ["water"] = 2,
         ["motionBlur"] = 0,
         ["visibRange"] = "Extreme",
-        ["aspect"] = 1.7777777777778,
+        ["aspect"] = 2.3888888888889,
         ["lights"] = 2,
         ["shadows"] = 4,
         ["MSAA"] = 2,
@@ -213,7 +213,7 @@ options =
         {
             ["mirrors"] = false,
             ["reflections"] = false,
-            ["avionics"] = 3,
+            ["avionics"] = 4,
         }, -- end of ["cockpit"]
     }, -- end of ["views"]
 } -- end of options

@@ -25,7 +25,7 @@ carrier = {
 }
 
 friendlyAirfield = {
-	blue = { "bArmor", "bSam", "bSam", "bSam2", "bSam2" },
+	blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSam3" },
 	red = {}
 }
 
@@ -35,6 +35,11 @@ airfield = {
 }
 
 airfieldEnhanced = {
+	blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
+	red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
+}
+
+airfieldFinal = {
 	blue = { "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
 	red = { "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
 }
@@ -50,8 +55,8 @@ farp = {
 }
 
 specialSAM = {
-	blue = { "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = { "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
+	blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
+	red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
 }
 
 convoy = {
@@ -116,7 +121,8 @@ krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=3, upgrades=airfield, c
 -- Airfields enhanced
 kelas = ZoneCommander:new({zone='Kelas', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 kras = ZoneCommander:new({zone='Kras', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
-sochi = ZoneCommander:new({zone='Sochi', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
+-- Airfields final
+sochi = ZoneCommander:new({zone='Sochi', side=1, level=3, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Edited: Done
 
 radio:addCriticalObject('RadioTower')
@@ -236,7 +242,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 	},
 	gelend = {
 		GroupCommander:new({name='r-attack-gelend-anapa-f16c', mission='attack', targetzone='Anapa'}),
-		GroupCommander:new({name='r-attack-gelend-novoro-asj37', mission='attack', targetzone='Novoro'}),
+		GroupCommander:new({name='r-attack-gelend-novoro-ajs37', mission='attack', targetzone='Novoro'}),
 		GroupCommander:new({name='r-attack-gelend-krymsk-a10a', mission='attack', targetzone='Krymsk'}),
 
 		GroupCommander:new({name='r-patrol-gelend-krymsk-f16c', mission='patrol', targetzone='Krymsk'}),
