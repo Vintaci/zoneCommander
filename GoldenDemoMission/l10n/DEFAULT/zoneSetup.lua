@@ -25,7 +25,7 @@ carrier = {
 }
 
 friendlyAirfield = {
-	blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSam3" },
+	blue = { "bArmor", "bSam", "bSam", "bSam2", "bSam2" },
 	red = {}
 }
 
@@ -35,8 +35,8 @@ airfield = {
 }
 
 airfieldEnhanced = {
-	blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
-	red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
+	blue = { "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
+	red = { "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
 }
 
 regularzone = {
@@ -50,8 +50,8 @@ farp = {
 }
 
 specialSAM = {
-	blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
-	red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
+	blue = { "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
+	red = { "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
 }
 
 convoy = {
@@ -113,10 +113,10 @@ banana = ZoneCommander:new({zone='Banana', side=1, level=3, upgrades=specialSAM,
 -- Airfields
 gelend = ZoneCommander:new({zone='Gelend', side=1, level=3, upgrades=airfield, crates=cargoAccepts.gelend, flavorText=hint.general, income=1})
 krymsk = ZoneCommander:new({zone='Krymsk', side=1, level=3, upgrades=airfield, crates=cargoAccepts.krymsk, flavorText=hint.general, income=1})
-kelas = ZoneCommander:new({zone='Kelas', side=1, level=3, upgrades=airfield, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Airfields enhanced
+kelas = ZoneCommander:new({zone='Kelas', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 kras = ZoneCommander:new({zone='Kras', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
--- Airfields final
+sochi = ZoneCommander:new({zone='Sochi', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Edited: Done
 
 radio:addCriticalObject('RadioTower')
@@ -367,7 +367,7 @@ bc:addZone(four)
 bc:addZone(ever)
 bc:addZone(gelend)
 bc:addZone(kelas)
-
+bc:addZone(sochi)
 
 -- Add lines between zones
 bc:addConnection("Anapa","Alpha")
@@ -436,6 +436,10 @@ bc:addConnection("Kras","Kelas")
 
 bc:addConnection("Apple","Banana")
 bc:addConnection("Apple","Four")
+
+bc:addConnection("Sochi","Gelend")
+bc:addConnection("Sochi","Apple")
+bc:addConnection("Sochi","Banana")
 
 convoy:registerTrigger('lost', function (event, sender)
 	local convoyItems = {'convoy1','convoy2','convoy3', 'convoy4'}
@@ -829,7 +833,7 @@ bc:addShopItem(2, 'airrefuel', -1)
 Group.getByName('r-support-frigate-sochi-carrier-1'):destroy()
 Group.getByName('r-support-frigate-sochi-carrier-2'):destroy()
 bc:registerShopItem('r-support-frigate-sochi-carrier', 'Frigate Patrol', 5000, function(sender)
-	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('SoChi').side==1 then
+	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Sochi').side==1 then
 		-- Group 1
 		local gr1 = Group.getByName('r-support-frigate-sochi-carrier-1')
 		local gr2 = Group.getByName('r-support-frigate-sochi-carrier-2')
@@ -846,11 +850,11 @@ bc:registerShopItem('r-support-frigate-sochi-carrier', 'Frigate Patrol', 5000, f
 end)
 bc:addShopItem(1, 'r-support-frigate-sochi-carrier', -1)
 
--- Bomber Attack SoChi to Novoro
+-- Bomber Attack Sochi to Novoro
 Group.getByName('r-support-bomber-sochi-novoro-tu22m3'):destroy()
 Group.getByName('r-support-bomber-sochi-novoro-f16c'):destroy()
-bc:registerShopItem('r-support-bomber-sochi-novoro', 'Bomber Attack from SoChi to Novoro', 5000, function(sender)
-	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('SoChi').side==1 then
+bc:registerShopItem('r-support-bomber-sochi-novoro', 'Bomber Attack from Sochi to Novoro', 5000, function(sender)
+	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('Sochi').side==1 then
 		local gr1 = Group.getByName('r-support-bomber-sochi-novoro-tu22m3')
 		local gr2 = Group.getByName('r-support-bomber-sochi-novoro-f16c')
 		if (gr1 and gr1:getSize()>0 and gr1:getController():hasTask()) or
@@ -870,7 +874,7 @@ bc:addShopItem(1, 'r-support-bomber-sochi-novoro', -1)
 Group.getByName('r-support-bomber-kelas-anapa-tu22m3'):destroy()
 Group.getByName('r-support-bomber-kelas-anapa-f16c'):destroy()
 bc:registerShopItem('r-support-bomber-kelas-anapa', 'Bomber Attack from Kelas to Anapa', 5000, function(sender)
-	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('SoChi').side==1 then
+	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('Sochi').side==1 then
 		local gr1 = Group.getByName('r-support-bomber-kelas-anapa-tu22m3')
 		local gr2 = Group.getByName('r-support-bomber-kelas-anapa-f16c')
 		if (gr1 and gr1:getSize()>0 and gr1:getController():hasTask()) or
@@ -897,10 +901,9 @@ budgetAI:init()
 lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
 	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
 	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana',
-	'Gelend', 'Kelas', 'Kras'
+	'Gelend', 'Kelas', 'Kras', 'Sochi'
 }}) 
 lc:init()
-
 
 bc:loadFromDisk() --will load and overwrite default zone levels, sides, funds and available shop items
 bc:init()
