@@ -243,8 +243,8 @@ dispatch = { -- Edited: Add dispatches for more zones
 	},
 	gelend = {
 		GroupCommander:new({name='r-attack-gelend-anapa-f16c', mission='attack', targetzone='Anapa'}),
-		GroupCommander:new({name='r-attack-gelend-novoro-su34', mission='attack', targetzone='Novoro'}),
-		GroupCommander:new({name='r-attack-gelend-krymsk-su34', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='r-attack-gelend-novoro-jf17', mission='attack', targetzone='Novoro'}),
+		GroupCommander:new({name='r-attack-gelend-krymsk-su25t', mission='attack', targetzone='Krymsk'}),
 
 		GroupCommander:new({name='r-patrol-gelend-krymsk-f16c', mission='patrol', targetzone='Krymsk'}),
 		GroupCommander:new({name='r-patrol-gelend-kras-su33', mission='patrol', targetzone='Kras'}),
