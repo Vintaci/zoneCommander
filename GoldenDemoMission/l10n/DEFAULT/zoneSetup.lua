@@ -40,8 +40,8 @@ airfieldEnhanced = {
 }
 
 airfieldFinal = {
-	blue = { "bSam", "bSam2", "bSam3", "bSamBig", "bSamFinal" },
-	red = { "rSam", "rSam2", "rSam3", "rSamBig", "rSamFinal" }
+	blue = { "bSamBig", "bSamFinal", "bSam3", "bSam3", "bSam3" },
+	red = { "rSamBig", "rSamFinal", "rSam3", "rSam3", "rSam3" }
 }
 
 regularzone = {
@@ -170,6 +170,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-novoro-factory-uh60a', mission='supply', targetzone='Factory'}),
 		GroupCommander:new({name='b-supply-novoro-four-uh60a', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='b-supply-novoro-gelend-uh60a', mission='supply', targetzone='Gelend'}),
+		GroupCommander:new({name='b-supply-novoro-sochi-uh60a', mission='supply', targetzone='Sochi'}),
 		},
 	-- Friendly carriers
 	carrier = {
@@ -242,8 +243,8 @@ dispatch = { -- Edited: Add dispatches for more zones
 	},
 	gelend = {
 		GroupCommander:new({name='r-attack-gelend-anapa-f16c', mission='attack', targetzone='Anapa'}),
-		GroupCommander:new({name='r-attack-gelend-novoro-ajs37', mission='attack', targetzone='Novoro'}),
-		GroupCommander:new({name='r-attack-gelend-krymsk-a10a', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='r-attack-gelend-novoro-su34', mission='attack', targetzone='Novoro'}),
+		GroupCommander:new({name='r-attack-gelend-krymsk-su34', mission='attack', targetzone='Krymsk'}),
 
 		GroupCommander:new({name='r-patrol-gelend-krymsk-f16c', mission='patrol', targetzone='Krymsk'}),
 		GroupCommander:new({name='r-patrol-gelend-kras-su33', mission='patrol', targetzone='Kras'}),
@@ -258,6 +259,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='r-supply-gelend-four-uh60a', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='r-supply-gelend-apple-uh60a', mission='supply', targetzone='Apple'}),
 		GroupCommander:new({name='r-supply-gelend-banana-uh60a', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='r-supply-gelend-sochi-mi8', mission='supply', targetzone='Sochi'}),
 
 		GroupCommander:new({name='b-supply-gelend-four-uh60a', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='b-supply-gelend-apple-uh60a', mission='supply', targetzone='Apple'}),
@@ -265,6 +267,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-gelend-novoro-uh60a', mission='supply', targetzone='Novoro'}),
 		GroupCommander:new({name='b-supply-gelend-factory-uh60a', mission='supply', targetzone='Factory'}),
 		GroupCommander:new({name='b-supply-gelend-radiotower-uh60a', mission='supply', targetzone='Radio Tower'}),
+		GroupCommander:new({name='b-supply-gelend-sochi-uh60a', mission='supply', targetzone='Sochi'}),
 	},
 	kelas = {
 		GroupCommander:new({name='r-attack-kelas-four-su25t', mission='attack', targetzone='Four'}),
@@ -314,23 +317,41 @@ dispatch = { -- Edited: Add dispatches for more zones
 	},
 	-- Airfields enhanced
 	kras={
+		GroupCommander:new({name='r-attack-kras-four-su34', mission='attack', targetzone='Four'}),
+		GroupCommander:new({name='r-attack-kras-sochi-su34', mission='attack', targetzone='Sochi'}),
+		GroupCommander:new({name='r-attack-kras-kelas-su34', mission='attack', targetzone='Kelas'}),
+		GroupCommander:new({name='r-attack-kras-krymsk-su34', mission='attack', targetzone='Krymsk'}),
+		GroupCommander:new({name='r-attack-kras-samsite-su34', mission='attack', targetzone='SAM Site'}),
+
+		GroupCommander:new({name='r-attack-kras-kelas-ka50', mission='attack', targetzone='Kelas'}),
+		GroupCommander:new({name='r-attack-kras-foxtrot-ka50', mission='attack', targetzone='Foxtrot'}),
+
+		GroupCommander:new({name='r-patrol-kras-kras-su33', mission='patrol', targetzone='Kras'}),
+		GroupCommander:new({name='r-patrol-kras-gelend-su27', mission='patrol', targetzone='Gelend'}),
+		GroupCommander:new({name='r-patrol-kras-samsite-mig29s', mission='patrol', targetzone='SAM Site'}),
+		GroupCommander:new({name='r-patrol-kras-sochi-mig31', mission='patrol', targetzone='Sochi'}),
+
 		GroupCommander:new({name='r-supply-kras-kelas-truck', mission='supply', targetzone='Kelas', type='surface'}),
-		
-		GroupCommander:new({name='kras1', mission='supply', targetzone='Echo'}),
-		GroupCommander:new({name='kras2', mission='supply', targetzone='Echo'}),
-		GroupCommander:new({name='kras3', mission='supply', targetzone='Foxtrot'}),
-		GroupCommander:new({name='kras4', mission='supply', targetzone='Foxtrot'}),
-		GroupCommander:new({name='kras5', mission='attack', targetzone='SAM Site'}),
-		GroupCommander:new({name='kras6', mission='attack', targetzone='Krymsk'}),
-		GroupCommander:new({name='kras7', mission='attack', targetzone='Radio Tower'}),
-		GroupCommander:new({name='kras8', mission='attack', targetzone='Factory'}),
-		GroupCommander:new({name='kras9', mission='attack', targetzone='Echo'}),
-		GroupCommander:new({name='kras10', mission='attack', targetzone='Foxtrot'}),
-		GroupCommander:new({name='kras11', mission='patrol', targetzone='Echo'}),
-		GroupCommander:new({name='kras12', mission='patrol', targetzone='Delta'}),
-		GroupCommander:new({name='kras13', mission='patrol', targetzone='Factory'}),
-		GroupCommander:new({name='kras332', mission='supply', targetzone='Banana'}),
-		GroupCommander:new({name='kras332-1', mission='supply', targetzone='Apple'}),
+
+		GroupCommander:new({name='r-supply-kras-echo-mi8', mission='supply', targetzone='Echo'}),
+		GroupCommander:new({name='r-supply-kras-foxtrot-mi8', mission='supply', targetzone='Foxtrot'}),
+		GroupCommander:new({name='r-supply-kras-apple-mi8', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='r-supply-kras-banana-mi8', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='r-supply-kras-four-mi8', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='r-supply-kras-ever-mi8', mission='supply', targetzone='Ever'}),
+		GroupCommander:new({name='r-supply-kras-kelas-mi8', mission='supply', targetzone='Kelas'}),
+		GroupCommander:new({name='r-supply-kras-sochi-mi8', mission='supply', targetzone='Sochi'}),
+	},
+	-- Airfields final
+	sochi={
+		GroupCommander:new({name='r-attack-sochi-gelend-su34', mission='attack', targetzone='Gelend'}),
+
+		GroupCommander:new({name='r-patrol-sochi-sochi-su33', mission='patrol', targetzone='Sochi'}),
+
+		GroupCommander:new({name='r-supply-sochi-apple-mi8', mission='supply', targetzone='Apple'}),
+		GroupCommander:new({name='r-supply-sochi-banana-mi8', mission='supply', targetzone='Banana'}),
+		GroupCommander:new({name='r-supply-sochi-four-mi8', mission='supply', targetzone='Four'}),
+		GroupCommander:new({name='r-supply-sochi-gelend-mi8', mission='supply', targetzone='Gelend'}),
 	},
 }
 
@@ -349,6 +370,8 @@ gelend:addGroups(dispatch.gelend)
 kelas:addGroups(dispatch.kelas)
 -- Airfields enhanced
 kras:addGroups(dispatch.kras)
+-- Airfields final
+sochi:addGroups(dispatch.sochi)
 
 bc:addZone(anapa)
 bc:addZone(carrier)
@@ -889,7 +912,7 @@ bc:registerShopItem('r-support-bomber-kelas-anapa', 'Bomber Attack from Kelas to
 		end
 		mist.respawnGroup('r-support-bomber-kelas-anapa-tu22m3', true)
 		mist.respawnGroup('r-support-bomber-kelas-anapa-f16c', true)
-		trigger.action.outTextForCoalition(2,'敌军正在派遣轰炸机机队攻击我方机场！\n起点：索契-阿德勒\n攻击目标：阿纳帕-维迪泽瓦',15)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣轰炸机机队攻击我方机场！\n起点：克拉斯诺达尔-中心区\n攻击目标：阿纳帕-维迪泽瓦',15)
 	else
 		return 'zone no match'
 	end
