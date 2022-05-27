@@ -528,7 +528,7 @@ end
 
 Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
-bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 5000, function(sender) 
+bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 2500, function(sender) 
 	local gr = Group.getByName('sead1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
 		return '防空压制任务仍在进行中'
@@ -599,7 +599,7 @@ end)
 
 Group.getByName('cas1'):destroy()
 local casTargetMenu = nil
-bc:registerShopItem('cas', 'F-4 对地攻击任务', 5000, function(sender) 
+bc:registerShopItem('cas', 'F-4 对地攻击任务', 2500, function(sender) 
 	local gr = Group.getByName('cas1')
 	if gr and gr:getSize()>0 and gr:getController():hasTask() then 
 		return '对地攻击任务仍在进行中'
@@ -657,7 +657,7 @@ end)
 
 bc:addMonitoredROE('bCruise1')
 local cruiseMissileTargetMenu = nil
-bc:registerShopItem('cruisemsl', '巡航导弹打击', 10000, function(sender)
+bc:registerShopItem('cruisemsl', '巡航导弹打击', 5000, function(sender)
 	if cruiseMissileTargetMenu then
 		return '请使用 F10 菜单指派攻击目标'
 	end
@@ -725,7 +725,7 @@ end)
 Group.getByName('jtacDrone'):destroy()
 local jtacTargetMenu = nil
 drone = JTAC:new({name = 'jtacDrone'})
-bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 500, function(sender)
+bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 100, function(sender)
 	
 	if jtacTargetMenu then
 		return '请使用 F10 菜单指派侦查目标'
@@ -781,7 +781,7 @@ local smoketargets = function(tz)
 end
 
 local smokeTargetMenu = nil
-bc:registerShopItem('smoke', '烟雾标记', 500, function(sender)
+bc:registerShopItem('smoke', '烟雾标记', 100, function(sender)
 	if smokeTargetMenu then
 		return '请使用 F10 菜单指派标记区域'
 	end
@@ -817,7 +817,7 @@ local spawnAwacs = function(sender)
 	trigger.action.outTextForCoalition(2,'空中预警机已上线\n呼号：Darkstar\n无线电频率：252.00 MHz AM', 15)
 end
 Group.getByName('awacs1'):destroy()
-bc:registerShopItem('awacs', 'AWACS 空中预警机', 500, spawnAwacs, spawnAwacs)
+bc:registerShopItem('awacs', 'AWACS 空中预警机', 100, spawnAwacs, spawnAwacs)
 
 local spawnAirrefuel = function(sender) 
 	local gr = Group.getByName('airrefuel1')
@@ -828,7 +828,7 @@ local spawnAirrefuel = function(sender)
 	trigger.action.outTextForCoalition(2,'空中加油机已上线', 15)
 end
 Group.getByName('airrefuel1'):destroy()
-bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 500, spawnAirrefuel, spawnAirrefuel)
+bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 100, spawnAirrefuel, spawnAirrefuel)
 
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
