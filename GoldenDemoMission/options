@@ -122,6 +122,11 @@ options =
     }, -- end of ["graphics"]
     ["plugins"] = 
     {
+        ["UH-60L"] = 
+        {
+            ["aimingMarkRemove"] = false,
+            ["pedalTrimOption"] = false,
+        }, -- end of ["UH-60L"]
         ["CaptoGlove"] = 
         {
             ["shoulderJointZ_Right"] = 23,
@@ -167,11 +172,6 @@ options =
             ["F18RealisticTDC"] = false,
             ["mfdReflections"] = 0,
         }, -- end of ["F/A-18C"]
-        ["UH-60L"] = 
-        {
-            ["aimingMarkRemove"] = false,
-            ["pedalTrimOption"] = false,
-        }, -- end of ["UH-60L"]
         ["LeapMotion"] = 
         {
             ["handUseThrottle"] = false,
@@ -181,6 +181,14 @@ options =
             ["pointerUseType"] = 0,
             ["handUseStick"] = false,
         }, -- end of ["LeapMotion"]
+        ["A-4E-C"] = 
+        {
+            ["cssActivate"] = 15,
+            ["trimSpeed"] = 0,
+            ["cockpitShake"] = 100,
+            ["oldRadar"] = false,
+            ["wheelBrakeAssist"] = false,
+        }, -- end of ["A-4E-C"]
     }, -- end of ["plugins"]
     ["format"] = 1,
     ["sound"] = 
