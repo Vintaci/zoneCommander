@@ -515,14 +515,17 @@ local checkMissionComplete = function (event, sender)
 	end
 	
 	if done then
-		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于15秒后重启！", 120)
-		trigger.action.setUserFlag("TriggerFlagMissionComplete", true) -- Edited: Set flag to make mission restart
+		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于30秒后重启！", 120)
+		trigger.action.setUserFlag("TriggerFlagMissionComplete", true)
+		os.remove("D:\\DCS World OpenBeta Server\\GameSave.lua")
 	end
 end
 
-for i,v in ipairs(bc:getZones()) do
-	v:registerTrigger('lost', checkMissionComplete, 'missioncompleted')
-end
+-- for i,v in ipairs(bc:getZones()) do
+-- 	v:registerTrigger('lost', checkMissionComplete, 'missioncompleted')
+-- end
+
+mist.scheduleFunction(checkMissionComplete, {}, timer.getTime(), 60)
 
 -- Blue supports
 
