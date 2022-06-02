@@ -19,9 +19,14 @@ function allExcept(tbls, except)
 	return merge(tomerge)
 end
 
-carrier = {
-	blue = { "bShip", "bShip", "bShip"},
+carrier = { -- For zones on sea, their "upgrades" must not have two sides
+	blue = { "bShip", "bShip", "bShip" },
 	red = {}
+}
+
+fleet = {
+	blue = {},
+	red = { "rShip", "rShip", "rShip" }
 }
 
 friendlyAirfield = {
@@ -88,7 +93,6 @@ hint = {
 }
 
 bc = BattleCommander:new('Caucasus-NW-Saved-Data.lua')
--- Edited: Change zone settings
 -- Friendly airfields
 anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=friendlyAirfield, crates=cargoAccepts.anapa, flavorText=hint.general})
 novoro = ZoneCommander:new({zone='Novoro', side=2, level=5, upgrades=friendlyAirfield, crates=cargoAccepts.novoro, flavorText=hint.general})
@@ -123,7 +127,8 @@ kelas = ZoneCommander:new({zone='Kelas', side=1, level=3, upgrades=airfieldEnhan
 kras = ZoneCommander:new({zone='Kras', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Airfields final
 sochi = ZoneCommander:new({zone='Sochi', side=1, level=3, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=hint.general, income=3})
--- Edited: Done
+-- Fleet
+redfleet = ZoneCommander:new({zone='Red Fleet', side=1, level=3, upgrades=fleet, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 
 radio:addCriticalObject('RadioTower')
 samsite:addCriticalObject('CommandCenter')
@@ -353,6 +358,12 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='r-supply-sochi-four-mi8', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='r-supply-sochi-gelend-mi8', mission='supply', targetzone='Gelend'}),
 	},
+	-- Fleet
+	redfleet={
+		GroupCommander:new({name='r-patrol-rcvn74-rcvn73-f14b', mission='patrol', targetzone='Red Fleet'}),
+		GroupCommander:new({name='r-patrol-rcvn61-rcvn61-su33', mission='patrol', targetzone='Red Fleet'}),
+		GroupCommander:new({name='r-patrol-rcvn73-rcvn74-f18c', mission='patrol', targetzone='Red Fleet'}),
+	},
 }
 
 -- Friendly airfields
@@ -372,6 +383,8 @@ kelas:addGroups(dispatch.kelas)
 kras:addGroups(dispatch.kras)
 -- Airfields final
 sochi:addGroups(dispatch.sochi)
+-- Fleet
+redfleet:addGroups(dispatch.redfleet)
 
 bc:addZone(anapa)
 bc:addZone(carrier)
@@ -397,6 +410,7 @@ bc:addZone(ever)
 bc:addZone(gelend)
 bc:addZone(kelas)
 bc:addZone(sochi)
+bc:addZone(redfleet)
 
 -- Add lines between zones
 bc:addConnection("Anapa","Alpha")
@@ -888,7 +902,7 @@ bc:addShopItem(2, 'airrefuel', -1)
 -- Frigate Patrol
 Group.getByName('r-support-frigate-sochi-carrier-1'):destroy()
 Group.getByName('r-support-frigate-sochi-carrier-2'):destroy()
-bc:registerShopItem('r-support-frigate-sochi-carrier', 'Frigate Patrol', 5000, function(sender)
+bc:registerShopItem('r-support-frigate-sochi-carrier', 'Frigate Patrol', 1000, function(sender)
 	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Sochi').side==1 then
 		-- Group 1
 		local gr1 = Group.getByName('r-support-frigate-sochi-carrier-1')
@@ -906,30 +920,34 @@ bc:registerShopItem('r-support-frigate-sochi-carrier', 'Frigate Patrol', 5000, f
 end)
 bc:addShopItem(1, 'r-support-frigate-sochi-carrier', -1)
 
--- Bomber Attack Sochi to Novoro
-Group.getByName('r-support-bomber-sochi-novoro-tu22m3'):destroy()
-Group.getByName('r-support-bomber-sochi-novoro-f16c'):destroy()
-bc:registerShopItem('r-support-bomber-sochi-novoro', 'Bomber Attack from Sochi to Novoro', 5000, function(sender)
-	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('Sochi').side==1 then
-		local gr1 = Group.getByName('r-support-bomber-sochi-novoro-tu22m3')
-		local gr2 = Group.getByName('r-support-bomber-sochi-novoro-f16c')
+-- Anti-Ship Attack Sochi to Carrier
+Group.getByName('r-support-antiship-sochi-carrier-tu22m3'):destroy()
+Group.getByName('r-support-antiship-sochi-carrier-f16c'):destroy()
+Group.getByName('r-support-antiship-sochi-carrier-su34'):destroy()
+bc:registerShopItem('r-support-antiship-sochi-carrier', 'Anti-ship Attack from Sochi to Carrier', 1500, function(sender)
+	if bc:getZoneByName('Carrier Group').side==2 and bc:getZoneByName('Sochi').side==1 then
+		local gr1 = Group.getByName('r-support-antiship-sochi-carrier-tu22m3')
+		local gr2 = Group.getByName('r-support-antiship-sochi-carrier-f16c')
+		local gr3 = Group.getByName('r-support-antiship-sochi-carrier-su34')
 		if (gr1 and gr1:getSize()>0 and gr1:getController():hasTask()) or
-			(gr2 and gr2:getSize()>0 and gr2:getController():hasTask()) then 
+			(gr2 and gr2:getSize()>0 and gr2:getController():hasTask()) or 
+			(gr3 and gr3:getSize()>0 and gr3:getController():hasTask()) then 
 			return 'still alive'
 		end
-		mist.respawnGroup('r-support-bomber-sochi-novoro-tu22m3', true)
-		mist.respawnGroup('r-support-bomber-sochi-novoro-f16c', true)
-		trigger.action.outTextForCoalition(2,'敌军正在派遣轰炸机机队攻击我方机场！\n起点：索契\n攻击目标：新罗西斯克',15)
+		mist.respawnGroup('r-support-antiship-sochi-carrier-tu22m3', true)
+		mist.respawnGroup('r-support-antiship-sochi-carrier-f16c', true)
+		mist.respawnGroup('r-support-antiship-sochi-carrier-su34', true)
+		trigger.action.outTextForCoalition(2,'敌军正在派遣机队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群',15)
 	else
 		return 'zone no match'
 	end
 end)
-bc:addShopItem(1, 'r-support-bomber-sochi-novoro', -1)
+bc:addShopItem(1, 'r-support-antiship-sochi-carrier', -1)
 
 -- Bomber Attack Kelas to Anapa
 Group.getByName('r-support-bomber-kelas-anapa-tu22m3'):destroy()
 Group.getByName('r-support-bomber-kelas-anapa-f16c'):destroy()
-bc:registerShopItem('r-support-bomber-kelas-anapa', 'Bomber Attack from Kelas to Anapa', 5000, function(sender)
+bc:registerShopItem('r-support-bomber-kelas-anapa', 'Bomber Attack from Kelas to Anapa', 1000, function(sender)
 	if bc:getZoneByName('Novoro').side==2 and bc:getZoneByName('Sochi').side==1 then
 		local gr1 = Group.getByName('r-support-bomber-kelas-anapa-tu22m3')
 		local gr2 = Group.getByName('r-support-bomber-kelas-anapa-f16c')
@@ -957,13 +975,13 @@ budgetAI:init()
 lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
 	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
 	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana',
-	'Gelend', 'Kelas', 'Kras', 'Sochi'
+	'Gelend', 'Kelas', 'Kras', 'Sochi', 'Red Fleet'
 }}) 
 lc:init()
 
 bc:loadFromDisk() --will load and overwrite default zone levels, sides, funds and available shop items
 bc:init()
-bc:startRewardPlayerContribution(15,{infantry = 5, ground = 15, sam = 25, airplane = 25, ship = 100, helicopter=15, crate=150, rescue = 300})
+bc:startRewardPlayerContribution(15, {infantry = 5, ground = 15, sam = 25, airplane = 50, ship = 100, helicopter = 25, crate = 150, rescue = 300})
 
 HercCargoDropSupply.init(bc)
 
