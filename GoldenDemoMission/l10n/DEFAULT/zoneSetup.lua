@@ -87,7 +87,7 @@ hint = {
 	general = 'You need to capture all the zones to win the battle.',
 }
 
-bc = BattleCommander:new('GameSave.lua')
+bc = BattleCommander:new('Caucasus-NW-Saved-Data.lua')
 -- Edited: Change zone settings
 -- Friendly airfields
 anapa = ZoneCommander:new({zone='Anapa', side=2, level=5, upgrades=friendlyAirfield, crates=cargoAccepts.anapa, flavorText=hint.general})
@@ -505,6 +505,8 @@ end
 oilfields:registerTrigger('captured', showCredIncrease, 'oilfieldcaptured')
 factory:registerTrigger('captured', showCredIncrease, 'factorycaptured')
 
+-- Mission Complete Check
+
 local checkMissionComplete = function (event, sender)
 	local done = true
 	for i,v in ipairs(bc:getZones()) do
@@ -517,7 +519,7 @@ local checkMissionComplete = function (event, sender)
 	if done then
 		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于30秒后重启！", 120)
 		trigger.action.setUserFlag("TriggerFlagMissionComplete", true)
-		os.remove("D:\\DCS World OpenBeta Server\\GameSave.lua")
+		os.remove("D:\\DCS World OpenBeta Server\\Caucasus-NW-Saved-Data.lua")
 	end
 end
 
@@ -526,6 +528,28 @@ end
 -- end
 
 mist.scheduleFunction(checkMissionComplete, {}, timer.getTime(), 60)
+
+-- Mission Complete Check Done
+
+-- Scheduled Restart
+local triggerScheduledRestart = function (event, sender)
+	trigger.action.setUserFlag("TriggerFlagScheduledRestart", true)
+end
+
+local saveScheduledRestart = function (event, sender)
+	bc:update()
+	bc:saveToDisk()
+	mist.scheduleFunction(triggerScheduledRestart, {}, timer.getTime() + 1)
+end
+
+local hintScheduledRestart = function (event, sender)
+	trigger.action.outText("服务器将于60秒后定时重启！", 120)
+	mist.scheduleFunction(saveScheduledRestart, {}, timer.getTime() + 60)
+end
+
+mist.scheduleFunction(hintScheduledRestart, {}, timer.getTime() + 21540)
+
+-- Scheduled Restart Done
 
 -- Blue supports
 
