@@ -127,8 +127,6 @@ kelas = ZoneCommander:new({zone='Kelas', side=1, level=3, upgrades=airfieldEnhan
 kras = ZoneCommander:new({zone='Kras', side=1, level=3, upgrades=airfieldEnhanced, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 -- Airfields final
 sochi = ZoneCommander:new({zone='Sochi', side=1, level=3, upgrades=airfieldFinal, crates=cargoAccepts.all, flavorText=hint.general, income=3})
--- Fleet
-redfleet = ZoneCommander:new({zone='Red Fleet', side=1, level=3, upgrades=fleet, crates=cargoAccepts.all, flavorText=hint.general, income=3})
 
 radio:addCriticalObject('RadioTower')
 samsite:addCriticalObject('CommandCenter')
@@ -358,12 +356,6 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='r-supply-sochi-four-mi8', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='r-supply-sochi-gelend-mi8', mission='supply', targetzone='Gelend'}),
 	},
-	-- Fleet
-	redfleet={
-		GroupCommander:new({name='r-patrol-rcvn74-rcvn73-f14b', mission='patrol', targetzone='Red Fleet'}),
-		GroupCommander:new({name='r-patrol-rcvn61-rcvn61-su33', mission='patrol', targetzone='Red Fleet'}),
-		GroupCommander:new({name='r-patrol-rcvn73-rcvn74-f18c', mission='patrol', targetzone='Red Fleet'}),
-	},
 }
 
 -- Friendly airfields
@@ -383,8 +375,6 @@ kelas:addGroups(dispatch.kelas)
 kras:addGroups(dispatch.kras)
 -- Airfields final
 sochi:addGroups(dispatch.sochi)
--- Fleet
-redfleet:addGroups(dispatch.redfleet)
 
 bc:addZone(anapa)
 bc:addZone(carrier)
@@ -410,7 +400,6 @@ bc:addZone(ever)
 bc:addZone(gelend)
 bc:addZone(kelas)
 bc:addZone(sochi)
-bc:addZone(redfleet)
 
 -- Add lines between zones
 bc:addConnection("Anapa","Alpha")
