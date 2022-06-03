@@ -177,7 +177,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		},
 	-- Friendly carriers
 	carrier = {
-		GroupCommander:new({name='b-patrol-cvn73-cvn73-f18c', mission='patrol', targetzone='Carrier Group'}),
+		GroupCommander:new({name='b-patrol-cvn73-cvn73-f18c', mission='patrol', targetzone='Carrier Group', type='carrier_air'}),
 	},
 	oilfields={
 		GroupCommander:new({name='r-supply-oilfields-krymsk-truck', mission='supply', targetzone='Krymsk', type='surface'})
@@ -961,10 +961,54 @@ budgetAI:init()
 
 -- Red support end
 
+-- Red carrier red units, this is special as the zone is not registed as a normal zone
+Group.getByName('r-patrol-rcvn61-rcvn61-su33'):destroy()
+Group.getByName('r-patrol-rcvn73-rcvn74-f18c'):destroy()
+Group.getByName('r-patrol-rcvn74-rcvn73-f14b'):destroy()
+
+local redCarrierAirGroupSpawn = function (event, sender)
+	local redCarrierAirGroup1 = Group.getByName('r-patrol-rcvn61-rcvn61-su33')
+	if not redCarrierAirGroup1 or redCarrierAirGroup1:getSize()==0 then
+		if redCarrierAirGroup1 and redCarrierAirGroup1:getSize()==0 then
+			redCarrierAirGroup1:destroy()
+		else
+			mist.respawnGroup('r-patrol-rcvn61-rcvn61-su33', true)
+		end
+	elseif Utils.allGroupIsLanded(redCarrierAirGroup1, true) then
+		redCarrierAirGroup1:destroy()
+	end
+
+	local redCarrierAirGroup2 = Group.getByName('r-patrol-rcvn73-rcvn74-f18c')
+	if not redCarrierAirGroup2 or redCarrierAirGroup2:getSize()==0 then
+		if redCarrierAirGroup2 and redCarrierAirGroup2:getSize()==0 then
+			redCarrierAirGroup2:destroy()
+		else
+			mist.respawnGroup('r-patrol-rcvn73-rcvn74-f18c', true)
+		end
+	elseif Utils.allGroupIsLanded(redCarrierAirGroup2, true) then
+		redCarrierAirGroup2:destroy()
+	end
+
+	local redCarrierAirGroup3 = Group.getByName('r-patrol-rcvn74-rcvn73-f14b')
+	if not redCarrierAirGroup3 or redCarrierAirGroup3:getSize()==0 then
+		if redCarrierAirGroup3 and redCarrierAirGroup3:getSize()==0 then
+			redCarrierAirGroup3:destroy()
+		else
+			mist.respawnGroup('r-patrol-rcvn74-rcvn73-f14b', true)
+		end
+	elseif Utils.allGroupIsLanded(redCarrierAirGroup3, true) then
+		redCarrierAirGroup3:destroy()
+	end
+end
+
+mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime(), 900) -- The detect duration should allow aircrafts' first-time take off, at least 60 seconds
+
+-- Red carrier red units Done
+
 lc = LogisticCommander:new({battleCommander = bc, supplyZones = {
 	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
 	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana',
-	'Gelend', 'Kelas', 'Kras', 'Sochi', 'Red Fleet'
+	'Gelend', 'Kelas', 'Kras', 'Sochi'
 }}) 
 lc:init()
 
