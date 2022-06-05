@@ -582,29 +582,43 @@ GlobalSettings = {}
 do
 	GlobalSettings.blockedDespawnTime = 10*60 --used to despawn aircraft that are stuck taxiing for some reason
 	GlobalSettings.landedDespawnTime = 1*60
+	GlobalSettings.initialDelayVariance = 30 -- minutes
 	
-	GlobalSettings.respawnTimers = {}
-	GlobalSettings.respawnTimers[1] = {
+	GlobalSettings.defaultRespawns = {}
+	GlobalSettings.defaultRespawns[1] = {
 		supply = { dead=40*60, hangar=25*60},
 		patrol = { dead=40*60, hangar=2*60},
 		attack = { dead=40*60, hangar=2*60}
 	}
-	GlobalSettings.respawnTimers[2] = {
+	
+	GlobalSettings.defaultRespawns[2] = {
 		supply = { dead=40*60, hangar=25*60},
 		patrol = { dead=40*60, hangar=2*60},
 		attack = { dead=40*60, hangar=2*60}
+	}
+	
+	GlobalSettings.respawnTimers = {}
+	GlobalSettings.respawnTimers[1] = {
+		supply = { dead=GlobalSettings.defaultRespawns[1].supply.dead, hangar=GlobalSettings.defaultRespawns[1].supply.hangar},
+		patrol = { dead=GlobalSettings.defaultRespawns[1].patrol.dead, hangar=GlobalSettings.defaultRespawns[1].patrol.hangar},
+		attack = { dead=GlobalSettings.defaultRespawns[1].attack.dead, hangar=GlobalSettings.defaultRespawns[1].attack.hangar}
+	}
+	GlobalSettings.respawnTimers[2] = {
+		supply = { dead=GlobalSettings.defaultRespawns[2].supply.dead, hangar=GlobalSettings.defaultRespawns[2].supply.hangar},
+		patrol = { dead=GlobalSettings.defaultRespawns[2].patrol.dead, hangar=GlobalSettings.defaultRespawns[2].patrol.hangar},
+		attack = { dead=GlobalSettings.defaultRespawns[2].attack.dead, hangar=GlobalSettings.defaultRespawns[2].attack.hangar}
 	}
 	
 	function GlobalSettings.resetDifficultyScaling()
 		GlobalSettings.respawnTimers[1] = {
-			supply = { dead=40*60, hangar=25*60},
-			patrol = { dead=40*60, hangar=2*60},
-			attack = { dead=40*60, hangar=2*60}
+			supply = { dead=GlobalSettings.defaultRespawns[1].supply.dead, hangar=GlobalSettings.defaultRespawns[1].supply.hangar},
+			patrol = { dead=GlobalSettings.defaultRespawns[1].patrol.dead, hangar=GlobalSettings.defaultRespawns[1].patrol.hangar},
+			attack = { dead=GlobalSettings.defaultRespawns[1].attack.dead, hangar=GlobalSettings.defaultRespawns[1].attack.hangar}
 		}
 		GlobalSettings.respawnTimers[2] = {
-			supply = { dead=40*60, hangar=25*60},
-			patrol = { dead=40*60, hangar=2*60},
-			attack = { dead=40*60, hangar=2*60}
+			supply = { dead=GlobalSettings.defaultRespawns[2].supply.dead, hangar=GlobalSettings.defaultRespawns[2].supply.hangar},
+			patrol = { dead=GlobalSettings.defaultRespawns[2].patrol.dead, hangar=GlobalSettings.defaultRespawns[2].patrol.hangar},
+			attack = { dead=GlobalSettings.defaultRespawns[2].attack.dead, hangar=GlobalSettings.defaultRespawns[2].attack.hangar}
 		}
 	end
 	
@@ -629,6 +643,7 @@ do
 	BattleCommander.playerContributions = {[1]={}, [2]={}}
 	BattleCommander.playerRewardsOn = false
 	BattleCommander.rewards = {}
+	BattleCommander.creditsCap = nil
 	BattleCommander.difficultyModifier = 0
 	BattleCommander.lastDiffChange = 0
 	
@@ -693,11 +708,21 @@ do
 	end
 	
 	function BattleCommander:addFunds(coalition, ammount)
-		self.accounts[coalition] = math.max(self.accounts[coalition] + ammount,0)
+		local newAmmount = math.max(self.accounts[coalition] + ammount,0)
+		if self.creditsCap then
+			newAmmount = math.min(newAmmount, self.creditsCap)
+		end
+		
+		self.accounts[coalition] = newAmmount
 	end
 	
 	function BattleCommander:printShopStatus(coalition)
-		local text = 'Credits: '..self.accounts[coalition]..'\n'
+		local text = 'Credits: '..self.accounts[coalition]
+		if self.creditsCap then
+			text = text..'/'..self.creditsCap
+		end
+		
+		text = text..'\n'
 		
 		local sorted = {}
 		for i,v in pairs(self.shops[coalition]) do table.insert(sorted,{i,v}) end
@@ -1177,7 +1202,12 @@ do
 				
 				if event.text:find('^buy') then
 					if event.text == 'buy' then
-						local toprint = 'Credits: '..self.context.accounts[event.coalition]..'\n'
+						local toprint = 'Credits: '..self.context.accounts[event.coalition]
+						if self.context.creditsCap then
+							toprint = toprint..'/'..self.context.creditsCap
+						end
+						
+						toprint = toprint..'\n'
 						local sorted = {}
 						for i,v in pairs(self.context.shops[event.coalition]) do table.insert(sorted,{i,v}) end
 						table.sort(sorted, function(a,b) return a[2].name < b[2].name end)
@@ -1952,7 +1982,7 @@ do
 			
 			for _,v in ipairs(self.groups) do  -- reset group timers to random times so that they don't all spawn immediatly
 				if v.state == 'inhangar' or v.state == 'dead' then
-					v.lastStateTime = timer.getAbsTime() + math.random(60,30*60)
+					v.lastStateTime = timer.getAbsTime() + math.random(60,GlobalSettings.initialDelayVariance*60)
 				end
 			end
 			
@@ -2061,7 +2091,7 @@ do
 	
 	function GroupCommander:init()
 		self.state = 'inhangar'
-		self.lastStateTime = timer.getAbsTime() + math.random(1,30*60)
+		self.lastStateTime = timer.getAbsTime() + math.random(1,GlobalSettings.initialDelayVariance*60)
 		local gr = Group.getByName(self.name)
 		if gr then
 			self.side = gr:getCoalition()
