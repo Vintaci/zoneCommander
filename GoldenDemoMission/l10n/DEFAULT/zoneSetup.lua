@@ -158,6 +158,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-anapa-convoy-uh60a', mission='supply', targetzone='Convoy'}),
 		GroupCommander:new({name='b-supply-anapa-oilfields-uh60a', mission='supply', targetzone='Oil Fields'}),
 		GroupCommander:new({name='b-supply-anapa-charlie-uh60a', mission='supply', targetzone='Charlie'}),
+		GroupCommander:new({name='b-supply-anapa-cvn74-uh60a', mission='supply', targetzone='Carrier Group', type='carrier_air'}),
 	},
 	novoro = {
 		GroupCommander:new({name='b-attack-novoro-krymsk-a10c2', mission='attack', targetzone='Krymsk'}),
@@ -174,6 +175,7 @@ dispatch = { -- Edited: Add dispatches for more zones
 		GroupCommander:new({name='b-supply-novoro-four-uh60a', mission='supply', targetzone='Four'}),
 		GroupCommander:new({name='b-supply-novoro-gelend-uh60a', mission='supply', targetzone='Gelend'}),
 		GroupCommander:new({name='b-supply-novoro-sochi-uh60a', mission='supply', targetzone='Sochi'}),
+		GroupCommander:new({name='b-supply-novoro-cvn73-uh60a', mission='supply', targetzone='Carrier Group', type='carrier_air'}),
 		},
 	-- Friendly carriers
 	carrier = {
