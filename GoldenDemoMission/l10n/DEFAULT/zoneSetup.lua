@@ -1043,6 +1043,3 @@ function respawnStatics()
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
-
-GlobalSettings.setDifficultyScaling(1.0,1) --red
-GlobalSettings.setDifficultyScaling(1.0,2) --blue
