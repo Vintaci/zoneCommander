@@ -1,6 +1,9 @@
 -- Make functions local to make them run faster
 local pairs = pairs
 local ipairs = ipairs
+local table = table
+local Group = Group
+local mist = mist
 
 local hint = "You need to capture all the zones to win the battle."
 
@@ -233,7 +236,6 @@ local zones = {
 			"Four",
 			"Factory",
 			"Radio Tower",
-			"Apple",
 		},
 	},
 
@@ -437,6 +439,7 @@ local zones = {
 			"Gelend",
 			"Apple",
 			"Banana",
+			"Four",
 		},
 	},
 
@@ -1064,9 +1067,10 @@ end,
 		end
 	end)
 
+local JTAC = JTAC
 Group.getByName('jtacDrone'):destroy()
 local jtacTargetMenu = nil
-drone = JTAC:new({ name = 'jtacDrone' })
+local drone = JTAC:new({ name = 'jtacDrone' })
 bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 100, function(sender)
 
 	if jtacTargetMenu then
@@ -1186,95 +1190,166 @@ bc:addShopItem(2, 'airrefuel', -1)
 
 -- Blue Support Done
 
+-- Group Functions, used by red supports
+local GroupFunctions = {}
+
+function GroupFunctions:getGroupsByNames(names)
+	local groups = {}
+	for index, item in pairs(names) do
+		table.insert(groups, Group.getByName(item))
+	end
+	return groups
+end
+
+function GroupFunctions:destroyGroups(groups)
+	for index, item in pairs(groups) do
+		item:destroy()
+	end
+end
+
+function GroupFunctions:respawnGroupsByNames(names, task)
+	for index, item in pairs(names) do
+		mist.respawnGroup(item, task)
+	end
+end
+
+function GroupFunctions:groupsAreActive(groups)
+	local active = false
+	for index, item in pairs(groups) do
+		active = active or item and item:getSize() > 0 and item:getController():hasTask()
+	end
+	return active
+end
+
+-- Group Functions Done
+
 -- Red Support
 
--- Group.getByName('r-cap-cclockwise-m2000c'):destroy()
--- bc:registerShopItem('r-cap-cclockwise-m2000c', 'Red Combat Air Patrol Counter-Clockwise M-2000C', 100, function(sender)
--- 	local gr = Group.getByName('r-cap-cclockwise-m2000c')
--- 	if gr and gr:getSize()>0 and gr:getController():hasTask() then
--- 		return 'still alive'
--- 	end
--- 	mist.respawnGroup('r-cap-cclockwise-m2000c', true)
--- 	trigger.action.outTextForCoalition(2,'Enemy M-2000C is executing Combat Air Patrol missions.',15)
--- end)
+local redSupports = {
+	shipAttack = {
+		name = "r-support-frigate-sochi-carrier",
+		description = "Ship Attack",
+		price = 1000,
+		groupNames = {
+			"r-support-frigate-sochi-carrier-1",
+			"r-support-frigate-sochi-carrier-2",
+		},
+		zones = {
+			base = {
+				name = "Sochi",
+				side = 1,
+			},
+			target = {
+				name = "Carrier Group",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣舰队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群",
+		},
+		extraProcedure = function(self)
+		end,
+	},
+	antishipSochiToCarrier = {
+		name = "r-support-antiship-sochi-carrier",
+		description = "Anti-ship Attack from Sochi to Carrier",
+		price = 1500,
+		groupNames = {
+			"r-support-antiship-sochi-carrier-tu22m3",
+			"r-support-antiship-sochi-carrier-f16c",
+			"r-support-antiship-sochi-carrier-su34",
+		},
+		zones = {
+			base = {
+				name = "Sochi",
+				side = 1,
+			},
+			target = {
+				name = "Carrier Group",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣机队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群",
+		},
+		extraProcedure = function(self)
+		end,
+	},
+	bomberKelasToKrymsk = {
+		name = "r-support-bomber-kelas-krymsk",
+		description = "Bomber Attack from Kelas to Krymsk",
+		price = 1000,
+		groupNames = {
+			"r-support-bomber-kelas-krymsk-tu22m3",
+			"r-support-bomber-kelas-krymsk-f16c",
+		},
+		zones = {
+			base = {
+				name = "Kelas",
+				side = 1,
+			},
+			target = {
+				name = "Krymsk",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点：克拉斯诺达尔-中心区\n攻击目标：克雷姆斯克",
+		},
+		extraProcedure = function(self)
+		end,
+	},
+}
 
--- bc:addShopItem(1, 'r-cap-cclockwise-m2000c', -1)
-
--- Frigate Patrol
-Group.getByName('r-support-frigate-sochi-carrier-1'):destroy()
-Group.getByName('r-support-frigate-sochi-carrier-2'):destroy()
-bc:registerShopItem('r-support-frigate-sochi-carrier', 'Frigate Patrol', 1000, function(sender)
-	if bc:getZoneByName('Carrier Group').side == 2 and bc:getZoneByName('Sochi').side == 1 then
-		-- Group 1
-		local gr1 = Group.getByName('r-support-frigate-sochi-carrier-1')
-		local gr2 = Group.getByName('r-support-frigate-sochi-carrier-2')
-		if (gr1 and gr1:getSize() > 0 and gr1:getController():hasTask()) or
-			(gr2 and gr2:getSize() > 0 and gr2:getController():hasTask()) then
-			return 'still alive'
+local function NewRedSupport(support)
+	GroupFunctions:destroyGroups(GroupFunctions:getGroupsByNames(support.groupNames))
+	bc:registerShopItem(support.name, support.description, support.price, function(sender)
+		local zoneMatch = true
+		for index, item in pairs(support.zones) do
+			zoneMatch = zoneMatch and bc:getZoneByName(item.name).side == item.side
 		end
-		mist.respawnGroup('r-support-frigate-sochi-carrier-1', true)
-		mist.respawnGroup('r-support-frigate-sochi-carrier-2', true)
-		trigger.action.outTextForCoalition(2, '敌军正在派遣舰队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群', 15)
-	else
-		return 'zone no match'
-	end
-end)
-bc:addShopItem(1, 'r-support-frigate-sochi-carrier', -1)
-
--- Anti-Ship Attack Sochi to Carrier
-Group.getByName('r-support-antiship-sochi-carrier-tu22m3'):destroy()
-Group.getByName('r-support-antiship-sochi-carrier-f16c'):destroy()
-Group.getByName('r-support-antiship-sochi-carrier-su34'):destroy()
-bc:registerShopItem('r-support-antiship-sochi-carrier', 'Anti-ship Attack from Sochi to Carrier', 1500, function(sender)
-	if bc:getZoneByName('Carrier Group').side == 2 and bc:getZoneByName('Sochi').side == 1 then
-		local gr1 = Group.getByName('r-support-antiship-sochi-carrier-tu22m3')
-		local gr2 = Group.getByName('r-support-antiship-sochi-carrier-f16c')
-		local gr3 = Group.getByName('r-support-antiship-sochi-carrier-su34')
-		if (gr1 and gr1:getSize() > 0 and gr1:getController():hasTask()) or
-			(gr2 and gr2:getSize() > 0 and gr2:getController():hasTask()) or
-			(gr3 and gr3:getSize() > 0 and gr3:getController():hasTask()) then
-			return 'still alive'
+		if not zoneMatch then
+			return "zone not match"
 		end
-		mist.respawnGroup('r-support-antiship-sochi-carrier-tu22m3', true)
-		mist.respawnGroup('r-support-antiship-sochi-carrier-f16c', true)
-		mist.respawnGroup('r-support-antiship-sochi-carrier-su34', true)
-		trigger.action.outTextForCoalition(2, '敌军正在派遣机队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群', 15)
-	else
-		return 'zone no match'
-	end
-end)
-bc:addShopItem(1, 'r-support-antiship-sochi-carrier', -1)
-
--- Bomber Attack Kelas to Anapa
-Group.getByName('r-support-bomber-kelas-anapa-tu22m3'):destroy()
-Group.getByName('r-support-bomber-kelas-anapa-f16c'):destroy()
-bc:registerShopItem('r-support-bomber-kelas-anapa', 'Bomber Attack from Kelas to Anapa', 1000, function(sender)
-	if bc:getZoneByName('Novoro').side == 2 and bc:getZoneByName('Sochi').side == 1 then
-		local gr1 = Group.getByName('r-support-bomber-kelas-anapa-tu22m3')
-		local gr2 = Group.getByName('r-support-bomber-kelas-anapa-f16c')
-		if (gr1 and gr1:getSize() > 0 and gr1:getController():hasTask()) or
-			(gr2 and gr2:getSize() > 0 and gr2:getController():hasTask()) then
-			return 'still alive'
+		local groups = GroupFunctions:getGroupsByNames(support.groupNames) -- Each time a group is respawned, it is a NEW group, so it MUST be done during runtime
+		local active = false
+		for index, item in pairs(groups) do
+			active = active or item and item:getSize() > 0 and item:getController():hasTask()
 		end
-		mist.respawnGroup('r-support-bomber-kelas-anapa-tu22m3', true)
-		mist.respawnGroup('r-support-bomber-kelas-anapa-f16c', true)
-		trigger.action.outTextForCoalition(2, '敌军正在派遣轰炸机机队攻击我方机场！\n起点：克拉斯诺达尔-中心区\n攻击目标：阿纳帕-维迪泽瓦', 15)
-	else
-		return 'zone no match'
+		if active then
+			return "support ongoing"
+		end
+		GroupFunctions:respawnGroupsByNames(support.groupNames)
+		support.extraProcedure()
+		trigger.action.outTextForCoalition(support.hint.side, support.hint.text, 30)
+		return "support activated"
+	end)
+	bc:addShopItem(1, support.name, -1)
+end
+
+local function InitRedSupports()
+	for index, item in pairs(redSupports) do
+		NewRedSupport(item)
 	end
-end)
-bc:addShopItem(1, 'r-support-bomber-kelas-anapa', -1)
+end
 
--- bc:addFunds(1,100000)
--- budgetAI = BudgetCommander:new({ battleCommander = bc, side=1, decissionFrequency=1, decissionVariance=1, skipChance = 0})
+InitRedSupports()
 
-budgetAI = BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 })
-budgetAI:init()
+-- bc:addFunds(1, 100000)
+-- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
+
+BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 }):init()
 
 -- Red Support Done
 
 -- Red Carrier Patrols
 -- This is special as the zone is not registed as a normal zone
+
+local Utils = Utils
+
 Group.getByName('r-patrol-rcvn61-rcvn61-su33'):destroy()
 Group.getByName('r-patrol-rcvn73-rcvn74-f18c'):destroy()
 Group.getByName('r-patrol-rcvn74-rcvn73-f14b'):destroy()
@@ -1318,7 +1393,7 @@ mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime(), 900) -- The 
 
 -- Red Carrier Patrols Done
 
-lc = LogisticCommander:new({ battleCommander = bc, supplyZones = {
+local lc = LogisticCommander:new({ battleCommander = bc, supplyZones = {
 	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
 	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana',
 	'Gelend', 'Kelas', 'Kras', 'Sochi'
@@ -1330,7 +1405,7 @@ bc:init()
 bc:startRewardPlayerContribution(15, { infantry = 5, ground = 15, sam = 25, airplane = 50, ship = 100, helicopter = 25, crate = 150, rescue = 300 })
 
 -- Cargo Supply Functions
--- This is the player slingload cargo
+-- This is the player slingload cargo function
 
 HercCargoDropSupply.init(bc)
 
