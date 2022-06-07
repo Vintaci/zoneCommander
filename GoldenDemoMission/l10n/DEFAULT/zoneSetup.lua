@@ -1207,18 +1207,35 @@ function GroupFunctions:destroyGroups(groups)
 	end
 end
 
+function GroupFunctions:destroyGroupsByNames(names)
+	GroupFunctions:destroyGroups(GroupFunctions:getGroupsByNames(names))
+end
+
 function GroupFunctions:respawnGroupsByNames(names, task)
 	for index, item in pairs(names) do
 		mist.respawnGroup(item, task)
 	end
 end
 
-function GroupFunctions:groupsAreActive(groups)
+function GroupFunctions:areGroupsActive(groups)
 	local active = false
 	for index, item in pairs(groups) do
 		active = active or item and item:getSize() > 0 and item:getController():hasTask()
 	end
 	return active
+end
+
+function GroupFunctions:areGroupsActiveByNames(names)
+	-- Each time a group is respawned, it is a NEW group, so it MUST be done during runtime
+	return GroupFunctions:areGroupsActive(GroupFunctions:getGroupsByNames(names))
+end
+
+function GroupFunctions:zoneMatch(zones)
+	local zoneMatch = true
+	for index, item in pairs(zones) do
+		zoneMatch = zoneMatch and bc:getZoneByName(item.name).side == item.side
+	end
+	return zoneMatch
 end
 
 -- Group Functions Done
@@ -1248,8 +1265,6 @@ local redSupports = {
 			side = 2,
 			text = "敌军正在派遣舰队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群",
 		},
-		extraProcedure = function(self)
-		end,
 	},
 	antishipSochiToCarrier = {
 		name = "r-support-antiship-sochi-carrier",
@@ -1274,8 +1289,6 @@ local redSupports = {
 			side = 2,
 			text = "敌军正在派遣机队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群",
 		},
-		extraProcedure = function(self)
-		end,
 	},
 	bomberKelasToKrymsk = {
 		name = "r-support-bomber-kelas-krymsk",
@@ -1299,31 +1312,19 @@ local redSupports = {
 			side = 2,
 			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点：克拉斯诺达尔-中心区\n攻击目标：克雷姆斯克",
 		},
-		extraProcedure = function(self)
-		end,
 	},
 }
 
 local function NewRedSupport(support)
-	GroupFunctions:destroyGroups(GroupFunctions:getGroupsByNames(support.groupNames))
+	GroupFunctions:destroyGroupsByNames(support.groupNames)
 	bc:registerShopItem(support.name, support.description, support.price, function(sender)
-		local zoneMatch = true
-		for index, item in pairs(support.zones) do
-			zoneMatch = zoneMatch and bc:getZoneByName(item.name).side == item.side
+		if not GroupFunctions:zoneMatch(support.zones) then
+			return "zones mismatch"
 		end
-		if not zoneMatch then
-			return "zone not match"
-		end
-		local groups = GroupFunctions:getGroupsByNames(support.groupNames) -- Each time a group is respawned, it is a NEW group, so it MUST be done during runtime
-		local active = false
-		for index, item in pairs(groups) do
-			active = active or item and item:getSize() > 0 and item:getController():hasTask()
-		end
-		if active then
-			return "support ongoing"
+		if GroupFunctions:areGroupsActiveByNames(support.groupNames) then
+			return "groups still active"
 		end
 		GroupFunctions:respawnGroupsByNames(support.groupNames)
-		support.extraProcedure()
 		trigger.action.outTextForCoalition(support.hint.side, support.hint.text, 30)
 		return "support activated"
 	end)
