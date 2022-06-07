@@ -1349,48 +1349,31 @@ BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 
 -- Red Carrier Patrols
 -- This is special as the zone is not registed as a normal zone
 
+local redCarrierPatrols = {
+	"r-patrol-rcvn61-rcvn61-su33",
+	"r-patrol-rcvn73-rcvn74-f18c",
+	"r-patrol-rcvn74-rcvn73-f14b",
+}
+
+GroupFunctions:destroyGroupsByNames(redCarrierPatrols)
+
 local Utils = Utils
-
-Group.getByName('r-patrol-rcvn61-rcvn61-su33'):destroy()
-Group.getByName('r-patrol-rcvn73-rcvn74-f18c'):destroy()
-Group.getByName('r-patrol-rcvn74-rcvn73-f14b'):destroy()
-
 local redCarrierAirGroupSpawn = function(event, sender)
-	local redCarrierAirGroup1 = Group.getByName('r-patrol-rcvn61-rcvn61-su33')
-	if not redCarrierAirGroup1 or redCarrierAirGroup1:getSize() == 0 then
-		if redCarrierAirGroup1 and redCarrierAirGroup1:getSize() == 0 then
-			redCarrierAirGroup1:destroy()
-		else
-			mist.respawnGroup('r-patrol-rcvn61-rcvn61-su33', true)
+	for index, item in pairs(redCarrierPatrols) do
+		local group = Group.getByName(item)
+		if not group or group:getSize() == 0 then
+			if group and group:getSize() == 0 then
+				group:destroy()
+			elseif math.random(1, 100) > 50 then
+				mist.respawnGroup(item, true)
+			end
+		elseif Utils.allGroupIsLanded(group, true) then
+			group:destroy()
 		end
-	elseif Utils.allGroupIsLanded(redCarrierAirGroup1, true) then
-		redCarrierAirGroup1:destroy()
-	end
-
-	local redCarrierAirGroup2 = Group.getByName('r-patrol-rcvn73-rcvn74-f18c')
-	if not redCarrierAirGroup2 or redCarrierAirGroup2:getSize() == 0 then
-		if redCarrierAirGroup2 and redCarrierAirGroup2:getSize() == 0 then
-			redCarrierAirGroup2:destroy()
-		else
-			mist.respawnGroup('r-patrol-rcvn73-rcvn74-f18c', true)
-		end
-	elseif Utils.allGroupIsLanded(redCarrierAirGroup2, true) then
-		redCarrierAirGroup2:destroy()
-	end
-
-	local redCarrierAirGroup3 = Group.getByName('r-patrol-rcvn74-rcvn73-f14b')
-	if not redCarrierAirGroup3 or redCarrierAirGroup3:getSize() == 0 then
-		if redCarrierAirGroup3 and redCarrierAirGroup3:getSize() == 0 then
-			redCarrierAirGroup3:destroy()
-		else
-			mist.respawnGroup('r-patrol-rcvn74-rcvn73-f14b', true)
-		end
-	elseif Utils.allGroupIsLanded(redCarrierAirGroup3, true) then
-		redCarrierAirGroup3:destroy()
 	end
 end
 
-mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime(), 900) -- The detect duration should allow aircrafts' first-time take off, at least 60 seconds
+mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime() + 300, 900) -- The detect duration should allow aircrafts' first-time take off, at least 60 seconds
 
 -- Red Carrier Patrols Done
 
