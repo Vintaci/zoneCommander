@@ -29,13 +29,16 @@ local function allExcept(tbls, except)
 	return merge(tomerge)
 end
 
-local cargoSpawns = {
+local cargoSpawns = { -- This should be the unit name instead of group name
 	["Anapa"] = { "cargo-anapa-ammo-1", "cargo-anapa-crate-1", "cargo-anapa-fuel-1" },
 	["Krymsk"] = { "cargo-krymsk-ammo-1", "cargo-krymsk-crate-1", "cargo-krymsk-fuel-1" },
 	["Novoro"] = { "cargo-novoro-ammo-1", "cargo-novoro-crate-1", "cargo-novoro-fuel-1" },
 	["Gelend"] = { "cargo-gelend-ammo-1", "cargo-gelend-crate-1", "cargo-gelend-fuel-1" },
+	["Kelas"] = { "cargo-kelas-ammo-1", "cargo-kelas-crate-1", "cargo-kelas-fuel-1" },
+	["Kras"] = { "cargo-Kras-ammo-1", "cargo-Kras-crate-1", "cargo-Kras-fuel-1" },
 	["Factory"] = { "cargo-factory-crate1-1", "cargo-factory-crate2-1", "cargo-factory-crate3-1" },
 	["Oil Fields"] = { "cargo-oilfields-fuel1-1", "cargo-oilfields-fuel2-1", "cargo-oilfields-fuel3-1" },
+	["SAM Site"] = { "cargo-samsite-ammo1-1", "cargo-samsite-ammo2-1", "cargo-samsite-ammo3-1" },
 }
 
 local cargoAccepts = {
@@ -43,8 +46,11 @@ local cargoAccepts = {
 	novoro = allExcept(cargoSpawns, "Novoro"),
 	krymsk = allExcept(cargoSpawns, "Krymsk"),
 	gelend = allExcept(cargoSpawns, "Gelend"),
+	kelas = allExcept(cargoSpawns, "Kelas"),
+	kras = allExcept(cargoSpawns, "Kras"),
 	factory = allExcept(cargoSpawns, "Factory"),
 	oilfields = allExcept(cargoSpawns, "Oil Fields"),
+	samsite = allExcept(cargoSpawns, "SAM Site"),
 	all = allExcept(cargoSpawns),
 }
 
@@ -316,7 +322,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.all,
+			crates = cargoAccepts.kelas,
 			flavorText = hint,
 			income = 3,
 		},
@@ -376,7 +382,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.all,
+			crates = cargoAccepts.kras,
 			flavorText = hint,
 			income = 3,
 		},
@@ -722,9 +728,9 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.sam,
-			crates = cargoAccepts.all,
+			crates = cargoAccepts.samsite,
 			flavorText = hint,
-			income = 0,
+			income = 1,
 		},
 		dispatches = {
 			{ name = "r-attack-samsite-krymsk-armor", mission = "attack", targetzone = "Krymsk", type = "surface" },
