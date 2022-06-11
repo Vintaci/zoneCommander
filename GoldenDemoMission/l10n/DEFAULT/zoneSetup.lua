@@ -1402,11 +1402,11 @@ mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime() + 300, 900) -
 -- Logistics Functions
 -- Pilot rescue, cargo transport, etc. in F10 Radio Menu
 
-local supplyZones = {}
+local logisticCommanderSupplyZones = {}
 for key, value in pairs(zones) do
-	table.insert(supplyZones, value.zoneCommanderProperties.zone)
+	table.insert(logisticCommanderSupplyZones, value.zoneCommanderProperties.zone)
 end
-local lc = LogisticCommander:new({ battleCommander = bc, supplyZones})
+local lc = LogisticCommander:new({ battleCommander = bc, supplyZones = logisticCommanderSupplyZones})
 lc:init()
 
 -- Logistics Functions Done
