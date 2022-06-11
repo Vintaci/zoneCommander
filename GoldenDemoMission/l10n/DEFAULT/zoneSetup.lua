@@ -105,7 +105,7 @@ local zoneUpgrades = {
 
 -- Zone Initialization
 
-local bc = BattleCommander:new("Caucasus-NW-Saved-Data.lua")
+bc = BattleCommander:new("Caucasus-NW-Saved-Data.lua") -- This MUST NOT be local, as zoneCommander.lua gets zone list though it for support menu to work
 
 local zones = {
 	carrier = {
@@ -763,26 +763,26 @@ local function NewZone(zone)
 	zone.zoneCommander = ZoneCommander:new(zone.zoneCommanderProperties)
 
 	local dispatches = {}
-	for index, item in pairs(zone.dispatches) do
-		table.insert(dispatches, GroupCommander:new(item))
+	for key, value in pairs(zone.dispatches) do
+		table.insert(dispatches, GroupCommander:new(value))
 	end
 
 	zone.zoneCommander:addGroups(dispatches)
 
-	for index, item in pairs(zone.criticalObjects) do
-		zone.zoneCommander:addCriticalObject(item)
+	for key, value in pairs(zone.criticalObjects) do
+		zone.zoneCommander:addCriticalObject(value)
 	end
 
 	bc:addZone(zone.zoneCommander)
 
-	for index, item in pairs(zone.connections) do
-		bc:addConnection(zone.zoneCommanderProperties.zone, item)
+	for key, value in pairs(zone.connections) do
+		bc:addConnection(zone.zoneCommanderProperties.zone, value)
 	end
 end
 
 local function InitZones()
-	for index, item in pairs(zones) do
-		NewZone(item)
+	for key, value in pairs(zones) do
+		NewZone(value)
 	end
 end
 
@@ -1192,7 +1192,7 @@ bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
 bc:addShopItem(2, 'airrefuel', -1)
 
--- bc:addFunds(2,100000)
+-- bc:addFunds(2, 100000)
 
 -- Blue Support Done
 
@@ -1201,15 +1201,15 @@ local GroupFunctions = {}
 
 function GroupFunctions:getGroupsByNames(names)
 	local groups = {}
-	for index, item in pairs(names) do
-		table.insert(groups, Group.getByName(item))
+	for key, value in pairs(names) do
+		table.insert(groups, Group.getByName(value))
 	end
 	return groups
 end
 
 function GroupFunctions:destroyGroups(groups)
-	for index, item in pairs(groups) do
-		item:destroy()
+	for key, value in pairs(groups) do
+		value:destroy()
 	end
 end
 
@@ -1218,15 +1218,15 @@ function GroupFunctions:destroyGroupsByNames(names)
 end
 
 function GroupFunctions:respawnGroupsByNames(names, task)
-	for index, item in pairs(names) do
-		mist.respawnGroup(item, task)
+	for key, value in pairs(names) do
+		mist.respawnGroup(value, task)
 	end
 end
 
 function GroupFunctions:areGroupsActive(groups)
 	local active = false
-	for index, item in pairs(groups) do
-		active = active or item and item:getSize() > 0 and item:getController():hasTask()
+	for key, value in pairs(groups) do
+		active = active or value and value:getSize() > 0 and value:getController():hasTask()
 	end
 	return active
 end
@@ -1238,8 +1238,8 @@ end
 
 function GroupFunctions:zoneMatch(zones)
 	local zoneMatch = true
-	for index, item in pairs(zones) do
-		zoneMatch = zoneMatch and bc:getZoneByName(item.name).side == item.side
+	for key, value in pairs(zones) do
+		zoneMatch = zoneMatch and bc:getZoneByName(value.name).side == value.side
 	end
 	return zoneMatch
 end
@@ -1253,6 +1253,7 @@ local redSupports = {
 		name = "r-support-frigate-sochi-carrier",
 		description = "Ship Attack",
 		price = 1000,
+		random = 50, -- Any value <= 0 or >= 100 will always spawn all groups
 		groupNames = {
 			"r-support-frigate-sochi-carrier-1",
 			"r-support-frigate-sochi-carrier-2",
@@ -1275,7 +1276,8 @@ local redSupports = {
 	antishipSochiToCarrier = {
 		name = "r-support-antiship-sochi-carrier",
 		description = "Anti-ship Attack from Sochi to Carrier",
-		price = 1500,
+		price = 1000,
+		random = 25,
 		groupNames = {
 			"r-support-antiship-sochi-carrier-tu22m3",
 			"r-support-antiship-sochi-carrier-f16c",
@@ -1300,6 +1302,7 @@ local redSupports = {
 		name = "r-support-bomber-kelas-krymsk",
 		description = "Bomber Attack from Kelas to Krymsk",
 		price = 1000,
+		random = 0,
 		groupNames = {
 			"r-support-bomber-kelas-krymsk-tu22m3",
 			"r-support-bomber-kelas-krymsk-f16c",
@@ -1330,7 +1333,20 @@ local function NewRedSupport(support)
 		if GroupFunctions:areGroupsActiveByNames(support.groupNames) then
 			return "groups still active"
 		end
-		GroupFunctions:respawnGroupsByNames(support.groupNames)
+		local selectedGroupNames = {}
+		if support.random > 0 and support.random < 100 then -- Actually spawned group amount based on random value
+			for key, value in pairs(support.groupNames) do
+				if math.random(1, 100) < support.random then
+					table.insert(selectedGroupNames, value)
+				end
+			end
+			if #selectedGroupNames == 0 then -- At least spawn one group
+				table.insert(selectedGroupNames, support.groupNames[math.random(1, #support.groupNames)])
+			end
+		else
+			selectedGroupNames = support.groupNames
+		end
+		GroupFunctions:respawnGroupsByNames(selectedGroupNames)
 		trigger.action.outTextForCoalition(support.hint.side, support.hint.text, 30)
 		return "support activated"
 	end)
@@ -1338,8 +1354,8 @@ local function NewRedSupport(support)
 end
 
 local function InitRedSupports()
-	for index, item in pairs(redSupports) do
-		NewRedSupport(item)
+	for key, value in pairs(redSupports) do
+		NewRedSupport(value)
 	end
 end
 
@@ -1365,13 +1381,13 @@ GroupFunctions:destroyGroupsByNames(redCarrierPatrols)
 
 local Utils = Utils
 local redCarrierAirGroupSpawn = function(event, sender)
-	for index, item in pairs(redCarrierPatrols) do
-		local group = Group.getByName(item)
+	for key, value in pairs(redCarrierPatrols) do
+		local group = Group.getByName(value)
 		if not group or group:getSize() == 0 then
 			if group and group:getSize() == 0 then
 				group:destroy()
 			elseif math.random(1, 100) > 50 then
-				mist.respawnGroup(item, true)
+				mist.respawnGroup(value, true)
 			end
 		elseif Utils.allGroupIsLanded(group, true) then
 			group:destroy()
@@ -1383,19 +1399,28 @@ mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime() + 300, 900) -
 
 -- Red Carrier Patrols Done
 
-local lc = LogisticCommander:new({ battleCommander = bc, supplyZones = {
-	'Anapa', 'Krymsk', 'Factory', 'Bravo', 'Echo', 'Carrier Group',
-	'Novoro', 'Foxtrot', 'Famer', 'Oil Fields', 'Banana',
-	'Gelend', 'Kelas', 'Kras', 'Sochi'
-} })
+-- Logistics Functions
+-- Pilot rescue, cargo transport, etc. in F10 Radio Menu
+
+local supplyZones = {}
+for key, value in pairs(zones) do
+	table.insert(supplyZones, value.zoneCommanderProperties.zone)
+end
+local lc = LogisticCommander:new({ battleCommander = bc, supplyZones})
 lc:init()
+
+-- Logistics Functions Done
+
+-- BattleCommander Initialization
 
 bc:loadFromDisk() --will load and overwrite default zone levels, sides, funds and available shop items
 bc:init()
 bc:startRewardPlayerContribution(15, { infantry = 5, ground = 15, sam = 25, airplane = 50, ship = 100, helicopter = 25, crate = 150, rescue = 300 })
 
--- Cargo Supply Functions
--- This is the player slingload cargo function
+-- BattleCommander Initialization Done
+
+-- Spawn Cargo Supplies
+-- These are cargos for players' slingload
 
 HercCargoDropSupply.init(bc)
 
@@ -1423,4 +1448,4 @@ end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
 
--- Cargo Supply Functions Done
+-- Spawn Cargo Supplies Done
