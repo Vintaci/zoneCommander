@@ -452,7 +452,7 @@ local zones = {
 	alpha = {
 		zoneCommanderProperties = {
 			zone = "Alpha",
-			side = 1,
+			side = 0,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
 			crates = cargoAccepts.all,
@@ -493,7 +493,7 @@ local zones = {
 	charlie = {
 		zoneCommanderProperties = {
 			zone = "Charlie",
-			side = 1,
+			side = 0,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
 			crates = cargoAccepts.all,
@@ -571,7 +571,7 @@ local zones = {
 	famer = {
 		zoneCommanderProperties = {
 			zone = "Famer",
-			side = 1,
+			side = 0,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
 			crates = cargoAccepts.all,
@@ -879,7 +879,7 @@ mist.scheduleFunction(hintScheduledRestart, {}, timer.getTime() + 21540)
 
 Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
-bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 2500, function(sender)
+bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 1500, function(sender)
 	local gr = Group.getByName('sead1')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
 		return '防空压制任务仍在进行中'
@@ -933,7 +933,7 @@ end,
 	end)
 
 Group.getByName('sweep1'):destroy()
-bc:registerShopItem('sweep', 'F-14B 战斗机扫荡任务', 2500, function(sender)
+bc:registerShopItem('sweep', 'F-14B 战斗机扫荡任务', 1500, function(sender)
 	local gr = Group.getByName('sweep1')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
 		return '战斗机扫荡任务仍在进行中'
@@ -950,7 +950,7 @@ end,
 
 Group.getByName('cas1'):destroy()
 local casTargetMenu = nil
-bc:registerShopItem('cas', 'F-4 对地攻击任务', 2500, function(sender)
+bc:registerShopItem('cas', 'F-16CM 对地攻击任务', 1500, function(sender)
 	local gr = Group.getByName('cas1')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
 		return '对地攻击任务仍在进行中'
@@ -970,7 +970,7 @@ bc:registerShopItem('cas', 'F-4 对地攻击任务', 2500, function(sender)
 					return err
 				end
 
-				trigger.action.outTextForCoalition(2, 'F-4 正在进行对地攻击：' .. target, 15)
+				trigger.action.outTextForCoalition(2, 'F-16CM 正在进行对地攻击：' .. target, 15)
 			else
 				trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 15)
 			end
@@ -979,9 +979,9 @@ bc:registerShopItem('cas', 'F-4 对地攻击任务', 2500, function(sender)
 		end
 	end
 
-	casTargetMenu = bc:showTargetZoneMenu(2, '指派 F-4 对地攻击目标', launchAttack, 1)
+	casTargetMenu = bc:showTargetZoneMenu(2, '指派 F-16CM 对地攻击目标', launchAttack, 1)
 
-	trigger.action.outTextForCoalition(2, 'F-4 已就绪，请使用 F10 菜单指派攻击目标', 15)
+	trigger.action.outTextForCoalition(2, 'F-16CM 已就绪，请使用 F10 菜单指派攻击目标', 15)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
@@ -998,7 +998,7 @@ end,
 						return err
 					end
 
-					trigger.action.outTextForCoalition(2, 'F-4 正在进行对地攻击：' .. target, 15)
+					trigger.action.outTextForCoalition(2, 'F-16CM 正在进行对地攻击：' .. target, 15)
 				end
 			end, { params.zone.zone }, timer.getTime() + 2)
 		else
@@ -1008,7 +1008,7 @@ end,
 
 bc:addMonitoredROE('bCruise1')
 local cruiseMissileTargetMenu = nil
-bc:registerShopItem('cruisemsl', '巡航导弹打击', 5000, function(sender)
+bc:registerShopItem('cruisemsl', '巡航导弹打击', 2500, function(sender)
 	if cruiseMissileTargetMenu then
 		return '请使用 F10 菜单指派攻击目标'
 	end
@@ -1076,7 +1076,7 @@ end,
 local JTAC = JTAC
 Group.getByName('jtacDrone'):destroy()
 local jtacTargetMenu = nil
-local drone = JTAC:new({ name = 'jtacDrone' })
+drone = JTAC:new({ name = 'jtacDrone' }) -- This should be global, as JTAC in zomeCommander.lua will directly refer to this value
 bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 100, function(sender)
 
 	if jtacTargetMenu then
@@ -1185,7 +1185,7 @@ bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 100, spawnAirrefuel, 
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
 bc:addShopItem(2, 'cas', -1)
-bc:addShopItem(2, 'cruisemsl', 12)
+bc:addShopItem(2, 'cruisemsl', -1)
 bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
