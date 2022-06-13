@@ -817,11 +817,11 @@ zones.convoy.zoneCommander:registerTrigger('lost', function(event, sender)
 
 	bc:addFunds(2, creditsEarned)
 
-	trigger.action.outTextForCoalition(2, message, 15)
+	trigger.action.outTextForCoalition(2, message, 60)
 end, 'convoyLost', 1)
 
 local showCredIncrease = function(event, sender)
-	trigger.action.outTextForCoalition(sender.side, '+' .. math.floor(sender.income * 360) .. ' Credits/Hour', 5)
+	trigger.action.outTextForCoalition(sender.side, '+' .. math.floor(sender.income * 360) .. ' Credits/Hour', 60)
 end
 
 zones.oilfields.zoneCommander:registerTrigger('captured', showCredIncrease, 'oilfieldcaptured')
@@ -897,9 +897,9 @@ bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 1500, function(sender)
 				return err
 			end
 
-			trigger.action.outTextForCoalition(2, 'F/A-18C 正在进行防空压制：' .. target, 15)
+			trigger.action.outTextForCoalition(2, 'F/A-18C 正在进行防空压制：' .. target, 60)
 		else
-			trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 15)
+			trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 60)
 		end
 
 		seadTargetMenu = nil
@@ -907,7 +907,7 @@ bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 1500, function(sender)
 
 	seadTargetMenu = bc:showTargetZoneMenu(2, '指派 F/A-18C 防空压制目标', launchAttack, 1)
 
-	trigger.action.outTextForCoalition(2, 'F/A-18C 已就绪，请使用 F10 菜单指派攻击目标', 15)
+	trigger.action.outTextForCoalition(2, 'F/A-18C 已就绪，请使用 F10 菜单指派攻击目标', 60)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
@@ -924,7 +924,7 @@ end,
 						return err
 					end
 
-					trigger.action.outTextForCoalition(2, 'F/A-18C 正在进行防空压制：' .. target, 15)
+					trigger.action.outTextForCoalition(2, 'F/A-18C 正在进行防空压制：' .. target, 60)
 				end
 			end, { params.zone.zone }, timer.getTime() + 2)
 		else
@@ -970,9 +970,9 @@ bc:registerShopItem('cas', 'F-16CM 对地攻击任务', 1500, function(sender)
 					return err
 				end
 
-				trigger.action.outTextForCoalition(2, 'F-16CM 正在进行对地攻击：' .. target, 15)
+				trigger.action.outTextForCoalition(2, 'F-16CM 正在进行对地攻击：' .. target, 60)
 			else
-				trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 15)
+				trigger.action.outTextForCoalition(2, '支援单位已离开战区或已被击毁', 60)
 			end
 
 			casTargetMenu = nil
@@ -981,7 +981,7 @@ bc:registerShopItem('cas', 'F-16CM 对地攻击任务', 1500, function(sender)
 
 	casTargetMenu = bc:showTargetZoneMenu(2, '指派 F-16CM 对地攻击目标', launchAttack, 1)
 
-	trigger.action.outTextForCoalition(2, 'F-16CM 已就绪，请使用 F10 菜单指派攻击目标', 15)
+	trigger.action.outTextForCoalition(2, 'F-16CM 已就绪，请使用 F10 菜单指派攻击目标', 60)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
@@ -998,7 +998,7 @@ end,
 						return err
 					end
 
-					trigger.action.outTextForCoalition(2, 'F-16CM 正在进行对地攻击：' .. target, 15)
+					trigger.action.outTextForCoalition(2, 'F-16CM 正在进行对地攻击：' .. target, 60)
 				end
 			end, { params.zone.zone }, timer.getTime() + 2)
 		else
@@ -1021,13 +1021,13 @@ bc:registerShopItem('cruisemsl', '巡航导弹打击', 2500, function(sender)
 			end
 
 			cruiseMissileTargetMenu = nil
-			trigger.action.outTextForCoalition(2, '正在进行巡航导弹打击：' .. target, 15)
+			trigger.action.outTextForCoalition(2, '正在进行巡航导弹打击：' .. target, 60)
 		end
 	end
 
 	cruiseMissileTargetMenu = bc:showTargetZoneMenu(2, '指派巡航导弹打击目标', launchAttack, 1)
 
-	trigger.action.outTextForCoalition(2, '巡航导弹已就绪，请使用 F10 菜单指派攻击目标', 15)
+	trigger.action.outTextForCoalition(2, '巡航导弹已就绪，请使用 F10 菜单指派攻击目标', 60)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
@@ -1036,7 +1036,7 @@ end,
 				return err
 			end
 
-			trigger.action.outTextForCoalition(2, '正在进行巡航导弹打击：' .. params.zone.zone, 15)
+			trigger.action.outTextForCoalition(2, '正在进行巡航导弹打击：' .. params.zone.zone, 60)
 		else
 			return '仅允许攻击敌方占领区'
 		end
@@ -1063,7 +1063,7 @@ bc:registerShopItem('supplies', '补给友方占领区', 1000, function(sender)
 
 	upgradeMenu = bc:showTargetZoneMenu(2, '指派补给区域', upgradeZone, 2)
 
-	trigger.action.outTextForCoalition(2, '补给已就绪，请使用 F10 菜单指派补给区域', 15)
+	trigger.action.outTextForCoalition(2, '补给已就绪，请使用 F10 菜单指派补给区域', 60)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 2 then
@@ -1088,20 +1088,20 @@ bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 100, function(sender)
 			local zn = bc:getZoneByName(target)
 			drone:deployAtZone(zn)
 			drone:showMenu()
-			trigger.action.outTextForCoalition(2, 'MQ-1A 已部署于战区上空：' .. target, 15)
+			trigger.action.outTextForCoalition(2, 'MQ-1A 已部署于战区上空：' .. target, 60)
 			jtacTargetMenu = nil
 		end
 	end
 
 	jtacTargetMenu = bc:showTargetZoneMenu(2, '部署 MQ-1A', spawnAndOrbit, 1)
 
-	trigger.action.outTextForCoalition(2, 'MQ-1A 已就绪，请使用 F10 菜单指派侦查区域', 15)
+	trigger.action.outTextForCoalition(2, 'MQ-1A 已就绪，请使用 F10 菜单指派侦查区域', 60)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
 			drone:deployAtZone(params.zone)
 			drone:showMenu()
-			trigger.action.outTextForCoalition(2, 'MQ-1A 已部署于战区上空：' .. params.zone.zone, 15)
+			trigger.action.outTextForCoalition(2, 'MQ-1A 已部署于战区上空：' .. params.zone.zone, 60)
 		else
 			return '仅允许侦查敌方占领区'
 		end
@@ -1143,18 +1143,18 @@ bc:registerShopItem('smoke', '烟雾标记', 100, function(sender)
 			local tz = bc:getZoneByName(target)
 			smoketargets(tz)
 			smokeTargetMenu = nil
-			trigger.action.outTextForCoalition(2, '目标已由红色烟雾标出：' .. target, 15)
+			trigger.action.outTextForCoalition(2, '目标已由红色烟雾标出：' .. target, 60)
 		end
 	end
 
 	smokeTargetMenu = bc:showTargetZoneMenu(2, '指派烟雾标记目标', launchAttack, 1)
 
-	trigger.action.outTextForCoalition(2, '烟雾标记已就绪，请使用 F10 菜单指派标记区域', 15)
+	trigger.action.outTextForCoalition(2, '烟雾标记已就绪，请使用 F10 菜单指派标记区域', 60)
 end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
 			smoketargets(params.zone)
-			trigger.action.outTextForCoalition(2, '目标已由红色烟雾标出：' .. params.zone.zone, 15)
+			trigger.action.outTextForCoalition(2, '目标已由红色烟雾标出：' .. params.zone.zone, 60)
 		else
 			return '仅允许标记敌方占领区'
 		end
@@ -1166,7 +1166,7 @@ local spawnAwacs = function(sender)
 		return '空中预警机仍在执行任务\n呼号：Darkstar\n无线电频率：252.00 MHz AM'
 	end
 	mist.respawnGroup('awacs1', true)
-	trigger.action.outTextForCoalition(2, '空中预警机已上线\n呼号：Darkstar\n无线电频率：252.00 MHz AM', 15)
+	trigger.action.outTextForCoalition(2, '空中预警机已上线\n呼号：Darkstar\n无线电频率：252.00 MHz AM', 60)
 end
 Group.getByName('awacs1'):destroy()
 bc:registerShopItem('awacs', 'AWACS 空中预警机', 100, spawnAwacs, spawnAwacs)
@@ -1177,7 +1177,7 @@ local spawnAirrefuel = function(sender)
 		return '空中加油机仍在执行任务'
 	end
 	mist.respawnGroup('airrefuel1', true)
-	trigger.action.outTextForCoalition(2, '空中加油机已上线', 15)
+	trigger.action.outTextForCoalition(2, '空中加油机已上线', 60)
 end
 Group.getByName('airrefuel1'):destroy()
 bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 100, spawnAirrefuel, spawnAirrefuel)
@@ -1347,7 +1347,7 @@ local function NewRedSupport(support)
 			selectedGroupNames = support.groupNames
 		end
 		GroupFunctions:respawnGroupsByNames(selectedGroupNames)
-		trigger.action.outTextForCoalition(support.hint.side, support.hint.text, 30)
+		trigger.action.outTextForCoalition(support.hint.side, support.hint.text, 60)
 		return "support activated"
 	end)
 	bc:addShopItem(1, support.name, -1)
@@ -1406,7 +1406,7 @@ local logisticCommanderSupplyZones = {}
 for key, value in pairs(zones) do
 	table.insert(logisticCommanderSupplyZones, value.zoneCommanderProperties.zone)
 end
-local lc = LogisticCommander:new({ battleCommander = bc, supplyZones = logisticCommanderSupplyZones})
+local lc = LogisticCommander:new({ battleCommander = bc, supplyZones = logisticCommanderSupplyZones })
 lc:init()
 
 -- Logistics Functions Done
