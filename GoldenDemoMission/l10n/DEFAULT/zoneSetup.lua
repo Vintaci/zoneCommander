@@ -831,7 +831,9 @@ zones.factory.zoneCommander:registerTrigger('captured', showCredIncrease, 'facto
 
 -- Mission Complete Check
 
-local checkMissionComplete = function(event, sender)
+local missionCompleteCheckSheduler = {}
+
+local missionCompleteCheck = function(event, sender)
 	local done = true
 	for i, v in ipairs(bc:getZones()) do
 		if v.side == 1 then
@@ -841,37 +843,39 @@ local checkMissionComplete = function(event, sender)
 	end
 
 	if done then
-		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于30秒后重启！", 120)
-		trigger.action.setUserFlag("TriggerFlagMissionComplete", true)
-		os.remove("D:\\DCS World OpenBeta Server\\Caucasus-NW-Saved-Data.lua")
+		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于90秒后重启！", 90)
+		mist.removeFunction(missionCompleteCheckSheduler)
+		mist.scheduleFunction(function(event, sender)
+			os.remove("D:\\DCS World OpenBeta Server\\Caucasus-NW-Saved-Data.lua")
+			trigger.action.setUserFlag("TriggerFlagMissionComplete", true)
+		end, {}, timer.getTime() + 90)
 	end
 end
+
+missionCompleteCheckSheduler = mist.scheduleFunction(missionCompleteCheck, {}, timer.getTime() + 60, 60)
 
 -- for i,v in ipairs(bc:getZones()) do
 -- 	v:registerTrigger('lost', checkMissionComplete, 'missioncompleted')
 -- end
 
-mist.scheduleFunction(checkMissionComplete, {}, timer.getTime(), 60)
-
 -- Mission Complete Check Done
 
 -- Scheduled Restart
-local triggerScheduledRestart = function(event, sender)
-	trigger.action.setUserFlag("TriggerFlagScheduledRestart", true)
+
+local restartTime = 21600 -- 6 hours
+local restartHintTime = { 60, 180, 300, 900 }
+
+for key, value in pairs(restartHintTime) do -- Restart hint
+	mist.scheduleFunction(function(event, sender)
+		trigger.action.outText("服务器将于" .. value / 60 .. "分钟后定时重启！", 60)
+	end, {}, timer.getTime() + restartTime - value)
 end
 
-local saveScheduledRestart = function(event, sender)
+mist.scheduleFunction(function(event, sender) -- Restart
 	bc:update()
 	bc:saveToDisk()
-	mist.scheduleFunction(triggerScheduledRestart, {}, timer.getTime() + 1)
-end
-
-local hintScheduledRestart = function(event, sender)
-	trigger.action.outText("服务器将于60秒后定时重启！", 120)
-	mist.scheduleFunction(saveScheduledRestart, {}, timer.getTime() + 60)
-end
-
-mist.scheduleFunction(hintScheduledRestart, {}, timer.getTime() + 21540)
+	trigger.action.setUserFlag("TriggerFlagScheduledRestart", true)
+end, {}, timer.getTime() + restartTime)
 
 -- Scheduled Restart Done
 
