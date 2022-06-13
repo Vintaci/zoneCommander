@@ -1,12 +1,7 @@
 dictionary = 
 {
-    ["DictKey_descriptionText_1"] = "[开黑啦-语音频道]\
-频道号：95367853\
-\
-\
-[QQ群]\
-总群：274455383\
-DCS开黑专用群：750508967\
+    ["DictKey_descriptionText_1"] = "-=QQ群=-\
+750508967\
 \
 \
 [任务目标]\
@@ -55,6 +50,6 @@ DCS开黑专用群：750508967\
     ["DictKey_sortie_5"] = "",
     ["DictKey_descriptionNeutralsTask_4"] = "",
     ["DictKey_ActionText_19"] = "",
-    ["DictKey_ActionText_31"] = "任务完成！",
+    ["DictKey_ActionText_31"] = "任务成功！",
     ["DictKey_descriptionRedTask_2"] = "",
 } -- end of dictionary
