@@ -339,7 +339,7 @@ end
 
 function getWeaponExplosive(name)
   if explTable[name] then
-    return explTable[name]
+    return explTable[name] / 4 -- Edited: Decrease explosion value to 1/4
   else
     return 0
   end
