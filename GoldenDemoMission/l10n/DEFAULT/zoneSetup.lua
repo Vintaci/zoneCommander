@@ -258,11 +258,11 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-krymsk-bravo-armor", mission = "attack", targetzone = "Bravo", type = "surface" },
 
-			{ name = "r-attack-krymsk-alpha-mi24v", mission = "attack", targetzone = "Alpha" },
-			{ name = "r-attack-krymsk-bravo-mi24v", mission = "attack", targetzone = "Bravo" },
-			{ name = "r-attack-krymsk-convoy-mi24v", mission = "attack", targetzone = "Convoy" },
-			{ name = "r-attack-krymsk-oilfields-mi24v", mission = "attack", targetzone = "Oil Fields" },
-			{ name = "r-attack-krymsk-radiotower-mi24v", mission = "attack", targetzone = "Radio Tower" },
+			{ name = "r-attack-krymsk-alpha-mi24p", mission = "attack", targetzone = "Alpha" },
+			{ name = "r-attack-krymsk-bravo-mi24p", mission = "attack", targetzone = "Bravo" },
+			{ name = "r-attack-krymsk-convoy-mi24p", mission = "attack", targetzone = "Convoy" },
+			{ name = "r-attack-krymsk-oilfields-mi24p", mission = "attack", targetzone = "Oil Fields" },
+			{ name = "r-attack-krymsk-radiotower-mi24p", mission = "attack", targetzone = "Radio Tower" },
 
 			{ name = "r-attack-krymsk-famer-a10c2", mission = "attack", targetzone = "Famer" },
 			{ name = "r-attack-krymsk-alpha-a10c2", mission = "attack", targetzone = "Alpha" },
