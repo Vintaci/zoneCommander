@@ -584,6 +584,15 @@ do
 	GlobalSettings.landedDespawnTime = 1*60
 	GlobalSettings.initialDelayVariance = 30 -- minutes
 	
+	GlobalSettings.messages = {
+		grouplost = false,
+		captured = true,
+		upgraded = true,
+		repaired = true,
+		zonelost = true,
+		disabled = true
+	}
+	
 	GlobalSettings.defaultRespawns = {}
 	GlobalSettings.defaultRespawns[1] = {
 		supply = { dead=40*60, hangar=25*60},
@@ -635,6 +644,7 @@ end
 BattleCommander = {}
 do
 	BattleCommander.zones = {}
+	BattleCommander.indexedZones = {}
 	BattleCommander.connections = {}
 	BattleCommander.accounts = { [1]=0, [2]=0} -- 1 = red coalition, 2 = blue coalition
 	BattleCommander.shops = {[1]={}, [2]={}}
@@ -647,14 +657,20 @@ do
 	BattleCommander.difficultyModifier = 0
 	BattleCommander.lastDiffChange = 0
 	
-	function BattleCommander:new(savepath, difficulty) -- difficulty = {start = 1.4, min = -0.5, max = 0.5, escalation = 0.1, fade = 0.1, fadeTime = 30*60, coalition=1} --coalition 1:red 2:blue
+	function BattleCommander:new(savepath, updateFrequency, saveFrequency, difficulty) -- difficulty = {start = 1.4, min = -0.5, max = 0.5, escalation = 0.1, fade = 0.1, fadeTime = 30*60, coalition=1} --coalition 1:red 2:blue
 		local obj = {}
 		obj.saveFile = 'zoneCommander.lua'
 		if savepath then
 			obj.saveFile = savepath
 		end
+
+		if not updateFrequency then updateFrequency = 10 end
+		if not saveFrequency then saveFrequency = 60 end
 		
 		obj.difficulty = difficulty
+		obj.updateFrequency = updateFrequency
+		obj.saveFrequency = saveFrequency
+		
 		
 		setmetatable(obj, self)
 		self.__index = self
@@ -880,6 +896,96 @@ do
 		end
 		
 		return menu
+	end
+	
+	function BattleCommander:getRandomSurfaceUnitInZone(tgtzone, myside)
+		local zn = self:getZoneByName(tgtzone)
+		
+		local selectedUnit = nil
+		
+		local units = {}
+		for _,v in pairs(zn.built) do
+			local g = Group.getByName(v)
+			if g and g:getCoalition() ~= myside then
+				for _,unit in ipairs(g:getUnits()) do
+					table.insert(units, unit)
+				end
+			end
+		end
+		
+		for _,v in ipairs(zn.groups) do
+			local g = Group.getByName(v.name)
+			
+			if g and v.type == 'surface' and v.side ~= myside then
+				for _,unit in ipairs(g:getUnits()) do
+					table.insert(units, unit)
+				end
+			end
+		end
+		
+		
+		if #units > 0 then
+		 return units[math.random(1, #units)]
+		end
+	end
+	
+	function BattleCommander:moveToUnit(tgtunitname, groupname)
+		timer.scheduleFunction(function(params, time)
+			local group = Group.getByName(params.groupname)
+			local unit = Unit.getByName(params.tgtunitname)
+			
+			if not group or not unit then return end -- do not recalculate route, either target or hunter stopped existing
+			
+			local pos = unit:getPoint()
+			local cnt = group:getController()
+			local task = {
+				id = "Mission",
+				params = {
+					airborne = false,
+					route = {
+						points = {
+							[1] = { 
+								type=AI.Task.WaypointType.TURNING_POINT, 
+								action=AI.Task.TurnMethod.FLY_OVER_POINT,
+								speed = 100, 
+								x = pos.x + math.random(-100,100), 
+								y = pos.z + math.random(-100,100)
+							}
+						}
+					}
+				}
+			}
+			
+			cnt:setTask(task)
+			return time+50
+		end, {tgtunitname = tgtunitname, groupname = groupname}, timer.getTime() + 2)
+	end
+	
+	
+	function BattleCommander:startHuntUnitsInZone(tgtzone, groupname)
+		if not self.huntedunits then self.huntedunits = {} end
+		
+		timer.scheduleFunction(function(param, time)
+			local group = Group.getByName(param.group)
+			
+			if not group then 
+				param.context.huntedunits[param.group] = nil
+				return -- group stopped existing, shut down the hunt
+			end
+			
+			local huntedunit = param.context.huntedunits[param.group]
+			if huntedunit and Unit.getByName(huntedunit) then return time+60 end -- hunted unit still exists, check again in a minute
+		
+			local tgtunit = param.context:getRandomSurfaceUnitInZone(param.zone, group:getCoalition())
+			if tgtunit then
+				param.context.huntedunits[param.group] = tgtunit:getName()
+				param.context:moveToUnit(tgtunit:getName(), param.group)
+				return time+120 -- new unit selected, check again in 2 minutes if we should select a new one
+			else
+				return time+600 -- no unit in zone, try again in 10 minutes
+			end
+					
+		end, {context = self, zone = tgtzone, group = groupname}, timer.getTime()+2)
 	end
 	
 	function BattleCommander:engageZone(tgtzone, groupname, expendAmmount)
@@ -1126,14 +1232,11 @@ do
 		table.insert(self.zones, zone)
 		zone.index = self:getZoneIndexByName(zone.zone)+3000
 		zone.battleCommander = self
+		self.indexedZones[zone.zone] = zone
 	end
 	
 	function BattleCommander:getZoneByName(name)
-		for i,v in ipairs(self.zones) do
-			if v.zone == name then
-				return v
-			end
-		end
+		return self.indexedZones[name]
 	end
 	
 	function BattleCommander:addConnection(f, t)
@@ -1305,8 +1408,8 @@ do
 		self:refreshShopMenuForCoalition(1)
 		self:refreshShopMenuForCoalition(2)
 		
-		mist.scheduleFunction(self.update, {self}, timer.getTime() + 1, 10)
-		mist.scheduleFunction(self.saveToDisk, {self}, timer.getTime() + 60, 60)
+		mist.scheduleFunction(self.update, {self}, timer.getTime() + 1, self.updateFrequency)
+		mist.scheduleFunction(self.saveToDisk, {self}, timer.getTime() + 30, self.saveFrequency)
 		
 		local ev = {}
 		function ev:onEvent(event)
@@ -1647,7 +1750,7 @@ do
 			
 			self.side = 0
 			self.active = false
-			trigger.action.outText(self.zone..' has been destroyed', 5)
+			if GlobalSettings.messages.disabled then trigger.action.outText(self.zone..' has been destroyed', 5) end
 			trigger.action.setMarkupColorFill(self.index, {0.1,0.1,0.1,0.3})
 			trigger.action.setMarkupColor(self.index, {0.1,0.1,0.1,0.3})
 			self:runTriggers('destroyed')
@@ -1871,7 +1974,7 @@ do
 			
 			if not gr or gr:getSize() == 0 then
 				self.built[i] = nil
-				trigger.action.outText(self.zone..' lost group '..v, 5)
+				if GlobalSettings.messages.grouplost then trigger.action.outText(self.zone..' lost group '..v, 5) end
 			end		
 		end
 		
@@ -1890,7 +1993,7 @@ do
 		
 			self.side = 0
 			
-			trigger.action.outText(self.zone..' is now neutral ', 5)
+			if GlobalSettings.messages.zonelost then trigger.action.outText(self.zone..' is now neutral ', 5) end
 			trigger.action.setMarkupColorFill(self.index, {0.7,0.7,0.7,0.3})
 			trigger.action.setMarkupColor(self.index, {0.7,0.7,0.7,0.3})
 			self:runTriggers('lost')
@@ -1974,7 +2077,7 @@ do
 				color = {0,0,1,0.3}
 			end
 			
-			trigger.action.outText(self.zone..' captured by '..sidename, 5)
+			if GlobalSettings.messages.captured then trigger.action.outText(self.zone..' captured by '..sidename, 5) end
 			trigger.action.setMarkupColorFill(self.index, color)
 			trigger.action.setMarkupColor(self.index, color)
 			self:runTriggers('captured')
@@ -1992,7 +2095,7 @@ do
 		end
 		
 		if not self.active then
-			trigger.action.outText(self.zone..' has been destroyed and can no longer be captured', 5)
+			if GlobalSettings.messages.disabled then trigger.action.outText(self.zone..' has been destroyed and can no longer be captured', 5) end
 		end
 	end
 	
@@ -2044,7 +2147,7 @@ do
 				local gr = Group.getByName(v)
 				if gr and gr:getSize() < gr:getInitialSize() then
 					mist.respawnGroup(v, true)
-					trigger.action.outText('Group '..v..' at '..self.zone..' was repaired', 5)
+					if GlobalSettings.messages.repaired then trigger.action.outText('Group '..v..' at '..self.zone..' was repaired', 5) end
 					self:runTriggers('repaired')
 					complete = true
 					break
@@ -2057,7 +2160,7 @@ do
 					if not self.built[i] then
 						local gr = zone:spawnGroup(v)
 						self.built[i] = gr.name
-						trigger.action.outText(self.zone..' defenses upgraded', 5)
+						if GlobalSettings.messages.upgraded then trigger.action.outText(self.zone..' defenses upgraded', 5) end
 						self:runTriggers('upgraded')
 						break
 					end
@@ -2066,7 +2169,7 @@ do
 		end
 		
 		if not self.active then
-			trigger.action.outText(self.zone..' has been destroyed and can no longer be upgraded', 5)
+			if GlobalSettings.messages.disabled then trigger.action.outText(self.zone..' has been destroyed and can no longer be upgraded', 5) end
 		end
 	end
 end
@@ -2883,5 +2986,89 @@ do
 			return nil
 		end
 		return time+0.1
+	end
+end
+
+MissionCommander = {}
+do
+	--{side = int, battleCommander = bc, checkFrequency = int}
+	function MissionCommander:new(obj)
+		obj = obj or {}
+		obj.missions = {}
+		
+		if obj.checkFrequency then
+			obj.checkFrequency = 30
+		end
+		
+		setmetatable(obj, self)
+		self.__index = self
+		return obj
+	end
+	
+	--[[
+		{ 
+			messageStart="string, function", 
+			messageEnd="string, function", 
+			title="string, function", 
+			description="string, function", 
+			isActive = function,
+			startAction = function,
+			endAction = function,
+			reward=int
+		}
+	--]]
+	function MissionCommander:trackMission(params)
+		params.isRunning = false
+		table.insert(self.missions, params)
+	end
+	
+	function MissionCommander:printMissions()
+		local output = 'Active missions'
+		output = output..'\n------------------------------------------------'
+		for _,v in ipairs(self.missions) do
+			if v.isRunning then
+				output = output..'\n['..self:decodeMessage(v.title)..']'
+				output = output..'\n'..self:decodeMessage(v.description)
+				output = output..'\n------------------------------------------------'
+			end
+		end
+		
+		trigger.action.outTextForCoalition(self.side, output, 30)
+	end
+	
+	function MissionCommander:checkMissions(time)
+		for _,v in ipairs(self.missions) do
+			if v.isRunning then
+				if not v:isActive() then
+					if v.messageEnd then trigger.action.outTextForCoalition(self.side, self:decodeMessage(v.messageEnd), 30) end
+					if v.reward then self.battleCommander:addFunds(self.side, v.reward) end
+					if v.endAction then v.endAction() end
+					v.isRunning = false
+					return time+2 --to prevent all ended missions to show at once
+				end
+			else
+				if v:isActive() then
+					if v.messageStart then trigger.action.outTextForCoalition(self.side, self:decodeMessage(v.messageStart), 30) end
+					if v.startAction then v.startAction() end
+					v.isRunning = true
+					return time+2 --to prevent all new missions starting all at once
+				end
+			end
+		end
+		
+		return time + self.checkFrequency
+	end
+	
+	function MissionCommander:init()
+		missionCommands.addCommandForCoalition(self.side, 'Missions', nil, self.printMissions, self)
+		timer.scheduleFunction(self.checkMissions, self, timer.getTime() + 15)
+	end
+	
+	function MissionCommander:decodeMessage(param)
+		if type(param) == "function" then
+			return param()
+		elseif type(param) == "string" then
+			return param
+		end
 	end
 end
