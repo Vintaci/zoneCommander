@@ -56,6 +56,17 @@ local cargoAccepts = {
 
 -- Cargo Done
 
+-- FARP Sites
+
+local farpSites = {
+	["Bravo"] = {"farp-bravo"},
+	["Factory"] = {"farp-factory"},
+	["SAM Site"] = {"farp-samsite"},
+	["Foxtrot"] = {"farp-foxtrot"},
+}
+
+-- FARP Sites Done
+
 -- Zone Upgrades
 
 local zoneUpgrades = {
@@ -258,35 +269,26 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-krymsk-bravo-armor", mission = "attack", targetzone = "Bravo", type = "surface" },
 
-			{ name = "r-attack-krymsk-alpha-mi24p", mission = "attack", targetzone = "Alpha" },
-			{ name = "r-attack-krymsk-bravo-mi24p", mission = "attack", targetzone = "Bravo" },
-			{ name = "r-attack-krymsk-convoy-mi24p", mission = "attack", targetzone = "Convoy" },
-			{ name = "r-attack-krymsk-oilfields-mi24p", mission = "attack", targetzone = "Oil Fields" },
-			{ name = "r-attack-krymsk-radiotower-mi24p", mission = "attack", targetzone = "Radio Tower" },
-
-			{ name = "r-attack-krymsk-famer-a10c2", mission = "attack", targetzone = "Famer" },
-			{ name = "r-attack-krymsk-alpha-a10c2", mission = "attack", targetzone = "Alpha" },
 			{ name = "r-attack-krymsk-charlie-a10c2", mission = "attack", targetzone = "Charlie" },
 			{ name = "r-attack-krymsk-factory-su25t", mission = "attack", targetzone = "Factory" },
-			{ name = "r-attack-krymsk-oilfields-su25t", mission = "attack", targetzone = "Oil Fields" },
 			{ name = "r-attack-krymsk-anapa-f18c", mission = "attack", targetzone = "Anapa" },
 			{ name = "r-attack-krymsk-novoro-f16c", mission = "attack", targetzone = "Novoro" },
 
 			{ name = "r-patrol-krymsk-krymsk-m2000c", mission = "patrol", targetzone = "Krymsk" },
-			{ name = "r-patrol-krymsk-samsite-f14b", mission = "patrol", targetzone = "SAM Site" },
-			{ name = "r-patrol-krymsk-famer-f16c", mission = "patrol", targetzone = "Famer" },
+			{ name = "r-patrol-krymsk-charlie-f14b", mission = "patrol", targetzone = "SAM Site" },
+
+			{ name = "r-supply-krymsk-alpha-mi24p", mission = "attack", targetzone = "Alpha" },
+			{ name = "r-supply-krymsk-bravo-mi24p", mission = "attack", targetzone = "Bravo" },
+			{ name = "r-supply-krymsk-convoy-mi24p", mission = "attack", targetzone = "Convoy" },
+			{ name = "r-supply-krymsk-oilfields-mi24p", mission = "attack", targetzone = "Oil Fields" },
+			{ name = "r-supply-krymsk-radiotower-mi24p", mission = "attack", targetzone = "Radio Tower" },
 
 			{ name = "r-supply-krymsk-famer-uh60a", mission = "supply", targetzone = "Famer" },
-			{ name = "r-supply-krymsk-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
-			{ name = "r-supply-krymsk-bravo-mi8mtv2", mission = "supply", targetzone = "Bravo" },
 			{ name = "r-supply-krymsk-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
-			{ name = "r-supply-krymsk-convoy-uh60a", mission = "supply", targetzone = "Convoy" },
-			{ name = "r-supply-krymsk-oilfields-mi8mtv2", mission = "supply", targetzone = "Oil Fields" },
 			{ name = "r-supply-krymsk-samsite-mi8mtv2", mission = "supply", targetzone = "SAM Site" },
 			{ name = "r-supply-krymsk-echo-uh60a", mission = "supply", targetzone = "Echo" },
 			{ name = "r-supply-krymsk-delta-mi8mtv2", mission = "supply", targetzone = "Delta" },
 			{ name = "r-supply-krymsk-factory-mi8mtv2", mission = "supply", targetzone = "Factory" },
-			{ name = "r-supply-krymsk-radiotower-mi8mtv2", mission = "supply", targetzone = "Radio Tower" },
 			{ name = "r-supply-krymsk-gelend-mi8mtv2", mission = "supply", targetzone = "Gelend" },
 			{ name = "r-supply-krymsk-ever-mi8", mission = "supply", targetzone = "Ever" },
 			{ name = "r-supply-krymsk-kelas-mi8", mission = "supply", targetzone = "Kelas" },
@@ -1422,7 +1424,7 @@ bc:startRewardPlayerContribution(15, { infantry = 5, ground = 15, sam = 25, airp
 
 -- BattleCommander Initialization Done
 
--- Spawn Cargo Supplies
+-- Spawn Cargo Supplies and FARP Sites
 -- These are cargos for players' slingload
 
 HercCargoDropSupply.init(bc)
@@ -1447,11 +1449,34 @@ function respawnStatics()
 			end
 		end
 	end
+
+	for i,v in pairs(farpSites) do
+		local farp = bc:getZoneByName(i)
+		if farp then
+			if farp.side==2 then
+				for ix,vx in ipairs(v) do
+					local gr = Group.getByName(vx)
+					if not gr then
+						mist.respawnGroup(vx)
+					elseif gr:getSize() < gr:getInitialSize() then
+						mist.respawnGroup(vx)
+					end
+				end
+			else
+				for ix,vx in ipairs(v) do
+					local cr = Group.getByName(vx)
+					if cr then
+						cr:destroy()
+					end
+				end
+			end
+		end
+	end
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
 
--- Spawn Cargo Supplies Done
+-- Spawn Cargo Supplies and FARP Sites Done
 
 -- Server Info Hint
 
