@@ -277,11 +277,11 @@ local zones = {
 			{ name = "r-patrol-krymsk-krymsk-m2000c", mission = "patrol", targetzone = "Krymsk" },
 			{ name = "r-patrol-krymsk-charlie-f14b", mission = "patrol", targetzone = "SAM Site" },
 
-			{ name = "r-supply-krymsk-alpha-mi24p", mission = "attack", targetzone = "Alpha" },
-			{ name = "r-supply-krymsk-bravo-mi24p", mission = "attack", targetzone = "Bravo" },
-			{ name = "r-supply-krymsk-convoy-mi24p", mission = "attack", targetzone = "Convoy" },
-			{ name = "r-supply-krymsk-oilfields-mi24p", mission = "attack", targetzone = "Oil Fields" },
-			{ name = "r-supply-krymsk-radiotower-mi24p", mission = "attack", targetzone = "Radio Tower" },
+			{ name = "r-supply-krymsk-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
+			{ name = "r-supply-krymsk-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
+			{ name = "r-supply-krymsk-convoy-mi24p", mission = "supply", targetzone = "Convoy" },
+			{ name = "r-supply-krymsk-oilfields-mi24p", mission = "supply", targetzone = "Oil Fields" },
+			{ name = "r-supply-krymsk-radiotower-mi24p", mission = "supply", targetzone = "Radio Tower" },
 
 			{ name = "r-supply-krymsk-famer-uh60a", mission = "supply", targetzone = "Famer" },
 			{ name = "r-supply-krymsk-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
