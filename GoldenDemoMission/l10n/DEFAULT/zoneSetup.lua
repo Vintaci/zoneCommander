@@ -226,7 +226,6 @@ local zones = {
 			{ name = "r-attack-gelend-krymsk-su25t", mission = "attack", targetzone = "Krymsk" },
 
 			{ name = "r-patrol-gelend-krymsk-f16c", mission = "patrol", targetzone = "Krymsk" },
-			{ name = "r-patrol-gelend-kras-su33", mission = "patrol", targetzone = "Kras" },
 
 			{ name = "r-supply-gelend-novoro-uh60a", mission = "supply", targetzone = "Novoro" },
 			{ name = "r-supply-gelend-famer-uh60a", mission = "supply", targetzone = "Famer" },
@@ -269,13 +268,12 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-krymsk-bravo-armor", mission = "attack", targetzone = "Bravo", type = "surface" },
 
-			{ name = "r-attack-krymsk-charlie-a10c2", mission = "attack", targetzone = "Charlie" },
-			{ name = "r-attack-krymsk-factory-su25t", mission = "attack", targetzone = "Factory" },
+			{ name = "r-attack-krymsk-gelend-a10c2", mission = "attack", targetzone = "Gelend" },
 			{ name = "r-attack-krymsk-anapa-f18c", mission = "attack", targetzone = "Anapa" },
 			{ name = "r-attack-krymsk-novoro-f16c", mission = "attack", targetzone = "Novoro" },
 
 			{ name = "r-patrol-krymsk-krymsk-m2000c", mission = "patrol", targetzone = "Krymsk" },
-			{ name = "r-patrol-krymsk-charlie-f14b", mission = "patrol", targetzone = "SAM Site" },
+			{ name = "r-patrol-krymsk-charlie-f14b", mission = "patrol", targetzone = "Charlie" },
 
 			{ name = "r-supply-krymsk-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
 			{ name = "r-supply-krymsk-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
