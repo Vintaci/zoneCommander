@@ -58,12 +58,12 @@ local cargoAccepts = {
 
 -- FARP Sites
 
-local farpSites = {
-	["Bravo"] = {"farp-bravo"},
-	["Factory"] = {"farp-factory"},
-	["SAM Site"] = {"farp-samsite"},
-	["Foxtrot"] = {"farp-foxtrot"},
-}
+-- local farpSites = {
+-- 	["Bravo"] = {"farp-bravo"},
+-- 	["Factory"] = {"farp-factory"},
+-- 	["SAM Site"] = {"farp-samsite"},
+-- 	["Foxtrot"] = {"farp-foxtrot"},
+-- }
 
 -- FARP Sites Done
 
@@ -1448,28 +1448,28 @@ function respawnStatics()
 		end
 	end
 
-	for i,v in pairs(farpSites) do
-		local farp = bc:getZoneByName(i)
-		if farp then
-			if farp.side==2 then
-				for ix,vx in ipairs(v) do
-					local gr = Group.getByName(vx)
-					if not gr then
-						mist.respawnGroup(vx)
-					elseif gr:getSize() < gr:getInitialSize() then
-						mist.respawnGroup(vx)
-					end
-				end
-			else
-				for ix,vx in ipairs(v) do
-					local cr = Group.getByName(vx)
-					if cr then
-						cr:destroy()
-					end
-				end
-			end
-		end
-	end
+	-- for i,v in pairs(farpSites) do
+	-- 	local farp = bc:getZoneByName(i)
+	-- 	if farp then
+	-- 		if farp.side==2 then
+	-- 			for ix,vx in ipairs(v) do
+	-- 				local gr = Group.getByName(vx)
+	-- 				if not gr then
+	-- 					mist.respawnGroup(vx)
+	-- 				elseif gr:getSize() < gr:getInitialSize() then
+	-- 					mist.respawnGroup(vx)
+	-- 				end
+	-- 			end
+	-- 		else
+	-- 			for ix,vx in ipairs(v) do
+	-- 				local cr = Group.getByName(vx)
+	-- 				if cr then
+	-- 					cr:destroy()
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
