@@ -1181,38 +1181,32 @@ bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 100, spawnAirrefuel, 
 
 Group.getByName('ewAircraft'):destroy()
 local jamMenu = nil
-bc:registerShopItem('jam', 'Jam radars at zone', 500, function(sender)
+bc:registerShopItem('jam', '雷达干扰 (Radar Jamming)', 500, function(sender)
 	local gr = Group.getByName('ewAircraft')
-	if Utils.isGroupActive(gr) then 
-		return 'Jamming mission still in progress'
+	if Utils.isGroupActive(gr) then
+		return '雷达干扰任务仍在进行中'
 	end
-
 	mist.respawnGroup('ewAircraft', true)
-
 	if jamMenu then
-		return 'Choose target zone from F10 menu'
+		return '请使用 F10 菜单指派目标区域'
 	end
-
 	local startJam = function(target)
 		if jamMenu then
 			bc:jamRadarsAtZone('ewAircraft', target)
 			jamMenu = nil
-			trigger.action.outTextForCoalition(2, 'Growler jamming radars at '..target, 15)
+			trigger.action.outTextForCoalition(2, "Growler 正在干扰 " .. target .. " 区域的雷达", 60)
 		end
 	end
-
-	jamMenu = bc:showTargetZoneMenu(2, 'Jamming target', startJam, 1)
-	trigger.action.outTextForCoalition(2, 'Choose target zone from F10 menu', 15)
+	jamMenu = bc:showTargetZoneMenu(2, '雷达干扰目标', startJam, 1)
+	trigger.action.outTextForCoalition(2, '请使用 F10 菜单指派目标区域', 60)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 1 then
 		local gr = Group.getByName('ewAircraft')
 		if Utils.isGroupActive(gr) then
-			return 'Jamming mission still in progress'
+			return '雷达干扰任务仍在进行中'
 		end
-
 		mist.respawnGroup('ewAircraft', true)
-
 		mist.scheduleFunction(function(target)
 			local ew = Group.getByName('ewAircraft')
 			if ew then
@@ -1220,143 +1214,119 @@ function(sender, params)
 				if err then
 					return err
 				end
-
-				trigger.action.outTextForCoalition(2, 'Growler jamming radars at '..target, 15)
+				trigger.action.outTextForCoalition(2, "Growler 正在干扰 " .. target .. " 区域的雷达", 60)
 			end
 		end,{params.zone.zone},timer.getTime() + 2)
-
 	else
-		return 'Can only target enemy zone'
+		return '只能对敌方占领区进行雷达干扰'
 	end
 end)
 
 Group.getByName('ca-tanks'):destroy()
 local tanksMenu = nil
-bc:registerShopItem('armor', 'Deploy armor', 100, function(sender)
-
+bc:registerShopItem('ca-tanks', '部署坦克', 150, function(sender)
 	if tanksMenu then
-		return 'Choose deploy zone from F10 menu'
+		return "请使用 F10 菜单选择部署区域"
 	end
-
 	local deployTanks = function(target)
 		if tanksMenu then
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-tanks')
 			tanksMenu = nil
-			trigger.action.outTextForCoalition(2, 'Friendly armor deployed at '..target, 15)
+			trigger.action.outTextForCoalition(2, '友方坦克已部署于 '..target, 60)
 		end
 	end
-	
-	tanksMenu = bc:showTargetZoneMenu(2, 'Deploy armor (Choose friendly zone)', deployTanks, 2)
-	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+	tanksMenu = bc:showTargetZoneMenu(2, '部署坦克 (请选择友方占领区域)', deployTanks, 2)
+	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 2 then
-		
 		local zn = CustomZone:getByName(params.zone.zone)
 		zn:spawnGroup('ca-tanks')
-		trigger.action.outTextForCoalition(2, 'Friendly armor deployed at '..params.zone.zone, 15)
+		trigger.action.outTextForCoalition(2, '友方坦克已部署于 '..params.zone.zone, 60)
 	else
-		return 'Can only deploy at friendly zone'
+		return '只能在友方占领区部署地面单位'
 	end
 end)
 
 Group.getByName('ca-arty'):destroy()
 local artyMenu = nil
-bc:registerShopItem('artillery', 'Deploy artillery', 100, function(sender)
-	
+bc:registerShopItem('ca-arty', '部署火炮', 250, function(sender)
 	if artyMenu then
-		return 'Choose deploy zone from F10 menu'
+		return "请使用 F10 菜单选择部署区域"
 	end
-	
 	local deployArty = function(target)
 		if artyMenu then
-		
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-arty')
-			
 			artyMenu = nil
-			trigger.action.outTextForCoalition(2, 'Friendly artillery deployed at '..target, 15)
+			trigger.action.outTextForCoalition(2, '友方火炮已部署于 '..target, 60)
 		end
 	end
-	
-	artyMenu = bc:showTargetZoneMenu(2, 'Deploy artillery (Choose friendly zone)', deployArty, 2)
-	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+	artyMenu = bc:showTargetZoneMenu(2, '部署火炮 (请选择友方占领区域)', deployArty, 2)
+	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 2 then
-		
 		local zn = CustomZone:getByName(params.zone.zone)
 		zn:spawnGroup('ca-arty')
-		trigger.action.outTextForCoalition(2, 'Friendly artillery deployed at '..params.zone.zone, 15)
+		trigger.action.outTextForCoalition(2, '友方火炮已部署于 '..params.zone.zone, 60)
 	else
-		return 'Can only deploy at friendly zone'
+		return '只能在友方占领区部署地面单位'
 	end
 end)
 
-Group.getByName('ca-recon'):destroy()
-local reconMenu = nil
-bc:registerShopItem('recon', 'Deploy recon group', 50, function(sender)
-	
-	if reconMenu then
-		return 'Choose deploy zone from F10 menu'
+Group.getByName('ca-supply'):destroy()
+local caSupplyMenu = nil
+bc:registerShopItem('ca-supply', '部署补给卡车', 100, function(sender)
+	if caSupplyMenu then
+		return "请使用 F10 菜单选择部署区域"
 	end
-	
 	local deployRecon = function(target)
-		if reconMenu then
-		
+		if caSupplyMenu then
 			local zn = CustomZone:getByName(target)
-			zn:spawnGroup('ca-recon')
-			
-			reconMenu = nil
-			trigger.action.outTextForCoalition(2, 'Friendly recon group deployed at '..target, 15)
+			zn:spawnGroup('ca-supply')
+			caSupplyMenu = nil
+			trigger.action.outTextForCoalition(2, "补给卡车已部署于 " .. target, 60)
 		end
 	end
-	
-	reconMenu = bc:showTargetZoneMenu(2, 'Deploy recon group (Choose friendly zone)', deployRecon, 2)
-	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+	caSupplyMenu = bc:showTargetZoneMenu(2, "部署补给卡车 (请选择友方占领区域)", deployRecon, 2)
+	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择补给卡车的部署区域", 60)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 2 then
-		
 		local zn = CustomZone:getByName(params.zone.zone)
-		zn:spawnGroup('ca-recon')
-		trigger.action.outTextForCoalition(2, 'Friendly recon group deployed at '..params.zone.zone, 15)
+		zn:spawnGroup('ca-supply')
+		trigger.action.outTextForCoalition(2, "补给卡车已部署于 "..params.zone.zone, 60)
 	else
-		return 'Can only deploy at friendly zone'
+		return "只能在友方占领区部署地面单位"
 	end
 end)
 
 Group.getByName('ca-airdef'):destroy()
 local airdefMenu = nil
-bc:registerShopItem('airdef', 'Deploy air defence', 150, function(sender)
-	
+bc:registerShopItem('ca-airdef', '部署防空车', 300, function(sender)
 	if airdefMenu then
-		return 'Choose deploy zone from F10 menu'
+		return "请使用 F10 菜单选择部署区域"
 	end
-	
 	local deployAirDef = function(target)
 		if airdefMenu then
-		
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-airdef')
-			
 			airdefMenu = nil
-			trigger.action.outTextForCoalition(2, 'Friendly air defence deployed at '..target, 15)
+			trigger.action.outTextForCoalition(2, '友方防空车已部署于 '..target, 60)
 		end
 	end
-	
-	airdefMenu = bc:showTargetZoneMenu(2, 'Deploy air defence (Choose friendly zone)', deployAirDef, 2)
-	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+	airdefMenu = bc:showTargetZoneMenu(2, '部署防空车 (请选择友方占领区域)', deployAirDef, 2)
+	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
 end,
 function(sender, params)
 	if params.zone and params.zone.side == 2 then
-		
 		local zn = CustomZone:getByName(params.zone.zone)
 		zn:spawnGroup('ca-airdef')
-		trigger.action.outTextForCoalition(2, 'Friendly air defence deployed at '..params.zone.zone, 15)
+		trigger.action.outTextForCoalition(2, '友方防空车已部署于 '..params.zone.zone, 60)
 	else
-		return 'Can only deploy at friendly zone'
+		return '只能在友方占领区部署地面单位'
 	end
 end)
 
@@ -1370,10 +1340,10 @@ bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
 bc:addShopItem(2, 'airrefuel', -1)
 bc:addShopItem(2, 'jam', -1)
-bc:addShopItem(2, 'armor', -1)
-bc:addShopItem(2, 'artillery', -1)
-bc:addShopItem(2, 'recon', -1)
-bc:addShopItem(2, 'airdef', -1)
+bc:addShopItem(2, 'ca-tanks', -1)
+bc:addShopItem(2, 'ca-arty', -1)
+bc:addShopItem(2, 'ca-supply', -1)
+bc:addShopItem(2, 'ca-airdef', -1)
 
 -- bc:addFunds(2, 100000)
 
