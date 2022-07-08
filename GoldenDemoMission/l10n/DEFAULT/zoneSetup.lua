@@ -4,6 +4,9 @@ local ipairs = ipairs
 local table = table
 local Group = Group
 local mist = mist
+local lfs = lfs
+local timer = timer
+local trigger = trigger
 
 local hint = "You need to capture all the zones to win the battle."
 
@@ -114,9 +117,20 @@ local zoneUpgrades = {
 
 -- Zone Upgrades Done
 
--- Zone Initialization
+-- BattleCommander Initialization
 
-bc = BattleCommander:new("Caucasus-NW-Saved-Data.lua") -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
+local filepath = 'Caucasus-NW-Saved-Data.lua'
+if lfs then
+	local dir = lfs.writedir()..'Missions/Saves/'
+	lfs.mkdir(dir)
+	filepath = dir..filepath
+	env.info('Foothold - Save file path: '..filepath)
+end
+bc = BattleCommander:new(filepath, 10, 60) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
+
+-- BattleCommander Initialization Done
+
+-- Zone Definition
 
 local zones = {
 	carrier = {
@@ -734,6 +748,10 @@ local zones = {
 	},
 }
 
+-- Zone Definition Done
+
+-- Zone Initialization
+
 local function NewZone(zone)
 	zone.zoneCommander = ZoneCommander:new(zone.zoneCommanderProperties)
 
@@ -1161,6 +1179,187 @@ end
 Group.getByName('airrefuel1'):destroy()
 bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 100, spawnAirrefuel, spawnAirrefuel)
 
+Group.getByName('ewAircraft'):destroy()
+local jamMenu = nil
+bc:registerShopItem('jam', 'Jam radars at zone', 500, function(sender)
+	local gr = Group.getByName('ewAircraft')
+	if Utils.isGroupActive(gr) then 
+		return 'Jamming mission still in progress'
+	end
+
+	mist.respawnGroup('ewAircraft', true)
+
+	if jamMenu then
+		return 'Choose target zone from F10 menu'
+	end
+
+	local startJam = function(target)
+		if jamMenu then
+			bc:jamRadarsAtZone('ewAircraft', target)
+			jamMenu = nil
+			trigger.action.outTextForCoalition(2, 'Growler jamming radars at '..target, 15)
+		end
+	end
+
+	jamMenu = bc:showTargetZoneMenu(2, 'Jamming target', startJam, 1)
+	trigger.action.outTextForCoalition(2, 'Choose target zone from F10 menu', 15)
+end,
+function(sender, params)
+	if params.zone and params.zone.side == 1 then
+		local gr = Group.getByName('ewAircraft')
+		if Utils.isGroupActive(gr) then
+			return 'Jamming mission still in progress'
+		end
+
+		mist.respawnGroup('ewAircraft', true)
+
+		mist.scheduleFunction(function(target)
+			local ew = Group.getByName('ewAircraft')
+			if ew then
+				local err = bc:jamRadarsAtZone('ewAircraft', target)
+				if err then
+					return err
+				end
+
+				trigger.action.outTextForCoalition(2, 'Growler jamming radars at '..target, 15)
+			end
+		end,{params.zone.zone},timer.getTime() + 2)
+
+	else
+		return 'Can only target enemy zone'
+	end
+end)
+
+Group.getByName('ca-tanks'):destroy()
+local tanksMenu = nil
+bc:registerShopItem('armor', 'Deploy armor', 100, function(sender)
+
+	if tanksMenu then
+		return 'Choose deploy zone from F10 menu'
+	end
+
+	local deployTanks = function(target)
+		if tanksMenu then
+			local zn = CustomZone:getByName(target)
+			zn:spawnGroup('ca-tanks')
+			tanksMenu = nil
+			trigger.action.outTextForCoalition(2, 'Friendly armor deployed at '..target, 15)
+		end
+	end
+	
+	tanksMenu = bc:showTargetZoneMenu(2, 'Deploy armor (Choose friendly zone)', deployTanks, 2)
+	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+end,
+function(sender, params)
+	if params.zone and params.zone.side == 2 then
+		
+		local zn = CustomZone:getByName(params.zone.zone)
+		zn:spawnGroup('ca-tanks')
+		trigger.action.outTextForCoalition(2, 'Friendly armor deployed at '..params.zone.zone, 15)
+	else
+		return 'Can only deploy at friendly zone'
+	end
+end)
+
+Group.getByName('ca-arty'):destroy()
+local artyMenu = nil
+bc:registerShopItem('artillery', 'Deploy artillery', 100, function(sender)
+	
+	if artyMenu then
+		return 'Choose deploy zone from F10 menu'
+	end
+	
+	local deployArty = function(target)
+		if artyMenu then
+		
+			local zn = CustomZone:getByName(target)
+			zn:spawnGroup('ca-arty')
+			
+			artyMenu = nil
+			trigger.action.outTextForCoalition(2, 'Friendly artillery deployed at '..target, 15)
+		end
+	end
+	
+	artyMenu = bc:showTargetZoneMenu(2, 'Deploy artillery (Choose friendly zone)', deployArty, 2)
+	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+end,
+function(sender, params)
+	if params.zone and params.zone.side == 2 then
+		
+		local zn = CustomZone:getByName(params.zone.zone)
+		zn:spawnGroup('ca-arty')
+		trigger.action.outTextForCoalition(2, 'Friendly artillery deployed at '..params.zone.zone, 15)
+	else
+		return 'Can only deploy at friendly zone'
+	end
+end)
+
+Group.getByName('ca-recon'):destroy()
+local reconMenu = nil
+bc:registerShopItem('recon', 'Deploy recon group', 50, function(sender)
+	
+	if reconMenu then
+		return 'Choose deploy zone from F10 menu'
+	end
+	
+	local deployRecon = function(target)
+		if reconMenu then
+		
+			local zn = CustomZone:getByName(target)
+			zn:spawnGroup('ca-recon')
+			
+			reconMenu = nil
+			trigger.action.outTextForCoalition(2, 'Friendly recon group deployed at '..target, 15)
+		end
+	end
+	
+	reconMenu = bc:showTargetZoneMenu(2, 'Deploy recon group (Choose friendly zone)', deployRecon, 2)
+	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+end,
+function(sender, params)
+	if params.zone and params.zone.side == 2 then
+		
+		local zn = CustomZone:getByName(params.zone.zone)
+		zn:spawnGroup('ca-recon')
+		trigger.action.outTextForCoalition(2, 'Friendly recon group deployed at '..params.zone.zone, 15)
+	else
+		return 'Can only deploy at friendly zone'
+	end
+end)
+
+Group.getByName('ca-airdef'):destroy()
+local airdefMenu = nil
+bc:registerShopItem('airdef', 'Deploy air defence', 150, function(sender)
+	
+	if airdefMenu then
+		return 'Choose deploy zone from F10 menu'
+	end
+	
+	local deployAirDef = function(target)
+		if airdefMenu then
+		
+			local zn = CustomZone:getByName(target)
+			zn:spawnGroup('ca-airdef')
+			
+			airdefMenu = nil
+			trigger.action.outTextForCoalition(2, 'Friendly air defence deployed at '..target, 15)
+		end
+	end
+	
+	airdefMenu = bc:showTargetZoneMenu(2, 'Deploy air defence (Choose friendly zone)', deployAirDef, 2)
+	trigger.action.outTextForCoalition(2, 'Choose deploy zone from F10 menu', 15)
+end,
+function(sender, params)
+	if params.zone and params.zone.side == 2 then
+		
+		local zn = CustomZone:getByName(params.zone.zone)
+		zn:spawnGroup('ca-airdef')
+		trigger.action.outTextForCoalition(2, 'Friendly air defence deployed at '..params.zone.zone, 15)
+	else
+		return 'Can only deploy at friendly zone'
+	end
+end)
+
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
 bc:addShopItem(2, 'cas', -1)
@@ -1170,6 +1369,11 @@ bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
 bc:addShopItem(2, 'airrefuel', -1)
+bc:addShopItem(2, 'jam', -1)
+bc:addShopItem(2, 'armor', -1)
+bc:addShopItem(2, 'artillery', -1)
+bc:addShopItem(2, 'recon', -1)
+bc:addShopItem(2, 'airdef', -1)
 
 -- bc:addFunds(2, 100000)
 
@@ -1397,12 +1601,66 @@ bc:startRewardPlayerContribution(15, { infantry = 5, ground = 15, sam = 25, airp
 
 -- BattleCommander Initialization Done
 
+-- Mission Generator
+
+local mc = MissionCommander:new({side = 2, battleCommander = bc, checkFrequency = 60})
+
+local captureTarget = nil
+mc:trackMission({
+	title = function() return "Capture "..captureTarget end,
+	description = function() return captureTarget.." is neutral. Capture it by delivering supplies" end,
+	messageStart = function() return "New mission: Capture "..captureTarget end,
+	messageEnd = function() return "Mission ended: Capture "..captureTarget end,
+	startAction = function() end,
+	endAction = function()
+		captureTarget = nil
+	end,
+	isActive = function()
+		if not captureTarget then
+			return false
+		end
+		local targetzn = bc:getZoneByName(captureTarget)
+		return targetzn.side == 0 and targetzn.active
+	end
+})
+
+local function generateCaptureMission()
+	if captureTarget ~= nil then return end
+		
+	local validzones = {}
+	for _,v in ipairs(bc.zones) do
+		if v.side == 0 and v.active then
+			table.insert(validzones, v.zone)
+		end
+	end
+	
+	if #validzones == 0 then return end
+	
+	local choice = math.random(1, #validzones)
+	if validzones[choice] then
+		captureTarget = validzones[choice]
+		return true
+	end
+end
+
+timer.scheduleFunction(function(_, time)
+	if generateCaptureMission() then
+		return time+300
+	else
+		return time+120
+	end
+end, {}, timer.getTime() + 20)
+
+mc:init()
+
+-- Mission Generator Done
+
 -- Spawn Cargo Supplies and FARP Sites
 -- These are cargos for players' slingload
 
 HercCargoDropSupply.init(bc)
 
-function respawnStatics()
+local function respawnStatics()
 	for i, v in pairs(cargoSpawns) do
 		local farp = bc:getZoneByName(i)
 		if farp then
@@ -1422,29 +1680,6 @@ function respawnStatics()
 			end
 		end
 	end
-
-	-- for i,v in pairs(farpSites) do
-	-- 	local farp = bc:getZoneByName(i)
-	-- 	if farp then
-	-- 		if farp.side==2 then
-	-- 			for ix,vx in ipairs(v) do
-	-- 				local gr = Group.getByName(vx)
-	-- 				if not gr then
-	-- 					mist.respawnGroup(vx)
-	-- 				elseif gr:getSize() < gr:getInitialSize() then
-	-- 					mist.respawnGroup(vx)
-	-- 				end
-	-- 			end
-	-- 		else
-	-- 			for ix,vx in ipairs(v) do
-	-- 				local cr = Group.getByName(vx)
-	-- 				if cr then
-	-- 					cr:destroy()
-	-- 				end
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
