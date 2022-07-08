@@ -236,12 +236,10 @@ local zones = {
 			{ name = "r-supply-gelend-factory-mi8mtv2", mission = "supply", targetzone = "Factory" },
 			{ name = "r-supply-gelend-four-uh60a", mission = "supply", targetzone = "Four" },
 			{ name = "r-supply-gelend-apple-uh60a", mission = "supply", targetzone = "Apple" },
-			{ name = "r-supply-gelend-banana-uh60a", mission = "supply", targetzone = "Banana" },
 			{ name = "r-supply-gelend-sochi-mi8", mission = "supply", targetzone = "Sochi" },
 
 			{ name = "b-supply-gelend-four-uh60a", mission = "supply", targetzone = "Four" },
 			{ name = "b-supply-gelend-apple-uh60a", mission = "supply", targetzone = "Apple" },
-			{ name = "b-supply-gelend-banana-uh60a", mission = "supply", targetzone = "Banana" },
 			{ name = "b-supply-gelend-novoro-uh60a", mission = "supply", targetzone = "Novoro" },
 			{ name = "b-supply-gelend-factory-uh60a", mission = "supply", targetzone = "Factory" },
 			{ name = "b-supply-gelend-radiotower-uh60a", mission = "supply", targetzone = "Radio Tower" },
@@ -338,7 +336,6 @@ local zones = {
 			{ name = "r-attack-kelas-samsite-a10c2", mission = "attack", targetzone = "SAM Site" },
 			{ name = "r-attack-kelas-ever-su25t", mission = "attack", targetzone = "Ever" },
 			{ name = "r-attack-kelas-kras-ah64d", mission = "attack", targetzone = "Kras" },
-			{ name = "r-attack-kelas-banana-f16c", mission = "attack", targetzone = "Banana" },
 			{ name = "r-attack-kelas-apple-su25t", mission = "attack", targetzone = "Apple" },
 
 			{ name = "r-patrol-kelas-krymsk-f16c", mission = "patrol", targetzone = "Krymsk" },
@@ -359,7 +356,6 @@ local zones = {
 			{ name = "r-supply-kelas-samsite-mi8", mission = "supply", targetzone = "SAM Site" },
 			{ name = "r-supply-kelas-ever-mi8", mission = "supply", targetzone = "Ever" },
 			{ name = "r-supply-kelas-kras-uh60a", mission = "supply", targetzone = "Kras" },
-			{ name = "r-supply-kelas-banana-mi8", mission = "supply", targetzone = "Banana" },
 			{ name = "r-supply-kelas-apple-mi8", mission = "supply", targetzone = "Apple" },
 
 			{ name = "b-supply-kelas-four-uh60a", mission = "supply", targetzone = "Four" },
@@ -369,7 +365,6 @@ local zones = {
 			{ name = "b-supply-kelas-samsite-uh60a", mission = "supply", targetzone = "SAM Site" },
 			{ name = "b-supply-kelas-ever-uh60a", mission = "supply", targetzone = "Ever" },
 			{ name = "b-supply-kelas-kras-uh60a", mission = "supply", targetzone = "Kras" },
-			{ name = "b-supply-kelas-banana-uh60a", mission = "supply", targetzone = "Banana" },
 			{ name = "b-supply-kelas-apple-uh60a", mission = "supply", targetzone = "Apple" },
 		},
 		criticalObjects = {},
@@ -406,7 +401,6 @@ local zones = {
 			{ name = "r-supply-kras-echo-mi8", mission = "supply", targetzone = "Echo" },
 			{ name = "r-supply-kras-foxtrot-mi8", mission = "supply", targetzone = "Foxtrot" },
 			{ name = "r-supply-kras-apple-mi8", mission = "supply", targetzone = "Apple" },
-			{ name = "r-supply-kras-banana-mi8", mission = "supply", targetzone = "Banana" },
 			{ name = "r-supply-kras-four-mi8", mission = "supply", targetzone = "Four" },
 			{ name = "r-supply-kras-ever-mi8", mission = "supply", targetzone = "Ever" },
 			{ name = "r-supply-kras-kelas-mi8", mission = "supply", targetzone = "Kelas" },
@@ -415,7 +409,6 @@ local zones = {
 		criticalObjects = {},
 		connections = {
 			"Apple",
-			"Banana",
 			"Kelas",
 		},
 	},
@@ -436,7 +429,6 @@ local zones = {
 			{ name = "r-patrol-sochi-sochi-su33", mission = "patrol", targetzone = "Sochi" },
 
 			{ name = "r-supply-sochi-apple-mi8", mission = "supply", targetzone = "Apple" },
-			{ name = "r-supply-sochi-banana-mi8", mission = "supply", targetzone = "Banana" },
 			{ name = "r-supply-sochi-four-mi8", mission = "supply", targetzone = "Four" },
 			{ name = "r-supply-sochi-gelend-mi8", mission = "supply", targetzone = "Gelend" },
 		},
@@ -444,7 +436,6 @@ local zones = {
 		connections = {
 			"Gelend",
 			"Apple",
-			"Banana",
 			"Four",
 		},
 	},
@@ -631,24 +622,8 @@ local zones = {
 		dispatches = {},
 		criticalObjects = {},
 		connections = {
-			"Banana",
 			"Four",
 		},
-	},
-
-	banana = {
-		zoneCommanderProperties = {
-			zone = "Banana",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {},
 	},
 
 	oilfields = {

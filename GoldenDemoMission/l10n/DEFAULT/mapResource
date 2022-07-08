@@ -1,7 +1,6 @@
 mapResource = 
 {
     ["ResKey_Action_6"] = "mist_4_5_107.lua",
-    ["ResKey_Action_82"] = "Splash_Damage_2_0.lua",
     ["ResKey_Action_21"] = "zoneSetup.lua",
     ["ResKey_ImageBriefing_76"] = "title.jpg",
     ["ResKey_Action_20"] = "zoneCommander.lua",
