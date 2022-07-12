@@ -1160,24 +1160,35 @@ end,
 local spawnAwacs = function(sender)
 	local gr = Group.getByName('awacs1')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
-		return '空中预警机仍在执行任务\n呼号：Darkstar\n无线电频率：252.00 MHz AM'
+		return 'E-2D 空中预警机 仍在执行任务\n呼号：Darkstar\n无线电频率：255.00 MHz AM'
 	end
 	mist.respawnGroup('awacs1', true)
-	trigger.action.outTextForCoalition(2, '空中预警机已上线\n呼号：Darkstar\n无线电频率：252.00 MHz AM', 60)
+	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Darkstar\n无线电频率：255.00 MHz AM', 60)
 end
 Group.getByName('awacs1'):destroy()
-bc:registerShopItem('awacs', 'AWACS 空中预警机', 100, spawnAwacs, spawnAwacs)
+bc:registerShopItem('awacs', 'E-2D 空中预警机(AWACS)', 100, spawnAwacs, spawnAwacs)
 
-local spawnAirrefuel = function(sender)
-	local gr = Group.getByName('airrefuel1')
+local spawnAirrefuelSoft = function(sender)
+	local gr = Group.getByName('airrefuel-soft')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
-		return '空中加油机仍在执行任务\n呼号：Texaco\n无线电频率：251.00 MHz AM'
+		return 'KC-135MPRS 空中加油机(软管) 仍在执行任务\n呼号：Texaco\n无线电频率：251.00 MHz AM'
 	end
-	mist.respawnGroup('airrefuel1', true)
-	trigger.action.outTextForCoalition(2, '空中加油机已上线\n呼号：Texaco\n无线电频率：251.00 MHz AM', 60)
+	mist.respawnGroup('airrefuel-soft', true)
+	trigger.action.outTextForCoalition(2, 'KC-135MPRS 空中加油机(软管) 已上线\n呼号：Texaco\n无线电频率：251.00 MHz AM', 60)
 end
-Group.getByName('airrefuel1'):destroy()
-bc:registerShopItem('airrefuel', 'KC-135 空中加油机', 100, spawnAirrefuel, spawnAirrefuel)
+Group.getByName('airrefuel-soft'):destroy()
+bc:registerShopItem('airrefuel-soft', 'KC-135MPRS 空中加油机(软管)', 100, spawnAirrefuelSoft, spawnAirrefuelSoft)
+
+local spawnAirrefuelHard = function(sender)
+	local gr = Group.getByName('airrefuel-hard')
+	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+		return 'KC-135 空中加油机(硬管) 仍在执行任务\n呼号：Arco\n无线电频率：252.00 MHz AM'
+	end
+	mist.respawnGroup('airrefuel-hard', true)
+	trigger.action.outTextForCoalition(2, 'KC-135 空中加油机(硬管) 已上线\n呼号：Arco\n无线电频率：252.00 MHz AM', 60)
+end
+Group.getByName('airrefuel-hard'):destroy()
+bc:registerShopItem('airrefuel-hard', 'KC-135 空中加油机(硬管)', 100, spawnAirrefuelHard, spawnAirrefuelHard)
 
 Group.getByName('ewAircraft'):destroy()
 local jamMenu = nil
@@ -1194,10 +1205,10 @@ bc:registerShopItem('jam', '雷达干扰 (Radar Jamming)', 500, function(sender)
 		if jamMenu then
 			bc:jamRadarsAtZone('ewAircraft', target)
 			jamMenu = nil
-			trigger.action.outTextForCoalition(2, "Growler 正在干扰 " .. target .. " 区域的雷达", 60)
+			trigger.action.outTextForCoalition(2, "E/A-18 Growler 正在干扰 " .. target .. " 区域的雷达", 60)
 		end
 	end
-	jamMenu = bc:showTargetZoneMenu(2, '雷达干扰目标', startJam, 1)
+	jamMenu = bc:showTargetZoneMenu(2, '指派雷达干扰目标', startJam, 1)
 	trigger.action.outTextForCoalition(2, '请使用 F10 菜单指派目标区域', 60)
 end,
 function(sender, params)
@@ -1214,7 +1225,7 @@ function(sender, params)
 				if err then
 					return err
 				end
-				trigger.action.outTextForCoalition(2, "Growler 正在干扰 " .. target .. " 区域的雷达", 60)
+				trigger.action.outTextForCoalition(2, "E/A-18 Growler 正在干扰 " .. target .. " 区域的雷达", 60)
 			end
 		end,{params.zone.zone},timer.getTime() + 2)
 	else
@@ -1338,7 +1349,8 @@ bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
 bc:addShopItem(2, 'awacs', -1)
-bc:addShopItem(2, 'airrefuel', -1)
+bc:addShopItem(2, 'airrefuel-soft', -1)
+bc:addShopItem(2, 'airrefuel-hard', -1)
 bc:addShopItem(2, 'jam', -1)
 bc:addShopItem(2, 'ca-tanks', -1)
 bc:addShopItem(2, 'ca-arty', -1)
