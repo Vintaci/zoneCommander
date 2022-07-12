@@ -839,7 +839,7 @@ local missionCompleteCheck = function(event, sender)
 		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于90秒后重启！", 90)
 		mist.removeFunction(missionCompleteCheckSheduler)
 		mist.scheduleFunction(function(event, sender)
-			os.remove("D:\\DCS World OpenBeta Server\\Caucasus-NW-Saved-Data.lua")
+			os.remove(filepath)
 			trigger.action.setUserFlag("TriggerFlagMissionComplete", true)
 		end, {}, timer.getTime() + 90)
 	end
