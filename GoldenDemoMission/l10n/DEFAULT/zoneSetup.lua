@@ -59,16 +59,15 @@ local cargoAccepts = {
 
 -- Cargo Done
 
--- FARP Sites
+-- FARP Trucks
 
--- local farpSites = {
--- 	["Bravo"] = {"farp-bravo"},
--- 	["Factory"] = {"farp-factory"},
--- 	["SAM Site"] = {"farp-samsite"},
--- 	["Foxtrot"] = {"farp-foxtrot"},
--- }
+local farpTrucks = {
+	["Bravo"] = {"farp-trucks-bravo"},
+	["Delta"] = {"farp-trucks-delta"},
+	["Foxtrot"] = {"farp-trucks-foxtrot"},
+}
 
--- FARP Sites Done
+-- FARP Trucks Done
 
 -- Zone Upgrades
 
@@ -1637,7 +1636,7 @@ mc:init()
 
 -- Mission Generator Done
 
--- Spawn Cargo Supplies and FARP Sites
+-- Spawn Cargo Supplies and FARP Trucks
 -- These are cargos for players' slingload
 
 HercCargoDropSupply.init(bc)
@@ -1662,11 +1661,34 @@ local function respawnStatics()
 			end
 		end
 	end
+
+	for i,v in pairs(farpTrucks) do
+		local farp = bc:getZoneByName(i)
+		if farp then
+			if farp.side==2 then
+				for ix,vx in ipairs(v) do
+					local gr = Group.getByName(vx)
+					if not gr then
+						mist.respawnGroup(vx)
+					elseif gr:getSize() < gr:getInitialSize() then
+						mist.respawnGroup(vx)
+					end
+				end
+			else
+				for ix,vx in ipairs(v) do
+					local cr = Group.getByName(vx)
+					if cr then
+						cr:destroy()
+					end
+				end
+			end
+		end
+	end
 end
 
 mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
 
--- Spawn Cargo Supplies and FARP Sites Done
+-- Spawn Cargo Supplies and FARP Trucks Done
 
 -- Server Info Hint
 
