@@ -1661,7 +1661,11 @@ local function respawnStatics()
 			end
 		end
 	end
+end
 
+mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
+
+local function respawnFarpTrucks()
 	for i,v in pairs(farpTrucks) do
 		local farp = bc:getZoneByName(i)
 		if farp then
@@ -1686,7 +1690,7 @@ local function respawnStatics()
 	end
 end
 
-mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
+mist.scheduleFunction(respawnFarpTrucks, {}, timer.getTime() + 1, 300)
 
 -- Spawn Cargo Supplies and FARP Trucks Done
 
