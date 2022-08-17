@@ -154,6 +154,33 @@ local zones = {
 		connections = {},
 	},
 
+	batumi = {
+		zoneCommanderProperties = {
+			zone = "Batumi",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.airfieldPlusPlus,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 3,
+		},
+		dispatches = {
+			{ name = "r-attack-batumi-gelend-su34", mission = "attack", targetzone = "Gelend" }, -- TODO
+
+			{ name = "r-patrol-batumi-batumi-su33", mission = "patrol", targetzone = "Batumi" },
+
+			{ name = "r-supply-batumi-apple-mi24p", mission = "supply", targetzone = "Apple" }, -- TODO
+			{ name = "r-supply-batumi-four-mi24p", mission = "supply", targetzone = "Four" }, -- TODO
+			{ name = "r-supply-batumi-gelend-mi24p", mission = "supply", targetzone = "Gelend" }, -- TODO
+		},
+		criticalObjects = {},
+		connections = {
+			"Gelend",
+			"Apple",
+			"Four",
+		},
+	},
+
 	anapa = {
 		zoneCommanderProperties = {
 			zone = "Anapa",
@@ -423,33 +450,6 @@ local zones = {
 		connections = {
 			"Apple",
 			"Kelas",
-		},
-	},
-
-	sochi = {
-		zoneCommanderProperties = {
-			zone = "Sochi",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.airfieldPlusPlus,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 3,
-		},
-		dispatches = {
-			{ name = "r-attack-sochi-gelend-su34", mission = "attack", targetzone = "Gelend" },
-
-			{ name = "r-patrol-sochi-sochi-su33", mission = "patrol", targetzone = "Sochi" },
-
-			{ name = "r-supply-sochi-apple-mi8", mission = "supply", targetzone = "Apple" },
-			{ name = "r-supply-sochi-four-mi8", mission = "supply", targetzone = "Four" },
-			{ name = "r-supply-sochi-gelend-mi8", mission = "supply", targetzone = "Gelend" },
-		},
-		criticalObjects = {},
-		connections = {
-			"Gelend",
-			"Apple",
-			"Four",
 		},
 	},
 
@@ -1414,17 +1414,17 @@ end
 
 local redSupports = {
 	shipAttack = {
-		name = "r-support-frigate-sochi-carrier",
+		name = "r-support-ship-batumi-carrier",
 		description = "Ship Attack",
 		price = 1000,
 		random = 50, -- Any value <= 0 or >= 100 will always spawn all groups
 		groupNames = {
-			"r-support-frigate-sochi-carrier-1",
-			"r-support-frigate-sochi-carrier-2",
+			"r-support-ship-batumi-carrier-1",
+			"r-support-ship-batumi-carrier-2",
 		},
 		zones = {
 			base = {
-				name = "Sochi",
+				name = "Batumi",
 				side = 1,
 			},
 			target = {
@@ -1434,22 +1434,22 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣舰队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群",
+			text = "敌军正在派遣舰队攻击我方航母！\n起点：巴统\n攻击目标：蓝方航母作战集群",
 		},
 	},
-	antishipSochiToCarrier = {
-		name = "r-support-antiship-sochi-carrier",
-		description = "Anti-ship Attack from Sochi to Carrier",
+	antishipBatumiToCarrier = {
+		name = "r-support-antiship-batumi-carrier",
+		description = "Anti-ship Attack from Batumi to Carrier",
 		price = 1000,
 		random = 25,
 		groupNames = {
-			"r-support-antiship-sochi-carrier-tu22m3",
-			"r-support-antiship-sochi-carrier-f16c",
-			"r-support-antiship-sochi-carrier-su34",
+			"r-support-antiship-batumi-carrier-tu22m3",
+			"r-support-antiship-batumi-carrier-f16c",
+			"r-support-antiship-batumi-carrier-su34",
 		},
 		zones = {
 			base = {
-				name = "Sochi",
+				name = "Batumi",
 				side = 1,
 			},
 			target = {
@@ -1459,7 +1459,7 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣机队攻击我方航母！\n起点：索契\n攻击目标：蓝方航母作战集群",
+			text = "敌军正在派遣机队攻击我方航母！\n起点：巴统\n攻击目标：蓝方航母作战集群",
 		},
 	},
 	bomberKelasToKrymsk = {
@@ -1536,8 +1536,8 @@ BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 
 
 local redCarrierPatrols = {
 	"r-patrol-rcvn61-rcvn61-su33",
-	"r-patrol-rcvn73-rcvn74-f18c",
-	"r-patrol-rcvn74-rcvn73-f14b",
+	"r-patrol-rcvn73-rcvn73-f18c",
+	"r-patrol-rcvn74-rcvn74-f14b",
 }
 
 GroupFunctions:destroyGroupsByNames(redCarrierPatrols)
