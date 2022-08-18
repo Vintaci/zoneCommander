@@ -33,27 +33,13 @@ local function allExcept(tbls, except)
 end
 
 local cargoSpawns = { -- This should be the unit name instead of group name
-	["Anapa"] = { "cargo-anapa-ammo-1", "cargo-anapa-crate-1", "cargo-anapa-fuel-1" },
-	["Krymsk"] = { "cargo-krymsk-ammo-1", "cargo-krymsk-crate-1", "cargo-krymsk-fuel-1" },
-	["Novoro"] = { "cargo-novoro-ammo-1", "cargo-novoro-crate-1", "cargo-novoro-fuel-1" },
-	["Gelend"] = { "cargo-gelend-ammo-1", "cargo-gelend-crate-1", "cargo-gelend-fuel-1" },
-	["Kelas"] = { "cargo-kelas-ammo-1", "cargo-kelas-crate-1", "cargo-kelas-fuel-1" },
-	["Kras"] = { "cargo-Kras-ammo-1", "cargo-Kras-crate-1", "cargo-Kras-fuel-1" },
-	["Factory"] = { "cargo-factory-crate1-1", "cargo-factory-crate2-1", "cargo-factory-crate3-1" },
-	["Oil Fields"] = { "cargo-oilfields-fuel1-1", "cargo-oilfields-fuel2-1", "cargo-oilfields-fuel3-1" },
-	["SAM Site"] = { "cargo-samsite-ammo1-1", "cargo-samsite-ammo2-1", "cargo-samsite-ammo3-1" },
+	["Sochi"] = { "cargo-sochi-ammo-1", "cargo-sochi-crate-1", "cargo-sochi-fuel-1" },
+	["Gudauta"] = { "cargo-gudauta-ammo-1", "cargo-gudauta-crate-1", "cargo-gudauta-fuel-1" },
 }
 
 local cargoAccepts = {
-	anapa = allExcept(cargoSpawns, "Anapa"),
-	novoro = allExcept(cargoSpawns, "Novoro"),
-	krymsk = allExcept(cargoSpawns, "Krymsk"),
-	gelend = allExcept(cargoSpawns, "Gelend"),
-	kelas = allExcept(cargoSpawns, "Kelas"),
-	kras = allExcept(cargoSpawns, "Kras"),
-	factory = allExcept(cargoSpawns, "Factory"),
-	oilfields = allExcept(cargoSpawns, "Oil Fields"),
-	samsite = allExcept(cargoSpawns, "SAM Site"),
+	sochi = allExcept(cargoSpawns, "Sochi"),
+	gudauta = allExcept(cargoSpawns, "Gudauta"),
 	all = allExcept(cargoSpawns),
 }
 
@@ -62,9 +48,7 @@ local cargoAccepts = {
 -- FARP Trucks
 
 local farpTrucks = {
-	["Bravo"] = {"farp-trucks-bravo"},
-	["Delta"] = {"farp-trucks-delta"},
-	["Foxtrot"] = {"farp-trucks-foxtrot"},
+	["Alpha"] = {"farp-trucks-alpha"},
 }
 
 -- FARP Trucks Done
@@ -154,6 +138,162 @@ local zones = {
 		connections = {},
 	},
 
+	sochi = {
+		zoneCommanderProperties = {
+			zone = "Sochi",
+			side = 2,
+			level = 5,
+			upgrades = zoneUpgrades.blueAirfield,
+			crates = cargoAccepts.sochi,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {
+			{ name = "b-attack-sochi-gudauta-f16c", mission = "attack", targetzone = "Gudauta" },
+
+			{ name = "b-patrol-sochi-sochi-f18c", mission = "patrol", targetzone = "Sochi" },
+
+			{ name = "b-supply-sochi-gudauta-uh60a", mission = "supply", targetzone = "Gudauta" },
+			{ name = "b-supply-sochi-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
+		},
+		criticalObjects = {},
+		connections = {
+			"Alpha",
+		},
+	},
+
+	alpha = {
+		zoneCommanderProperties = {
+			zone = "Alpha",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.armor,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Gudauta",
+		},
+	},
+
+	gudauta = {
+		zoneCommanderProperties = {
+			zone = "Gudauta",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.airfield,
+			crates = cargoAccepts.gudauta,
+			flavorText = hint,
+			income = 1,
+		},
+		dispatches = {
+			{ name = "r-attack-gudauta-alpha-ka50", mission = "attack", targetzone = "Alpha" },
+			{ name = "r-attack-gudauta-alpha-armor", mission = "attack", targetzone = "Alpha", type = "surface" },
+
+			{ name = "r-attack-gudauta-sochi-f16c", mission = "attack", targetzone = "Sochi" },
+			{ name = "r-attack-gudauta-sukhumi-f16c", mission = "attack", targetzone = "Sukhumi" },
+
+			{ name = "r-supply-gudauta-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
+			{ name = "r-supply-gudauta-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
+			{ name = "r-supply-gudauta-sukhumi-mi24p", mission = "supply", targetzone = "Sukhumi" },
+
+			{ name = "r-patrol-gudauta-gudauta-f18c", mission = "patrol", targetzone = "Gudauta" },
+
+			{ name = "b-supply-gudauta-sochi-uh60a", mission = "supply", targetzone = "Sochi" },
+			{ name = "b-supply-gudauta-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
+			{ name = "b-supply-gudauta-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
+			{ name = "b-supply-gudauta-sukhumi-uh60a", mission = "supply", targetzone = "Sukhumi" },
+		},
+		criticalObjects = {},
+		connections = {
+			"Bravo",
+		},
+	},
+
+	bravo = {
+		zoneCommanderProperties = {
+			zone = "Bravo",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.normal,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Sukhumi",
+			"Radio",
+		},
+	},
+
+	sukhumi = {
+		zoneCommanderProperties = {
+			zone = "Sukhumi",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.airfield,
+			crates = cargoAccepts.sukhumi,
+			flavorText = hint,
+			income = 1,
+		},
+		dispatches = {
+			-- { name = "r-attack-gudauta-sochi-f16c", mission = "attack", targetzone = "Sochi" },
+			-- { name = "r-attack-gudauta-sukhumi-f16c", mission = "attack", targetzone = "Sukhumi" },
+
+			-- { name = "r-patrol-gudauta-gudauta-f18c", mission = "patrol", targetzone = "Gudauta" },
+
+			-- { name = "b-supply-gudauta-sochi-uh60a", mission = "supply", targetzone = "Gudauta" },
+			-- { name = "b-supply-gudauta-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
+			-- { name = "b-supply-gudauta-barvo-uh60a", mission = "supply", targetzone = "Bravo" },
+			-- { name = "b-supply-gudauta-sukhumi-uh60a", mission = "supply", targetzone = "Sukhumi" },
+		},
+		criticalObjects = {},
+		connections = {
+			"Radio",
+			"Charlie"
+		},
+	},
+
+	radio = {
+		zoneCommanderProperties = {
+			zone = "Radio",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.armor,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {
+			"critical-object-radio-1",
+		},
+		connections = {
+			"Charlie"
+		},
+	},
+
+	charlie = {
+		zoneCommanderProperties = {
+			zone = "Charlie",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.armor,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+		},
+	},
+
 	batumi = {
 		zoneCommanderProperties = {
 			zone = "Batumi",
@@ -175,575 +315,7 @@ local zones = {
 		},
 		criticalObjects = {},
 		connections = {
-			"Gelend",
-			"Apple",
-			"Four",
 		},
-	},
-
-	anapa = {
-		zoneCommanderProperties = {
-			zone = "Anapa",
-			side = 2,
-			level = 5,
-			upgrades = zoneUpgrades.blueAirfield,
-			crates = cargoAccepts.anapa,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {
-			{ name = "b-attack-anapa-krymsk-a10c2", mission = "attack", targetzone = "Krymsk" },
-
-			{ name = "b-patrol-anapa-krymsk-f15c", mission = "patrol", targetzone = "Krymsk" },
-			{ name = "b-patrol-anapa-novoro-f15c", mission = "patrol", targetzone = "Novoro" },
-
-			{ name = "b-supply-anapa-famer-uh60a", mission = "supply", targetzone = "Famer" },
-			{ name = "b-supply-anapa-novoro-uh60a", mission = "supply", targetzone = "Novoro" },
-			{ name = "b-supply-anapa-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
-			{ name = "b-supply-anapa-krymsk-uh60a", mission = "supply", targetzone = "Krymsk" },
-			{ name = "b-supply-anapa-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
-			{ name = "b-supply-anapa-convoy-uh60a", mission = "supply", targetzone = "Convoy" },
-			{ name = "b-supply-anapa-oilfields-uh60a", mission = "supply", targetzone = "Oil Fields" },
-			{ name = "b-supply-anapa-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
-			{ name = "b-supply-anapa-cvn74-uh60a", mission = "supply", targetzone = "Carrier Group", type = "carrier_air" },
-		},
-		criticalObjects = {},
-		connections = {
-			"Alpha",
-			"Charlie",
-			"Famer",
-		},
-	},
-
-	novoro = {
-		zoneCommanderProperties = {
-			zone = "Novoro",
-			side = 2,
-			level = 5,
-			upgrades = zoneUpgrades.blueAirfield,
-			crates = cargoAccepts.novoro,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {
-			{ name = "b-attack-novoro-krymsk-a10c2", mission = "attack", targetzone = "Krymsk" },
-
-			{ name = "b-patrol-novoro-krymsk-f15c", mission = "patrol", targetzone = "Krymsk" },
-
-			{ name = "b-supply-novoro-famer-uh60a", mission = "supply", targetzone = "Famer" },
-			{ name = "b-supply-novoro-anapa-uh60a", mission = "supply", targetzone = "Anapa" },
-			{ name = "b-supply-novoro-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
-			{ name = "b-supply-novoro-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
-			{ name = "b-supply-novoro-krymsk-uh60a", mission = "supply", targetzone = "Krymsk" },
-			{ name = "b-supply-novoro-radiotower-uh60a", mission = "supply", targetzone = "Radio Tower" },
-			{ name = "b-supply-novoro-factory-uh60a", mission = "supply", targetzone = "Factory" },
-			{ name = "b-supply-novoro-four-uh60a", mission = "supply", targetzone = "Four" },
-			{ name = "b-supply-novoro-gelend-uh60a", mission = "supply", targetzone = "Gelend" },
-			{ name = "b-supply-novoro-sochi-uh60a", mission = "supply", targetzone = "Sochi" },
-			{ name = "b-supply-novoro-cvn73-uh60a", mission = "supply", targetzone = "Carrier Group", type = "carrier_air" },
-		},
-		criticalObjects = {},
-		connections = {
-			"Famer",
-			"Gelend",
-			"Radio Tower"
-		},
-	},
-
-	gelend = {
-		zoneCommanderProperties = {
-			zone = "Gelend",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.gelend,
-			flavorText = hint,
-			income = 1,
-		},
-		dispatches = {
-			{ name = "r-attack-gelend-anapa-f16c", mission = "attack", targetzone = "Anapa" },
-			{ name = "r-attack-gelend-novoro-jf17", mission = "attack", targetzone = "Novoro" },
-			{ name = "r-attack-gelend-krymsk-su25t", mission = "attack", targetzone = "Krymsk" },
-
-			{ name = "r-patrol-gelend-krymsk-f16c", mission = "patrol", targetzone = "Krymsk" },
-
-			{ name = "r-supply-gelend-novoro-uh60a", mission = "supply", targetzone = "Novoro" },
-			{ name = "r-supply-gelend-famer-uh60a", mission = "supply", targetzone = "Famer" },
-			{ name = "r-supply-gelend-alpha-mi8mtv2", mission = "supply", targetzone = "Alpha" },
-			{ name = "r-supply-gelend-bravo-mi8mtv2", mission = "supply", targetzone = "Bravo" },
-			{ name = "r-supply-gelend-krymsk-mi8mtv2", mission = "supply", targetzone = "Krymsk" },
-			{ name = "r-supply-gelend-radiotower-mi8mtv2", mission = "supply", targetzone = "Radio Tower" },
-			{ name = "r-supply-gelend-factory-mi8mtv2", mission = "supply", targetzone = "Factory" },
-			{ name = "r-supply-gelend-four-uh60a", mission = "supply", targetzone = "Four" },
-			{ name = "r-supply-gelend-apple-uh60a", mission = "supply", targetzone = "Apple" },
-			{ name = "r-supply-gelend-sochi-mi8", mission = "supply", targetzone = "Sochi" },
-
-			{ name = "b-supply-gelend-four-uh60a", mission = "supply", targetzone = "Four" },
-			{ name = "b-supply-gelend-apple-uh60a", mission = "supply", targetzone = "Apple" },
-			{ name = "b-supply-gelend-novoro-uh60a", mission = "supply", targetzone = "Novoro" },
-			{ name = "b-supply-gelend-factory-uh60a", mission = "supply", targetzone = "Factory" },
-			{ name = "b-supply-gelend-radiotower-uh60a", mission = "supply", targetzone = "Radio Tower" },
-			{ name = "b-supply-gelend-sochi-uh60a", mission = "supply", targetzone = "Sochi" },
-		},
-		criticalObjects = {},
-		connections = {
-			"Four",
-			"Factory",
-			"Radio Tower",
-		},
-	},
-
-	krymsk = {
-		zoneCommanderProperties = {
-			zone = "Krymsk",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.krymsk,
-			flavorText = hint,
-			income = 1,
-		},
-		dispatches = {
-			{ name = "r-attack-krymsk-bravo-armor", mission = "attack", targetzone = "Bravo", type = "surface" },
-
-			{ name = "r-attack-krymsk-gelend-a10c2", mission = "attack", targetzone = "Gelend" },
-			{ name = "r-attack-krymsk-anapa-f18c", mission = "attack", targetzone = "Anapa" },
-			{ name = "r-attack-krymsk-novoro-f16c", mission = "attack", targetzone = "Novoro" },
-
-			{ name = "r-patrol-krymsk-krymsk-m2000c", mission = "patrol", targetzone = "Krymsk" },
-			{ name = "r-patrol-krymsk-charlie-f14b", mission = "patrol", targetzone = "Charlie" },
-
-			{ name = "r-supply-krymsk-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
-			{ name = "r-supply-krymsk-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
-			{ name = "r-supply-krymsk-convoy-mi24p", mission = "supply", targetzone = "Convoy" },
-			{ name = "r-supply-krymsk-oilfields-mi24p", mission = "supply", targetzone = "Oil Fields" },
-			{ name = "r-supply-krymsk-radiotower-mi24p", mission = "supply", targetzone = "Radio Tower" },
-
-			{ name = "r-supply-krymsk-famer-uh60a", mission = "supply", targetzone = "Famer" },
-			{ name = "r-supply-krymsk-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
-			{ name = "r-supply-krymsk-samsite-mi8mtv2", mission = "supply", targetzone = "SAM Site" },
-			{ name = "r-supply-krymsk-echo-uh60a", mission = "supply", targetzone = "Echo" },
-			{ name = "r-supply-krymsk-delta-mi8mtv2", mission = "supply", targetzone = "Delta" },
-			{ name = "r-supply-krymsk-factory-mi8mtv2", mission = "supply", targetzone = "Factory" },
-			{ name = "r-supply-krymsk-gelend-mi8mtv2", mission = "supply", targetzone = "Gelend" },
-			{ name = "r-supply-krymsk-ever-mi8", mission = "supply", targetzone = "Ever" },
-			{ name = "r-supply-krymsk-kelas-mi8", mission = "supply", targetzone = "Kelas" },
-
-			{ name = "b-patrol-krymsk-krymsk-m2000c", mission = "patrol", targetzone = "Krymsk" },
-
-			{ name = "b-supply-krymsk-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
-			{ name = "b-supply-krymsk-radiotower-uh60a", mission = "supply", targetzone = "Radio Tower" },
-			{ name = "b-supply-krymsk-delta-uh60a", mission = "supply", targetzone = "Delta" },
-			{ name = "b-supply-krymsk-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
-			{ name = "b-supply-krymsk-factory-uh60a", mission = "supply", targetzone = "Factory" },
-			{ name = "b-supply-krymsk-samsite-uh60a", mission = "supply", targetzone = "SAM Site" },
-			{ name = "b-supply-krymsk-convoy-uh60a", mission = "supply", targetzone = "Convoy" },
-			{ name = "b-supply-krymsk-oilfields-uh60a", mission = "supply", targetzone = "Oil Fields" },
-			{ name = "b-supply-krymsk-echo-uh60a", mission = "supply", targetzone = "Echo" },
-			{ name = "b-supply-krymsk-ever-uh60a", mission = "supply", targetzone = "Ever" },
-			{ name = "b-supply-krymsk-kelas-uh60a", mission = "supply", targetzone = "Kelas" },
-		},
-		criticalObjects = {},
-		connections = {
-			"Delta",
-			"Convoy",
-			"Radio Tower",
-			"Factory",
-			"SAM Site",
-			"Oil Fields",
-		},
-	},
-
-	kelas = {
-		zoneCommanderProperties = {
-			zone = "Kelas",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.kelas,
-			flavorText = hint,
-			income = 3,
-		},
-		dispatches = {
-			{ name = "r-attack-kelas-four-su25t", mission = "attack", targetzone = "Four" },
-			{ name = "r-attack-kelas-foxtrot-ah64d", mission = "attack", targetzone = "Foxtrot" },
-			{ name = "r-attack-kelas-gelend-f18c", mission = "attack", targetzone = "Gelend" },
-			{ name = "r-attack-kelas-factory-su25t", mission = "attack", targetzone = "Factory" },
-			{ name = "r-attack-kelas-radiotower-su25t", mission = "attack", targetzone = "Radio Tower" },
-			{ name = "r-attack-kelas-krymsk-f18c", mission = "attack", targetzone = "Krymsk" },
-			{ name = "r-attack-kelas-delta-a10c2", mission = "attack", targetzone = "Delta" },
-			{ name = "r-attack-kelas-echo-su25t", mission = "attack", targetzone = "Echo" },
-			{ name = "r-attack-kelas-samsite-a10c2", mission = "attack", targetzone = "SAM Site" },
-			{ name = "r-attack-kelas-ever-su25t", mission = "attack", targetzone = "Ever" },
-			{ name = "r-attack-kelas-kras-ah64d", mission = "attack", targetzone = "Kras" },
-			{ name = "r-attack-kelas-apple-su25t", mission = "attack", targetzone = "Apple" },
-
-			{ name = "r-patrol-kelas-krymsk-f16c", mission = "patrol", targetzone = "Krymsk" },
-			{ name = "r-patrol-kelas-apple-f16c", mission = "patrol", targetzone = "Apple" },
-			{ name = "r-patrol-kelas-gelend-f14b", mission = "patrol", targetzone = "Gelend" },
-			{ name = "r-patrol-kelas-kelas-f14b", mission = "patrol", targetzone = "Kelas" },
-
-			{ name = "r-supply-kelas-kras-truck", mission = "supply", targetzone = "Kras", type = "surface" },
-
-			{ name = "r-supply-kelas-four-mi8", mission = "supply", targetzone = "Four" },
-			{ name = "r-supply-kelas-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
-			{ name = "r-supply-kelas-gelend-uh60a", mission = "supply", targetzone = "Gelend" },
-			{ name = "r-supply-kelas-factory-mi8", mission = "supply", targetzone = "Factory" },
-			{ name = "r-supply-kelas-radiotower-uh60a", mission = "supply", targetzone = "Radio Tower" },
-			{ name = "r-supply-kelas-krymsk-mi8", mission = "supply", targetzone = "Krymsk" },
-			{ name = "r-supply-kelas-delta-mi8", mission = "supply", targetzone = "Delta" },
-			{ name = "r-supply-kelas-echo-uh60a", mission = "supply", targetzone = "Echo" },
-			{ name = "r-supply-kelas-samsite-mi8", mission = "supply", targetzone = "SAM Site" },
-			{ name = "r-supply-kelas-ever-mi8", mission = "supply", targetzone = "Ever" },
-			{ name = "r-supply-kelas-kras-uh60a", mission = "supply", targetzone = "Kras" },
-			{ name = "r-supply-kelas-apple-mi8", mission = "supply", targetzone = "Apple" },
-
-			{ name = "b-supply-kelas-four-uh60a", mission = "supply", targetzone = "Four" },
-			{ name = "b-supply-kelas-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
-			{ name = "b-supply-kelas-delta-uh60a", mission = "supply", targetzone = "Delta" },
-			{ name = "b-supply-kelas-echo-uh60a", mission = "supply", targetzone = "Echo" },
-			{ name = "b-supply-kelas-samsite-uh60a", mission = "supply", targetzone = "SAM Site" },
-			{ name = "b-supply-kelas-ever-uh60a", mission = "supply", targetzone = "Ever" },
-			{ name = "b-supply-kelas-kras-uh60a", mission = "supply", targetzone = "Kras" },
-			{ name = "b-supply-kelas-apple-uh60a", mission = "supply", targetzone = "Apple" },
-		},
-		criticalObjects = {},
-		connections = {},
-	},
-
-	kras = {
-		zoneCommanderProperties = {
-			zone = "Kras",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.kras,
-			flavorText = hint,
-			income = 3,
-		},
-		dispatches = {
-			{ name = "r-attack-kras-four-su34", mission = "attack", targetzone = "Four" },
-			{ name = "r-attack-kras-sochi-su34", mission = "attack", targetzone = "Sochi" },
-			{ name = "r-attack-kras-kelas-su34", mission = "attack", targetzone = "Kelas" },
-			{ name = "r-attack-kras-krymsk-su34", mission = "attack", targetzone = "Krymsk" },
-			{ name = "r-attack-kras-samsite-su34", mission = "attack", targetzone = "SAM Site" },
-
-			{ name = "r-attack-kras-kelas-ka50", mission = "attack", targetzone = "Kelas" },
-			{ name = "r-attack-kras-foxtrot-ka50", mission = "attack", targetzone = "Foxtrot" },
-
-			{ name = "r-patrol-kras-kras-su33", mission = "patrol", targetzone = "Kras" },
-			{ name = "r-patrol-kras-gelend-su27", mission = "patrol", targetzone = "Gelend" },
-			{ name = "r-patrol-kras-samsite-mig29s", mission = "patrol", targetzone = "SAM Site" },
-			{ name = "r-patrol-kras-sochi-mig31", mission = "patrol", targetzone = "Sochi" },
-
-			{ name = "r-supply-kras-kelas-truck", mission = "supply", targetzone = "Kelas", type = "surface" },
-
-			{ name = "r-supply-kras-echo-mi8", mission = "supply", targetzone = "Echo" },
-			{ name = "r-supply-kras-foxtrot-mi8", mission = "supply", targetzone = "Foxtrot" },
-			{ name = "r-supply-kras-apple-mi8", mission = "supply", targetzone = "Apple" },
-			{ name = "r-supply-kras-four-mi8", mission = "supply", targetzone = "Four" },
-			{ name = "r-supply-kras-ever-mi8", mission = "supply", targetzone = "Ever" },
-			{ name = "r-supply-kras-kelas-mi8", mission = "supply", targetzone = "Kelas" },
-			{ name = "r-supply-kras-sochi-mi8", mission = "supply", targetzone = "Sochi" },
-		},
-		criticalObjects = {},
-		connections = {
-			"Apple",
-			"Kelas",
-		},
-	},
-
-	alpha = {
-		zoneCommanderProperties = {
-			zone = "Alpha",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Bravo",
-			"Charlie",
-			"Famer",
-			"Novoro",
-			"Radio Tower",
-		},
-	},
-
-	bravo = {
-		zoneCommanderProperties = {
-			zone = "Bravo",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Charlie",
-			"Convoy",
-			"Krymsk",
-			"Radio Tower",
-		},
-	},
-
-	charlie = {
-		zoneCommanderProperties = {
-			zone = "Charlie",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Convoy",
-			"Oil Fields",
-		},
-	},
-
-	delta = {
-		zoneCommanderProperties = {
-			zone = "Delta",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Echo",
-			"SAM Site",
-			"Factory",
-		},
-	},
-
-	echo = {
-		zoneCommanderProperties = {
-			zone = "Echo",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Foxtrot",
-			"Kelas",
-			"SAM Site",
-			"Factory",
-		},
-	},
-
-	foxtrot = {
-		zoneCommanderProperties = {
-			zone = "Foxtrot",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Kelas",
-			"Kras",
-			"Factory",
-			"Four",
-			"Apple",
-		},
-	},
-
-	famer = {
-		zoneCommanderProperties = {
-			zone = "Famer",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {},
-	},
-
-	four = {
-		zoneCommanderProperties = {
-			zone = "Four",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {},
-	},
-
-	ever = {
-		zoneCommanderProperties = {
-			zone = "Ever",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Echo",
-			"Oil Fields",
-			"SAM Site",
-			"Kelas",
-		},
-	},
-
-	apple = {
-		zoneCommanderProperties = {
-			zone = "Apple",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {
-			"Four",
-		},
-	},
-
-	oilfields = {
-		zoneCommanderProperties = {
-			zone = "Oil Fields",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.oilfields,
-			flavorText = hint,
-			income = 1,
-		},
-		dispatches = {
-			{ name = "r-supply-oilfields-krymsk-truck", mission = "supply", targetzone = "Krymsk", type = "surface" },
-		},
-		criticalObjects = {
-			"oilref1",
-			"oilref2",
-		},
-		connections = {
-			"Convoy",
-			"SAM Site",
-		},
-	},
-
-	factory = {
-		zoneCommanderProperties = {
-			zone = "Factory",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.factory,
-			flavorText = hint,
-			income = 1,
-		},
-		dispatches = {
-			{ name = "r-attack-factory-krymsk-armor", mission = "attack", targetzone = "Krymsk", type = "surface" },
-
-			{ name = "r-supply-factory-krymsk-truck", mission = "supply", targetzone = "Krymsk", type = "surface" },
-			{ name = "r-supply-factory-delta-truck", mission = "supply", targetzone = "Delta", type = "surface" },
-			{ name = "r-supply-factory-echo-truck", mission = "supply", targetzone = "Echo", type = "surface" },
-			{ name = "r-supply-factory-foxtrot-truck", mission = "supply", targetzone = "Foxtrot", type = "surface" },
-		},
-		criticalObjects = {
-			"FactoryBuilding1",
-			"FactoryBuilding2",
-		},
-		connections = {
-			"Four",
-			"Radio Tower",
-		},
-	},
-
-	convoy = {
-		zoneCommanderProperties = {
-			zone = "Convoy",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 1,
-		},
-		dispatches = {},
-		criticalObjects = {
-			"convoy1",
-			"convoy2",
-			"convoy3",
-			"convoy4",
-		},
-		connections = {},
-	},
-
-	samsite = {
-		zoneCommanderProperties = {
-			zone = "SAM Site",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.sam,
-			crates = cargoAccepts.samsite,
-			flavorText = hint,
-			income = 1,
-		},
-		dispatches = {
-			{ name = "r-attack-samsite-krymsk-armor", mission = "attack", targetzone = "Krymsk", type = "surface" },
-		},
-		criticalObjects = {
-			"CommandCenter",
-		},
-		connections = {},
-	},
-
-	radiotower = {
-		zoneCommanderProperties = {
-			zone = "Radio Tower",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.armor,
-			crates = cargoAccepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
-		criticalObjects = {
-			"RadioTower",
-		},
-		connections = {},
 	},
 }
 
@@ -784,40 +356,11 @@ InitZones()
 
 -- Resource Point Triggers
 
-zones.convoy.zoneCommander:registerTrigger('lost', function(event, sender)
-	local convoyItems = { 'convoy1', 'convoy2', 'convoy3', 'convoy4' }
+-- local showCredIncrease = function(event, sender)
+-- 	trigger.action.outTextForCoalition(sender.side, sender.zoneCommanderProperties.name .. " 已被我方占领！\n收入增加：" .. math.floor(sender.income * 360) .. " 点数/每小时", 90)
+-- end
 
-	local message = "Convoy liberated"
-	local totalLost = 0
-	for i, v in ipairs(convoyItems) do
-		if not StaticObject.getByName(v) then
-			totalLost = totalLost + 1
-		end
-	end
-
-	if totalLost > 0 then
-		local percentLost = math.ceil((totalLost / #convoyItems) * 100)
-		percentLost = math.min(percentLost, 100)
-		percentLost = math.max(percentLost, 1)
-		message = message .. ' but we lost ' .. percentLost .. '% of the trucks.'
-	else
-		message = message .. '. We recovered all of the supplies.'
-	end
-
-	local creditsEarned = (#convoyItems - totalLost) * 250
-	message = message .. '\n\n+' .. creditsEarned .. ' credits'
-
-	bc:addFunds(2, creditsEarned)
-
-	trigger.action.outTextForCoalition(2, message, 60)
-end, 'convoyLost', 1)
-
-local showCredIncrease = function(event, sender)
-	trigger.action.outTextForCoalition(sender.side, '+' .. math.floor(sender.income * 360) .. ' Credits/Hour', 60)
-end
-
-zones.oilfields.zoneCommander:registerTrigger('captured', showCredIncrease, 'oilfieldcaptured')
-zones.factory.zoneCommander:registerTrigger('captured', showCredIncrease, 'factorycaptured')
+-- zones.gudauta.zoneCommander:registerTrigger('captured', showCredIncrease, 'gudauta-captured')
 
 -- Resource Point Triggers Done
 
@@ -844,7 +387,7 @@ local missionCompleteCheck = function(event, sender)
 	end
 end
 
-missionCompleteCheckSheduler = mist.scheduleFunction(missionCompleteCheck, {}, timer.getTime() + 60, 60)
+missionCompleteCheckSheduler = mist.scheduleFunction(missionCompleteCheck, {}, timer.getTime() + 90, 90)
 
 -- for i,v in ipairs(bc:getZones()) do
 -- 	v:registerTrigger('lost', checkMissionComplete, 'missioncompleted')
