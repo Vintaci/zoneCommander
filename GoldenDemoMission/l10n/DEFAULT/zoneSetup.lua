@@ -35,11 +35,13 @@ end
 local cargoSpawns = { -- This should be the unit name instead of group name
 	["Sochi"] = { "cargo-sochi-ammo-1", "cargo-sochi-crate-1", "cargo-sochi-fuel-1" },
 	["Gudauta"] = { "cargo-gudauta-ammo-1", "cargo-gudauta-crate-1", "cargo-gudauta-fuel-1" },
+	["Sukhumi"] = { "cargo-sukhumi-ammo-1", "cargo-sukhumi-crate-1", "cargo-sukhumi-fuel-1" },
 }
 
 local cargoAccepts = {
 	sochi = allExcept(cargoSpawns, "Sochi"),
 	gudauta = allExcept(cargoSpawns, "Gudauta"),
+	sukhumi = allExcept(cargoSpawns, "Sukhumi"),
 	all = allExcept(cargoSpawns),
 }
 
@@ -49,6 +51,7 @@ local cargoAccepts = {
 
 local farpTrucks = {
 	["Alpha"] = {"farp-trucks-alpha"},
+	["Bravo"] = {"farp-trucks-bravo"},
 }
 
 -- FARP Trucks Done
@@ -102,7 +105,7 @@ local zoneUpgrades = {
 
 -- BattleCommander Initialization
 
-local filepath = 'Caucasus-NW-Saved-Data.lua'
+local filepath = 'Caucasus-S-Saved-Data.lua'
 if lfs then
 	local dir = lfs.writedir()..'Missions/Saves/'
 	lfs.mkdir(dir)
@@ -192,9 +195,7 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-gudauta-alpha-ka50", mission = "attack", targetzone = "Alpha" },
 			{ name = "r-attack-gudauta-alpha-armor", mission = "attack", targetzone = "Alpha", type = "surface" },
-
 			{ name = "r-attack-gudauta-sochi-f16c", mission = "attack", targetzone = "Sochi" },
-			{ name = "r-attack-gudauta-sukhumi-f16c", mission = "attack", targetzone = "Sukhumi" },
 
 			{ name = "r-supply-gudauta-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
 			{ name = "r-supply-gudauta-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
@@ -227,7 +228,6 @@ local zones = {
 		criticalObjects = {},
 		connections = {
 			"Sukhumi",
-			"Radio",
 		},
 	},
 
@@ -242,20 +242,26 @@ local zones = {
 			income = 1,
 		},
 		dispatches = {
-			-- { name = "r-attack-gudauta-sochi-f16c", mission = "attack", targetzone = "Sochi" },
-			-- { name = "r-attack-gudauta-sukhumi-f16c", mission = "attack", targetzone = "Sukhumi" },
+			{ name = "r-attack-sukhumi-gudauta-su25t", mission = "attack", targetzone = "Gudauta" },
+			{ name = "r-attack-sukhumi-sochi-a10c2", mission = "attack", targetzone = "Sochi" },
 
-			-- { name = "r-patrol-gudauta-gudauta-f18c", mission = "patrol", targetzone = "Gudauta" },
+			{ name = "r-patrol-sukhumi-sukhumi-su27", mission = "patrol", targetzone = "Sukhumi" },
+			{ name = "r-patrol-sukhumi-gudauta-f15c", mission = "patrol", targetzone = "Gudauta" },
 
-			-- { name = "b-supply-gudauta-sochi-uh60a", mission = "supply", targetzone = "Gudauta" },
-			-- { name = "b-supply-gudauta-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
-			-- { name = "b-supply-gudauta-barvo-uh60a", mission = "supply", targetzone = "Bravo" },
-			-- { name = "b-supply-gudauta-sukhumi-uh60a", mission = "supply", targetzone = "Sukhumi" },
+			{ name = "r-supply-sukhumi-gudauta-mi24p", mission = "supply", targetzone = "Gudauta" },
+			{ name = "r-supply-sukhumi-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
+			{ name = "r-supply-sukhumi-radio-mi24p", mission = "supply", targetzone = "Radio" },
+			{ name = "r-supply-sukhumi-charlie-mi24p", mission = "supply", targetzone = "Charlie" },
+
+			{ name = "b-supply-sukhumi-gudauta-uh60a", mission = "supply", targetzone = "Gudauta" },
+			{ name = "b-supply-sukhumi-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
+			{ name = "b-supply-sukhumi-radio-uh60a", mission = "supply", targetzone = "Radio" },
+			{ name = "b-supply-sukhumi-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
 		},
 		criticalObjects = {},
 		connections = {
 			"Radio",
-			"Charlie"
+			"Charlie",
 		},
 	},
 
