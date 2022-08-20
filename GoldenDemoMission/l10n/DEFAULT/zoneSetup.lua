@@ -170,7 +170,7 @@ local zones = {
 			zone = "Alpha",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.armor,
+			upgrades = zoneUpgrades.normal,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 0,
@@ -228,6 +228,7 @@ local zones = {
 		criticalObjects = {},
 		connections = {
 			"Sukhumi",
+			"Radio",
 		},
 	},
 
@@ -270,7 +271,7 @@ local zones = {
 			zone = "Radio",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.armor,
+			upgrades = zoneUpgrades.normal,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 0,
@@ -280,7 +281,8 @@ local zones = {
 			"critical-object-radio-1",
 		},
 		connections = {
-			"Charlie"
+			"Charlie",
+			"Delta",
 		},
 	},
 
@@ -289,7 +291,154 @@ local zones = {
 			zone = "Charlie",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.armor,
+			upgrades = zoneUpgrades.normal,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Delta",
+			"Senaki",
+			"Port",
+		},
+	},
+
+	delta = {
+		zoneCommanderProperties = {
+			zone = "Delta",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.normal,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"SAM",
+			"Senaki",
+		},
+	},
+
+	port = {
+		zoneCommanderProperties = {
+			zone = "Port",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.normal,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Senaki",
+			"Kobuleti",
+			"Batumi",
+		},
+	},
+
+	senaki = {
+		zoneCommanderProperties = {
+			zone = "Senaki",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.airfield,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"SAM",
+			"Kutaisi",
+			"Echo",
+			"Kobuleti",
+		},
+	},
+
+	sam = {
+		zoneCommanderProperties = {
+			zone = "SAM",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.sam,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Foxtrot",
+			"Kutaisi",
+		},
+	},
+
+	kobuleti = {
+		zoneCommanderProperties = {
+			zone = "Kobuleti",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.airfield,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Echo",
+			"Batumi",
+		},
+	},
+
+	echo = {
+		zoneCommanderProperties = {
+			zone = "Echo",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.normal,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Kutaisi",
+			"Batumi",
+		},
+	},
+
+	kutaisi = {
+		zoneCommanderProperties = {
+			zone = "Kutaisi",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.airfield,
+			crates = cargoAccepts.all,
+			flavorText = hint,
+			income = 0,
+		},
+		dispatches = {},
+		criticalObjects = {},
+		connections = {
+			"Foxtrot",
+		},
+	},
+
+	foxtrot = {
+		zoneCommanderProperties = {
+			zone = "Foxtrot",
+			side = 1,
+			level = 3,
+			upgrades = zoneUpgrades.normal,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 0,
