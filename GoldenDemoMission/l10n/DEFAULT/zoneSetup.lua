@@ -121,7 +121,7 @@ bc = BattleCommander:new(filepath, 10, 60) -- This MUST be global, as zoneComman
 local zones = {
 	carrier = {
 		zoneCommanderProperties = {
-			zone = "Carrier Group",
+			zone = "Carrier",
 			side = 2, -- 0 = neutral, 1 = red, 2 = blue
 			level = 3,
 			upgrades = zoneUpgrades.blueShip,
@@ -133,7 +133,7 @@ local zones = {
 			{
 				name = "b-patrol-cvn73-cvn73-f18c",
 				mission = "patrol", -- patrol, supply, attack
-				targetzone = "Carrier Group",
+				targetzone = "Carrier",
 				type = "carrier_air" -- air, carrier_air, surface
 			},
 		},
@@ -152,7 +152,7 @@ local zones = {
 			income = 0,
 		},
 		dispatches = {
-			{ name = "b-attack-sochi-gudauta-f16c", mission = "attack", targetzone = "Gudauta" },
+			{ name = "b-attack-sochi-gudauta-av8b", mission = "attack", targetzone = "Gudauta" },
 
 			{ name = "b-patrol-sochi-sochi-f18c", mission = "patrol", targetzone = "Sochi" },
 
@@ -203,6 +203,8 @@ local zones = {
 
 			{ name = "r-patrol-gudauta-gudauta-f18c", mission = "patrol", targetzone = "Gudauta" },
 
+			{ name = "b-attack-gudauta-sukhumi-a10c2", mission = "attack", targetzone = "Sukhumi" },
+
 			{ name = "b-supply-gudauta-sochi-uh60a", mission = "supply", targetzone = "Sochi" },
 			{ name = "b-supply-gudauta-alpha-uh60a", mission = "supply", targetzone = "Alpha" },
 			{ name = "b-supply-gudauta-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
@@ -248,16 +250,28 @@ local zones = {
 
 			{ name = "r-patrol-sukhumi-sukhumi-su27", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-sukhumi-gudauta-f15c", mission = "patrol", targetzone = "Gudauta" },
+			{ name = "r-patrol-sukhumi-senaki-f14b", mission = "patrol", targetzone = "Sukhumi" },
 
 			{ name = "r-supply-sukhumi-gudauta-mi24p", mission = "supply", targetzone = "Gudauta" },
 			{ name = "r-supply-sukhumi-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
 			{ name = "r-supply-sukhumi-radio-mi24p", mission = "supply", targetzone = "Radio" },
 			{ name = "r-supply-sukhumi-charlie-mi24p", mission = "supply", targetzone = "Charlie" },
+			{ name = "r-supply-sukhumi-alpha-mi8", mission = "supply", targetzone = "Alpha" },
+			{ name = "r-supply-sukhumi-delta-mi8", mission = "supply", targetzone = "Delta" },
+			{ name = "r-supply-sukhumi-senaki-mi8", mission = "supply", targetzone = "Senaki" },
+			{ name = "r-supply-sukhumi-port-mi8", mission = "supply", targetzone = "Port" },
+			{ name = "r-supply-sukhumi-batumi-mi8", mission = "supply", targetzone = "Port" },
+
+			{ name = "b-attack-sukhumi-senaki-f16c", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "b-supply-sukhumi-gudauta-uh60a", mission = "supply", targetzone = "Gudauta" },
 			{ name = "b-supply-sukhumi-bravo-uh60a", mission = "supply", targetzone = "Bravo" },
 			{ name = "b-supply-sukhumi-radio-uh60a", mission = "supply", targetzone = "Radio" },
 			{ name = "b-supply-sukhumi-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
+			{ name = "b-supply-sukhumi-delta-uh60a", mission = "supply", targetzone = "Delta" },
+			{ name = "b-supply-sukhumi-senaki-uh60a", mission = "supply", targetzone = "Senaki" },
+			{ name = "b-supply-sukhumi-port-uh60a", mission = "supply", targetzone = "Port" },
+			{ name = "b-supply-sukhumi-batumi-uh60a", mission = "supply", targetzone = "Batumi" },
 		},
 		criticalObjects = {},
 		connections = {
@@ -347,12 +361,39 @@ local zones = {
 			zone = "Senaki",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.airfield,
+			upgrades = zoneUpgrades.airfieldPlus,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 0,
 		},
-		dispatches = {},
+		dispatches = {
+			{ name = "r-attack-senaki-sukhumi-su34", mission = "attack", targetzone = "Sukhumi" },
+
+			{ name = "r-patrol-senaki-kutaisi-j11a", mission = "patrol", targetzone = "Kutaisi" },
+			{ name = "r-patrol-senaki-batumi-f18c", mission = "patrol", targetzone = "Batumi" },
+
+			{ name = "r-supply-senaki-charlie-mi24p", mission = "supply", targetzone = "Charlie" },
+			{ name = "r-supply-senaki-delta-mi24p", mission = "supply", targetzone = "Delta" },
+			{ name = "r-supply-senaki-sam-mi24p", mission = "supply", targetzone = "SAM" },
+			{ name = "r-supply-senaki-kutaisi-mi24p", mission = "supply", targetzone = "Kutaisi" },
+			{ name = "r-supply-senaki-echo-mi24p", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-senaki-kobuleti-mi24p", mission = "supply", targetzone = "Kobuleti" },
+			{ name = "r-supply-senaki-port-mi24p", mission = "supply", targetzone = "Port" },
+			{ name = "r-supply-senaki-sukhumi-mi8", mission = "supply", targetzone = "Sukhumi" },
+			{ name = "r-supply-senaki-radio-mi8", mission = "supply", targetzone = "Radio" },
+			{ name = "r-supply-senaki-foxtrot-mi8", mission = "supply", targetzone = "Foxtrot" },
+
+			{ name = "b-supply-senaki-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
+			{ name = "b-supply-senaki-sukhumi-uh60a", mission = "supply", targetzone = "Sukhumi" },
+			{ name = "b-supply-senaki-radio-uh60a", mission = "supply", targetzone = "Radio" },
+			{ name = "b-supply-senaki-delta-uh60a", mission = "supply", targetzone = "Delta" },
+			{ name = "b-supply-senaki-port-uh60a", mission = "supply", targetzone = "Port" },
+			{ name = "b-supply-senaki-sam-uh60a", mission = "supply", targetzone = "SAM" },
+			{ name = "b-supply-senaki-kutaisi-uh60a", mission = "supply", targetzone = "Kutaisi" },
+			{ name = "b-supply-senaki-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-senaki-kobuleti-uh60a", mission = "supply", targetzone = "Kobuleti" },
+			{ name = "b-supply-senaki-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
+		},
 		criticalObjects = {},
 		connections = {
 			"SAM",
@@ -385,12 +426,14 @@ local zones = {
 			zone = "Kobuleti",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.airfield,
+			upgrades = zoneUpgrades.airfieldPlus,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 0,
 		},
-		dispatches = {},
+		dispatches = {
+			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
+		},
 		criticalObjects = {},
 		connections = {
 			"Echo",
@@ -421,12 +464,34 @@ local zones = {
 			zone = "Kutaisi",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.airfield,
+			upgrades = zoneUpgrades.airfieldPlus,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 0,
 		},
-		dispatches = {},
+		dispatches = {
+			{ name = "r-attack-kutaisi-senaki-ajs37", mission = "attack", targetzone = "Senaki" },
+
+			{ name = "r-patrol-kutaisi-kutaisi-jf17", mission = "patrol", targetzone = "Kutaisi" },
+
+			{ name = "r-supply-kutaisi-foxtrot-mi24p", mission = "supply", targetzone = "Foxtrot" },
+			{ name = "r-supply-kutaisi-echo-mi24p", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-kutaisi-sam-mi24p", mission = "supply", targetzone = "SAM" },
+			{ name = "r-supply-kutaisi-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
+			{ name = "r-supply-kutaisi-batumi-mi8", mission = "supply", targetzone = "Batumi" },
+			{ name = "r-supply-kutaisi-kobuleti-mi8", mission = "supply", targetzone = "Kobuleti" },
+			{ name = "r-supply-kutaisi-port-mi8", mission = "supply", targetzone = "Port" },
+			{ name = "r-supply-kutaisi-delta-mi8", mission = "supply", targetzone = "Delta" },
+
+			{ name = "b-supply-kutaisi-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
+			{ name = "b-supply-kutaisi-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-kutaisi-kobuleti-uh60a", mission = "supply", targetzone = "Kobuleti" },
+			{ name = "b-supply-kutaisi-batumi-uh60a", mission = "supply", targetzone = "Batumi" },
+			{ name = "b-supply-kutaisi-port-uh60a", mission = "supply", targetzone = "Port" },
+			{ name = "b-supply-kutaisi-sam-uh60a", mission = "supply", targetzone = "SAM" },
+			{ name = "b-supply-kutaisi-senaki-uh60a", mission = "supply", targetzone = "Senaki" },
+			{ name = "b-supply-kutaisi-delta-uh60a", mission = "supply", targetzone = "Delta" },
+		},
 		criticalObjects = {},
 		connections = {
 			"Foxtrot",
@@ -1111,9 +1176,9 @@ end
 -- Red Support
 
 local redSupports = {
-	shipAttack = {
+	shipAttackingFromBatumiToCarrier = {
 		name = "r-support-ship-batumi-carrier",
-		description = "Ship Attack",
+		description = "Ship Attacking from Batumi to Blue Carrier",
 		price = 1000,
 		random = 50, -- Any value <= 0 or >= 100 will always spawn all groups
 		groupNames = {
@@ -1126,18 +1191,18 @@ local redSupports = {
 				side = 1,
 			},
 			target = {
-				name = "Carrier Group",
+				name = "Carrier",
 				side = 2,
 			},
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣舰队攻击我方航母！\n起点：巴统\n攻击目标：蓝方航母作战集群",
+			text = "敌军正在派遣舰队攻击我方航母！\n起点：Batumi\n攻击目标：蓝方航母作战集群",
 		},
 	},
-	antishipBatumiToCarrier = {
+	antishipFromBatumiToCarrier = {
 		name = "r-support-antiship-batumi-carrier",
-		description = "Anti-ship Attack from Batumi to Carrier",
+		description = "Anti-Ship Attack from Batumi to Blue Carrier",
 		price = 1000,
 		random = 25,
 		groupNames = {
@@ -1151,37 +1216,37 @@ local redSupports = {
 				side = 1,
 			},
 			target = {
-				name = "Carrier Group",
+				name = "Carrier",
 				side = 2,
 			},
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣机队攻击我方航母！\n起点：巴统\n攻击目标：蓝方航母作战集群",
+			text = "敌军正在派遣机队攻击我方航母！\n起点：Batumi\n攻击目标：蓝方航母作战集群",
 		},
 	},
-	bomberKelasToKrymsk = {
-		name = "r-support-bomber-kelas-krymsk",
-		description = "Bomber Attack from Kelas to Krymsk",
+	bomberFromKutaisiToSenaki = {
+		name = "r-support-bomber-kutaisi-senaki",
+		description = "Bomber Attack from Kutaisi to Senaki",
 		price = 1000,
 		random = 0,
 		groupNames = {
-			"r-support-bomber-kelas-krymsk-tu22m3",
-			"r-support-bomber-kelas-krymsk-f16c",
+			"r-support-bomber-kutaisi-senaki-tu22m3",
+			"r-support-bomber-kutaisi-senaki-f16c",
 		},
 		zones = {
 			base = {
-				name = "Kelas",
+				name = "Kutaisi",
 				side = 1,
 			},
 			target = {
-				name = "Krymsk",
+				name = "Senaki",
 				side = 2,
 			},
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点：克拉斯诺达尔-中心区\n攻击目标：克雷姆斯克",
+			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点：Kutaisi\n攻击目标：Senaki",
 		},
 	},
 }
