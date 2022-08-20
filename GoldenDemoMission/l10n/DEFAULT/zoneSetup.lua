@@ -1282,7 +1282,7 @@ local redSupports = {
 		price = 1000,
 		random = 25,
 		groupNames = {
-			"r-support-antiship-batumi-carrier-tu22m3",
+			"r-support-antiship-batumi-carrier-f18c",
 			"r-support-antiship-batumi-carrier-f16c",
 			"r-support-antiship-batumi-carrier-su34",
 		},
