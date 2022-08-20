@@ -36,12 +36,24 @@ local cargoSpawns = { -- This should be the unit name instead of group name
 	["Sochi"] = { "cargo-sochi-ammo-1", "cargo-sochi-crate-1", "cargo-sochi-fuel-1" },
 	["Gudauta"] = { "cargo-gudauta-ammo-1", "cargo-gudauta-crate-1", "cargo-gudauta-fuel-1" },
 	["Sukhumi"] = { "cargo-sukhumi-ammo-1", "cargo-sukhumi-crate-1", "cargo-sukhumi-fuel-1" },
+	["Port"] = { "cargo-port-ammo-1", "cargo-port-crate-1", "cargo-port-fuel-1" },
+	["Senaki"] = { "cargo-senaki-ammo-1", "cargo-senaki-crate-1", "cargo-senaki-fuel-1" },
+	["Kobuleti"] = { "cargo-kobuleti-ammo-1", "cargo-kobuleti-crate-1", "cargo-kobuleti-fuel-1" },
+	["Oil"] = { "cargo-oil-ammo-1", "cargo-oil-crate-1", "cargo-oil-fuel-1" },
+	["Kutaisi"] = { "cargo-kutaisi-ammo-1", "cargo-kutaisi-crate-1", "cargo-kutaisi-fuel-1" },
+	["Batumi"] = { "cargo-batumi-ammo-1", "cargo-batumi-crate-1", "cargo-batumi-fuel-1" },
 }
 
 local cargoAccepts = {
 	sochi = allExcept(cargoSpawns, "Sochi"),
 	gudauta = allExcept(cargoSpawns, "Gudauta"),
 	sukhumi = allExcept(cargoSpawns, "Sukhumi"),
+	port = allExcept(cargoSpawns, "Port"),
+	senaki = allExcept(cargoSpawns, "Senaki"),
+	kobuleti = allExcept(cargoSpawns, "Kobuleti"),
+	oil = allExcept(cargoSpawns, "Oil"),
+	kutaisi = allExcept(cargoSpawns, "Kutaisi"),
+	batumi = allExcept(cargoSpawns, "Batumi"),
 	all = allExcept(cargoSpawns),
 }
 
@@ -52,6 +64,13 @@ local cargoAccepts = {
 local farpTrucks = {
 	["Alpha"] = {"farp-trucks-alpha"},
 	["Bravo"] = {"farp-trucks-bravo"},
+	["Radio"] = {"farp-trucks-radio"},
+	["Charlie"] = {"farp-trucks-charlie"},
+	["Delta"] = {"farp-trucks-delta"},
+	["Port"] = {"farp-trucks-port"},
+	["SAM"] = {"farp-trucks-sam"},
+	["Oil"] = {"farp-trucks-oil"},
+	["Echo"] = {"farp-trucks-echo"},
 }
 
 -- FARP Trucks Done
@@ -149,7 +168,7 @@ local zones = {
 			upgrades = zoneUpgrades.blueAirfield,
 			crates = cargoAccepts.sochi,
 			flavorText = hint,
-			income = 0,
+			income = 1,
 		},
 		dispatches = {
 			{ name = "b-attack-sochi-gudauta-av8b", mission = "attack", targetzone = "Gudauta" },
@@ -291,10 +310,10 @@ local zones = {
 			zone = "Radio",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.normal,
+			upgrades = zoneUpgrades.airfield,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 1,
 		},
 		dispatches = {},
 		criticalObjects = {
@@ -348,10 +367,10 @@ local zones = {
 			zone = "Port",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.normal,
+			upgrades = zoneUpgrades.airfield,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 1,
 		},
 		dispatches = {
 			{ name = "r-supply-port-charlie-armor", mission = "supply", targetzone = "Charlie", type = "surface" },
@@ -376,14 +395,14 @@ local zones = {
 			upgrades = zoneUpgrades.airfieldPlus,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 3,
 		},
 		dispatches = {
 			{ name = "r-attack-senaki-sukhumi-su34", mission = "attack", targetzone = "Sukhumi" },
 
 			{ name = "r-attack-senaki-delta-ah64d", mission = "attack", targetzone = "Delta" },
 			{ name = "r-attack-senaki-port-ah64d", mission = "attack", targetzone = "Port" },
-			{ name = "r-attack-senaki-echo-ah64d", mission = "attack", targetzone = "Echo" },
+			{ name = "r-attack-senaki-oil-ah64d", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-senaki-charlie-ka50", mission = "attack", targetzone = "Charlie" },
 			{ name = "r-attack-senaki-sam-ka50", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-senaki-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
@@ -395,12 +414,12 @@ local zones = {
 			{ name = "r-supply-senaki-delta-mi24p", mission = "supply", targetzone = "Delta" },
 			{ name = "r-supply-senaki-sam-mi24p", mission = "supply", targetzone = "SAM" },
 			{ name = "r-supply-senaki-kutaisi-mi24p", mission = "supply", targetzone = "Kutaisi" },
-			{ name = "r-supply-senaki-echo-mi24p", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-senaki-oil-mi24p", mission = "supply", targetzone = "Oil" },
 			{ name = "r-supply-senaki-kobuleti-mi24p", mission = "supply", targetzone = "Kobuleti" },
 			{ name = "r-supply-senaki-port-mi24p", mission = "supply", targetzone = "Port" },
 			{ name = "r-supply-senaki-sukhumi-mi8", mission = "supply", targetzone = "Sukhumi" },
 			{ name = "r-supply-senaki-radio-mi8", mission = "supply", targetzone = "Radio" },
-			{ name = "r-supply-senaki-foxtrot-mi8", mission = "supply", targetzone = "Foxtrot" },
+			{ name = "r-supply-senaki-echo-mi8", mission = "supply", targetzone = "Echo" },
 
 			{ name = "r-supply-senaki-port-armor", mission = "supply", targetzone = "Port", type = "surface" },
 
@@ -411,15 +430,15 @@ local zones = {
 			{ name = "b-supply-senaki-port-uh60a", mission = "supply", targetzone = "Port" },
 			{ name = "b-supply-senaki-sam-uh60a", mission = "supply", targetzone = "SAM" },
 			{ name = "b-supply-senaki-kutaisi-uh60a", mission = "supply", targetzone = "Kutaisi" },
-			{ name = "b-supply-senaki-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-senaki-oil-uh60a", mission = "supply", targetzone = "Oil" },
 			{ name = "b-supply-senaki-kobuleti-uh60a", mission = "supply", targetzone = "Kobuleti" },
-			{ name = "b-supply-senaki-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
+			{ name = "b-supply-senaki-echo-uh60a", mission = "supply", targetzone = "Echo" },
 		},
 		criticalObjects = {},
 		connections = {
 			"SAM",
 			"Kutaisi",
-			"Echo",
+			"Oil",
 			"Kobuleti",
 		},
 	},
@@ -432,14 +451,14 @@ local zones = {
 			upgrades = zoneUpgrades.sam,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 1,
 		},
 		dispatches = {},
 		criticalObjects = {
 			"critical-object-sam-1",
 		},
 		connections = {
-			"Foxtrot",
+			"Echo",
 			"Kutaisi",
 		},
 	},
@@ -452,7 +471,7 @@ local zones = {
 			upgrades = zoneUpgrades.airfieldPlus,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 3,
 		},
 		dispatches = {
 			{ name = "r-attack-kobuleti-senaki-f16c", mission = "attack", targetzone = "Senaki" },
@@ -460,7 +479,7 @@ local zones = {
 			{ name = "r-attack-kobuleti-batumi-a10c2", mission = "attack", targetzone = "Batumi" },
 
 			{ name = "r-attack-kobuleti-port-ah64d", mission = "attack", targetzone = "Port" },
-			{ name = "r-attack-kobuleti-echo-ah64d", mission = "attack", targetzone = "Echo" },
+			{ name = "r-attack-kobuleti-oil-ah64d", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-kobuleti-batumi-ka50", mission = "attack", targetzone = "Batumi" },
 			{ name = "r-attack-kobuleti-senaki-ka50", mission = "attack", targetzone = "Senaki" },
 
@@ -468,35 +487,37 @@ local zones = {
 
 			{ name = "r-supply-kobuleti-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
 			{ name = "r-supply-kobuleti-port-mi24p", mission = "supply", targetzone = "Port" },
-			{ name = "r-supply-kobuleti-echo-mi24p", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-kobuleti-oil-mi24p", mission = "supply", targetzone = "Oil" },
 			{ name = "r-supply-kobuleti-kutaisi-mi8", mission = "supply", targetzone = "Kutaisi" },
 
 			{ name = "r-supply-kutaisi-sam-armor", mission = "supply", targetzone = "SAM", type = "surface" },
 
 			{ name = "b-supply-kobuleti-senaki-uh60a", mission = "supply", targetzone = "Senaki" },
 			{ name = "b-supply-kobuleti-port-uh60a", mission = "supply", targetzone = "Port" },
-			{ name = "b-supply-kobuleti-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-kobuleti-oil-uh60a", mission = "supply", targetzone = "Oil" },
 			{ name = "b-supply-kobuleti-kutaisi-uh60a", mission = "supply", targetzone = "Kutaisi" },
 		},
 		criticalObjects = {},
 		connections = {
-			"Echo",
+			"Oil",
 			"Batumi",
 		},
 	},
 
-	echo = {
+	oil = {
 		zoneCommanderProperties = {
-			zone = "Echo",
+			zone = "Oil",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.normal,
+			upgrades = zoneUpgrades.airfield,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 1,
 		},
 		dispatches = {},
-		criticalObjects = {},
+		criticalObjects = {
+			"critical-object-oil-1",
+		},
 		connections = {
 			"Kutaisi",
 			"Batumi",
@@ -511,20 +532,20 @@ local zones = {
 			upgrades = zoneUpgrades.airfieldPlus,
 			crates = cargoAccepts.all,
 			flavorText = hint,
-			income = 0,
+			income = 3,
 		},
 		dispatches = {
 			{ name = "r-attack-kutaisi-senaki-ajs37", mission = "attack", targetzone = "Senaki" },
 			{ name = "r-attack-kutaisi-kobuleti-su25t", mission = "attack", targetzone = "Kobuleti" },
 
-			{ name = "r-attack-kutaisi-echo-ka50", mission = "attack", targetzone = "Echo" },
+			{ name = "r-attack-kutaisi-oil-ka50", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-kutaisi-sam-ka50", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-kutaisi-senaki-ah64d", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kutaisi-kutaisi-jf17", mission = "patrol", targetzone = "Kutaisi" },
 
-			{ name = "r-supply-kutaisi-foxtrot-mi24p", mission = "supply", targetzone = "Foxtrot" },
 			{ name = "r-supply-kutaisi-echo-mi24p", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-kutaisi-oil-mi24p", mission = "supply", targetzone = "Oil" },
 			{ name = "r-supply-kutaisi-sam-mi24p", mission = "supply", targetzone = "SAM" },
 			{ name = "r-supply-kutaisi-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
 			{ name = "r-supply-kutaisi-batumi-mi8", mission = "supply", targetzone = "Batumi" },
@@ -532,8 +553,8 @@ local zones = {
 			{ name = "r-supply-kutaisi-port-mi8", mission = "supply", targetzone = "Port" },
 			{ name = "r-supply-kutaisi-delta-mi8", mission = "supply", targetzone = "Delta" },
 
-			{ name = "b-supply-kutaisi-foxtrot-uh60a", mission = "supply", targetzone = "Foxtrot" },
 			{ name = "b-supply-kutaisi-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-kutaisi-oil-uh60a", mission = "supply", targetzone = "Oil" },
 			{ name = "b-supply-kutaisi-kobuleti-uh60a", mission = "supply", targetzone = "Kobuleti" },
 			{ name = "b-supply-kutaisi-batumi-uh60a", mission = "supply", targetzone = "Batumi" },
 			{ name = "b-supply-kutaisi-port-uh60a", mission = "supply", targetzone = "Port" },
@@ -543,13 +564,13 @@ local zones = {
 		},
 		criticalObjects = {},
 		connections = {
-			"Foxtrot",
+			"Echo",
 		},
 	},
 
-	foxtrot = {
+	echo = {
 		zoneCommanderProperties = {
-			zone = "Foxtrot",
+			zone = "Echo",
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
@@ -582,11 +603,11 @@ local zones = {
 
 			{ name = "r-supply-batumi-kobuleti-mi24p", mission = "supply", targetzone = "Kobuleti" },
 			{ name = "r-supply-batumi-port-mi24p", mission = "supply", targetzone = "Port" },
-			{ name = "r-supply-batumi-echo-mi8", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-batumi-oil-mi8", mission = "supply", targetzone = "Oil" },
 
 			{ name = "b-supply-batumi-kobuleti-uh60a", mission = "supply", targetzone = "Kobuleti" },
 			{ name = "b-supply-batumi-port-uh60a", mission = "supply", targetzone = "Port" },
-			{ name = "b-supply-batumi-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-batumi-oil-uh60a", mission = "supply", targetzone = "Oil" },
 		},
 		criticalObjects = {},
 		connections = {
@@ -1295,8 +1316,8 @@ local redSupports = {
 				side = 1,
 			},
 			target = {
-				name = "Carrier", -- TODO Senaki
-				side = 2, -- TODO 2
+				name = "Senaki",
+				side = 2,
 			},
 		},
 		hint = {
@@ -1342,10 +1363,10 @@ end
 
 InitRedSupports()
 
-bc:addFunds(1, 100000) -- TODO
-BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
+-- bc:addFunds(1, 100000)
+-- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
 
--- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 }):init() -- TODO
+BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 }):init()
 
 -- Red Support Done
 
