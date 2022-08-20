@@ -193,13 +193,15 @@ local zones = {
 			income = 1,
 		},
 		dispatches = {
-			{ name = "r-attack-gudauta-alpha-ka50", mission = "attack", targetzone = "Alpha" },
-			{ name = "r-attack-gudauta-alpha-armor", mission = "attack", targetzone = "Alpha", type = "surface" },
 			{ name = "r-attack-gudauta-sochi-f16c", mission = "attack", targetzone = "Sochi" },
+
+			{ name = "r-attack-gudauta-alpha-ka50", mission = "attack", targetzone = "Alpha" },
 
 			{ name = "r-supply-gudauta-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
 			{ name = "r-supply-gudauta-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
 			{ name = "r-supply-gudauta-sukhumi-mi24p", mission = "supply", targetzone = "Sukhumi" },
+
+			{ name = "r-supply-gudauta-alpha-armor", mission = "supply", targetzone = "Alpha", type = "surface" },
 
 			{ name = "r-patrol-gudauta-gudauta-f18c", mission = "patrol", targetzone = "Gudauta" },
 
@@ -248,9 +250,11 @@ local zones = {
 			{ name = "r-attack-sukhumi-gudauta-su25t", mission = "attack", targetzone = "Gudauta" },
 			{ name = "r-attack-sukhumi-sochi-a10c2", mission = "attack", targetzone = "Sochi" },
 
+			{ name = "r-attack-sukhumi-bravo-ah64d", mission = "attack", targetzone = "Bravo" },
+
 			{ name = "r-patrol-sukhumi-sukhumi-su27", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-sukhumi-gudauta-f15c", mission = "patrol", targetzone = "Gudauta" },
-			{ name = "r-patrol-sukhumi-senaki-f14b", mission = "patrol", targetzone = "Sukhumi" },
+			{ name = "r-patrol-sukhumi-senaki-f14b", mission = "patrol", targetzone = "Senaki" },
 
 			{ name = "r-supply-sukhumi-gudauta-mi24p", mission = "supply", targetzone = "Gudauta" },
 			{ name = "r-supply-sukhumi-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
@@ -260,7 +264,9 @@ local zones = {
 			{ name = "r-supply-sukhumi-delta-mi8", mission = "supply", targetzone = "Delta" },
 			{ name = "r-supply-sukhumi-senaki-mi8", mission = "supply", targetzone = "Senaki" },
 			{ name = "r-supply-sukhumi-port-mi8", mission = "supply", targetzone = "Port" },
-			{ name = "r-supply-sukhumi-batumi-mi8", mission = "supply", targetzone = "Port" },
+			{ name = "r-supply-sukhumi-batumi-mi8", mission = "supply", targetzone = "Batumi" },
+
+			{ name = "r-supply-sukhumi-bravo-armor", mission = "supply", targetzone = "Bravo", type = "surface" },
 
 			{ name = "b-attack-sukhumi-senaki-f16c", mission = "attack", targetzone = "Senaki" },
 
@@ -347,8 +353,14 @@ local zones = {
 			flavorText = hint,
 			income = 0,
 		},
-		dispatches = {},
-		criticalObjects = {},
+		dispatches = {
+			{ name = "r-supply-port-charlie-armor", mission = "supply", targetzone = "Charlie", type = "surface" },
+			{ name = "r-supply-port-senaki-armor", mission = "supply", targetzone = "Senaki", type = "surface" },
+			{ name = "r-supply-port-kobuleti-armor", mission = "supply", targetzone = "Kobuleti", type = "surface" },
+		},
+		criticalObjects = {
+			"critical-object-port-1",
+		},
 		connections = {
 			"Senaki",
 			"Kobuleti",
@@ -369,6 +381,13 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-senaki-sukhumi-su34", mission = "attack", targetzone = "Sukhumi" },
 
+			{ name = "r-attack-senaki-delta-ah64d", mission = "attack", targetzone = "Delta" },
+			{ name = "r-attack-senaki-port-ah64d", mission = "attack", targetzone = "Port" },
+			{ name = "r-attack-senaki-echo-ah64d", mission = "attack", targetzone = "Echo" },
+			{ name = "r-attack-senaki-charlie-ka50", mission = "attack", targetzone = "Charlie" },
+			{ name = "r-attack-senaki-sam-ka50", mission = "attack", targetzone = "SAM" },
+			{ name = "r-attack-senaki-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
+
 			{ name = "r-patrol-senaki-kutaisi-j11a", mission = "patrol", targetzone = "Kutaisi" },
 			{ name = "r-patrol-senaki-batumi-f18c", mission = "patrol", targetzone = "Batumi" },
 
@@ -382,6 +401,8 @@ local zones = {
 			{ name = "r-supply-senaki-sukhumi-mi8", mission = "supply", targetzone = "Sukhumi" },
 			{ name = "r-supply-senaki-radio-mi8", mission = "supply", targetzone = "Radio" },
 			{ name = "r-supply-senaki-foxtrot-mi8", mission = "supply", targetzone = "Foxtrot" },
+
+			{ name = "r-supply-senaki-port-armor", mission = "supply", targetzone = "Port", type = "surface" },
 
 			{ name = "b-supply-senaki-charlie-uh60a", mission = "supply", targetzone = "Charlie" },
 			{ name = "b-supply-senaki-sukhumi-uh60a", mission = "supply", targetzone = "Sukhumi" },
@@ -414,7 +435,9 @@ local zones = {
 			income = 0,
 		},
 		dispatches = {},
-		criticalObjects = {},
+		criticalObjects = {
+			"critical-object-sam-1",
+		},
 		connections = {
 			"Foxtrot",
 			"Kutaisi",
@@ -434,7 +457,12 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-kobuleti-senaki-f16c", mission = "attack", targetzone = "Senaki" },
 			{ name = "r-attack-kobuleti-kutaisi-f18c", mission = "attack", targetzone = "Kutaisi" },
-			{ name = "r-attack-kobuleti-batumi-a10c2", mission = "attack", targetzone = "Kutaisi" },
+			{ name = "r-attack-kobuleti-batumi-a10c2", mission = "attack", targetzone = "Batumi" },
+
+			{ name = "r-attack-kobuleti-port-ah64d", mission = "attack", targetzone = "Port" },
+			{ name = "r-attack-kobuleti-echo-ah64d", mission = "attack", targetzone = "Echo" },
+			{ name = "r-attack-kobuleti-batumi-ka50", mission = "attack", targetzone = "Batumi" },
+			{ name = "r-attack-kobuleti-senaki-ka50", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
 
@@ -442,6 +470,8 @@ local zones = {
 			{ name = "r-supply-kobuleti-port-mi24p", mission = "supply", targetzone = "Port" },
 			{ name = "r-supply-kobuleti-echo-mi24p", mission = "supply", targetzone = "Echo" },
 			{ name = "r-supply-kobuleti-kutaisi-mi8", mission = "supply", targetzone = "Kutaisi" },
+
+			{ name = "r-supply-kutaisi-sam-armor", mission = "supply", targetzone = "SAM", type = "surface" },
 
 			{ name = "b-supply-kobuleti-senaki-uh60a", mission = "supply", targetzone = "Senaki" },
 			{ name = "b-supply-kobuleti-port-uh60a", mission = "supply", targetzone = "Port" },
@@ -486,6 +516,10 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-kutaisi-senaki-ajs37", mission = "attack", targetzone = "Senaki" },
 			{ name = "r-attack-kutaisi-kobuleti-su25t", mission = "attack", targetzone = "Kobuleti" },
+
+			{ name = "r-attack-kutaisi-echo-ka50", mission = "attack", targetzone = "Echo" },
+			{ name = "r-attack-kutaisi-sam-ka50", mission = "attack", targetzone = "SAM" },
+			{ name = "r-attack-kutaisi-senaki-ah64d", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kutaisi-kutaisi-jf17", mission = "patrol", targetzone = "Kutaisi" },
 
@@ -541,6 +575,8 @@ local zones = {
 		},
 		dispatches = {
 			{ name = "r-attack-batumi-kobuleti-su34", mission = "attack", targetzone = "Kobuleti" },
+
+			{ name = "r-attack-batumi-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
 
 			{ name = "r-patrol-batumi-batumi-su33", mission = "patrol", targetzone = "Batumi" },
 
@@ -1259,8 +1295,8 @@ local redSupports = {
 				side = 1,
 			},
 			target = {
-				name = "Senaki",
-				side = 2,
+				name = "Carrier", -- TODO Senaki
+				side = 2, -- TODO 2
 			},
 		},
 		hint = {
@@ -1306,10 +1342,10 @@ end
 
 InitRedSupports()
 
--- bc:addFunds(1, 100000)
--- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
+bc:addFunds(1, 100000) -- TODO
+BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
 
-BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 }):init()
+-- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 }):init() -- TODO
 
 -- Red Support Done
 
