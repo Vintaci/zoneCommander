@@ -432,7 +432,21 @@ local zones = {
 			income = 0,
 		},
 		dispatches = {
+			{ name = "r-attack-kobuleti-senaki-f16c", mission = "attack", targetzone = "Senaki" },
+			{ name = "r-attack-kobuleti-kutaisi-f18c", mission = "attack", targetzone = "Kutaisi" },
+			{ name = "r-attack-kobuleti-batumi-a10c2", mission = "attack", targetzone = "Kutaisi" },
+
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
+
+			{ name = "r-supply-kobuleti-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
+			{ name = "r-supply-kobuleti-port-mi24p", mission = "supply", targetzone = "Port" },
+			{ name = "r-supply-kobuleti-echo-mi24p", mission = "supply", targetzone = "Echo" },
+			{ name = "r-supply-kobuleti-kutaisi-mi8", mission = "supply", targetzone = "Kutaisi" },
+
+			{ name = "b-supply-kobuleti-senaki-uh60a", mission = "supply", targetzone = "Senaki" },
+			{ name = "b-supply-kobuleti-port-uh60a", mission = "supply", targetzone = "Port" },
+			{ name = "b-supply-kobuleti-echo-uh60a", mission = "supply", targetzone = "Echo" },
+			{ name = "b-supply-kobuleti-kutaisi-uh60a", mission = "supply", targetzone = "Kutaisi" },
 		},
 		criticalObjects = {},
 		connections = {
@@ -471,6 +485,7 @@ local zones = {
 		},
 		dispatches = {
 			{ name = "r-attack-kutaisi-senaki-ajs37", mission = "attack", targetzone = "Senaki" },
+			{ name = "r-attack-kutaisi-kobuleti-su25t", mission = "attack", targetzone = "Kobuleti" },
 
 			{ name = "r-patrol-kutaisi-kutaisi-jf17", mission = "patrol", targetzone = "Kutaisi" },
 
@@ -525,13 +540,17 @@ local zones = {
 			income = 3,
 		},
 		dispatches = {
-			{ name = "r-attack-batumi-gelend-su34", mission = "attack", targetzone = "Gelend" }, -- TODO
+			{ name = "r-attack-batumi-kobuleti-su34", mission = "attack", targetzone = "Kobuleti" },
 
 			{ name = "r-patrol-batumi-batumi-su33", mission = "patrol", targetzone = "Batumi" },
 
-			{ name = "r-supply-batumi-apple-mi24p", mission = "supply", targetzone = "Apple" }, -- TODO
-			{ name = "r-supply-batumi-four-mi24p", mission = "supply", targetzone = "Four" }, -- TODO
-			{ name = "r-supply-batumi-gelend-mi24p", mission = "supply", targetzone = "Gelend" }, -- TODO
+			{ name = "r-supply-batumi-kobuleti-mi24p", mission = "supply", targetzone = "Kobuleti" },
+			{ name = "r-supply-batumi-port-mi24p", mission = "supply", targetzone = "Port" },
+			{ name = "r-supply-batumi-echo-mi8", mission = "supply", targetzone = "Echo" },
+
+			{ name = "b-supply-batumi-kobuleti-uh60a", mission = "supply", targetzone = "Kobuleti" },
+			{ name = "b-supply-batumi-port-uh60a", mission = "supply", targetzone = "Port" },
+			{ name = "b-supply-batumi-echo-uh60a", mission = "supply", targetzone = "Echo" },
 		},
 		criticalObjects = {},
 		connections = {
