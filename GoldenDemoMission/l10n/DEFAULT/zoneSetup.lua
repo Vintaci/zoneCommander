@@ -841,42 +841,6 @@ end,
 		end
 	end)
 
-bc:addMonitoredROE('bCruise1')
-local cruiseMissileTargetMenu = nil
-bc:registerShopItem('cruisemsl', '巡航导弹打击', 2500, function(sender)
-	if cruiseMissileTargetMenu then
-		return '请使用 F10 菜单指派攻击目标'
-	end
-
-	local launchAttack = function(target)
-		if cruiseMissileTargetMenu then
-			local err = bc:fireAtZone(target, 'bCruise1', true, 8)
-			if err then
-				return err
-			end
-
-			cruiseMissileTargetMenu = nil
-			trigger.action.outTextForCoalition(2, '正在对' .. target .. '战区进行巡航导弹打击', 60)
-		end
-	end
-
-	cruiseMissileTargetMenu = bc:showTargetZoneMenu(2, '指派巡航导弹打击目标', launchAttack, 1)
-
-	trigger.action.outTextForCoalition(2, '巡航导弹已就绪，请使用 F10 菜单指派攻击目标', 60)
-end,
-	function(sender, params)
-		if params.zone and params.zone.side == 1 then
-			local err = bc:fireAtZone(params.zone.zone, 'bCruise1', true, 8)
-			if err then
-				return err
-			end
-
-			trigger.action.outTextForCoalition(2, '正在对' .. params.zone.zone .. '战区进行巡航导弹打击', 60)
-		else
-			return '仅允许攻击敌方占领区'
-		end
-	end)
-
 local upgradeMenu = nil
 bc:registerShopItem('supplies', '补给友方占领区', 1000, function(sender)
 	if upgradeMenu then
@@ -1182,7 +1146,6 @@ end)
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
 bc:addShopItem(2, 'cas', -1)
-bc:addShopItem(2, 'cruisemsl', -1)
 bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
