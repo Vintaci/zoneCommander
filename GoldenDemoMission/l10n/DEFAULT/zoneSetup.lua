@@ -1503,7 +1503,7 @@ mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
 -- Server Info Hint
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("欢迎来到 [金家寨] <高加索：攻占模式> 服务器！\nQQ群：750508967。\n\n如果您觉得本服务器很好玩，欢迎赞助服务器运营资金！\n收款码可在任务简报页面查询。\n\n本服务器已启用游戏内置的语音功能。\n按下 [ LCtrl + LShift + Tab ] 即可打开语音面板。", 60)
+	trigger.action.outText("欢迎来到 [金家寨] <高加索：攻占模式> 服务器！\nQQ群：750508967；开黑啦语音频道：95367853。\n\n如果您觉得本服务器很好玩，欢迎赞助服务器运营资金！\n收款码可在任务简报页面查询。", 60)
 end, {}, timer.getTime() + 30, 1800)
 
 -- Server Info Hint Done
