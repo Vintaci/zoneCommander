@@ -131,7 +131,14 @@ if lfs then
 	filepath = dir..filepath
 	env.info('Foothold - Save file path: '..filepath)
 end
-local difficulty = { start = 2.5, min = 1.5, max = 5, escalation = 0.1, fade = 0.01, fadeTime = 300, coalition = 1 } -- Difficulty scaling
+
+-- Difficulty scaling
+-- <start> is the base value, all calculation is added onto this
+-- overall minimum <difficultyModifier> = <start> + <min>
+-- overall maximum <difficultyModifier> = <start> + <max>
+-- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
+-- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
+local difficulty = { start = 2.5, min = 0, max = 2.5, escalation = 0.5, fade = 0.01, fadeTime = 180, coalition = 1 }
 bc = BattleCommander:new(filepath, 15, 60, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
