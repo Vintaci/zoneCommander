@@ -131,7 +131,8 @@ if lfs then
 	filepath = dir..filepath
 	env.info('Foothold - Save file path: '..filepath)
 end
-bc = BattleCommander:new(filepath, 10, 60) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
+local difficulty = { start = 2.5, min = 1.5, max = 5, escalation = 0.1, fade = 0.01, fadeTime = 300, coalition = 1 } -- Difficulty scaling
+bc = BattleCommander:new(filepath, 15, 60, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
 
