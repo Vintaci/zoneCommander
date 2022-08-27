@@ -415,6 +415,7 @@ local zones = {
 			{ name = "r-attack-senaki-sam-ka50", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-senaki-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
 
+			{ name = "r-patrol-senaki-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-senaki-kutaisi-j11a", mission = "patrol", targetzone = "Kutaisi" },
 			{ name = "r-patrol-senaki-batumi-f18c", mission = "patrol", targetzone = "Batumi" },
 
