@@ -333,7 +333,29 @@ function Hercules_Cargo.Cargo_SpawnStatic(Cargo_Drop_Position, Cargo_Type_name, 
 		["heading"] = CargoHeading,
 		["dead"] = dead,
 	}
-	coalition.addStaticObject(Cargo_Country, Herc_CargoObject_Spawn)
+	-- Edited, support zone capture, default = coalition.addStaticObject(Cargo_Country, Herc_CargoObject_Spawn)
+	local zn = bc:getZoneOfPoint(Cargo_Drop_Position)
+	local cargoSide = coalition.side
+	if zn.side == 0 then
+		if HercCargoDropSupply.battleCommander.playerRewardsOn then
+			HercCargoDropSupply.battleCommander:addFunds(cargoSide, HercCargoDropSupply.battleCommander.rewards.crate)
+			trigger.action.outTextForCoalition(cargoSide,'Capture +'..HercCargoDropSupply.battleCommander.rewards.crate..' credits',5)
+		end
+		zn:capture(cargoSide)
+	elseif zn.side == cargoSide then
+		if HercCargoDropSupply.battleCommander.playerRewardsOn then
+			if zn:canRecieveSupply() then
+				HercCargoDropSupply.battleCommander:addFunds(cargoSide, HercCargoDropSupply.battleCommander.rewards.crate)
+				trigger.action.outTextForCoalition(cargoSide,'Resupply +'..HercCargoDropSupply.battleCommander.rewards.crate..' credits',5)
+			else
+				local reward = HercCargoDropSupply.battleCommander.rewards.crate * 0.25
+				HercCargoDropSupply.battleCommander:addFunds(cargoSide, reward)
+				trigger.action.outTextForCoalition(cargoSide,'Resupply +'..reward..' credits (-75% due to no demand)',5)
+			end
+		end
+		zn:upgrade()
+	end
+	-- Edited Done
 end
 
 function Hercules_Cargo.Cargo_SpawnObjects(Cargo_Drop_Direction, Cargo_Content_position, Cargo_Type_name, Cargo_over_water, Container_Enclosed, ParatrooperGroupSpawn, offload_cargo, all_cargo_survive_to_the_ground, all_cargo_gets_destroyed, destroy_cargo_dropped_without_parachute, Cargo_Country)
