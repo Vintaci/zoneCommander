@@ -1447,10 +1447,76 @@ mc:init()
 
 -- Mission Generator Done
 
+-- Support C130 cargo drop
+HercCargoDropSupply.init(bc)
+
+HercCargoDropSupply.allowedCargo = {
+	["weapons.bombs.ATGM M1045 HMMWV TOW Air [7183lb]"] = true,
+    ["weapons.bombs.ATGM M1045 HMMWV TOW Skid [7073lb]"] = true,
+    ["weapons.bombs.APC M1043 HMMWV Armament Air [7023lb]"] = true,
+    ["weapons.bombs.APC M1043 HMMWV Armament Skid [6912lb]"] = true,
+    ["weapons.bombs.SAM Avenger M1097 Air [7200lb]"] = true,
+    ["weapons.bombs.SAM Avenger M1097 Skid [7090lb]"] = true,
+    ["weapons.bombs.APC Cobra Air [10912lb]"] = true,
+    ["weapons.bombs.APC Cobra Skid [10802lb]"] = true,
+    ["weapons.bombs.APC M113 Air [21624lb]"] = true,
+    ["weapons.bombs.APC M113 Skid [21494lb]"] = true,
+    ["weapons.bombs.Tanker M978 HEMTT [34000lb]"] = true,
+    ["weapons.bombs.HEMTT TFFT [34400lb]"] = true,
+    ["weapons.bombs.SPG M1128 Stryker MGS [33036lb]"] = true,
+    ["weapons.bombs.AAA Vulcan M163 Air [21666lb]"] = true,
+    ["weapons.bombs.AAA Vulcan M163 Skid [21577lb]"] = true,
+    ["weapons.bombs.APC M1126 Stryker ICV [29542lb]"] = true,
+    ["weapons.bombs.ATGM M1134 Stryker [30337lb]"] = true,
+    ["weapons.bombs.APC LAV-25 Air [22520lb]"] = true,
+    ["weapons.bombs.APC LAV-25 Skid [22514lb]"] = true,
+    ["weapons.bombs.M1025 HMMWV Air [6160lb]"] = true,
+    ["weapons.bombs.M1025 HMMWV Skid [6050lb]"] = true,
+    ["weapons.bombs.IFV M2A2 Bradley [34720lb]"] = true,
+    ["weapons.bombs.IFV MCV-80 [34720lb]"] = true,
+    ["weapons.bombs.IFV BMP-1 [23232lb]"] = true,
+    ["weapons.bombs.IFV BMP-2 [25168lb]"] = true,
+    ["weapons.bombs.IFV BMP-3 [32912lb]"] = true,
+    ["weapons.bombs.ARV BRDM-2 Air [12320lb]"] = true,
+    ["weapons.bombs.ARV BRDM-2 Skid [12210lb]"] = true,
+    ["weapons.bombs.APC BTR-80 Air [23936lb]"] = true,
+    ["weapons.bombs.APC BTR-80 Skid [23826lb]"] = true,
+    ["weapons.bombs.APC BTR-82A Air [24998lb]"] = true,
+    ["weapons.bombs.APC BTR-82A Skid [24888lb]"] = true,
+    ["weapons.bombs.SAM ROLAND ADS [34720lb]"] = true,
+    ["weapons.bombs.SAM ROLAND LN [34720b]"] = true,
+    ["weapons.bombs.SAM SA-13 STRELA [21624lb]"] = true,
+    ["weapons.bombs.AAA ZSU-23-4 Shilka [32912lb]"] = true,
+    ["weapons.bombs.SAM SA-19 Tunguska 2S6 [34720lb]"] = true,
+    ["weapons.bombs.Transport UAZ-469 Air [3747lb]"] = true,
+    ["weapons.bombs.Transport UAZ-469 Skid [3630lb]"] = true,
+    ["weapons.bombs.AAA GEPARD [34720lb]"] = true,
+    ["weapons.bombs.SAM CHAPARRAL Air [21624lb]"] = true,
+    ["weapons.bombs.SAM CHAPARRAL Skid [21516lb]"] = true,
+    ["weapons.bombs.SAM LINEBACKER [34720lb]"] = true,
+    ["weapons.bombs.Transport URAL-375 [14815lb]"] = true,
+    ["weapons.bombs.Transport M818 [16000lb]"] = true,
+    ["weapons.bombs.IFV MARDER [34720lb]"] = true,
+    ["weapons.bombs.Transport Tigr Air [15900lb]"] = true,
+    ["weapons.bombs.Transport Tigr Skid [15730lb]"] = true,
+    ["weapons.bombs.IFV TPZ FUCH [33440lb]"] = true,
+    ["weapons.bombs.IFV BMD-1 Air [18040lb]"] = true,
+    ["weapons.bombs.IFV BMD-1 Skid [17930lb]"] = true,
+    ["weapons.bombs.IFV BTR-D Air [18040lb]"] = true,
+    ["weapons.bombs.IFV BTR-D Skid [17930lb]"] = true,
+    ["weapons.bombs.EWR SBORKA Air [21624lb]"] = true,
+    ["weapons.bombs.EWR SBORKA Skid [21624lb]"] = true,
+    ["weapons.bombs.ART 2S9 NONA Air [19140lb]"] = true,
+    ["weapons.bombs.ART 2S9 NONA Skid [19030lb]"] = true,
+    ["weapons.bombs.ART GVOZDIKA [34720lb]"] = true,
+    ["weapons.bombs.APC MTLB Air [26400lb]"] = true,
+    ["weapons.bombs.APC MTLB Skid [26290lb]"] = true,
+}
+
+-- Support C130 cargo drop Done
+
 -- Spawn Cargo Supplies and FARP Trucks
 -- These are cargos for players' slingload
-
-HercCargoDropSupply.init(bc)
 
 local function respawnStatics()
 	for i, v in pairs(cargoSpawns) do
