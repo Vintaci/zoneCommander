@@ -546,6 +546,7 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-kutaisi-senaki-ajs37", mission = "attack", targetzone = "Senaki" },
 			{ name = "r-attack-kutaisi-kobuleti-su25t", mission = "attack", targetzone = "Kobuleti" },
+			{ name = "r-attack-kutaisi-sam-a10c2", mission = "attack", targetzone = "SAM" },
 
 			{ name = "r-attack-kutaisi-oil-ka50", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-kutaisi-sam-ka50", mission = "attack", targetzone = "SAM" },
