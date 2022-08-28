@@ -138,7 +138,7 @@ end
 -- overall maximum <difficultyModifier> = <start> + <max>
 -- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
 -- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
-local difficulty = { start = 2.5, min = 0, max = 2.5, escalation = 0.5, fade = 0.01, fadeTime = 180, coalition = 1 }
+local difficulty = { start = 1.5, min = 0, max = 8.5, escalation = 0.5, fade = 0.01, fadeTime = 180, coalition = 1 }
 bc = BattleCommander:new(filepath, 15, 60, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
@@ -281,7 +281,6 @@ local zones = {
 
 			{ name = "r-patrol-sukhumi-sukhumi-su27", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-sukhumi-gudauta-f15c", mission = "patrol", targetzone = "Gudauta" },
-			{ name = "r-patrol-sukhumi-senaki-f14b", mission = "patrol", targetzone = "Senaki" },
 
 			{ name = "r-supply-sukhumi-gudauta-mi24p", mission = "supply", targetzone = "Gudauta" },
 			{ name = "r-supply-sukhumi-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
@@ -493,6 +492,7 @@ local zones = {
 			{ name = "r-attack-kobuleti-senaki-ka50", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
+			{ name = "r-patrol-kobuleti-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
 
 			{ name = "r-supply-kobuleti-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
 			{ name = "r-supply-kobuleti-port-mi24p", mission = "supply", targetzone = "Port" },
@@ -545,6 +545,7 @@ local zones = {
 		},
 		dispatches = {
 			{ name = "r-attack-kutaisi-senaki-ajs37", mission = "attack", targetzone = "Senaki" },
+			{ name = "r-attack-kutaisi-port-f16c", mission = "attack", targetzone = "Port" },
 			{ name = "r-attack-kutaisi-kobuleti-su25t", mission = "attack", targetzone = "Kobuleti" },
 			{ name = "r-attack-kutaisi-sam-a10c2", mission = "attack", targetzone = "SAM" },
 
