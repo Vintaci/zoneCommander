@@ -3298,6 +3298,7 @@ do
 				end
 				
 				zn:capture(cargoSide)
+				cargo:destroy() -- Edited, destroy cargo if it is consumed
 			elseif zn.side == cargoSide then
 				if HercCargoDropSupply.battleCommander.playerRewardsOn then
 					if zn:canRecieveSupply() then
@@ -3311,9 +3312,10 @@ do
 				end
 				
 				zn:upgrade()
+				cargo:destroy() -- Edited, destroy cargo if it is consumed
 			end
 			
-			cargo:destroy()
+			-- cargo:destroy() -- Edited, do not destroy cargo if it is not consumed
 		end
 	end
 	
