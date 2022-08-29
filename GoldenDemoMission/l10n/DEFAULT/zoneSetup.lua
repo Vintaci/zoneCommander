@@ -1450,8 +1450,6 @@ mc:init()
 -- Mission Generator Done
 
 -- Support C130 cargo drop
-HercCargoDropSupply.init(bc)
-
 HercCargoDropSupply.allowedCargo = {
     ["weapons.bombs.Ammo AGM-65D*10 [4800lb]"] = true,
     ["weapons.bombs.Ammo AGM-65H*10 [4570lb]"] = true,
@@ -1581,6 +1579,8 @@ HercCargoDropSupply.allowedCargo = {
     ["weapons.bombs.APC BTR-82A Air [24998lb]"] = true,
     ["weapons.bombs.APC BTR-82A Skid [24888lb]"] = true,
 }
+
+HercCargoDropSupply.init(bc)
 
 -- Support C130 cargo drop Done
 
