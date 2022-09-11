@@ -499,8 +499,6 @@ local zones = {
 			{ name = "r-supply-kobuleti-oil-mi24p", mission = "supply", targetzone = "Oil" },
 			{ name = "r-supply-kobuleti-kutaisi-mi8", mission = "supply", targetzone = "Kutaisi" },
 
-			{ name = "r-supply-kutaisi-sam-armor", mission = "supply", targetzone = "SAM", type = "surface" },
-
 			{ name = "b-supply-kobuleti-senaki-uh60a", mission = "supply", targetzone = "Senaki" },
 			{ name = "b-supply-kobuleti-port-uh60a", mission = "supply", targetzone = "Port" },
 			{ name = "b-supply-kobuleti-oil-uh60a", mission = "supply", targetzone = "Oil" },
@@ -563,6 +561,8 @@ local zones = {
 			{ name = "r-supply-kutaisi-kobuleti-mi8", mission = "supply", targetzone = "Kobuleti" },
 			{ name = "r-supply-kutaisi-port-mi8", mission = "supply", targetzone = "Port" },
 			{ name = "r-supply-kutaisi-delta-mi8", mission = "supply", targetzone = "Delta" },
+
+			{ name = "r-supply-kutaisi-sam-armor", mission = "supply", targetzone = "SAM", type = "surface" },
 
 			{ name = "b-supply-kutaisi-echo-uh60a", mission = "supply", targetzone = "Echo" },
 			{ name = "b-supply-kutaisi-oil-uh60a", mission = "supply", targetzone = "Oil" },
