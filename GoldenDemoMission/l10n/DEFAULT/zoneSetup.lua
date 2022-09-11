@@ -139,7 +139,7 @@ end
 -- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
 -- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
 local difficulty = { start = 1.5, min = 0, max = 8.5, escalation = 1, fade = 0.01, fadeTime = 180, coalition = 1 }
-bc = BattleCommander:new(filepath, 15, 60, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
+bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
 
@@ -717,7 +717,7 @@ mist.scheduleFunction(function(event, sender) -- Restart
 	bc:update()
 	bc:saveToDisk()
 	trigger.action.setUserFlag("TriggerFlagScheduledRestart", true)
-end, {}, timer.getTime() + restartTime)
+end, {}, timer.getTime() + restartTime + 15) -- Wait 15 more seconds to avoid conflict with scheduled auto save
 
 -- Scheduled Restart Done
 
