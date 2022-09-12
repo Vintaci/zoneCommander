@@ -3351,7 +3351,7 @@ do
 	function HercCargoDropSupply.ProcessCargo(shotevent)
 		local cargo = shotevent.weapon
 		local zn = HercCargoDropSupply.battleCommander:getZoneOfWeapon(cargo)
-		if zn and zn.active and shotevent.initiator then -- Edited, fix crash issue, default = zn and zn.active
+		if zn and zn.active and shotevent.initiator then
 			local herc = HercCargoDropSupply.herculesRegistry[shotevent.initiator:getName()]
 			if not herc or herc.takeoffzone == zn.zone then
 				cargo:destroy()
