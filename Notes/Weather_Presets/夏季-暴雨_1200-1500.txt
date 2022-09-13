@@ -1,0 +1,68 @@
+    ["start_time"] = 43200,
+
+    ["date"] = 
+    {
+        ["Year"] = 2022,
+        ["Day"] = 22,
+        ["Month"] = 6,
+    }, -- end of ["date"]
+
+    ["weather"] = 
+    {
+        ["name_ru"] = "Лето. Буря",
+        ["wind"] = 
+        {
+            ["at8000"] = 
+            {
+                ["speed"] = 17,
+                ["dir"] = 313,
+            }, -- end of ["at8000"]
+            ["atGround"] = 
+            {
+                ["speed"] = 19,
+                ["dir"] = 330,
+            }, -- end of ["atGround"]
+            ["at2000"] = 
+            {
+                ["speed"] = 32,
+                ["dir"] = 41,
+            }, -- end of ["at2000"]
+        }, -- end of ["wind"]
+        ["enable_fog"] = false,
+        ["season"] = 
+        {
+            ["temperature"] = 27,
+        }, -- end of ["season"]
+        ["qnh"] = 720,
+        ["cyclones"] = 
+        {
+        }, -- end of ["cyclones"]
+        ["name_de"] = "Sommer, starkes Gewitter",
+        ["dust_density"] = 0,
+        ["enable_dust"] = false,
+        ["clouds"] = 
+        {
+            ["thickness"] = 2000,
+            ["density"] = 10,
+            ["base"] = 3300,
+            ["iprecptns"] = 2,
+        }, -- end of ["clouds"]
+        ["atmosphere_type"] = 0,
+        ["groundTurbulence"] = 60,
+        ["name_fr"] = "Eté, forts orages",
+        ["type_weather"] = 0,
+        ["modifiedTime"] = true,
+        ["name"] = "Summer. Heavy thunderstorm",
+        ["fog"] = 
+        {
+            ["thickness"] = 0,
+            ["density"] = 0,
+            ["visibility"] = 0,
+        }, -- end of ["fog"]
+        ["name_cn"] = "夏季 强雷雨",
+        ["visibility"] = 
+        {
+            ["distance"] = 80000,
+        }, -- end of ["visibility"]
+        ["name_es"] = "Verano. Tormenta severa",
+    }, -- end of ["weather"]

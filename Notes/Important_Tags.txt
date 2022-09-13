@@ -1,0 +1,9 @@
+任务起始时间：
+["start_time"] = 从 0000 到任务起始时间的秒数。
+夹在 ["currentKey"] 和 ["forcedOptions"] 字段之间。
+
+天气：
+["weather"]
+
+日期：
+["date"]
