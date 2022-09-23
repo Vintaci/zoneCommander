@@ -1397,55 +1397,55 @@ bc:startRewardPlayerContribution(15, { infantry = 5, ground = 15, sam = 25, airp
 
 -- Mission Generator
 
-local mc = MissionCommander:new({side = 2, battleCommander = bc, checkFrequency = 60})
+-- local mc = MissionCommander:new({side = 2, battleCommander = bc, checkFrequency = 60})
 
-local captureTarget = nil
-mc:trackMission({
-	title = function() return "Capture "..captureTarget end,
-	description = function() return captureTarget.." is neutral. Capture it by delivering supplies" end,
-	messageStart = function() return "New mission: Capture "..captureTarget end,
-	messageEnd = function() return "Mission ended: Capture "..captureTarget end,
-	startAction = function() end,
-	endAction = function()
-		captureTarget = nil
-	end,
-	isActive = function()
-		if not captureTarget then
-			return false
-		end
-		local targetzn = bc:getZoneByName(captureTarget)
-		return targetzn.side == 0 and targetzn.active
-	end
-})
+-- local captureTarget = nil
+-- mc:trackMission({
+-- 	title = function() return "Capture "..captureTarget end,
+-- 	description = function() return captureTarget.." is neutral. Capture it by delivering supplies" end,
+-- 	messageStart = function() return "New mission: Capture "..captureTarget end,
+-- 	messageEnd = function() return "Mission ended: Capture "..captureTarget end,
+-- 	startAction = function() end,
+-- 	endAction = function()
+-- 		captureTarget = nil
+-- 	end,
+-- 	isActive = function()
+-- 		if not captureTarget then
+-- 			return false
+-- 		end
+-- 		local targetzn = bc:getZoneByName(captureTarget)
+-- 		return targetzn.side == 0 and targetzn.active
+-- 	end
+-- })
 
-local function generateCaptureMission()
-	if captureTarget ~= nil then return end
+-- local function generateCaptureMission()
+-- 	if captureTarget ~= nil then return end
 		
-	local validzones = {}
-	for _,v in ipairs(bc.zones) do
-		if v.side == 0 and v.active then
-			table.insert(validzones, v.zone)
-		end
-	end
+-- 	local validzones = {}
+-- 	for _,v in ipairs(bc.zones) do
+-- 		if v.side == 0 and v.active then
+-- 			table.insert(validzones, v.zone)
+-- 		end
+-- 	end
 	
-	if #validzones == 0 then return end
+-- 	if #validzones == 0 then return end
 	
-	local choice = math.random(1, #validzones)
-	if validzones[choice] then
-		captureTarget = validzones[choice]
-		return true
-	end
-end
+-- 	local choice = math.random(1, #validzones)
+-- 	if validzones[choice] then
+-- 		captureTarget = validzones[choice]
+-- 		return true
+-- 	end
+-- end
 
-timer.scheduleFunction(function(_, time)
-	if generateCaptureMission() then
-		return time+300
-	else
-		return time+120
-	end
-end, {}, timer.getTime() + 20)
+-- timer.scheduleFunction(function(_, time)
+-- 	if generateCaptureMission() then
+-- 		return time+300
+-- 	else
+-- 		return time+120
+-- 	end
+-- end, {}, timer.getTime() + 20)
 
-mc:init()
+-- mc:init()
 
 -- Mission Generator Done
 
@@ -1503,7 +1503,7 @@ local function respawnStatics()
 	end
 end
 
-mist.scheduleFunction(respawnStatics, {}, timer.getTime() + 1, 30)
+mist.scheduleFunction(respawnStatics, {}, timer.getTime(), 180)
 
 -- Spawn Cargo Supplies and FARP Trucks Done
 
