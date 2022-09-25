@@ -71,6 +71,7 @@ local farpTrucks = {
 	["SAM"] = {"farp-trucks-sam"},
 	["Oil"] = {"farp-trucks-oil"},
 	["Echo"] = {"farp-trucks-echo"},
+	["Sukhumi"] = {"farp-trucks-sukhumi"},
 }
 
 -- FARP Trucks Done
