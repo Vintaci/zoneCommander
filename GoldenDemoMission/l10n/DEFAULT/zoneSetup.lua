@@ -81,37 +81,30 @@ local farpTrucks = {
 local zoneUpgrades = {
 	normal = {
 		blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2" },
-		red = { "rInfantry", "rArmor", "rSamIR", "rSam", "rSam2" }
+		red = { "r-defense-mobile", "r-defense-armor", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium" }
 	},
 	sam = {
 		blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
-		red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
-	},
-	infantry = {
-		blue = { "bInfantry", "bInfantry", "bArmor", "bArmor", "bSamIR" },
-		red = { "rInfantry", "rInfantry", "rArmor", "rArmor", "rSamIR" }
-	},
-	armor = {
-		blue = { "bArmor", "bArmor", "bSamIR", "bSamIR", "bSamIR" },
-		red = { "rArmor", "rArmor", "rSamIR", "rSamIR", "rSamIR" }
+		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far", "r-defense-sam-radar-ultra" }
 	},
 	airfield = {
 		blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig" },
-		red = { "rArmor", "rSamIR", "rSam", "rSam2", "rSamBig" }
+		red = { "r-defense-armor", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	airfieldPlus = {
 		blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
-		red = { "rSamIR", "rSam", "rSam2", "rSamBig", "rSamFinal" }
+		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far", "r-defense-sam-radar-far" }
 	},
-	airfieldPlusPlus = {
+	airfieldUltra = {
 		blue = { "bSamBig", "bSamFinal", "bSam3", "bSam3", "bSam3" },
-		red = { "rSamBig", "rSamFinal", "rSam3", "rSam3", "rSam3" }
+		red = { "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far", "r-defense-sam-radar-ultra", "r-defense-sam-radar-ultra" }
 	},
 	blueAirfield = {
 		blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSam3" },
 		red = {}
 	},
-	blueShip = { -- For zones on sea, their "upgrades" MUST ONLY have one side
+	-- For zones on sea, their "upgrades" MUST ONLY have one side
+	blueShip = {
 		blue = { "bShip", "bShip", "bShip" },
 		red = {}
 	},
@@ -601,7 +594,7 @@ local zones = {
 			zone = "Batumi",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.airfieldPlusPlus,
+			upgrades = zoneUpgrades.airfieldUltra,
 			crates = cargoAccepts.all,
 			flavorText = hint,
 			income = 3,
