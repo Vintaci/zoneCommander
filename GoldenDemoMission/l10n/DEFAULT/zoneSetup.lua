@@ -81,23 +81,23 @@ local farpTrucks = {
 local zoneUpgrades = {
 	normal = {
 		blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2" },
-		red = { "r-defense-mobile", "r-defense-armor", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium" }
+		red = { "r-defense-motor", "r-defense-mech", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium" }
 	},
 	sam = {
 		blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
-		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far", "r-defense-sam-radar-ultra" }
+		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	airfield = {
 		blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig" },
-		red = { "r-defense-armor", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
+		red = { "r-defense-mech", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium" }
 	},
 	airfieldPlus = {
 		blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
-		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far", "r-defense-sam-radar-far" }
+		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium" }
 	},
 	airfieldUltra = {
 		blue = { "bSamBig", "bSamFinal", "bSam3", "bSam3", "bSam3" },
-		red = { "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far", "r-defense-sam-radar-ultra", "r-defense-sam-radar-ultra" }
+		red = { "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	blueAirfield = {
 		blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSam3" },
