@@ -698,7 +698,7 @@ missionCompleteCheckSheduler = mist.scheduleFunction(missionCompleteCheck, {}, t
 
 -- Scheduled Restart
 
-local restartTime = 10800 -- 3 hours
+local restartTime = 14400 -- 4 hours
 local restartHintTime = { 60, 180, 300, 900 }
 
 for key, value in pairs(restartHintTime) do -- Restart hint
