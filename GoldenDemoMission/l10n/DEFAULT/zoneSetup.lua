@@ -1497,7 +1497,7 @@ local function respawnStatics()
 	end
 end
 
-mist.scheduleFunction(respawnStatics, {}, timer.getTime(), 180)
+mist.scheduleFunction(respawnStatics, {}, timer.getTime(), 90)
 
 -- Spawn Cargo Supplies and FARP Trucks Done
 
