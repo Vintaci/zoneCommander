@@ -1389,90 +1389,44 @@ bc:startRewardPlayerContribution(15, { infantry = 5, ground = 15, sam = 25, airp
 
 -- BattleCommander Initialization Done
 
--- Mission Generator
-
--- local mc = MissionCommander:new({side = 2, battleCommander = bc, checkFrequency = 60})
-
--- local captureTarget = nil
--- mc:trackMission({
--- 	title = function() return "Capture "..captureTarget end,
--- 	description = function() return captureTarget.." is neutral. Capture it by delivering supplies" end,
--- 	messageStart = function() return "New mission: Capture "..captureTarget end,
--- 	messageEnd = function() return "Mission ended: Capture "..captureTarget end,
--- 	startAction = function() end,
--- 	endAction = function()
--- 		captureTarget = nil
--- 	end,
--- 	isActive = function()
--- 		if not captureTarget then
--- 			return false
--- 		end
--- 		local targetzn = bc:getZoneByName(captureTarget)
--- 		return targetzn.side == 0 and targetzn.active
--- 	end
--- })
-
--- local function generateCaptureMission()
--- 	if captureTarget ~= nil then return end
-		
--- 	local validzones = {}
--- 	for _,v in ipairs(bc.zones) do
--- 		if v.side == 0 and v.active then
--- 			table.insert(validzones, v.zone)
--- 		end
--- 	end
-	
--- 	if #validzones == 0 then return end
-	
--- 	local choice = math.random(1, #validzones)
--- 	if validzones[choice] then
--- 		captureTarget = validzones[choice]
--- 		return true
--- 	end
--- end
-
--- timer.scheduleFunction(function(_, time)
--- 	if generateCaptureMission() then
--- 		return time+300
--- 	else
--- 		return time+120
--- 	end
--- end, {}, timer.getTime() + 20)
-
--- mc:init()
-
--- Mission Generator Done
-
 -- Support C130 cargo drop
 
 HercCargoDropSupply.init(bc)
 
 -- Support C130 cargo drop Done
 
--- Spawn Cargo Supplies and FARP Trucks
--- These are cargos for players' slingload
+-- Spawn Cargo Supplies
+-- These cargos are for player helicopters' slingload
 
-local function respawnStatics()
-	for i, v in pairs(cargoSpawns) do
-		local farp = bc:getZoneByName(i)
-		if farp then
-			if farp.side == 2 then
-				for ix, vx in ipairs(v) do
-					if not StaticObject.getByName(vx) then
-						mist.respawnGroup(vx)
-					end
-				end
-			else
-				for ix, vx in ipairs(v) do
-					local cr = StaticObject.getByName(vx)
-					if cr then
-						cr:destroy()
-					end
-				end
-			end
-		end
-	end
+-- local function spawnCargos()
+-- 	for i, v in pairs(cargoSpawns) do
+-- 		local farp = bc:getZoneByName(i)
+-- 		if farp then
+-- 			if farp.side == 2 then
+-- 				for ix, vx in ipairs(v) do
+-- 					if not StaticObject.getByName(vx) then
+-- 						mist.respawnGroup(vx)
+-- 					end
+-- 				end
+-- 			else
+-- 				for ix, vx in ipairs(v) do
+-- 					local cr = StaticObject.getByName(vx)
+-- 					if cr then
+-- 						cr:destroy()
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
 
+-- mist.scheduleFunction(spawnCargos, {}, timer.getTime() + 90, 90)
+
+-- Spawn Cargo Supplies Done
+
+-- Spawn FARP Trucks
+
+local function spawnFarpTrucks()
 	for i,v in pairs(farpTrucks) do
 		local farp = bc:getZoneByName(i)
 		if farp then
@@ -1497,14 +1451,18 @@ local function respawnStatics()
 	end
 end
 
-mist.scheduleFunction(respawnStatics, {}, timer.getTime(), 90)
+mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 90, 90)
 
 -- Spawn Cargo Supplies and FARP Trucks Done
 
 -- Server Info Hint
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("欢迎来到 [#1金家寨] <高加索：攻占模式> 服务器！\n\nQQ群：750508967\nKOOK(开黑啦)语音频道：95367853\n\n服务器的运营离不开庞大的资金支持。如果您觉得本服务器很好玩，欢迎加入QQ群并赞助本服务器！\n\n \n===== 服务器募捐公告 =====\n\n由于近期玩家数量暴增，目前的服务器硬件无法承载超过25名玩家同时在线，超过此人数将会出现物体漂移和各类卡顿现象。\n老金现在急需资金用于更新服务器硬件，全部资金将用于更换单核性能更强的CPU和频率更高的内存。\n请注意，捐助本服务器不会为您带来任何意义上的特权，请理性捐赠，量力而行，谢谢！\n", 60)
+	trigger.action.outText("欢迎来到 [#1金家寨] <高加索：攻占模式> 服务器！\n\nQQ群：750508967\nKOOK(开黑啦)语音频道：95367853\n\n服务器的运营离不开庞大的资金支持。如果您觉得本服务器很好玩，欢迎加入QQ群并赞助本服务器！\n", 60)
 end, {}, timer.getTime() + 30, 1800)
+
+mist.scheduleFunction(function(event, sender)
+	trigger.action.outText("===== 服务器募捐公告 =====\n\n由于近期玩家数量暴增，目前的服务器硬件无法承载超过25名玩家同时在线，超过此人数将会出现物体漂移和各类卡顿现象。\n老金现在急需资金用于更新服务器硬件，全部资金将用于更换单核性能更强的CPU和频率更高的内存。\n请注意，捐助本服务器不会为您带来任何意义上的特权，请理性捐赠，量力而行，谢谢！\n", 60)
+end, {}, timer.getTime() + 45, 1800)
 
 -- Server Info Hint Done
