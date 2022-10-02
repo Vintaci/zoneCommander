@@ -79,15 +79,15 @@ options =
     }, -- end of ["VR"]
     ["graphics"] = 
     {
-        ["messagesFontScale"] = 1.25,
+        ["messagesFontScale"] = 1.5,
         ["forestDetailsFactor"] = 1,
         ["rainDroplets"] = true,
-        ["LensEffects"] = 0,
-        ["box_mouse_cursor"] = true,
-        ["anisotropy"] = 2,
+        ["LensEffects"] = 1,
+        ["box_mouse_cursor"] = false,
+        ["anisotropy"] = 4,
         ["water"] = 2,
         ["motionBlur"] = 0,
-        ["visibRange"] = "Medium",
+        ["visibRange"] = "Extreme",
         ["aspect"] = 2.3888888888889,
         ["lights"] = 2,
         ["shadows"] = 4,
@@ -100,19 +100,19 @@ options =
         ["multiMonitorSetup"] = "1camera",
         ["shadowTree"] = false,
         ["chimneySmokeDensity"] = 10,
-        ["fullScreen"] = false,
+        ["fullScreen"] = true,
         ["DOF"] = 0,
         ["clouds"] = 3,
         ["sceneryDetailsFactor"] = 1,
         ["textures"] = 2,
         ["useDeferredShading"] = 1,
         ["outputGamma"] = 2.2,
-        ["flatTerrainShadows"] = 2,
+        ["flatTerrainShadows"] = 0,
         ["width"] = 3440,
-        ["SSLR"] = 0,
+        ["SSLR"] = 1,
         ["secondaryShadows"] = 0,
-        ["SSAO"] = 0,
-        ["heatBlr"] = 0,
+        ["SSAO"] = 1,
+        ["heatBlr"] = 2,
         ["sync"] = false,
         ["preloadRadius"] = 150000,
         ["effects"] = 3,
@@ -124,7 +124,7 @@ options =
     {
         ["Su-25T"] = 
         {
-            ["CPLocalList"] = "default",
+            ["CPLocalList"] = "English",
         }, -- end of ["Su-25T"]
         ["CaptoGlove"] = 
         {
@@ -157,7 +157,7 @@ options =
         ["FC3"] = 
         {
             ["CPLocalList_Su-25"] = "default",
-            ["CPLocalList_Su-27"] = "default",
+            ["CPLocalList_Su-27"] = "chinese",
             ["CPLocalList_A-10A"] = "default",
             ["CPLocalList_Su-33"] = "default",
             ["CPLocalList_MiG-29S"] = "default",
@@ -200,6 +200,15 @@ options =
             ["oldRadar"] = false,
             ["wheelBrakeAssist"] = false,
         }, -- end of ["A-4E-C"]
+        ["AV8BNA"] = 
+        {
+            ["INS_Alignment"] = 2,
+            ["INS_GYROHasNAV"] = true,
+            ["USE_MPCD_EXPORT"] = false,
+            ["CPLocalList"] = "default",
+            ["USE_REAL_TDC"] = true,
+            ["MPCD_EXPORT"] = false,
+        }, -- end of ["AV8BNA"]
         ["LeapMotion"] = 
         {
             ["handUseThrottle"] = false,
@@ -240,7 +249,7 @@ options =
     ["format"] = 1,
     ["sound"] = 
     {
-        ["main_output"] = "{0.0.0.00000000}.{ca440381-9c23-4b6b-a176-749544dc3c09}",
+        ["main_output"] = "",
         ["FakeAfterburner"] = true,
         ["volume"] = 50,
         ["headphones_on_external_views"] = true,
