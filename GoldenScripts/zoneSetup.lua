@@ -1420,7 +1420,7 @@ HercCargoDropSupply.init(bc)
 -- 	end
 -- end
 
--- mist.scheduleFunction(spawnCargos, {}, timer.getTime() + 90, 90)
+-- mist.scheduleFunction(spawnCargos, {}, timer.getTime(), 180)
 
 -- Spawn Cargo Supplies Done
 
@@ -1451,7 +1451,7 @@ local function spawnFarpTrucks()
 	end
 end
 
-mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 90, 90)
+mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime(), 90)
 
 -- Spawn Cargo Supplies and FARP Trucks Done
 
