@@ -79,15 +79,15 @@ options =
     }, -- end of ["VR"]
     ["graphics"] = 
     {
-        ["messagesFontScale"] = 1.5,
+        ["messagesFontScale"] = 1.25,
         ["forestDetailsFactor"] = 1,
         ["rainDroplets"] = true,
-        ["LensEffects"] = 1,
-        ["box_mouse_cursor"] = false,
-        ["anisotropy"] = 4,
+        ["LensEffects"] = 0,
+        ["box_mouse_cursor"] = true,
+        ["anisotropy"] = 2,
         ["water"] = 2,
         ["motionBlur"] = 0,
-        ["visibRange"] = "Extreme",
+        ["visibRange"] = "Medium",
         ["aspect"] = 2.3888888888889,
         ["lights"] = 2,
         ["shadows"] = 4,
@@ -107,17 +107,17 @@ options =
         ["textures"] = 2,
         ["useDeferredShading"] = 1,
         ["outputGamma"] = 2.2,
-        ["flatTerrainShadows"] = 0,
+        ["flatTerrainShadows"] = 2,
         ["width"] = 3440,
-        ["SSLR"] = 1,
+        ["SSLR"] = 0,
         ["secondaryShadows"] = 0,
-        ["SSAO"] = 1,
-        ["heatBlr"] = 2,
+        ["SSAO"] = 0,
+        ["heatBlr"] = 0,
         ["sync"] = false,
         ["preloadRadius"] = 150000,
         ["effects"] = 3,
         ["scaleGui"] = 1,
-        ["clutterMaxDistance"] = 1500,
+        ["clutterMaxDistance"] = 0,
         ["height"] = 1440,
     }, -- end of ["graphics"]
     ["plugins"] = 
@@ -170,24 +170,26 @@ options =
         {
             ["abDetent"] = 0,
             ["canopyReflections"] = 0,
-            ["hmdEye"] = 1,
+            ["hmdEye"] = 2,
             ["CPLocalList"] = "chinese",
             ["F18RealisticTDC"] = false,
             ["mfdReflections"] = 0,
         }, -- end of ["F/A-18C"]
         ["RedK0d Clickable"] = 
         {
-            ["Su33_enabled"] = true,
+            ["F15c_enabled"] = true,
             ["J11a_enabled"] = true,
             ["Su25t_enabled"] = true,
             ["Mig29a_enabled"] = true,
+            ["F15c_extended"] = 0,
             ["Mig29g_enabled"] = true,
             ["dontuseit"] = false,
-            ["Su27_enabled"] = true,
+            ["Su33_enabled"] = true,
+            ["Version"] = 0,
             ["Su25_enabled"] = true,
             ["useit"] = true,
             ["A10a_enabled"] = true,
-            ["F15c_enabled"] = true,
+            ["Su27_enabled"] = true,
             ["Mig29s_enabled"] = true,
         }, -- end of ["RedK0d Clickable"]
         ["A-4E-C"] = 
@@ -207,6 +209,11 @@ options =
             ["pointerUseType"] = 0,
             ["handUseStick"] = false,
         }, -- end of ["LeapMotion"]
+        ["UH-60L"] = 
+        {
+            ["aimingMarkRemove"] = false,
+            ["pedalTrimOption"] = false,
+        }, -- end of ["UH-60L"]
         ["VRFree"] = 
         {
             ["handUseThrottle"] = false,
@@ -221,20 +228,19 @@ options =
             ["CPLocalList"] = "default",
             ["autoRudder"] = false,
         }, -- end of ["TF-51D"]
-        ["UH-60L"] = 
-        {
-            ["aimingMarkRemove"] = false,
-            ["pedalTrimOption"] = false,
-        }, -- end of ["UH-60L"]
         ["Hercules"] = 
         {
             ["NWS_Coupled_Separate_Input_Device"] = false,
         }, -- end of ["Hercules"]
+        ["UH1M"] = 
+        {
+            ["UNSPRUNG_CYCLIC"] = false,
+        }, -- end of ["UH1M"]
     }, -- end of ["plugins"]
     ["format"] = 1,
     ["sound"] = 
     {
-        ["main_output"] = "",
+        ["main_output"] = "{0.0.0.00000000}.{ca440381-9c23-4b6b-a176-749544dc3c09}",
         ["FakeAfterburner"] = true,
         ["volume"] = 50,
         ["headphones_on_external_views"] = true,
