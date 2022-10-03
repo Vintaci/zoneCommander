@@ -1426,6 +1426,10 @@ HercCargoDropSupply.init(bc)
 
 -- Spawn FARP Trucks
 
+for i, v in pairs(farpTrucks) do
+	GroupFunctions:destroyGroupsByNames(v)
+end
+
 local function spawnFarpTrucks()
 	for i,v in pairs(farpTrucks) do
 		local farp = bc:getZoneByName(i)
@@ -1451,7 +1455,7 @@ local function spawnFarpTrucks()
 	end
 end
 
-mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime(), 90)
+mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 
 -- Spawn Cargo Supplies and FARP Trucks Done
 
