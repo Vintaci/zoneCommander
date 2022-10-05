@@ -7,76 +7,37 @@ local mist = mist
 local lfs = lfs
 local timer = timer
 local trigger = trigger
+local env = env
+local file = file
 
-local hint = "You need to capture all the zones to win the battle."
+-- BattleCommander Initialization
 
--- Cargo
+local filepath = 'Caucasus-S-Saved-Data.lua'
+if lfs then
+	local dir = lfs.writedir()..'Missions/Saves/'
+	lfs.mkdir(dir)
+	filepath = dir..filepath
+	env.info('Foothold - Save file path: '..filepath)
 
-local function merge(tbls)
-	local res = {}
-	for i, v in ipairs(tbls) do
-		for i2, v2 in ipairs(v) do
-			table.insert(res, v2)
-		end
+	if (file.exists(filepath)) then
+		file.copy(filepath, filepath..".bak")
 	end
-	return res
 end
 
-local function allExcept(tbls, except)
-	local tomerge = {}
-	for i, v in pairs(tbls) do
-		if i ~= except then
-			table.insert(tomerge, v)
-		end
-	end
-	return merge(tomerge)
-end
+-- Difficulty scaling
+-- <start> is the base value, all calculation is added onto this
+-- overall minimum <difficultyModifier> = <start> + <min>
+-- overall maximum <difficultyModifier> = <start> + <max>
+-- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
+-- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
+local difficulty = { start = 1, min = 0, max = 7, escalation = 0.75, fade = 0.01, fadeTime = 90, coalition = 1 }
+bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
-local cargoSpawns = { -- This should be the unit name instead of group name
-	["Sochi"] = { "cargo-sochi-ammo-1", "cargo-sochi-crate-1", "cargo-sochi-fuel-1" },
-	["Gudauta"] = { "cargo-gudauta-ammo-1", "cargo-gudauta-crate-1", "cargo-gudauta-fuel-1" },
-	["Sukhumi"] = { "cargo-sukhumi-ammo-1", "cargo-sukhumi-crate-1", "cargo-sukhumi-fuel-1" },
-	["Port"] = { "cargo-port-ammo-1", "cargo-port-crate-1", "cargo-port-fuel-1" },
-	["Senaki"] = { "cargo-senaki-ammo-1", "cargo-senaki-crate-1", "cargo-senaki-fuel-1" },
-	["Kobuleti"] = { "cargo-kobuleti-ammo-1", "cargo-kobuleti-crate-1", "cargo-kobuleti-fuel-1" },
-	["Oil"] = { "cargo-oil-ammo-1", "cargo-oil-crate-1", "cargo-oil-fuel-1" },
-	["Kutaisi"] = { "cargo-kutaisi-ammo-1", "cargo-kutaisi-crate-1", "cargo-kutaisi-fuel-1" },
-	["Batumi"] = { "cargo-batumi-ammo-1", "cargo-batumi-crate-1", "cargo-batumi-fuel-1" },
-}
+-- BattleCommander Initialization Done
 
-local cargoAccepts = {
-	sochi = allExcept(cargoSpawns, "Sochi"),
-	gudauta = allExcept(cargoSpawns, "Gudauta"),
-	sukhumi = allExcept(cargoSpawns, "Sukhumi"),
-	port = allExcept(cargoSpawns, "Port"),
-	senaki = allExcept(cargoSpawns, "Senaki"),
-	kobuleti = allExcept(cargoSpawns, "Kobuleti"),
-	oil = allExcept(cargoSpawns, "Oil"),
-	kutaisi = allExcept(cargoSpawns, "Kutaisi"),
-	batumi = allExcept(cargoSpawns, "Batumi"),
-	all = allExcept(cargoSpawns),
-}
+-- Zone Definition
 
--- Cargo Done
-
--- FARP Trucks
-
-local farpTrucks = {
-	["Alpha"] = {"farp-trucks-alpha"},
-	["Bravo"] = {"farp-trucks-bravo"},
-	["Radio"] = {"farp-trucks-radio"},
-	["Charlie"] = {"farp-trucks-charlie"},
-	["Delta"] = {"farp-trucks-delta"},
-	["Port"] = {"farp-trucks-port"},
-	["SAM"] = {"farp-trucks-sam"},
-	["Oil"] = {"farp-trucks-oil"},
-	["Echo"] = {"farp-trucks-echo"},
-	["Sukhumi"] = {"farp-trucks-sukhumi"},
-}
-
--- FARP Trucks Done
-
--- Zone Upgrades
+local hint = "任务目标：占领所有区域！"
 
 local zoneUpgrades = {
 	normal = {
@@ -114,31 +75,6 @@ local zoneUpgrades = {
 	},
 }
 
--- Zone Upgrades Done
-
--- BattleCommander Initialization
-
-local filepath = 'Caucasus-S-Saved-Data.lua'
-if lfs then
-	local dir = lfs.writedir()..'Missions/Saves/'
-	lfs.mkdir(dir)
-	filepath = dir..filepath
-	env.info('Foothold - Save file path: '..filepath)
-end
-
--- Difficulty scaling
--- <start> is the base value, all calculation is added onto this
--- overall minimum <difficultyModifier> = <start> + <min>
--- overall maximum <difficultyModifier> = <start> + <max>
--- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
--- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
-local difficulty = { start = 1, min = 1, max = 5, escalation = 0.5, fade = 0.01, fadeTime = 90, coalition = 1 }
-bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
-
--- BattleCommander Initialization Done
-
--- Zone Definition
-
 local zones = {
 	carrier = {
 		zoneCommanderProperties = {
@@ -146,7 +82,7 @@ local zones = {
 			side = 2, -- 0 = neutral, 1 = red, 2 = blue
 			level = 3,
 			upgrades = zoneUpgrades.blueShip,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 0,
 		},
@@ -168,7 +104,7 @@ local zones = {
 			side = 2,
 			level = 5,
 			upgrades = zoneUpgrades.blueAirfield,
-			crates = cargoAccepts.sochi,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -192,7 +128,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 0,
 		},
@@ -209,7 +145,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.gudauta,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -245,7 +181,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 0,
 		},
@@ -263,7 +199,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.sukhumi,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -312,7 +248,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -332,7 +268,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 0,
 		},
@@ -351,7 +287,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 0,
 		},
@@ -369,7 +305,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -394,7 +330,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 3,
 		},
@@ -451,7 +387,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.sam,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -471,7 +407,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 3,
 		},
@@ -511,7 +447,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 1,
 		},
@@ -531,7 +467,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 3,
 		},
@@ -579,7 +515,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 0,
 		},
@@ -595,7 +531,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldUltra,
-			crates = cargoAccepts.all,
+			crates = {},
 			flavorText = hint,
 			income = 3,
 		},
@@ -717,8 +653,6 @@ mist.scheduleFunction(function(event, sender)
 end, {}, timer.getTime() + restartTime - 15)
 
 mist.scheduleFunction(function(event, sender) -- Restart
-	bc:update()
-	bc:saveToDisk()
 	trigger.action.setUserFlag("TriggerFlagScheduledRestart", true)
 end, {}, timer.getTime() + restartTime)
 
@@ -1404,36 +1338,20 @@ HercCargoDropSupply.init(bc)
 
 -- Support C130 cargo drop Done
 
--- Spawn Cargo Supplies
--- These cargos are for player helicopters' slingload
-
--- local function spawnCargos()
--- 	for i, v in pairs(cargoSpawns) do
--- 		local farp = bc:getZoneByName(i)
--- 		if farp then
--- 			if farp.side == 2 then
--- 				for ix, vx in ipairs(v) do
--- 					if not StaticObject.getByName(vx) then
--- 						mist.respawnGroup(vx)
--- 					end
--- 				end
--- 			else
--- 				for ix, vx in ipairs(v) do
--- 					local cr = StaticObject.getByName(vx)
--- 					if cr then
--- 						cr:destroy()
--- 					end
--- 				end
--- 			end
--- 		end
--- 	end
--- end
-
--- mist.scheduleFunction(spawnCargos, {}, timer.getTime(), 180)
-
--- Spawn Cargo Supplies Done
-
 -- Spawn FARP Trucks
+
+local farpTrucks = {
+	["Alpha"] = {"farp-trucks-alpha"},
+	["Bravo"] = {"farp-trucks-bravo"},
+	["Radio"] = {"farp-trucks-radio"},
+	["Charlie"] = {"farp-trucks-charlie"},
+	["Delta"] = {"farp-trucks-delta"},
+	["Port"] = {"farp-trucks-port"},
+	["SAM"] = {"farp-trucks-sam"},
+	["Oil"] = {"farp-trucks-oil"},
+	["Echo"] = {"farp-trucks-echo"},
+	["Sukhumi"] = {"farp-trucks-sukhumi"},
+}
 
 for i, v in pairs(farpTrucks) do
 	GroupFunctions:destroyGroupsByNames(v)

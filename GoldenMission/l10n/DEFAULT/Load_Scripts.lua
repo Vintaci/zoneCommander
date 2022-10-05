@@ -2,6 +2,7 @@ local script_path = "C:/Users/GoldJohnKing/Saved Games/DCS.openbeta/Missions/Scr
 
 local script_list =
 {
+    "file_lib.lua",
     "mist_4_5_107.lua",
     "zoneCommander.lua",
     "zoneSetup.lua",
