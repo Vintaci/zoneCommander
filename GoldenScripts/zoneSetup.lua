@@ -1389,11 +1389,15 @@ mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 -- Server Info Hint
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("欢迎来到 [#1金家寨] <高加索：攻占模式> 服务器！\n\nQQ群：750508967\nKOOK(开黑啦)语音频道：95367853\n\n服务器的运营离不开庞大的资金支持。如果您觉得本服务器很好玩，欢迎加入QQ群并赞助本服务器！\n", 60)
+	trigger.action.outText("欢迎来到 [#1金家寨] <高加索：攻占模式> 服务器！\n\nQQ群：750508967\nKOOK(开黑啦)语音频道：95367853\n", 60)
 end, {}, timer.getTime() + 30, 1800)
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("===== 服务器募捐公告 =====\n\n由于近期玩家数量暴增，目前的服务器硬件无法承载超过25名玩家同时在线，超过此人数将会出现物体漂移和各类卡顿现象。\n老金现在急需资金用于更新服务器硬件，全部资金将用于更换单核性能更强的CPU和频率更高的内存。\n请注意，捐助本服务器不会为您带来任何意义上的特权，请理性捐赠，量力而行，谢谢！\n", 60)
-end, {}, timer.getTime() + 45, 1800)
+	trigger.action.outText("===== 服务器公告 =====\n\n本服务器以大规模PVE作战为主要玩法，服务端的运算压力显著高于其他轻量化的PVE或PVP玩法。\n经实际测试，本服务器无法承载超过24名玩家同时在线，否则极易发生崩溃。\n暂不确定这是DCS引擎本身的缺陷，还是硬件性能不足导致的。\n", 60)
+end, {}, timer.getTime() + 35, 1800)
+
+mist.scheduleFunction(function(event, sender)
+	trigger.action.outText("服务器的日常运营和硬件更新都离不开庞大的资金支持。如果您觉得本服务器很好玩，欢迎进行赞助！\n请注意，捐助本服务器不会为您带来任何意义上的特权，请理性捐赠，量力而行，谢谢！\n", 60)
+end, {}, timer.getTime() + 40, 1800)
 
 -- Server Info Hint Done
