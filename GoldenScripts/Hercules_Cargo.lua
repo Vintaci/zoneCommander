@@ -277,6 +277,7 @@ function Hercules_Cargo.Soldier_SpawnGroup(Cargo_Drop_Position, Cargo_Type_name,
 		["start_time"] = 0,
 	}
 	coalition.addGroup(Cargo_Country, Group.Category.GROUND, Herc_Soldier_Spawn)
+	timer.scheduleFunction(MoveToNearEn, "Soldier_Group_"..SoldierGroupID, timer.getTime() + 90) -- Edited, Add auto attack script
 end
 
 local CargoUnitID = 10000
@@ -320,6 +321,7 @@ function Hercules_Cargo.Cargo_SpawnGroup(Cargo_Drop_Position, Cargo_Type_name, C
 		["start_time"] = 0,
 	}
 	coalition.addGroup(Cargo_Country, Group.Category.GROUND, Herc_Cargo_Spawn)
+	timer.scheduleFunction(MoveToNearEn, "Cargo Group "..CargoUnitID, timer.getTime() + 90) -- Edited, Add auto attack script
 end
 
 function Hercules_Cargo.Cargo_SpawnStatic(Cargo_Drop_Position, Cargo_Type_name, CargoHeading, dead, Cargo_Country)
@@ -571,6 +573,50 @@ function Hercules_Cargo.Hercules_Cargo_Drop_Events:onEvent(Cargo_Drop_Event)
 	end
 end
 world.addEventHandler(Hercules_Cargo.Hercules_Cargo_Drop_Events)
+
+-- Edited, Add auto attack script
+
+function MoveToNearEn(GroupName1)
+    local nearestDistance = 25000
+    local nearestGroupName = nil
+    local GroupsCoal = ((Group.getByName(GroupName1):getCoalition() == 1 and 2) or 1)
+    local EnemyGroups = coalition.getGroups(GroupsCoal, Group.Category.GROUND)
+    if #EnemyGroups > 0 then
+        for i = 1, #EnemyGroups do
+            ActualGrDist = mist.utils.get2DDist(mist.getLeadPos(GroupName1), mist.getLeadPos(EnemyGroups[i]))
+            if ActualGrDist <= nearestDistance then
+                nearestDistance = ActualGrDist
+                nearestGroupName = EnemyGroups[i]:getName()
+            end
+        end
+    end
+    if nearestGroupName ~= nil and mist.groupIsDead(nearestGroupName) == false then
+        Point1 = mist.getLeadPos(GroupName1)
+        Point2 = mist.getLeadPos(nearestGroupName)
+        EnemyLead = Group.getByName(nearestGroupName):getUnit(1)
+        local path = {}
+        path[#path + 1] = mist.ground.buildWP(Point1, 'Rank', 15)
+        path[#path + 1] = mist.ground.buildWP(Point2, 'Rank', 15)
+        mist.goRoute(GroupName1, path)
+        mist.scheduleFunction(EnemyLeadDead, { EnemyLead, GroupName1, nearestGroupName }, timer.getTime() + 180)
+    end
+end
+
+function EnemyLeadDead(EnemyLead, GroupName1, nearestGroupName)
+    if EnemyLead:isExist() == true and mist.groupIsDead(GroupName1) == false then
+        Point1 = mist.getLeadPos(GroupName1)
+        Point2 = mist.getLeadPos(nearestGroupName)
+        local path = {}
+        path[#path + 1] = mist.ground.buildWP(Point1, 'Rank', 15)
+        path[#path + 1] = mist.ground.buildWP(Point2, 'Rank', 15)
+        mist.goRoute(GroupName1, path)
+        mist.scheduleFunction(EnemyLeadDead, { EnemyLead, GroupName1, nearestGroupName }, timer.getTime() + 180)
+    elseif EnemyLead:isExist() == false and mist.groupIsDead(GroupName1) == false then
+        MoveToNearEn(GroupName1)
+    end
+end
+
+-- Edited, Add auto attack script Done
 
 -- trigger.action.outTextForCoalition(coalition.side.BLUE, string.format("Cargo_Drop_Event.weapon: %s", Weapon.getDesc(Cargo_Drop_Event.weapon).typeName), 10)
 -- trigger.action.outTextForCoalition(coalition.side.BLUE, tostring('Calculate_Object_Height_AGL: ' .. aaaaa), 10)
