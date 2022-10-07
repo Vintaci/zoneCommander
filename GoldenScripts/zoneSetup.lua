@@ -39,29 +39,35 @@ bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, a
 
 local hint = "任务目标：占领所有区域！"
 
+local blueUpgrades =
+{
+	normal = { "bInfantry", "bArmor", "bSamIR", "bSamIR", "bSam" },
+	airfield = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2" },
+}
+
 local zoneUpgrades = {
 	normal = {
-		blue = { "bInfantry", "bArmor", "bSamIR", "bSam", "bSam2" },
+		blue = blueUpgrades.normal,
 		red = { "r-defense-motor", "r-defense-mech", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium" }
 	},
 	sam = {
-		blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
+		blue = blueUpgrades.normal,
 		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	airfield = {
-		blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSamBig" },
+		blue = blueUpgrades.airfield,
 		red = { "r-defense-mech", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium" }
 	},
 	airfieldPlus = {
-		blue = { "bSamIR", "bSam", "bSam2", "bSamBig", "bSamFinal" },
+		blue = blueUpgrades.airfield,
 		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium" }
 	},
 	airfieldUltra = {
-		blue = { "bSamBig", "bSamFinal", "bSam3", "bSam3", "bSam3" },
+		blue = blueUpgrades.airfield,
 		red = { "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	blueAirfield = {
-		blue = { "bArmor", "bSamIR", "bSam", "bSam2", "bSam3" },
+		blue = blueUpgrades.airfield,
 		red = {}
 	},
 	-- For zones on sea, their "upgrades" MUST ONLY have one side
