@@ -30,7 +30,7 @@ end
 -- overall maximum <difficultyModifier> = <start> + <max>
 -- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
 -- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
-local difficulty = { start = 1, min = 0, max = 7, escalation = 0.75, fade = 0.01, fadeTime = 90, coalition = 1 }
+local difficulty = { start = 1, min = 0, max = 7, escalation = 0.75, fade = 0.01, fadeTime = 60, coalition = 1 }
 bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
@@ -1110,7 +1110,8 @@ bc:addShopItem(2, 'ca-airdef', -1)
 
 -- Blue Support Done
 
--- Group Functions, used by red supports
+-- Group Functions
+
 local GroupFunctions = {}
 
 function GroupFunctions:getGroupsByNames(names)
@@ -1393,7 +1394,7 @@ mist.scheduleFunction(function(event, sender)
 end, {}, timer.getTime() + 30, 1800)
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("===== 服务器公告 =====\n\n本服务器以大规模PVE作战为主要玩法，服务端的运算压力显著高于其他轻量化的PVE或PVP玩法。\n经实际测试，本服务器无法承载超过24名玩家同时在线，否则极易发生崩溃。\n暂不确定这是DCS引擎本身的缺陷，还是硬件性能不足导致的。\n", 60)
+	trigger.action.outText("===== 服务器公告 =====\n\n本服务器以大规模PVE作战为主要玩法，服务端的运算压力显著高于其他轻量化的PVE或PVP玩法。\n经实际测试，本服务器无法承载超过24名玩家同时在线，否则极易发生崩溃。暂不确定这是DCS引擎本身的缺陷，还是硬件性能不足导致的。", 60)
 end, {}, timer.getTime() + 35, 1800)
 
 mist.scheduleFunction(function(event, sender)
