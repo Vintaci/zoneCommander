@@ -1121,7 +1121,7 @@ bc:addShopItem(2, 'ca-airdef', -1)
 
 local GroupFunctions = {}
 
-function GroupFunctions:getGroupsByNames(names)
+function GroupFunctions.getGroupsByNames(names)
 	local groups = {}
 	for key, value in pairs(names) do
 		table.insert(groups, Group.getByName(value))
@@ -1129,29 +1129,29 @@ function GroupFunctions:getGroupsByNames(names)
 	return groups
 end
 
-function GroupFunctions:destroyGroup(group)
+function GroupFunctions.destroyGroup(group)
 	if (group ~= nil) then
 		group:destroy()
 	end
 end
 
-function GroupFunctions:destroyGroups(groups)
+function GroupFunctions.destroyGroups(groups)
 	for key, value in pairs(groups) do
-		GroupFunctions:destroyGroup(value)
+		GroupFunctions.destroyGroup(value)
 	end
 end
 
-function GroupFunctions:destroyGroupsByNames(names)
-	GroupFunctions:destroyGroups(GroupFunctions:getGroupsByNames(names))
+function GroupFunctions.destroyGroupsByNames(names)
+	GroupFunctions.destroyGroups(GroupFunctions.getGroupsByNames(names))
 end
 
-function GroupFunctions:respawnGroupsByNames(names, task)
+function GroupFunctions.respawnGroupsByNames(names, task)
 	for key, value in pairs(names) do
 		mist.respawnGroup(value, task)
 	end
 end
 
-function GroupFunctions:areGroupsActive(groups)
+function GroupFunctions.areGroupsActive(groups)
 	local active = false
 	for key, value in pairs(groups) do
 		active = active or value ~= nil and value:getSize() > 0 and value:getController():hasTask()
@@ -1159,12 +1159,12 @@ function GroupFunctions:areGroupsActive(groups)
 	return active
 end
 
-function GroupFunctions:areGroupsActiveByNames(names)
+function GroupFunctions.areGroupsActiveByNames(names)
 	-- Each time a group is respawned, it is a NEW group, so it MUST be done during runtime
-	return GroupFunctions:areGroupsActive(GroupFunctions:getGroupsByNames(names))
+	return GroupFunctions.areGroupsActive(GroupFunctions.getGroupsByNames(names))
 end
 
-function GroupFunctions:zoneMatch(zoneMatchList)
+function GroupFunctions.zoneMatch(zoneMatchList)
 	local zoneMatch = true
 	for key, value in pairs(zoneMatchList) do
 		zoneMatch = zoneMatch and bc:getZoneByName(value.name).side == value.side
@@ -1172,7 +1172,7 @@ function GroupFunctions:zoneMatch(zoneMatchList)
 	return zoneMatch
 end
 
-function GroupFunctions:isGroupDead(group)
+function GroupFunctions.isGroupDead(group)
     if group ~= nil and (group:getSize() > 0 or group:isExist() == true) then
         return false
 	else
@@ -1180,8 +1180,8 @@ function GroupFunctions:isGroupDead(group)
 	end
 end
 
-function GroupFunctions:isGroupDeadByName(name)
-    return GroupFunctions:isGroupDead(Group.getByName(name))
+function GroupFunctions.isGroupDeadByName(name)
+    return GroupFunctions.isGroupDead(Group.getByName(name))
 end
 
 -- Group Functions Done
@@ -1265,12 +1265,12 @@ local redSupports = {
 }
 
 local function NewRedSupport(support)
-	GroupFunctions:destroyGroupsByNames(support.groupNames)
+	GroupFunctions.destroyGroupsByNames(support.groupNames)
 	bc:registerShopItem(support.name, support.description, support.price, function(sender)
-		if not GroupFunctions:zoneMatch(support.zones) then
+		if not GroupFunctions.zoneMatch(support.zones) then
 			return "zones mismatch"
 		end
-		if GroupFunctions:areGroupsActiveByNames(support.groupNames) then
+		if GroupFunctions.areGroupsActiveByNames(support.groupNames) then
 			return "groups still active"
 		end
 		local selectedGroupNames = {}
@@ -1286,7 +1286,7 @@ local function NewRedSupport(support)
 		else
 			selectedGroupNames = support.groupNames
 		end
-		GroupFunctions:respawnGroupsByNames(selectedGroupNames)
+		GroupFunctions.respawnGroupsByNames(selectedGroupNames)
 		trigger.action.outTextForCoalition(support.hint.side, support.hint.text, 60)
 	end)
 	bc:addShopItem(1, support.name, -1)
@@ -1316,13 +1316,13 @@ local redCarrierPatrols = {
 	["r-cvn74"] = "r-patrol-rcvn74-rcvn74-f14b",
 }
 
-GroupFunctions:destroyGroupsByNames(redCarrierPatrols)
+GroupFunctions.destroyGroupsByNames(redCarrierPatrols)
 
 local redCarrierAirGroupSpawn = function(event, sender)
 	for key, value in pairs(redCarrierPatrols) do
-		if not GroupFunctions:isGroupDeadByName(key) then -- Make sure the carrier is alive
+		if not GroupFunctions.isGroupDeadByName(key) then -- Make sure the carrier is alive
 			local group = Group.getByName(value)
-			if GroupFunctions:isGroupDead(group) then
+			if GroupFunctions.isGroupDead(group) then
 				if math.random(1, 100) > 50 then
 					mist.respawnGroup(value, true)
 				end
@@ -1378,7 +1378,7 @@ local farpTrucks = {
 	["Sukhumi"] = "farp-trucks-sukhumi",
 }
 
-GroupFunctions:destroyGroupsByNames(farpTrucks)
+GroupFunctions.destroyGroupsByNames(farpTrucks)
 
 local function spawnFarpTrucks()
 	for i,v in pairs(farpTrucks) do
@@ -1386,7 +1386,7 @@ local function spawnFarpTrucks()
 		if farp ~= nil then
 			if farp.side==2 then
 				local gr = Group.getByName(v)
-				if GroupFunctions:isGroupDead(gr) then
+				if GroupFunctions.isGroupDead(gr) then
 					mist.respawnGroup(v)
 				elseif gr:getSize() < gr:getInitialSize() then
 					gr:destroy()
