@@ -3,11 +3,12 @@ local pairs = pairs
 local ipairs = ipairs
 local table = table
 local Group = Group
-local mist = mist
 local lfs = lfs
 local timer = timer
 local trigger = trigger
 local env = env
+local mist = mist
+local Utils = Utils
 local file = file
 
 -- BattleCommander Initialization
@@ -1128,9 +1129,15 @@ function GroupFunctions:getGroupsByNames(names)
 	return groups
 end
 
+function GroupFunctions:destroyGroup(group)
+	if (group ~= nil) then
+		group:destroy()
+	end
+end
+
 function GroupFunctions:destroyGroups(groups)
 	for key, value in pairs(groups) do
-		value:destroy()
+		GroupFunctions:destroyGroup(value)
 	end
 end
 
@@ -1147,7 +1154,7 @@ end
 function GroupFunctions:areGroupsActive(groups)
 	local active = false
 	for key, value in pairs(groups) do
-		active = active or value and value:getSize() > 0 and value:getController():hasTask()
+		active = active or value ~= nil and value:getSize() > 0 and value:getController():hasTask()
 	end
 	return active
 end
@@ -1157,12 +1164,24 @@ function GroupFunctions:areGroupsActiveByNames(names)
 	return GroupFunctions:areGroupsActive(GroupFunctions:getGroupsByNames(names))
 end
 
-function GroupFunctions:zoneMatch(zones)
+function GroupFunctions:zoneMatch(zoneMatchList)
 	local zoneMatch = true
-	for key, value in pairs(zones) do
+	for key, value in pairs(zoneMatchList) do
 		zoneMatch = zoneMatch and bc:getZoneByName(value.name).side == value.side
 	end
 	return zoneMatch
+end
+
+function GroupFunctions:isGroupDead(group)
+    if group ~= nil and (group:getSize() > 0 or group:isExist() == true) then
+        return false
+	else
+    	return true
+	end
+end
+
+function GroupFunctions:isGroupDeadByName(name)
+    return GroupFunctions:isGroupDead(Group.getByName(name))
 end
 
 -- Group Functions Done
@@ -1292,25 +1311,24 @@ BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 
 -- This is special as the zone is not registed as a normal zone
 
 local redCarrierPatrols = {
-	"r-patrol-rcvn61-rcvn61-su33",
-	"r-patrol-rcvn73-rcvn73-f18c",
-	"r-patrol-rcvn74-rcvn74-f14b",
+	["r-cvn61"] = "r-patrol-rcvn61-rcvn61-su33",
+	["r-cvn73"] = "r-patrol-rcvn73-rcvn73-f18c",
+	["r-cvn74"] = "r-patrol-rcvn74-rcvn74-f14b",
 }
 
 GroupFunctions:destroyGroupsByNames(redCarrierPatrols)
 
-local Utils = Utils
 local redCarrierAirGroupSpawn = function(event, sender)
 	for key, value in pairs(redCarrierPatrols) do
-		local group = Group.getByName(value)
-		if not group or group:getSize() == 0 then
-			if group and group:getSize() == 0 then
+		if not GroupFunctions:isGroupDeadByName(key) then -- Make sure the carrier is alive
+			local group = Group.getByName(value)
+			if GroupFunctions:isGroupDead(group) then
+				if math.random(1, 100) > 50 then
+					mist.respawnGroup(value, true)
+				end
+			elseif Utils.allGroupIsLanded(group, true) then
 				group:destroy()
-			elseif math.random(1, 100) > 50 then
-				mist.respawnGroup(value, true)
 			end
-		elseif Utils.allGroupIsLanded(group, true) then
-			group:destroy()
 		end
 	end
 end
@@ -1348,41 +1366,35 @@ HercCargoDropSupply.init(bc)
 -- Spawn FARP Trucks
 
 local farpTrucks = {
-	["Alpha"] = {"farp-trucks-alpha"},
-	["Bravo"] = {"farp-trucks-bravo"},
-	["Radio"] = {"farp-trucks-radio"},
-	["Charlie"] = {"farp-trucks-charlie"},
-	["Delta"] = {"farp-trucks-delta"},
-	["Port"] = {"farp-trucks-port"},
-	["SAM"] = {"farp-trucks-sam"},
-	["Oil"] = {"farp-trucks-oil"},
-	["Echo"] = {"farp-trucks-echo"},
-	["Sukhumi"] = {"farp-trucks-sukhumi"},
+	["Alpha"] = "farp-trucks-alpha",
+	["Bravo"] = "farp-trucks-bravo",
+	["Radio"] = "farp-trucks-radio",
+	["Charlie"] = "farp-trucks-charlie",
+	["Delta"] = "farp-trucks-delta",
+	["Port"] = "farp-trucks-port",
+	["SAM"] = "farp-trucks-sam",
+	["Oil"] = "farp-trucks-oil",
+	["Echo"] = "farp-trucks-echo",
+	["Sukhumi"] = "farp-trucks-sukhumi",
 }
 
-for i, v in pairs(farpTrucks) do
-	GroupFunctions:destroyGroupsByNames(v)
-end
+GroupFunctions:destroyGroupsByNames(farpTrucks)
 
 local function spawnFarpTrucks()
 	for i,v in pairs(farpTrucks) do
 		local farp = bc:getZoneByName(i)
-		if farp then
+		if farp ~= nil then
 			if farp.side==2 then
-				for ix,vx in ipairs(v) do
-					local gr = Group.getByName(vx)
-					if not gr then
-						mist.respawnGroup(vx)
-					elseif gr:getSize() < gr:getInitialSize() then
-						mist.respawnGroup(vx)
-					end
+				local gr = Group.getByName(v)
+				if GroupFunctions:isGroupDead(gr) then
+					mist.respawnGroup(v)
+				elseif gr:getSize() < gr:getInitialSize() then
+					gr:destroy()
 				end
 			else
-				for ix,vx in ipairs(v) do
-					local cr = Group.getByName(vx)
-					if cr then
-						cr:destroy()
-					end
+				local cr = Group.getByName(v)
+				if cr then
+					cr:destroy()
 				end
 			end
 		end
