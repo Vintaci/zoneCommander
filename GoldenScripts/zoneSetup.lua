@@ -610,7 +610,7 @@ InitZones()
 
 -- Mission Complete Check
 
-local missionCompleteCheckSheduler = {}
+local missionCompleteCheckSheduler = nil
 
 local missionCompleteCheck = function(event, sender)
 	local done = true
@@ -998,6 +998,10 @@ bc:registerShopItem('ca-tanks', '部署坦克', 150, function(sender)
 	end
 	local deployTanks = function(target)
 		if tanksMenu then
+			if "Carrier" == target then
+				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+				return "无法在航母上部署地面单位"
+			end
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-tanks')
 			tanksMenu = nil
@@ -1025,6 +1029,10 @@ bc:registerShopItem('ca-arty', '部署火炮', 250, function(sender)
 	end
 	local deployArty = function(target)
 		if artyMenu then
+			if "Carrier" == target then
+				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+				return "无法在航母上部署地面单位"
+			end
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-arty')
 			artyMenu = nil
@@ -1052,6 +1060,10 @@ bc:registerShopItem('ca-supply', '部署补给卡车', 100, function(sender)
 	end
 	local deployRecon = function(target)
 		if caSupplyMenu then
+			if "Carrier" == target then
+				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+				return "无法在航母上部署地面单位"
+			end
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-supply')
 			caSupplyMenu = nil
@@ -1079,6 +1091,10 @@ bc:registerShopItem('ca-airdef', '部署防空车', 300, function(sender)
 	end
 	local deployAirDef = function(target)
 		if airdefMenu then
+			if "Carrier" == target then
+				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+				return "无法在航母上部署地面单位"
+			end
 			local zn = CustomZone:getByName(target)
 			zn:spawnGroup('ca-airdef')
 			airdefMenu = nil
