@@ -2,8 +2,10 @@ local script_path = "C:/Users/GoldJohnKing/Saved Games/DCS.openbeta/Missions/Scr
 
 local script_list =
 {
+    -- Load order must be correct
     "file_lib.lua",
     "mist_4_5_107.lua",
+    "GroundUnitAutoAttack.lua",
     "zoneCommander.lua",
     "zoneSetup.lua",
     "Hercules_Cargo.lua",

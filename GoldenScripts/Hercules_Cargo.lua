@@ -21,7 +21,6 @@ local land = land
 local coord = coord
 local coalition = coalition
 local math = math
-local mist = mist
 
 Hercules_Cargo = {}
 Hercules_Cargo.Hercules_Cargo_Drop_Events = {}
@@ -290,7 +289,7 @@ function Hercules_Cargo.Soldier_SpawnGroup(Cargo_Drop_Position, Cargo_Type_name,
 		["start_time"] = 0,
 	}
 	coalition.addGroup(Cargo_Country, Group.Category.GROUND, Herc_Soldier_Spawn)
-	timer.scheduleFunction(MoveToNearestEnemy, "Soldier_Group_"..SoldierGroupID, timer.getTime() + 90) -- Edited, Add auto attack script
+	EnableAutoAttackForGroup("Soldier_Group_"..SoldierGroupID, 100000, 180, 90) -- Edited, Add auto attack script
 end
 
 local CargoUnitID = 10000
@@ -334,7 +333,7 @@ function Hercules_Cargo.Cargo_SpawnGroup(Cargo_Drop_Position, Cargo_Type_name, C
 		["start_time"] = 0,
 	}
 	coalition.addGroup(Cargo_Country, Group.Category.GROUND, Herc_Cargo_Spawn)
-	timer.scheduleFunction(MoveToNearestEnemy, "Cargo Group "..CargoUnitID, timer.getTime() + 90) -- Edited, Add auto attack script
+	EnableAutoAttackForGroup("Cargo Group "..CargoUnitID, 100000, 180, 90) -- Edited, Add auto attack script
 end
 
 function Hercules_Cargo.Cargo_SpawnStatic(Cargo_Drop_Position, Cargo_Type_name, CargoHeading, dead, Cargo_Country)
@@ -586,66 +585,6 @@ function Hercules_Cargo.Hercules_Cargo_Drop_Events:onEvent(Cargo_Drop_Event)
 	end
 end
 world.addEventHandler(Hercules_Cargo.Hercules_Cargo_Drop_Events)
-
--- Edited, Add auto attack script
-
-function MoveToNearestEnemy(currentGroupName)
-	local currentGroup = Group.getByName(currentGroupName)
-	if currentGroup == nil then return end
-
-    local enemyCoalition = (currentGroup:getCoalition() == 1 and 2) or 1
-    local enemyGroupList = coalition.getGroups(enemyCoalition, Group.Category.GROUND)
-
-	local currentGroupPosition = mist.getLeadPos(currentGroupName)
-	local maxSearchDistance = 25000
-	local nearestEnemyGroupName = nil
-
-	for index, value in pairs(enemyGroupList) do
-		local enemyGroupDistance = mist.utils.get2DDist(currentGroupPosition, mist.getLeadPos(value))
-        if enemyGroupDistance <= maxSearchDistance then
-			maxSearchDistance = enemyGroupDistance
-            nearestEnemyGroupName = value:getName()
-        end
-	end
-
-    if nearestEnemyGroupName == nil or mist.groupIsDead(nearestEnemyGroupName) == true then return end
-
-	local enemyGroup = Group.getByName(nearestEnemyGroupName)
-	if enemyGroup == nil then return end
-
-    local enemyLeaderUnit = enemyGroup:getUnit(1)
-	if enemyLeaderUnit == nil then return end
-
-    local nearestEnemyGroupPosition = mist.getLeadPos(nearestEnemyGroupName)
-    local path = {}
-    path[#path + 1] = mist.ground.buildWP(currentGroupPosition, 'Rank', 15)
-    path[#path + 1] = mist.ground.buildWP(nearestEnemyGroupPosition, 'Rank', 15)
-
-    mist.goRoute(currentGroupName, path)
-
-    mist.scheduleFunction(IsEnemyLeaderUnitDead, { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName }, timer.getTime() + 180)
-end
-
-function IsEnemyLeaderUnitDead(enemyLeaderUnit, currentGroupName, nearestEnemyGroupName)
-	if enemyLeaderUnit == nil or mist.groupIsDead(currentGroupName) == true then return end
-
-    if enemyLeaderUnit:isExist() == true then
-        local currentGroupPosition = mist.getLeadPos(currentGroupName)
-        local nearestEnemyGroupPosition = mist.getLeadPos(nearestEnemyGroupName)
-
-        local path = {}
-        path[#path + 1] = mist.ground.buildWP(currentGroupPosition, 'Rank', 15)
-        path[#path + 1] = mist.ground.buildWP(nearestEnemyGroupPosition, 'Rank', 15)
-
-        mist.goRoute(currentGroupName, path)
-
-        mist.scheduleFunction(IsEnemyLeaderUnitDead, { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName }, timer.getTime() + 180)
-    else
-        MoveToNearestEnemy(currentGroupName)
-    end
-end
-
--- Edited, Add auto attack script Done
 
 -- trigger.action.outTextForCoalition(coalition.side.BLUE, string.format("Cargo_Drop_Event.weapon: %s", Weapon.getDesc(Cargo_Drop_Event.weapon).typeName), 10)
 -- trigger.action.outTextForCoalition(coalition.side.BLUE, tostring('Calculate_Object_Height_AGL: ' .. aaaaa), 10)
