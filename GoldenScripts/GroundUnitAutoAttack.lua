@@ -6,16 +6,16 @@ local mist = mist
 local MoveToNearestEnemy = nil
 local IsEnemyLeaderUnitDead = nil
 
-function EnableAutoAttackForGroup(groupName, searchRange, searchDuration, initialDelay)
-    timer.scheduleFunction(MoveToNearestEnemy,
-        { groupName = groupName, searchRange = searchRange, searchDuration = searchDuration },
+function EnableAutoAttackForGroup(currentGroupName, searchRange, searchDuration, initialDelay)
+    timer.scheduleFunction(MoveToNearestEnemy, { currentGroupName, searchRange, searchDuration },
         timer.getTime() + initialDelay)
 end
 
 MoveToNearestEnemy = function(params)
-    local currentGroupName = params.groupName
-    local searchRange = params.searchRange
-    local searchDuration = params.searchDuration
+    -- We must copy these params to local variables, to solve the "Parameter missed" issue
+    local currentGroupName = params[1]
+    local searchRange = params[2]
+    local searchDuration = params[3]
 
     local currentGroup = Group.getByName(currentGroupName)
     if currentGroup == nil then return end
@@ -28,8 +28,9 @@ MoveToNearestEnemy = function(params)
 
     for index, value in pairs(enemyGroupList) do
         local enemyGroupDistance = mist.utils.get2DDist(currentGroupPosition, mist.getLeadPos(value))
-        if enemyGroupDistance <= searchRange then
-            searchRange = enemyGroupDistance
+        local closestTargetDistance = searchRange
+        if enemyGroupDistance <= closestTargetDistance then
+            closestTargetDistance = enemyGroupDistance
             nearestEnemyGroupName = value:getName()
         end
     end
@@ -50,11 +51,11 @@ MoveToNearestEnemy = function(params)
     mist.goRoute(currentGroupName, path)
 
     mist.scheduleFunction(IsEnemyLeaderUnitDead,
-        { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchDuration },
+        { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchRange, searchDuration },
         timer.getTime() + searchDuration)
 end
 
-IsEnemyLeaderUnitDead = function(enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchDuration)
+IsEnemyLeaderUnitDead = function(enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchRange, searchDuration)
     if enemyLeaderUnit == nil or mist.groupIsDead(currentGroupName) == true then return end
 
     if enemyLeaderUnit:isExist() == true then
@@ -67,9 +68,10 @@ IsEnemyLeaderUnitDead = function(enemyLeaderUnit, currentGroupName, nearestEnemy
 
         mist.goRoute(currentGroupName, path)
 
-        mist.scheduleFunction(IsEnemyLeaderUnitDead, { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName },
+        mist.scheduleFunction(IsEnemyLeaderUnitDead,
+            { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchRange, searchDuration },
             timer.getTime() + searchDuration)
     else
-        MoveToNearestEnemy(currentGroupName)
+        MoveToNearestEnemy({ currentGroupName, searchRange, searchDuration })
     end
 end
