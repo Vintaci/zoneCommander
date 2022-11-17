@@ -7,16 +7,10 @@ local MoveToNearestEnemy = nil
 local IsEnemyLeaderUnitDead = nil
 
 function EnableAutoAttackForGroup(currentGroupName, searchRange, searchDuration, initialDelay)
-    timer.scheduleFunction(MoveToNearestEnemy, { currentGroupName, searchRange, searchDuration },
-        timer.getTime() + initialDelay)
+    mist.scheduleFunction(MoveToNearestEnemy, { currentGroupName, searchRange, searchDuration }, timer.getTime() + initialDelay)
 end
 
-MoveToNearestEnemy = function(params)
-    -- We must copy these params to local variables, to solve the "Parameter missed" issue
-    local currentGroupName = params[1]
-    local searchRange = params[2]
-    local searchDuration = params[3]
-
+MoveToNearestEnemy = function(currentGroupName, searchRange, searchDuration)
     local currentGroup = Group.getByName(currentGroupName)
     if currentGroup == nil then return end
 
@@ -72,6 +66,6 @@ IsEnemyLeaderUnitDead = function(enemyLeaderUnit, currentGroupName, nearestEnemy
             { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchRange, searchDuration },
             timer.getTime() + searchDuration)
     else
-        MoveToNearestEnemy({ currentGroupName, searchRange, searchDuration })
+        MoveToNearestEnemy(currentGroupName, searchRange, searchDuration)
     end
 end
