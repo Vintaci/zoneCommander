@@ -2481,6 +2481,7 @@ do
 					if GlobalSettings.messages.repaired then trigger.action.outText('Group '..v..' at '..self.zone..' was repaired', 5) end
 					self:runTriggers('repaired')
 					complete = true
+					WeaponCooldown(v, 90) -- Edited, add weapon cooldown on spawn
 					break
 				end
 			end
@@ -2592,6 +2593,7 @@ do
 					mist.respawnGroup(self.name,true)
 					self.state = 'takeoff'
 					self.lastStateTime = timer.getAbsTime()
+					WeaponCooldown(self.name, 90) -- Edited, add weapon cooldown on spawn
 				end
 			end
 		elseif self.state =='takeoff' then
@@ -2669,6 +2671,7 @@ do
 					mist.respawnGroup(self.name,true)
 					self.state = 'enroute'
 					self.lastStateTime = timer.getAbsTime()
+					WeaponCooldown(self.name, 90) -- Edited, add weapon cooldown on spawn
 				end
 			end
 		elseif self.state =='enroute' then

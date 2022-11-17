@@ -6,6 +6,7 @@ local script_list =
     "file_lib.lua",
     "mist_4_5_107.lua",
     "GroundUnitAutoAttack.lua",
+    "WeaponCooldown.lua",
     "zoneCommander.lua",
     "zoneSetup.lua",
     "Hercules_Cargo.lua",
