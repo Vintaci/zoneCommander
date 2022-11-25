@@ -1573,7 +1573,7 @@ do
 		self:refreshShopMenuForCoalition(1)
 		self:refreshShopMenuForCoalition(2)
 		
-		mist.scheduleFunction(self.update, {self}, timer.getTime() + 1, self.updateFrequency)
+		mist.scheduleFunction(self.update, {self}, timer.getTime() + 15, self.updateFrequency) -- Edited, increase first zone update latency
 		mist.scheduleFunction(self.saveToDisk, {self}, timer.getTime() + 30, self.saveFrequency)
 		
 		local ev = {}
@@ -2481,7 +2481,7 @@ do
 					if GlobalSettings.messages.repaired then trigger.action.outText('Group '..v..' at '..self.zone..' was repaired', 5) end
 					self:runTriggers('repaired')
 					complete = true
-					WeaponCooldown(v, 90) -- Edited, add weapon cooldown on spawn
+					WeaponCooldown(v, "Surface", 90) -- Edited, add weapon cooldown on spawn
 					break
 				end
 			end
@@ -2593,7 +2593,7 @@ do
 					mist.respawnGroup(self.name,true)
 					self.state = 'takeoff'
 					self.lastStateTime = timer.getAbsTime()
-					WeaponCooldown(self.name, 90) -- Edited, add weapon cooldown on spawn
+					WeaponCooldown(self.name, "Air", 90) -- Edited, add weapon cooldown on spawn
 				end
 			end
 		elseif self.state =='takeoff' then
@@ -2671,7 +2671,7 @@ do
 					mist.respawnGroup(self.name,true)
 					self.state = 'enroute'
 					self.lastStateTime = timer.getAbsTime()
-					WeaponCooldown(self.name, 90) -- Edited, add weapon cooldown on spawn
+					WeaponCooldown(self.name, "Surface", 90) -- Edited, add weapon cooldown on spawn
 				end
 			end
 		elseif self.state =='enroute' then
