@@ -669,9 +669,9 @@ do
 				preparing = GlobalSettings.defaultRespawns[2].patrol.preparing
 			},
 			attack = { 
-				dead = GlobalSettings.defaultRespawns[2].attack.dead, 
-				hangar = GlobalSettings.defaultRespawns[2].attack.hangar, 
-				preparing = GlobalSettings.defaultRespawns[2].attack.preparing
+				dead = GlobalSettings.defaultRespawns[2].attack.dead * 2, -- Edited, temporarily decrease enemy attack spawn frequency, because of helicopters
+				hangar = GlobalSettings.defaultRespawns[2].attack.hangar * 2, -- Edited, temporarily decrease enemy attack spawn frequency, because of helicopters
+				preparing = GlobalSettings.defaultRespawns[2].attack.preparing * 2 -- Edited, temporarily decrease enemy attack spawn frequency, because of helicopters
 			}
 		}
 	end
