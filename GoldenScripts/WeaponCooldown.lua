@@ -31,6 +31,6 @@ function WeaponCooldown(groupName, groupType, delay)
         defaultROE = "OPEN_FIRE";
     end
 
-    ChangeGroupROE(groupName, "WEAPON_HOLD")
+    mist.scheduleFunction(ChangeGroupROE, { groupName, "WEAPON_HOLD" }, timer.getTime() + 1) -- ChangeGroupROE(groupName, "WEAPON_HOLD")
     mist.scheduleFunction(ChangeGroupROE, { groupName, defaultROE }, timer.getTime() + delay)
 end
