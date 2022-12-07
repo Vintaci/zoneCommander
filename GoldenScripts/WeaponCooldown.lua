@@ -2,17 +2,7 @@ local timer = timer
 local Group = Group
 local mist = mist
 
-local roeIndex =
-{
-    -- Ground and naval group does not support 0 and 1
-    ["WEAPON_FREE"] = 0, -- engage any threat
-    ["OPEN_FIRE_WEAPON_FREE"] = 1, -- engage any threat while prioritize its task target
-    ["OPEN_FIRE"] = 2, -- engage its task target only
-    ["RETURN_FIRE"] = 3, -- engage threars that shoot first
-    ["WEAPON_HOLD"] = 4, -- do not fire
-}
-
-local function ChangeGroupROE(groupName, roe)
+local function ChangeGroupROE(groupName, optionIndex, roe)
     local group = Group.getByName(groupName)
 
     if (nil == group) then
@@ -20,17 +10,29 @@ local function ChangeGroupROE(groupName, roe)
         return
     end
 
-    group:getController():setOption(0, roeIndex[roe])
-    env.info("ChangeGroupROE: set group ".. groupName .." ROE to " .. roe .. "(" .. roeIndex[roe] .. ")")
+    group:getController():setOption(optionIndex, roe)
+    env.info("ChangeGroupROE: set group " .. groupName .. " ROE(" .. optionIndex .. ") to " .. roe)
 end
 
 function WeaponCooldown(groupName, groupType, delay)
-    local defaultROE = "WEAPON_FREE";
-    
-    if ("Surface" == groupType) then
-        defaultROE = "OPEN_FIRE";
+    -- Air
+    if ("Air" == groupType) then
+        ChangeGroupROE(groupName, AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_HOLD)
+        mist.scheduleFunction(ChangeGroupROE, { groupName, AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE }, timer.getTime() + delay)
+        return
     end
 
-    mist.scheduleFunction(ChangeGroupROE, { groupName, "WEAPON_HOLD" }, timer.getTime() + 1) -- ChangeGroupROE(groupName, "WEAPON_HOLD")
-    mist.scheduleFunction(ChangeGroupROE, { groupName, defaultROE }, timer.getTime() + delay)
+    -- Ground
+    if ("Ground" == groupType) then
+        ChangeGroupROE(groupName, AI.Option.Ground.id.ROE, AI.Option.Ground.val.ROE.WEAPON_HOLD)
+        mist.scheduleFunction(ChangeGroupROE, { groupName, AI.Option.Ground.id.ROE, AI.Option.Ground.val.ROE.OPEN_FIRE }, timer.getTime() + delay)
+        return
+    end
+
+    -- Naval
+    if ("Naval" == groupType) then
+        ChangeGroupROE(groupName, AI.Option.Naval.id.ROE, AI.Option.Naval.val.ROE.WEAPON_HOLD)
+        mist.scheduleFunction(ChangeGroupROE, { groupName, AI.Option.Naval.id.ROE, AI.Option.Naval.val.ROE.OPEN_FIRE }, timer.getTime() + delay)
+        return
+    end
 end
