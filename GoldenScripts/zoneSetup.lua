@@ -159,7 +159,7 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-gudauta-sochi-f16c", mission = "attack", targetzone = "Sochi" },
 
-			{ name = "r-attack-gudauta-alpha-ka50", mission = "attack", targetzone = "Alpha" },
+			{ name = "r-attack-gudauta-alpha-ka503", mission = "attack", targetzone = "Alpha" },
 
 			{ name = "r-supply-gudauta-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
 			{ name = "r-supply-gudauta-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
@@ -344,10 +344,10 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-senaki-sukhumi-su34", mission = "attack", targetzone = "Sukhumi" },
 
-			{ name = "r-attack-senaki-delta-ah64d", mission = "attack", targetzone = "Delta" },
+			{ name = "r-attack-senaki-delta-ka503", mission = "attack", targetzone = "Delta" },
 			{ name = "r-attack-senaki-port-ah64d", mission = "attack", targetzone = "Port" },
 			{ name = "r-attack-senaki-oil-ah64d", mission = "attack", targetzone = "Oil" },
-			{ name = "r-attack-senaki-charlie-ka50", mission = "attack", targetzone = "Charlie" },
+			{ name = "r-attack-senaki-charlie-ka503", mission = "attack", targetzone = "Charlie" },
 			{ name = "r-attack-senaki-sam-ka50", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-senaki-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
 
@@ -426,7 +426,7 @@ local zones = {
 			{ name = "r-attack-kobuleti-port-ah64d", mission = "attack", targetzone = "Port" },
 			{ name = "r-attack-kobuleti-oil-ah64d", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-kobuleti-batumi-ka50", mission = "attack", targetzone = "Batumi" },
-			{ name = "r-attack-kobuleti-senaki-ka50", mission = "attack", targetzone = "Senaki" },
+			{ name = "r-attack-kobuleti-senaki-ka503", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
 			{ name = "r-patrol-kobuleti-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
@@ -484,7 +484,7 @@ local zones = {
 			{ name = "r-attack-kutaisi-kobuleti-su25t", mission = "attack", targetzone = "Kobuleti" },
 			{ name = "r-attack-kutaisi-sam-a10c2", mission = "attack", targetzone = "SAM" },
 
-			{ name = "r-attack-kutaisi-oil-ka50", mission = "attack", targetzone = "Oil" },
+			{ name = "r-attack-kutaisi-oil-ka503", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-kutaisi-sam-ka50", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-kutaisi-senaki-ah64d", mission = "attack", targetzone = "Senaki" },
 
@@ -545,7 +545,7 @@ local zones = {
 		dispatches = {
 			{ name = "r-attack-batumi-kobuleti-su34", mission = "attack", targetzone = "Kobuleti" },
 
-			{ name = "r-attack-batumi-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
+			{ name = "r-attack-batumi-kobuleti-ka503", mission = "attack", targetzone = "Kobuleti" },
 
 			{ name = "r-patrol-batumi-batumi-su33", mission = "patrol", targetzone = "Batumi" },
 
@@ -1391,6 +1391,7 @@ local farpTrucks = {
 	["SAM"] = "farp-trucks-sam",
 	["Oil"] = "farp-trucks-oil",
 	["Echo"] = "farp-trucks-echo",
+	["Gudauta"] = "farp-trucks-gudauta",
 	["Sukhumi"] = "farp-trucks-sukhumi",
 }
 
