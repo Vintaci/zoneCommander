@@ -2828,6 +2828,7 @@ LogisticCommander = {}
 do
 	LogisticCommander.allowedTypes = {}
 	LogisticCommander.allowedTypes['Ka-50'] = true
+	LogisticCommander.allowedTypes['Ka-50_3'] = true
 	LogisticCommander.allowedTypes['Mi-24P'] = true
 	LogisticCommander.allowedTypes['SA342Mistral'] = true
 	LogisticCommander.allowedTypes['SA342L'] = true
@@ -2838,7 +2839,6 @@ do
 	LogisticCommander.allowedTypes['UH-1H'] = true
 	LogisticCommander.allowedTypes['Mi-8MT'] = true
 	LogisticCommander.allowedTypes['Hercules'] = true
-	LogisticCommander.allowedTypes['UH1M'] = true -- Edited, add UH-1M
 	
 	LogisticCommander.maxCarriedPilots = 4
 	
