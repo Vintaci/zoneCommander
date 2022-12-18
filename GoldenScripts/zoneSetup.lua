@@ -922,16 +922,29 @@ end,
 		end
 	end)
 
-local spawnAwacs = function(sender)
-	local gr = Group.getByName('awacs1')
+local spawn_awacs_e2d = function(sender)
+	local gr = Group.getByName('awacs-e2d')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
 		return 'E-2D 空中预警机 仍在执行任务\n呼号：Darkstar\n无线电频率：255.00 MHz AM'
 	end
-	mist.respawnGroup('awacs1', true)
+	mist.respawnGroup('awacs-e2d', true)
 	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Darkstar\n无线电频率：255.00 MHz AM', 60)
+	GroupFunctions.delayedDestroyGroupByName("awacs-e2d", 3600)
 end
-Group.getByName('awacs1'):destroy()
-bc:registerShopItem('awacs', 'E-2D 空中预警机(AWACS)', 100, spawnAwacs, spawnAwacs)
+Group.getByName('awacs-e2d'):destroy()
+bc:registerShopItem('awacs-e2d', 'E-2D 空中预警机(AWACS)', 100, spawn_awacs_e2d, spawn_awacs_e2d)
+
+local spawn_awacs_a50 = function(sender)
+	local gr = Group.getByName('awacs-a50')
+	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+		return 'A-50 空中预警机 仍在执行任务\n呼号：Overlord\n无线电频率：124.00 MHz AM'
+	end
+	mist.respawnGroup('awacs-a50', true)
+	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Overlord\n无线电频率：124.00 MHz AM', 60)
+	GroupFunctions.delayedDestroyGroupByName("awacs-a50", 3600)
+end
+Group.getByName('awacs-a50'):destroy()
+bc:registerShopItem('awacs-a50', 'A-50 空中预警机(AWACS)', 100, spawn_awacs_a50, spawn_awacs_a50)
 
 local spawnAirrefuelSoft = function(sender)
 	local gr = Group.getByName('airrefuel-soft')
@@ -940,6 +953,7 @@ local spawnAirrefuelSoft = function(sender)
 	end
 	mist.respawnGroup('airrefuel-soft', true)
 	trigger.action.outTextForCoalition(2, 'KC-135MPRS 空中加油机(软管) 已上线\n呼号：Texaco\n无线电频率：251.00 MHz AM', 60)
+	GroupFunctions.delayedDestroyGroupByName("airrefuel-soft", 3600)
 end
 Group.getByName('airrefuel-soft'):destroy()
 bc:registerShopItem('airrefuel-soft', 'KC-135MPRS 空中加油机(软管)', 100, spawnAirrefuelSoft, spawnAirrefuelSoft)
@@ -951,6 +965,7 @@ local spawnAirrefuelHard = function(sender)
 	end
 	mist.respawnGroup('airrefuel-hard', true)
 	trigger.action.outTextForCoalition(2, 'KC-135 空中加油机(硬管) 已上线\n呼号：Arco\n无线电频率：252.00 MHz AM', 60)
+	GroupFunctions.delayedDestroyGroupByName("airrefuel-hard", 3600)
 end
 Group.getByName('airrefuel-hard'):destroy()
 bc:registerShopItem('airrefuel-hard', 'KC-135 空中加油机(硬管)', 100, spawnAirrefuelHard, spawnAirrefuelHard)
@@ -1128,7 +1143,8 @@ bc:addShopItem(2, 'cas', -1)
 bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
-bc:addShopItem(2, 'awacs', -1)
+bc:addShopItem(2, 'awacs-e2d', -1)
+bc:addShopItem(2, 'awacs-a50', -1)
 bc:addShopItem(2, 'airrefuel-soft', -1)
 bc:addShopItem(2, 'airrefuel-hard', -1)
 bc:addShopItem(2, 'jam', -1)
@@ -1140,75 +1156,6 @@ bc:addShopItem(2, 'ca-airdef', -1)
 -- bc:addFunds(2, 100000)
 
 -- Blue Support Done
-
--- Group Functions
-
-local GroupFunctions = {}
-
-function GroupFunctions.getGroupsByNames(names)
-	local groups = {}
-	for key, value in pairs(names) do
-		table.insert(groups, Group.getByName(value))
-	end
-	return groups
-end
-
-function GroupFunctions.destroyGroup(group)
-	if (group ~= nil) then
-		group:destroy()
-	end
-end
-
-function GroupFunctions.destroyGroups(groups)
-	for key, value in pairs(groups) do
-		GroupFunctions.destroyGroup(value)
-	end
-end
-
-function GroupFunctions.destroyGroupsByNames(names)
-	GroupFunctions.destroyGroups(GroupFunctions.getGroupsByNames(names))
-end
-
-function GroupFunctions.respawnGroupsByNames(names, task)
-	for key, value in pairs(names) do
-		mist.respawnGroup(value, task)
-	end
-end
-
-function GroupFunctions.areGroupsActive(groups)
-	local active = false
-	for key, value in pairs(groups) do
-		active = active or value ~= nil and value:getSize() > 0 and value:getController():hasTask()
-	end
-	return active
-end
-
-function GroupFunctions.areGroupsActiveByNames(names)
-	-- Each time a group is respawned, it is a NEW group, so it MUST be done during runtime
-	return GroupFunctions.areGroupsActive(GroupFunctions.getGroupsByNames(names))
-end
-
-function GroupFunctions.zoneMatch(zoneMatchList)
-	local zoneMatch = true
-	for key, value in pairs(zoneMatchList) do
-		zoneMatch = zoneMatch and bc:getZoneByName(value.name).side == value.side
-	end
-	return zoneMatch
-end
-
-function GroupFunctions.isGroupDead(group)
-    if group ~= nil and (group:getSize() > 0 or group:isExist() == true) then
-        return false
-	else
-    	return true
-	end
-end
-
-function GroupFunctions.isGroupDeadByName(name)
-    return GroupFunctions.isGroupDead(Group.getByName(name))
-end
-
--- Group Functions Done
 
 -- Red Support
 
