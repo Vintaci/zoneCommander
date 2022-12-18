@@ -1327,7 +1327,7 @@ InitRedSupports()
 -- bc:addFunds(1, 100000)
 -- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
 
-BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 30 * 60, decissionVariance = 30 * 60, skipChance = 25 }):init()
+BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 15 * 60, decissionVariance = 15 * 60, skipChance = 25 }):init()
 
 -- Red Support Done
 
