@@ -224,7 +224,7 @@ local zones = {
 
 			{ name = "r-attack-sukhumi-bravo-ah64d", mission = "attack", targetzone = "Bravo" },
 
-			{ name = "r-patrol-sukhumi-sukhumi-su27", mission = "patrol", targetzone = "Sukhumi" },
+			{ name = "r-patrol-sukhumi-sukhumi-j11a", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-sukhumi-gudauta-f15c", mission = "patrol", targetzone = "Gudauta" },
 
 			{ name = "r-supply-sukhumi-gudauta-mi24p", mission = "supply", targetzone = "Gudauta" },
@@ -361,7 +361,7 @@ local zones = {
 
 			{ name = "r-patrol-senaki-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-senaki-kutaisi-j11a", mission = "patrol", targetzone = "Kutaisi" },
-			{ name = "r-patrol-senaki-batumi-f18c", mission = "patrol", targetzone = "Batumi" },
+			{ name = "r-patrol-senaki-batumi-f15c", mission = "patrol", targetzone = "Batumi" },
 
 			{ name = "r-supply-senaki-charlie-mi24p", mission = "supply", targetzone = "Charlie" },
 			{ name = "r-supply-senaki-delta-mi24p", mission = "supply", targetzone = "Delta" },
@@ -437,7 +437,7 @@ local zones = {
 			{ name = "r-attack-kobuleti-senaki-ka50_3", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
-			{ name = "r-patrol-kobuleti-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
+			{ name = "r-patrol-kobuleti-sukhumi-f15c", mission = "patrol", targetzone = "Sukhumi" },
 
 			{ name = "r-supply-kobuleti-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
 			{ name = "r-supply-kobuleti-port-mi24p", mission = "supply", targetzone = "Port" },
@@ -555,7 +555,7 @@ local zones = {
 
 			{ name = "r-attack-batumi-kobuleti-ka50_3", mission = "attack", targetzone = "Kobuleti" },
 
-			{ name = "r-patrol-batumi-batumi-su33", mission = "patrol", targetzone = "Batumi" },
+			{ name = "r-patrol-batumi-batumi-mig29s", mission = "patrol", targetzone = "Batumi" },
 
 			{ name = "r-supply-batumi-kobuleti-mi24p", mission = "supply", targetzone = "Kobuleti" },
 			{ name = "r-supply-batumi-port-mi24p", mission = "supply", targetzone = "Port" },
