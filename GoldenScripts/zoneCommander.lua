@@ -1573,7 +1573,7 @@ do
 		self:refreshShopMenuForCoalition(1)
 		self:refreshShopMenuForCoalition(2)
 		
-		mist.scheduleFunction(self.update, {self}, timer.getTime() + 15, self.updateFrequency) -- Edited, increase first zone update latency
+		mist.scheduleFunction(self.update, {self}, timer.getTime() + 5, self.updateFrequency) -- Edited, increase first zone update latency, default = 1
 		mist.scheduleFunction(self.saveToDisk, {self}, timer.getTime() + 30, self.saveFrequency)
 		
 		local ev = {}

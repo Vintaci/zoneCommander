@@ -25,6 +25,14 @@ if lfs then
 	end
 end
 
+-- Block player slots for 15 seconds on mission start,
+-- prevent players from joining slots before initialization done
+trigger.action.setUserFlag("TriggerFlagInitDone", false)
+
+mist.scheduleFunction(function(event, sender)
+	trigger.action.setUserFlag("TriggerFlagInitDone", true)
+end, {}, timer.getTime() + 15)
+
 -- Difficulty scaling
 -- <start> is the base value, all calculation is added onto this
 -- overall minimum <difficultyModifier> = <start> + <min>
