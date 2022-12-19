@@ -8,7 +8,10 @@ GroupFunctions = {}
 function GroupFunctions.getGroupsByNames(names)
 	local groups = {}
 	for key, value in pairs(names) do
-		table.insert(groups, Group.getByName(value))
+		local group = Group.getByName(value)
+		if (group ~= nil) then
+			table.insert(groups, group)
+		end
 	end
 	return groups
 end
@@ -27,7 +30,7 @@ end
 
 function GroupFunctions.delayedDestroyGroupByName(name, delay)
     mist.scheduleFunction(function(name)
-        Group.getByName(name):destroy()
+		GroupFunctions.destroyGroup(Group.getByName(name))
     end, {name}, timer.getTime() + delay)
 end
 
@@ -52,14 +55,6 @@ end
 function GroupFunctions.areGroupsActiveByNames(names)
 	-- Each time a group is respawned, it is a NEW group, so it MUST be done during runtime
 	return GroupFunctions.areGroupsActive(GroupFunctions.getGroupsByNames(names))
-end
-
-function GroupFunctions.zoneMatch(zoneMatchList)
-	local zoneMatch = true
-	for key, value in pairs(zoneMatchList) do
-		zoneMatch = zoneMatch and bc:getZoneByName(value.name).side == value.side
-	end
-	return zoneMatch
 end
 
 function GroupFunctions.isGroupDead(group)

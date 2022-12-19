@@ -10,6 +10,7 @@ local env = env
 local mist = mist
 local Utils = Utils
 local file = file
+local GroupFunctions = GroupFunctions
 
 -- BattleCommander Initialization
 
@@ -1235,10 +1236,18 @@ local redSupports = {
 	},
 }
 
+local function zoneMatch(zoneMatchList)
+	local result = true
+	for key, value in pairs(zoneMatchList) do
+		result = result and bc:getZoneByName(value.name).side == value.side
+	end
+	return result
+end
+
 local function NewRedSupport(support)
 	GroupFunctions.destroyGroupsByNames(support.groupNames)
 	bc:registerShopItem(support.name, support.description, support.price, function(sender)
-		if not GroupFunctions.zoneMatch(support.zones) then
+		if not zoneMatch(support.zones) then
 			return "zones mismatch"
 		end
 		if GroupFunctions.areGroupsActiveByNames(support.groupNames) then
