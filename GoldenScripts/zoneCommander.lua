@@ -2594,6 +2594,7 @@ do
 					self.state = 'takeoff'
 					self.lastStateTime = timer.getAbsTime()
 					WeaponCooldown(self.name, "Air", 90) -- Edited, add weapon cooldown on spawn
+					self.zoneCommander.battleCommander:decreaseDifficulty() -- Edited, decrease difficulty on every once air group spawn
 				end
 			end
 		elseif self.state =='takeoff' then
