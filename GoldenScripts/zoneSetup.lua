@@ -40,7 +40,7 @@ end, {}, timer.getTime() + 15)
 -- overall maximum <difficultyModifier> = <start> + <max>
 -- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
 -- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
-local difficulty = { start = 1, min = 0, max = 7, escalation = 0.75, fade = 0.01, fadeTime = 60, coalition = 1 }
+local difficulty = { start = 1, min = 0, max = 7, escalation = 1, fade = 0.001, fadeTime = 30, coalition = 1 }
 bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
