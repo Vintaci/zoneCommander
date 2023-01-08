@@ -28,8 +28,4 @@ else
     env.info("Foothold - LFS not available, using default script load path: " .. script_path)
 end
 
-local function load_scripts_scheduled(params)
-    load_scripts(params[1], params[2])
-end
-
-timer.scheduleFunction(load_scripts_scheduled, { script_path, script_list }, 1)
+load_scripts(script_path, script_list)
