@@ -357,8 +357,8 @@ local zones = {
 			{ name = "r-attack-senaki-port-ah64d", mission = "attack", targetzone = "Port" },
 			{ name = "r-attack-senaki-oil-ah64d", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-senaki-charlie-ka50_3", mission = "attack", targetzone = "Charlie" },
-			{ name = "r-attack-senaki-sam-ka50", mission = "attack", targetzone = "SAM" },
-			{ name = "r-attack-senaki-kobuleti-ka50", mission = "attack", targetzone = "Kobuleti" },
+			{ name = "r-attack-senaki-sam-ah1w", mission = "attack", targetzone = "SAM" },
+			{ name = "r-attack-senaki-kobuleti-ah1w", mission = "attack", targetzone = "Kobuleti" },
 
 			{ name = "r-patrol-senaki-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-senaki-kutaisi-j11a", mission = "patrol", targetzone = "Kutaisi" },
@@ -434,7 +434,7 @@ local zones = {
 
 			{ name = "r-attack-kobuleti-port-ah64d", mission = "attack", targetzone = "Port" },
 			{ name = "r-attack-kobuleti-oil-ah64d", mission = "attack", targetzone = "Oil" },
-			{ name = "r-attack-kobuleti-batumi-ka50", mission = "attack", targetzone = "Batumi" },
+			{ name = "r-attack-kobuleti-batumi-ah1w", mission = "attack", targetzone = "Batumi" },
 			{ name = "r-attack-kobuleti-senaki-ka50_3", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
@@ -494,7 +494,7 @@ local zones = {
 			{ name = "r-attack-kutaisi-sam-a10c2", mission = "attack", targetzone = "SAM" },
 
 			{ name = "r-attack-kutaisi-oil-ka50_3", mission = "attack", targetzone = "Oil" },
-			{ name = "r-attack-kutaisi-sam-ka50", mission = "attack", targetzone = "SAM" },
+			{ name = "r-attack-kutaisi-sam-ah1w", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-kutaisi-senaki-ah64d", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kutaisi-kutaisi-jf17", mission = "patrol", targetzone = "Kutaisi" },

@@ -34,7 +34,7 @@ options =
         ["map"] = true,
         ["spectatorExternalViews"] = true,
         ["userSnapView"] = false,
-        ["iconsTheme"] = "nato",
+        ["iconsTheme"] = "russian",
         ["weapons"] = false,
         ["padlock"] = true,
         ["birds"] = 100,
@@ -46,7 +46,7 @@ options =
         ["hideStick"] = true,
         ["radio"] = true,
         ["geffect"] = "realistic",
-        ["unrestrictedSATNAV"] = false,
+        ["unrestrictedSATNAV"] = true,
         ["cockpitStatusBarAllowed"] = false,
         ["reports"] = true,
         ["tips"] = true,
@@ -140,26 +140,26 @@ options =
             ["shoulderJointX_Right"] = -15,
             ["mouseClickSrc"] = 0,
             ["shoulderJointZ_Left"] = 23,
-            ["forearmLength_Right"] = 30,
+            ["shoulderJointX_Left"] = -15,
             ["set_debug"] = false,
-            ["yawOffsetGlove_Right"] = 0,
-            ["forearmLength_Left"] = 30,
+            ["pitchOffsetGlove_Left"] = 0,
+            ["yawOffsetGlove_Left"] = 0,
             ["yawOffsetShoulder_Right"] = 0,
             ["useBending"] = false,
-            ["yawOffsetGlove_Left"] = 0,
             ["shoulderLength_Right"] = 40,
             ["pitchOffsetGlove_Right"] = 0,
-            ["pitchOffsetShoulder_Left"] = 0,
-            ["pitchOffsetShoulder_Right"] = 0,
-            ["set_attach"] = false,
-            ["shoulderLength_Left"] = 40,
-            ["shoulderJointY_Right"] = -23,
             ["shoulderJointY_Left"] = -23,
+            ["forearmLength_Left"] = 30,
+            ["shoulderLength_Left"] = 40,
+            ["set_attach"] = false,
+            ["pitchOffsetShoulder_Right"] = 0,
+            ["forearmLength_Right"] = 30,
+            ["pitchOffsetShoulder_Left"] = 0,
             ["set_symmetrically"] = false,
             ["yawOffsetShoulder_Left"] = 0,
-            ["shoulderJointX_Left"] = -15,
             ["enable"] = false,
-            ["pitchOffsetGlove_Left"] = 0,
+            ["shoulderJointY_Right"] = -23,
+            ["yawOffsetGlove_Right"] = 0,
         }, -- end of ["CaptoGlove"]
         ["FC3"] = 
         {
@@ -167,11 +167,11 @@ options =
             ["CPLocalList_Su-27"] = "chinese",
             ["CPLocalList_A-10A"] = "default",
             ["CPLocalList_Su-33"] = "default",
-            ["CPLocalList_F-15C"] = "default",
+            ["CPLocalList_MiG-29S"] = "default",
             ["CPLocalList_MiG-29A"] = "default",
             ["CPLocalList_J-11A"] = "default",
             ["CPLocalList_MiG-29G"] = "default",
-            ["CPLocalList_MiG-29S"] = "default",
+            ["CPLocalList_F-15C"] = "default",
         }, -- end of ["FC3"]
         ["F/A-18C"] = 
         {
@@ -182,27 +182,27 @@ options =
             ["F18RealisticTDC"] = false,
             ["mfdReflections"] = 0,
         }, -- end of ["F/A-18C"]
-        ["Hercules"] = 
+        ["VoiceChat"] = 
         {
-            ["NWS_Coupled_Separate_Input_Device"] = false,
-        }, -- end of ["Hercules"]
+            ["use_turn_servers_enabled"] = false,
+        }, -- end of ["VoiceChat"]
         ["A-4E-C"] = 
         {
             ["cssActivate"] = 15,
             ["wheelBrakeAssist"] = false,
-            ["throttleAcceleration"] = 50,
+            ["oldRadar"] = false,
             ["customRudderPressure"] = 50,
             ["trimSpeedRudder"] = 100,
-            ["customRollPressure"] = 50,
+            ["customPitchPressure"] = 50,
             ["throttleRate"] = 1,
-            ["trimSpeedRoll"] = 100,
+            ["customRudderRelease"] = 100,
             ["trimSpeedPitch"] = 100,
             ["cockpitShake"] = 100,
             ["customRollRelease"] = 100,
             ["customPitchRelease"] = 0,
-            ["oldRadar"] = false,
-            ["customRudderRelease"] = 100,
-            ["customPitchPressure"] = 50,
+            ["throttleAcceleration"] = 50,
+            ["trimSpeedRoll"] = 100,
+            ["customRollPressure"] = 50,
         }, -- end of ["A-4E-C"]
         ["AH-64D_BLK_II"] = 
         {
@@ -210,19 +210,22 @@ options =
             ["AH64HmdEye"] = 1,
             ["CPLocalList"] = "default",
             ["AH64BalaclavaCPG"] = true,
-            ["AH64LockoutDetent"] = 1,
-            ["AH64PedalsTrimmingMethod"] = 0,
+            ["AH64CyclicTrimmingMethod"] = 1,
+            ["AH64PedalsTrimmingMethod"] = 1,
             ["AH64TriggerGuardEnable"] = false,
             ["AH64CockpitShake"] = 50,
-            ["AH64AutoHandover"] = true,
+            ["AH64LockoutDetent"] = 1,
             ["AH64AIColorScheme"] = 0,
-            ["AH64CyclicTrimmingMethod"] = 0,
+            ["AH64AutoHandover"] = true,
             ["AH64IhadssMonocleVisible"] = true,
         }, -- end of ["AH-64D_BLK_II"]
-        ["VoiceChat"] = 
+        ["DCS-SRS"] = 
         {
-            ["use_turn_servers_enabled"] = false,
-        }, -- end of ["VoiceChat"]
+            ["srsOverlayHelpTextEnabled"] = true,
+            ["srsOverlayEnabled"] = true,
+            ["srsAutoLaunchEnabled"] = true,
+            ["srsOverlayCompactModeEnabled"] = false,
+        }, -- end of ["DCS-SRS"]
         ["LeapMotion"] = 
         {
             ["handUseThrottle"] = false,
@@ -252,15 +255,15 @@ options =
             ["aimingMarkRemove"] = true,
             ["infosOption"] = true,
         }, -- end of ["UH-60L"]
-        ["AH-6J"] = 
+        ["Hercules"] = 
         {
-            ["aimingMarkRemove"] = false,
-        }, -- end of ["AH-6J"]
+            ["NWS_Coupled_Separate_Input_Device"] = false,
+        }, -- end of ["Hercules"]
     }, -- end of ["plugins"]
     ["format"] = 1,
     ["sound"] = 
     {
-        ["main_output"] = "",
+        ["main_output"] = "{0.0.0.00000000}.{abe9c864-4477-4a50-affc-d5582a778e01}",
         ["FakeAfterburner"] = true,
         ["volume"] = 50,
         ["headphones_on_external_views"] = true,

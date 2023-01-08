@@ -48,9 +48,9 @@ dictionary =
 无线电菜单的F10子菜单可用于查询区域状态或呼叫支援。\
 ",
     ["DictKey_ActionText_30"] = "任务完成！服务器将于15秒后清档重启！",
-    ["DictKey_ActionText_36"] = "服务器定时重启！",
-    ["DictKey_sortie_5"] = "",
     ["DictKey_descriptionNeutralsTask_4"] = "",
+    ["DictKey_sortie_5"] = "",
+    ["DictKey_ActionText_36"] = "服务器定时重启！",
     ["DictKey_ActionText_19"] = "",
     ["DictKey_ActionText_31"] = "任务成功！",
     ["DictKey_descriptionRedTask_2"] = "",
