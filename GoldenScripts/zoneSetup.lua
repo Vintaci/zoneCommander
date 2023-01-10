@@ -38,8 +38,9 @@ end, {}, timer.getTime() + 15)
 -- <start> is the base value, all calculation is added onto this
 -- overall minimum <difficultyModifier> = <start> + <min>
 -- overall maximum <difficultyModifier> = <start> + <max>
--- once a <coalition> zone becomes neutral, <coalition>'s <difficultyModifier> increase <escalation>
--- every <fadeTime> seconds, <escalation>'s <difficultyModifier> decreases <fade>
+-- once a <coalition>'s zone becomes neutral, its <difficultyModifier> increases <escalation>
+-- once <coalition> captures a zone, its <difficultyModifier> decreases <escalation>
+-- if every <difficultyModifier> hasn't been changed for <fadeTime> seconds, <difficultyModifier> will decreases <fade>
 local difficulty = { start = 1, min = 0, max = 7, escalation = 1, fade = 0.001, fadeTime = 30, coalition = 1 }
 bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
