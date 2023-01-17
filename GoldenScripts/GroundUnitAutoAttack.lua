@@ -18,11 +18,12 @@ MoveToNearestEnemy = function(currentGroupName, searchRange, searchDuration)
     local enemyGroupList = coalition.getGroups(enemyCoalition, Group.Category.GROUND)
 
     local currentGroupPosition = mist.getLeadPos(currentGroupName)
+    local closestTargetDistance = searchRange
     local nearestEnemyGroupName = nil
 
     for index, value in pairs(enemyGroupList) do
         local enemyGroupDistance = mist.utils.get2DDist(currentGroupPosition, mist.getLeadPos(value))
-        local closestTargetDistance = searchRange
+
         if enemyGroupDistance <= closestTargetDistance then
             closestTargetDistance = enemyGroupDistance
             nearestEnemyGroupName = value:getName()
