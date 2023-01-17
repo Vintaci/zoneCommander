@@ -15,8 +15,8 @@ local vip_list = {
     },
 }
 
-local welcome_text_prefix = "====== VIP 欢迎消息 ======\n\n"
-local goodbye_text_prefix = "====== VIP 下线消息 ======\n\n"
+local welcome_text_prefix = "====== VIP 上线提醒 ======\\n\\n"
+local goodbye_text_prefix = "====== VIP 下线提醒 ======\\n\\n"
 local audio_path_prefix = "l10n/DEFAULT/Sounds/"
 
 local function vip_welcome(_player_id)
@@ -26,8 +26,7 @@ local function vip_welcome(_player_id)
     if _vip ~= nil and _vip.online == false then
         _vip.online = true
 
-        net.log("[GAC] trigger.action.outText(\"" .. welcome_text_prefix .. _vip.welcome_text .. "\", 45);")
-        net.dostring_in('server', "trigger.action.outText(\"" .. welcome_text_prefix .. _vip.welcome_text .. "\", 45);")
+        net.dostring_in('server', "trigger.action.outText(\"" .. welcome_text_prefix .. _vip.welcome_text .. "\\n\", 30)")
 
         if _vip.welcome_audio ~= nil then
             net.dostring_in('server', "trigger.action.outSound(\"" .. audio_path_prefix .. _vip.welcome_audio .. "\")")
@@ -42,7 +41,7 @@ local function vip_goodbye(_player_id)
     if _vip ~= nil and _vip.online == true then
         _vip.online = false
 
-        net.dostring_in('server', "trigger.action.outText(\"" .. goodbye_text_prefix .. _vip.goodbye_text .. "\", 45)")
+        net.dostring_in('server', "trigger.action.outText(\"" .. goodbye_text_prefix .. _vip.goodbye_text .. "\\n\", 30)")
     end
 end
 
