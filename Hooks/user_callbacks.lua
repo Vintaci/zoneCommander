@@ -1,22 +1,31 @@
 local vip_list = {
-    -- 晚风
-    ["78145d0ad9f139506511577d290fcb88"] = {
-        welcome_text = "欢迎下崽下一窝的大佬晚风加入服务器！",
-        welcome_audio = "WanFeng_Welcome.ogg",
-        goodbye_text = "老金恭送大佬晚风离开服务器~",
-        online = false,
-    },
     -- 老金
     ["197bd981b5ebe0f48479499ab7606856"] = {
-        welcome_text = "欢迎写不出来代码的秃头老金加入服务器！",
+        welcome_text = "欢迎 “写不出来代码的” 秃头老金 加入服务器！",
         welcome_audio = "LaoJin_Welcome.ogg",
-        goodbye_text = "啊~看来老金又去修他的BUG喽~",
+        online = false,
+    },
+    -- 晚风
+    ["78145d0ad9f139506511577d290fcb88"] = {
+        welcome_text = "欢迎 “下崽专业户” 晚风大佬 加入服务器！",
+        welcome_audio = "WanFeng_Welcome.ogg",
+        online = false,
+    },
+    -- 久久归一
+    ["ee5dfd2eb534f5ee9b622126af9081ef"] = {
+        welcome_text = "欢迎 抖音主播 #久久归一 加入服务器！",
+        welcome_audio = "JiuJiu_Welcome.ogg",
+        online = false,
+    },
+    -- 丹尼尔
+    ["00de5e7281279b56dac944d183727c6a"] = {
+        welcome_text = "欢迎 丹尼尔 来巡山！",
+        welcome_audio = "Daniel_Welcome.ogg",
         online = false,
     },
 }
 
-local welcome_text_prefix = "====== VIP 上线提醒 ======\\n\\n"
-local goodbye_text_prefix = "====== VIP 下线提醒 ======\\n\\n"
+local welcome_text_prefix = "===== VIP 上线提醒 =====\\n"
 local audio_path_prefix = "l10n/DEFAULT/Sounds/"
 
 local function vip_welcome(_player_id)
@@ -26,22 +35,11 @@ local function vip_welcome(_player_id)
     if _vip ~= nil and _vip.online == false then
         _vip.online = true
 
-        net.dostring_in('server', "trigger.action.outText(\"" .. welcome_text_prefix .. _vip.welcome_text .. "\\n\", 30)")
+        net.dostring_in('server', "trigger.action.outText(\"" .. welcome_text_prefix .. _vip.welcome_text .. "\", 30)")
 
         if _vip.welcome_audio ~= nil then
             net.dostring_in('server', "trigger.action.outSound(\"" .. audio_path_prefix .. _vip.welcome_audio .. "\")")
         end
-    end
-end
-
-local function vip_goodbye(_player_id)
-    local _player_ucid = net.get_player_info(_player_id, 'ucid')
-    local _vip = vip_list[_player_ucid]
-    
-    if _vip ~= nil and _vip.online == true then
-        _vip.online = false
-
-        net.dostring_in('server', "trigger.action.outText(\"" .. goodbye_text_prefix .. _vip.goodbye_text .. "\\n\", 30)")
     end
 end
 
@@ -98,10 +96,6 @@ end
 -- This will tirgger once a player gets into a slot successfully (player is assigned to the slot)
 function user_callbacks.onPlayerChangeSlot(_player_id)
     vip_welcome(_player_id)
-end
-
-function user_callbacks.onPlayerDisconnect(_player_id)
-    vip_goodbye(_player_id)
 end
 
 function user_callbacks.onPlayerConnect(_player_id)
