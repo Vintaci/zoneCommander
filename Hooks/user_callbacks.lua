@@ -17,10 +17,22 @@ local vip_list = {
         welcome_audio = "JiuJiu_Welcome.ogg",
         online = false,
     },
-    -- 丹尼尔
+    -- 丹尼尔(Steam)
     ["00de5e7281279b56dac944d183727c6a"] = {
         welcome_text = "欢迎 丹尼尔 来巡山！",
         welcome_audio = "Daniel_Welcome.ogg",
+        online = false,
+    },
+    -- 丹尼尔(ED)
+    ["a2d6cebef6d8371b53c539ca9e55eb31"] = {
+        welcome_text = "欢迎 丹尼尔 来巡山！",
+        welcome_audio = "Daniel_Welcome.ogg",
+        online = false,
+    },
+    -- 电电
+    ["d72ab8844f3b0849f79618330da21f7a"] = {
+        welcome_text = "<<警告！友机电电高速入境>>",
+        welcome_audio = "DianDian_Welcome.ogg",
         online = false,
     },
 }
