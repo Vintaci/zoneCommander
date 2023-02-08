@@ -7,7 +7,7 @@ local vip_list = {
     },
     -- 晚风
     ["78145d0ad9f139506511577d290fcb88"] = {
-        welcome_text = "欢迎 “下崽专业户” 晚风大佬 加入服务器！",
+        welcome_text = "欢迎 “下崽专业户” 晚风 加入服务器！",
         welcome_audio = "WanFeng_Welcome.ogg",
         online = false,
     },
@@ -33,6 +33,12 @@ local vip_list = {
     ["d72ab8844f3b0849f79618330da21f7a"] = {
         welcome_text = "<<警告！友机电电高速入境>>",
         welcome_audio = "DianDian_Welcome.ogg",
+        online = false,
+    },
+    -- 天空八戒
+    ["817d57c92a0373b9145d8924f8eb1e88"] = {
+        welcome_text = "欢迎 “头像屌的菜鸟” 天空八戒 进入服务器",
+        welcome_audio = "TianKongBaJie_Welcome.ogg",
         online = false,
     },
 }
