@@ -1,16 +1,9 @@
--- Make functions local to make them run faster
-local pairs = pairs
-local ipairs = ipairs
-local table = table
-local Group = Group
-local lfs = lfs
-local timer = timer
-local trigger = trigger
-local env = env
-local mist = mist
-local Utils = Utils
-local file = file
-local GroupFunctions = GroupFunctions
+-- Override player statistic functions to disable them
+function BattleCommander:addTempStat(playerName, statKey, value)
+end
+
+function BattleCommander:addStat(playerName, statKey, value)
+end
 
 -- BattleCommander Initialization
 
