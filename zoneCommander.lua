@@ -2825,6 +2825,7 @@ LogisticCommander = {}
 do
 	LogisticCommander.allowedTypes = {}
 	LogisticCommander.allowedTypes['Ka-50'] = true
+	LogisticCommander.allowedTypes['Ka-50_3'] = true
 	LogisticCommander.allowedTypes['Mi-24P'] = true
 	LogisticCommander.allowedTypes['SA342Mistral'] = true
 	LogisticCommander.allowedTypes['SA342L'] = true
@@ -3283,7 +3284,7 @@ do
 	function HercCargoDropSupply.ProcessCargo(shotevent)
 		local cargo = shotevent.weapon
 		local zn = HercCargoDropSupply.battleCommander:getZoneOfWeapon(cargo)
-		if zn and zn.active and shotevent.initiator then
+		if zn and zn.active and shotevent.initiator and shotevent.initiator:isExist() then
 			local herc = HercCargoDropSupply.herculesRegistry[shotevent.initiator:getName()]
 			if not herc or herc.takeoffzone == zn.zone then
 				cargo:destroy()
