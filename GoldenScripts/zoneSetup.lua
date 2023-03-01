@@ -1,10 +1,3 @@
--- Override player statistic functions to disable them
-function BattleCommander:addTempStat(playerName, statKey, value)
-end
-
-function BattleCommander:addStat(playerName, statKey, value)
-end
-
 -- BattleCommander Initialization
 
 local filepath = 'Caucasus-S-Saved-Data.lua'
