@@ -918,28 +918,28 @@ end,
 	end)
 
 local spawn_awacs_e2d = function(sender)
-	local gr = Group.getByName('awacs-e2d')
+	local gr = Group.getByName('awacs-e2d-255am')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
 		return 'E-2D 空中预警机 仍在执行任务\n呼号：Darkstar\n无线电频率：255.00 MHz AM'
 	end
-	mist.respawnGroup('awacs-e2d', true)
+	mist.respawnGroup('awacs-e2d-255am', true)
 	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Darkstar\n无线电频率：255.00 MHz AM', 60)
-	GroupFunctions.delayedDestroyGroupByName("awacs-e2d", 3600)
+	GroupFunctions.delayedDestroyGroupByName("awacs-e2d-255am", 3600)
 end
-Group.getByName('awacs-e2d'):destroy()
-bc:registerShopItem('awacs-e2d', 'E-2D 空中预警机(AWACS)', 100, spawn_awacs_e2d, spawn_awacs_e2d)
+Group.getByName('awacs-e2d-255am'):destroy()
+bc:registerShopItem('awacs-e2d-255am', 'E-2D 空中预警机(AWACS)', 100, spawn_awacs_e2d, spawn_awacs_e2d)
 
 local spawn_awacs_a50 = function(sender)
-	local gr = Group.getByName('awacs-a50')
+	local gr = Group.getByName('awacs-a50-124am')
 	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
 		return 'A-50 空中预警机 仍在执行任务\n呼号：Overlord\n无线电频率：124.00 MHz AM'
 	end
-	mist.respawnGroup('awacs-a50', true)
+	mist.respawnGroup('awacs-a50-124am', true)
 	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Overlord\n无线电频率：124.00 MHz AM', 60)
-	GroupFunctions.delayedDestroyGroupByName("awacs-a50", 3600)
+	GroupFunctions.delayedDestroyGroupByName("awacs-a50-124am", 3600)
 end
-Group.getByName('awacs-a50'):destroy()
-bc:registerShopItem('awacs-a50', 'A-50 空中预警机(AWACS)', 100, spawn_awacs_a50, spawn_awacs_a50)
+Group.getByName('awacs-a50-124am'):destroy()
+bc:registerShopItem('awacs-a50-124am', 'A-50 空中预警机(AWACS)', 100, spawn_awacs_a50, spawn_awacs_a50)
 
 local spawnAirrefuelSoft = function(sender)
 	local gr = Group.getByName('airrefuel-soft')
@@ -1138,8 +1138,8 @@ bc:addShopItem(2, 'cas', -1)
 bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'jtac', -1)
 bc:addShopItem(2, 'smoke', -1)
-bc:addShopItem(2, 'awacs-e2d', -1)
-bc:addShopItem(2, 'awacs-a50', -1)
+bc:addShopItem(2, 'awacs-e2d-255am', -1)
+bc:addShopItem(2, 'awacs-a50-124am', -1)
 bc:addShopItem(2, 'airrefuel-soft', -1)
 bc:addShopItem(2, 'airrefuel-hard', -1)
 bc:addShopItem(2, 'jam', -1)
@@ -1387,7 +1387,7 @@ mist.scheduleFunction(function(event, sender)
 end, {}, timer.getTime() + 30, 1800)
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("===== SRS语音频道 =====\n\n- 251.000 MHz 公共频道：猫猫狗狗，闲聊扯皮\n- 120.000 MHz 制空频道：用于对空协同与预警\n- 121.000 MHz 对地频道：用于对地作战协同与目标分配\n- 122.000 MHz AI预警机频道(尚未实装)：由Overlord-Bot人工智能响应玩家的语音请求，提供实时战场播报\n\n强烈建议各位玩家加入语音频道，加强沟通，相互配合，提升作战效率！\n", 60)
+	trigger.action.outText("===== SRS语音频道 =====\n\n- 251.000 MHz 公共频道：猫猫狗狗，闲聊扯皮\n- 120.000 MHz 制空频道：用于对空协同与预警\n- 121.000 MHz 对地频道：用于对地作战协同与目标分配\n- 122.000 MHz 预警机频道：由人工智能响应玩家的语音请求，提供战场播报\n\n强烈建议各位玩家加入语音频道，加强沟通，相互配合，提升作战效率！\n", 60)
 end, {}, timer.getTime() + 35, 1800)
 
 mist.scheduleFunction(function(event, sender)
