@@ -41,6 +41,12 @@ local vip_list = {
         welcome_audio = "TianKongBaJie_Welcome.ogg",
         online = false,
     },
+    -- LeftFeather
+    ["fabca83fd02de07dd2feb69e944fc394"] = {
+        welcome_text = "LeftFeather 的诺基亚响了",
+        welcome_audio = "LeftFeather_Welcome.ogg",
+        online = false,
+    },
 }
 
 local welcome_text_prefix = "===== VIP 上线提醒 =====\\n"
