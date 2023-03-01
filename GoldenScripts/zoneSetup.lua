@@ -967,7 +967,7 @@ bc:registerShopItem('airrefuel-hard', 'KC-135 空中加油机(硬管)', 100, spa
 
 Group.getByName('ewAircraft'):destroy()
 local jamMenu = nil
-bc:registerShopItem('jam', '雷达干扰 (Radar Jamming)', 500, function(sender)
+bc:registerShopItem('jam', '雷达干扰 (Radar Jamming)', 2500, function(sender)
 	local gr = Group.getByName('ewAircraft')
 	if Utils.isGroupActive(gr) then
 		return '雷达干扰任务仍在进行中'
