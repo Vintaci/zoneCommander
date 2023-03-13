@@ -1375,16 +1375,16 @@ mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 
 -- Server Info Hint
 
-mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("欢迎来到 [#1金家寨] <高加索：攻占模式> 服务器！\n\nQQ群：750508967\nKOOK(开黑啦)语音频道：95367853\n", 60)
-end, {}, timer.getTime() + 30, 1800)
+-- mist.scheduleFunction(function(event, sender)
+-- 	trigger.action.outText("欢迎来到 [#1金家寨] <高加索：攻占模式> 服务器！\n\nQQ群：750508967\nKOOK(开黑啦)语音频道：95367853\n", 60)
+-- end, {}, timer.getTime() + 30, 1800)
 
-mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("===== SRS语音频道 =====\n\n- 251.000 MHz 公共频道：猫猫狗狗，闲聊扯皮\n- 120.000 MHz 制空频道：用于对空协同与预警\n- 121.000 MHz 对地频道：用于对地作战协同与目标分配\n- 122.000 MHz 预警机频道：由人工智能响应玩家的语音请求，提供战场播报\n\n强烈建议各位玩家加入语音频道，加强沟通，相互配合，提升作战效率！\n", 60)
-end, {}, timer.getTime() + 35, 1800)
+-- mist.scheduleFunction(function(event, sender)
+-- 	trigger.action.outText("===== SRS语音频道 =====\n\n- 251.000 MHz 公共频道：猫猫狗狗，闲聊扯皮\n- 120.000 MHz 制空频道：用于对空协同与预警\n- 121.000 MHz 对地频道：用于对地作战协同与目标分配\n- 122.000 MHz 预警机频道：由人工智能响应玩家的语音请求，提供战场播报\n\n强烈建议各位玩家加入语音频道，加强沟通，相互配合，提升作战效率！\n", 60)
+-- end, {}, timer.getTime() + 35, 1800)
 
-mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("===== 服务器公告 =====\n\n本服务器设有自动封禁系统，攻击友军后请尽快道歉并获取谅解。如果您不幸被自动封禁，请在QQ群内联系老金解封。\n\n服务器的日常运营和硬件迭代都离不开庞大的资金支持。如果您觉得本服务器很好玩，欢迎进行赞助！\n请注意，捐助本服务器不会为您带来任何意义上的特权，请理性捐赠，量力而行，谢谢！\n", 60)
-end, {}, timer.getTime() + 40, 1800)
+-- mist.scheduleFunction(function(event, sender)
+-- 	trigger.action.outText("===== 服务器公告 =====\n\n本服务器设有自动封禁系统，攻击友军后请尽快道歉并获取谅解。如果您不幸被自动封禁，请在QQ群内联系老金解封。\n\n服务器的日常运营和硬件迭代都离不开庞大的资金支持。如果您觉得本服务器很好玩，欢迎进行赞助！\n请注意，捐助本服务器不会为您带来任何意义上的特权，请理性捐赠，量力而行，谢谢！\n", 60)
+-- end, {}, timer.getTime() + 40, 1800)
 
 -- Server Info Hint Done
