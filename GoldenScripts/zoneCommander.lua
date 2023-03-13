@@ -298,10 +298,10 @@ end
 JTAC = {}
 do
 	JTAC.categories = {}
-	JTAC.categories['SAM'] = {'SAM SR', 'SAM TR', 'IR Guided SAM','SAM LL','SAM CC'}
-	JTAC.categories['Infantry'] = {'Infantry'}
-	JTAC.categories['Armor'] = {'Tanks','IFV','APC'}
-	JTAC.categories['Support'] = {'Unarmed vehicles','Artillery'}
+	JTAC.categories['防空单位(雷达制导)'] = {'SAM SR','SAM TR','SAM LL','SAM CC'} -- Edited, refactor JTAC categories
+	JTAC.categories['防空单位(红外制导)'] = {'IR Guided SAM'}
+	JTAC.categories['地面目标(装甲载具)'] = {'Tanks','IFV','APC','Artillery'}
+	JTAC.categories['地面目标(低威胁度)'] = {'Unarmed vehicles','Infantry'} -- Edited, done
 	
 	--{name = 'groupname'}
 	function JTAC:new(obj)
