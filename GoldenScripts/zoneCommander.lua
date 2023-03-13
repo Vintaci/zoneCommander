@@ -448,13 +448,13 @@ do
 					toprint = 'Priority targets: '..self.prioname..'\n'
 				end
 				
-				toprint = toprint..'Lasing '..tgttype..' at '..self.tgtzone.zone..'\nCode: '..self.laserCode..'\n'
+				toprint = toprint..'Lasing '..tgttype..' at '..self.tgtzone.zone..' | Code: '..self.laserCode -- Edited, compact JTAC report
 				local lat,lon,alt = coord.LOtoLL(pnt)
 				local mgrs = coord.LLtoMGRS(coord.LOtoLL(pnt))
-				toprint = toprint..'\nDDM:  '.. mist.tostringLL(lat,lon,3)
-				toprint = toprint..'\nDMS:  '.. mist.tostringLL(lat,lon,2,true)
-				toprint = toprint..'\nMGRS: '.. mist.tostringMGRS(mgrs, 5)
-				toprint = toprint..'\n\nAlt: '..math.floor(alt)..'m'..' | '..math.floor(alt*3.280839895)..'ft'
+				toprint = toprint..' | Alt: '..math.floor(alt)..'m'..' ('..math.floor(alt*3.280839895)..'ft)'
+				toprint = toprint..'\nDDM: '.. mist.tostringLL(lat,lon,3)
+				toprint = toprint..'\nDMS: '.. mist.tostringLL(lat,lon,2,true)
+				toprint = toprint..'\nMGRS: '.. mist.tostringMGRS(mgrs, 5)-- Edited done
 			else
 				makeitlast = false
 				toprint = 'No Target'
