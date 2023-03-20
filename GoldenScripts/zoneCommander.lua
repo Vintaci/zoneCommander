@@ -3184,12 +3184,12 @@ do
 							missionCommands.addCommandForGroup(groupid, 'Unload supplies', cargomenu, self.context.unloadSupplies, self.context, groupname)
 							missionCommands.addCommandForGroup(groupid, 'List supply zones', cargomenu, self.context.listSupplyZones, self.context, groupname)
 							
-							local csar = missionCommands.addSubMenuForGroup(groupid, 'CSAR', cargomenu)
-							missionCommands.addCommandForGroup(groupid, 'Pick up pilot', csar, self.context.loadPilot, self.context, groupname)
-							missionCommands.addCommandForGroup(groupid, 'Drop off pilot', csar, self.context.unloadPilot, self.context, groupname)
-							missionCommands.addCommandForGroup(groupid, 'Info on closest pilot', csar, self.context.infoPilot, self.context, groupname)
-							missionCommands.addCommandForGroup(groupid, 'Deploy smoke at closest pilot', csar, self.context.markPilot, self.context, groupname)
-							missionCommands.addCommandForGroup(groupid, 'Deploy flare at closest pilot', csar, self.context.flarePilot, self.context, groupname)
+							-- local csar = missionCommands.addSubMenuForGroup(groupid, 'CSAR', cargomenu) -- Edited, Remove CSAR mission as it is not functional
+							-- missionCommands.addCommandForGroup(groupid, 'Pick up pilot', csar, self.context.loadPilot, self.context, groupname)
+							-- missionCommands.addCommandForGroup(groupid, 'Drop off pilot', csar, self.context.unloadPilot, self.context, groupname)
+							-- missionCommands.addCommandForGroup(groupid, 'Info on closest pilot', csar, self.context.infoPilot, self.context, groupname)
+							-- missionCommands.addCommandForGroup(groupid, 'Deploy smoke at closest pilot', csar, self.context.markPilot, self.context, groupname)
+							-- missionCommands.addCommandForGroup(groupid, 'Deploy flare at closest pilot', csar, self.context.flarePilot, self.context, groupname)
 							
 							local main = missionCommands.addSubMenuForGroup(groupid, 'Mark Zone', cargomenu)
 							local sub1
@@ -3217,18 +3217,18 @@ do
 				end
 			end
 			
-			if event.id == world.event.S_EVENT_LANDING_AFTER_EJECTION then
-				table.insert(self.context.ejectedPilots, event.initiator)
+			-- if event.id == world.event.S_EVENT_LANDING_AFTER_EJECTION then -- Edited, Remove CSAR mission as it is not functional
+			-- 	table.insert(self.context.ejectedPilots, event.initiator)
 				
-				for i,v in pairs(self.context.groupMenus) do
-					self.context:printPilotInfo(event.initiator, i, nil, 15)
-				end
-			end
+			-- 	for i,v in pairs(self.context.groupMenus) do
+			-- 		self.context:printPilotInfo(event.initiator, i, nil, 15)
+			-- 	end
+			-- end
 		end
 		
 		world.addEventHandler(ev)
 		
-		mist.scheduleFunction(self.update, {self}, timer.getTime() + 10, 10)
+		-- mist.scheduleFunction(self.update, {self}, timer.getTime() + 10, 10) -- Edited, Remove CSAR mission as it is not functional
 	end
 end
 
