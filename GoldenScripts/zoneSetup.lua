@@ -917,7 +917,7 @@ local spawn_awacs_e2d = function(sender)
 	end
 	mist.respawnGroup('awacs-e2d-255am', true)
 	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Darkstar\n无线电频率：255.00 MHz AM', 60)
-	GroupFunctions.delayedDestroyGroupByName("awacs-e2d-255am", 3600)
+	GroupFunctions.delayedDestroyGroupByName("awacs-e2d-255am", 3600, "E-2D 空中预警机 已离开空域")
 end
 Group.getByName('awacs-e2d-255am'):destroy()
 bc:registerShopItem('awacs-e2d-255am', 'E-2D 空中预警机(AWACS)', 100, spawn_awacs_e2d, spawn_awacs_e2d)
@@ -928,8 +928,8 @@ local spawn_awacs_a50 = function(sender)
 		return 'A-50 空中预警机 仍在执行任务\n呼号：Overlord\n无线电频率：124.00 MHz AM'
 	end
 	mist.respawnGroup('awacs-a50-124am', true)
-	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Overlord\n无线电频率：124.00 MHz AM', 60)
-	GroupFunctions.delayedDestroyGroupByName("awacs-a50-124am", 3600)
+	trigger.action.outTextForCoalition(2, 'A-50 空中预警机已上线\n呼号：Overlord\n无线电频率：124.00 MHz AM', 60)
+	GroupFunctions.delayedDestroyGroupByName("awacs-a50-124am", 3600, "A-50 空中预警机 已离开空域")
 end
 Group.getByName('awacs-a50-124am'):destroy()
 bc:registerShopItem('awacs-a50-124am', 'A-50 空中预警机(AWACS)', 100, spawn_awacs_a50, spawn_awacs_a50)
@@ -941,7 +941,7 @@ local spawnAirrefuelSoft = function(sender)
 	end
 	mist.respawnGroup('airrefuel-soft', true)
 	trigger.action.outTextForCoalition(2, 'KC-135MPRS 空中加油机(软管) 已上线\n呼号：Texaco\n无线电频率：251.00 MHz AM', 60)
-	GroupFunctions.delayedDestroyGroupByName("airrefuel-soft", 3600)
+	GroupFunctions.delayedDestroyGroupByName("airrefuel-soft", 3600, "KC-135MPRS 空中加油机(软管) 已离开空域")
 end
 Group.getByName('airrefuel-soft'):destroy()
 bc:registerShopItem('airrefuel-soft', 'KC-135MPRS 空中加油机(软管)', 100, spawnAirrefuelSoft, spawnAirrefuelSoft)
@@ -953,7 +953,7 @@ local spawnAirrefuelHard = function(sender)
 	end
 	mist.respawnGroup('airrefuel-hard', true)
 	trigger.action.outTextForCoalition(2, 'KC-135 空中加油机(硬管) 已上线\n呼号：Arco\n无线电频率：252.00 MHz AM', 60)
-	GroupFunctions.delayedDestroyGroupByName("airrefuel-hard", 3600)
+	GroupFunctions.delayedDestroyGroupByName("airrefuel-hard", 3600, "KC-135 空中加油机(硬管) 已离开空域")
 end
 Group.getByName('airrefuel-hard'):destroy()
 bc:registerShopItem('airrefuel-hard', 'KC-135 空中加油机(硬管)', 100, spawnAirrefuelHard, spawnAirrefuelHard)

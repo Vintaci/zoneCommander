@@ -28,10 +28,14 @@ function GroupFunctions.destroyGroups(groups)
 	end
 end
 
-function GroupFunctions.delayedDestroyGroupByName(name, delay)
-    mist.scheduleFunction(function(name)
-		GroupFunctions.destroyGroup(Group.getByName(name))
-    end, {name}, timer.getTime() + delay)
+function GroupFunctions.delayedDestroyGroupByName(name, delay, message)
+    mist.scheduleFunction(function(name, message)
+        local group = Group.getByName(name)
+        if message ~= nil then
+            trigger.action.outTextForCoalition(group:getCoalition(), message, 60)
+        end
+        GroupFunctions.destroyGroup(group)
+    end, {name, message}, timer.getTime() + delay)
 end
 
 function GroupFunctions.destroyGroupsByNames(names)
