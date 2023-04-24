@@ -2843,6 +2843,8 @@ do
 	LogisticCommander.allowedTypes['UH-1H'] = true
 	LogisticCommander.allowedTypes['Mi-8MT'] = true
 	LogisticCommander.allowedTypes['Hercules'] = true
+	LogisticCommander.allowedTypes['TF-51D'] = true -- Edited, add unarmed TF-51D as logistic vehicle
+	LogisticCommander.allowedTypes['Yak-52'] = true -- Edited, add unarmed Yak-52 as logistic vehicle
 	
 	LogisticCommander.maxCarriedPilots = 4
 	
