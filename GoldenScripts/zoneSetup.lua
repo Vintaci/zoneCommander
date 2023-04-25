@@ -38,9 +38,9 @@ local hint = "任务目标：占领所有区域！"
 
 local zoneUpgrades = {
 	normal = {
-		blue = { "b-defense-1", "b-defense-2", "b-defense-3" },
-		red = { "r-defense-1", "r-defense-2", "r-defense-3" }
-	}
+		blue = { "b-defense-halftrack", "b-defense-halftrack", "b-defense-aa", "b-defense-aa", "b-defense-tank" },
+		red = { "r-defense-halftrack", "r-defense-halftrack", "r-defense-aa", "r-defense-aa", "r-defense-tank" }
+	},
 }
 
 local zones = {
@@ -68,7 +68,7 @@ local zones = {
 		zoneCommanderProperties = {
 			zone = "Rucq",
 			side = 1,
-			level = 5,
+			level = 3,
 			upgrades = zoneUpgrades.normal,
 			crates = {},
 			flavorText = hint,
@@ -101,7 +101,12 @@ local zones = {
 			flavorText = hint,
 			income = 0,
 		},
-		dispatches = {},
+		dispatches = {
+			{ name = "r-supply-lanth-rucq-yak52-1", mission = "supply", targetzone = "Rucq" },
+
+			{ name = "r-patrol-lanth-lanth-i16-1", mission = "patrol", targetzone = "Lanth" },
+			{ name = "r-patrol-lanth-lanth-mosquito-1", mission = "patrol", targetzone = "Lanth" },
+		},
 		criticalObjects = {},
 		connections = {
 			"Somm",
@@ -118,37 +123,13 @@ local zones = {
 			flavorText = hint,
 			income = 0,
 		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {},
-	},
+		dispatches = {
+			{ name = "r-patrol-somm-somm-fw190a8-1", mission = "patrol", targetzone = "Somm" },
+			{ name = "r-patrol-somm-somm-p51d30-1", mission = "patrol", targetzone = "Somm" },
 
-	kenley = {
-		zoneCommanderProperties = {
-			zone = "Kenley",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = {},
-			flavorText = hint,
-			income = 0,
+			{ name = "r-attack-somm-rucq-i16-1", mission = "attack", targetzone = "Rucq" },
+			{ name = "r-attack-somm-lanth-mosquito-1", mission = "attack", targetzone = "Lanth" },
 		},
-		dispatches = {},
-		criticalObjects = {},
-		connections = {},
-	},
-
-	villa = {
-		zoneCommanderProperties = {
-			zone = "Villa",
-			side = 1,
-			level = 3,
-			upgrades = zoneUpgrades.normal,
-			crates = {},
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {},
 		criticalObjects = {},
 		connections = {},
 	},
@@ -223,7 +204,7 @@ missionCompleteCheckSheduler = mist.scheduleFunction(missionCompleteCheck, {}, t
 
 -- Scheduled Restart
 
-local restartTime = 10800 -- 3 hours
+local restartTime = 43200 -- 6 hours
 local restartHintTime = { 60, 180, 300, 900 }
 
 for key, value in pairs(restartHintTime) do -- Restart hint
@@ -243,7 +224,6 @@ end, {}, timer.getTime() + restartTime)
 -- Scheduled Restart Done
 
 -- Blue Support
-
 
 local upgradeMenu = nil
 bc:registerShopItem('supplies', '补给友方占领区', 1000, function(sender)
@@ -331,6 +311,7 @@ end,
 
 bc:addShopItem(2, 'supplies', -1)
 bc:addShopItem(2, 'smoke', -1)
+
 -- bc:addFunds(2, 100000)
 
 -- Blue Support Done
@@ -338,7 +319,6 @@ bc:addShopItem(2, 'smoke', -1)
 -- Red Support
 
 -- bc:addFunds(1, 100000)
--- BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 1, decissionVariance = 1, skipChance = 0 }):init()
 
 BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 15 * 60, decissionVariance = 15 * 60, skipChance = 25 }):init()
 

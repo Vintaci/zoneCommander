@@ -1582,7 +1582,7 @@ warehouses =
             ["suppliers"] = 
             {
             }, -- end of ["suppliers"]
-            ["coalition"] = "BLUE",
+            ["coalition"] = "NEUTRAL",
             ["jet_fuel"] = 
             {
                 ["InitFuel"] = 100,
@@ -1620,7 +1620,7 @@ warehouses =
             ["suppliers"] = 
             {
             }, -- end of ["suppliers"]
-            ["coalition"] = "BLUE",
+            ["coalition"] = "NEUTRAL",
             ["jet_fuel"] = 
             {
                 ["InitFuel"] = 100,
