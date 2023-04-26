@@ -75,8 +75,8 @@ local zones = {
 			income = 1,
 		},
 		dispatches = {
-			{ name = "r-supply-rucq-somm-yak52-1", mission = "supply", targetzone = "Somm" },
-			{ name = "r-supply-rucq-lanth-yak52-1", mission = "patrol", targetzone = "Lanth" },
+			{ name = "r-supply-rucq-somm-tf51d-1", mission = "supply", targetzone = "Somm" },
+			{ name = "r-supply-rucq-lanth-tf51d-1", mission = "supply", targetzone = "Lanth" },
 
 			{ name = "r-patrol-rucq-rucq-bf109-1", mission = "patrol", targetzone = "Rucq" },
 			{ name = "r-patrol-rucq-rucq-fw190d9-1", mission = "patrol", targetzone = "Rucq" },
@@ -102,7 +102,7 @@ local zones = {
 			income = 0,
 		},
 		dispatches = {
-			{ name = "r-supply-lanth-rucq-yak52-1", mission = "supply", targetzone = "Rucq" },
+			{ name = "r-supply-lanth-rucq-tf51d-1", mission = "supply", targetzone = "Rucq" },
 
 			{ name = "r-patrol-lanth-lanth-i16-1", mission = "patrol", targetzone = "Lanth" },
 			{ name = "r-patrol-lanth-lanth-mosquito-1", mission = "patrol", targetzone = "Lanth" },
