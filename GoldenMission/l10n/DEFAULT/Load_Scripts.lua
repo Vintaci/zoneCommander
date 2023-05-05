@@ -11,7 +11,7 @@ local script_list =
     "zoneCommander.lua",
     "zoneSetup.lua",
     -- "Hercules_Cargo.lua",
-    -- "Splash_Damage_2_0.lua",
+    "Splash_Damage_2_0.lua",
 }
 
 local function load_scripts(path, list)
