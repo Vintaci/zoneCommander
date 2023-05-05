@@ -47,6 +47,12 @@ local vip_list = {
         welcome_audio = "LeftFeather_Welcome.ogg",
         online = false,
     },
+    -- 蛇标
+    ["c28d7758bbba015847895f4389fc8e68"] = {
+        welcome_text = "欢迎 尊贵的VIP玩家 蛇标 进入服务器",
+        welcome_audio = "SheBiao_Welcome.ogg",
+        online = false,
+    },
 }
 
 local welcome_text_prefix = "===== VIP 上线提醒 =====\\n"
