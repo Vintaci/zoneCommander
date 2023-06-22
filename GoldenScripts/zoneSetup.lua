@@ -425,7 +425,7 @@ local zones = {
 			{ name = "r-attack-kobuleti-senaki-ka50_3", mission = "attack", targetzone = "Senaki" },
 
 			{ name = "r-patrol-kobuleti-kobuleti-m2000c", mission = "patrol", targetzone = "Kobuleti" },
-			{ name = "r-patrol-kobuleti-sukhumi-f15c", mission = "patrol", targetzone = "Sukhumi" },
+			{ name = "r-patrol-kobuleti-sukhumi-f15e", mission = "patrol", targetzone = "Sukhumi" },
 
 			{ name = "r-supply-kobuleti-senaki-mi24p", mission = "supply", targetzone = "Senaki" },
 			{ name = "r-supply-kobuleti-port-mi24p", mission = "supply", targetzone = "Port" },
