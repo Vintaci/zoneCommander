@@ -1,4 +1,4 @@
-local script_path = "C:/Users/GoldJohnKing/Saved Games/DCS.openbeta/Missions/Scripts/"
+local script_path = "D:/GitRepos/zoneCommander/GoldenScripts/"
 
 local script_list =
 {
@@ -21,7 +21,7 @@ local function load_scripts(path, list)
 end
 
 if lfs then
-    script_path = lfs.writedir() .. "Missions/Scripts/"
+    script_path = lfs.writedir() .. "Missions/Scripts/Foothold/"
 
     env.info("Foothold - LFS available, using relative script load path: " .. script_path)
 else
