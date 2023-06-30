@@ -627,7 +627,7 @@ local missionCompleteCheck = function(event, sender)
 
 		mist.scheduleFunction(function(event, sender)
 			os.remove(filepath)
-			trigger.action.setUserFlag("TriggerFlagMissionComplete", true)
+			trigger.action.setUserFlag("FLAG_MISSION_RESTART", true)
 		end, {}, timer.getTime() + 90)
 	end
 end
@@ -656,7 +656,7 @@ mist.scheduleFunction(function(event, sender)
 end, {}, timer.getTime() + restartTime - 15)
 
 mist.scheduleFunction(function(event, sender) -- Restart
-	trigger.action.setUserFlag("TriggerFlagScheduledRestart", true)
+	trigger.action.setUserFlag("FLAG_MISSION_RESTART", true)
 end, {}, timer.getTime() + restartTime)
 
 -- Scheduled Restart Done
