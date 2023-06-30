@@ -87,14 +87,6 @@ end
 
 -- Slot block check
 
-local function server_init_check()
-    local _status, _error = net.dostring_in('server', "return trigger.misc.getUserFlag(\"TriggerFlagInitDone\")")
-
-    if _status and tonumber(_status) == 0 then
-        return "服务器仍在初始化中，请稍后……"
-    end
-end
-
 local function slot_block_check(_slot_id)
     local _group_name = DCS.getUnitProperty(_slot_id, DCS.UNIT_GROUPNAME)
     local _status, _error = net.dostring_in('server', "return trigger.misc.getUserFlag(\"" .. _group_name .. "\")")
@@ -156,7 +148,6 @@ local function mission_restart_check()
 
     -- Get a random mission
     local current_mission = DCS.getMissionFilename()
-    net.log("GJK Current Mission " .. current_mission)
     local active_mission_list = {}
     for key, value in pairs(mission_list) do
         if key ~= current_mission then
@@ -179,13 +170,7 @@ local user_callbacks = {}
 
 -- This will tirgger once a player selects a slot
 function user_callbacks.onPlayerTryChangeSlot(_player_id, _side, _slot_id)
-    local _reason = server_init_check()
-
-    if _reason ~= nil then
-        return kick_user_to_spectator(_player_id, _reason)
-    end
-
-    _reason = slot_block_check(_slot_id)
+    local _reason = slot_block_check(_slot_id)
 
     if _reason ~= nil then
         return kick_user_to_spectator(_player_id, _reason)
