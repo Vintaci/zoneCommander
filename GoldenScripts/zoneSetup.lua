@@ -614,7 +614,7 @@ local missionCompleteCheck = function(event, sender)
 		mist.removeFunction(missionCompleteCheckSheduler)
 
 		mist.scheduleFunction(function(event, sender)
-			trigger.action.outText("服务器即将清档重启！", 60)
+			trigger.action.outText("服务器即将清档重启！", 180)
 		end, {}, timer.getTime() + 75)
 
 		mist.scheduleFunction(function(event, sender)
@@ -644,7 +644,7 @@ for key, value in pairs(restartHintTime) do -- Restart hint
 end
 
 mist.scheduleFunction(function(event, sender)
-	trigger.action.outText("服务器即将定时重启！", 60)
+	trigger.action.outText("服务器即将定时重启！", 180)
 end, {}, timer.getTime() + restartTime - 15)
 
 mist.scheduleFunction(function(event, sender) -- Restart
