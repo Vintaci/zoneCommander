@@ -611,7 +611,6 @@ local missionCompleteCheck = function(event, sender)
 
 	if done then
 		trigger.action.outText("敌军已被彻底击败！任务完成！ \n\n服务器将于90秒后清档重启！", 90)
-		mist.removeFunction(missionCompleteCheckSheduler)
 
 		mist.scheduleFunction(function(event, sender)
 			trigger.action.outText("服务器即将清档重启！", 180)
@@ -621,6 +620,8 @@ local missionCompleteCheck = function(event, sender)
 			os.remove(filepath)
 			trigger.action.setUserFlag("FLAG_MISSION_RESTART", true)
 		end, {}, timer.getTime() + 90)
+
+		mist.removeFunction(missionCompleteCheckSheduler)
 	end
 end
 
