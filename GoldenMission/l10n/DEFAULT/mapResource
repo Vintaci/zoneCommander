@@ -1,6 +1,6 @@
 mapResource = 
 {
-    ["ResKey_ImageBriefing_76"] = "pay.jpg",
-    ["ResKey_ImageBriefing_77"] = "title.jpg",
+    ["ResKey_ImageBriefing_86"] = "pay_wechat.jpg",
+    ["ResKey_ImageBriefing_87"] = "pay_alipay.jpg",
     ["ResKey_Action_85"] = "Load_Scripts.lua",
 } -- end of mapResource

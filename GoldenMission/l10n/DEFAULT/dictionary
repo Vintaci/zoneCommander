@@ -2,7 +2,8 @@ dictionary =
 {
     ["DictKey_descriptionNeutralsTask_4"] = "",
     ["DictKey_sortie_5"] = "",
-    ["DictKey_descriptionText_1"] = "JF17_TVC\
+    ["DictKey_descriptionText_1"] = "\
+如果您觉得本服务器非常好玩，欢迎扫描左侧二维码，赞助服务器运营资金！\
 \
 \
 -= KOOK 语音频道 =-\
@@ -45,6 +46,8 @@ dictionary =
 - 向友方占领区运送补给。\
 \
 敌方阵营会从占领区获得收入，他们也会花费积分来呼叫支援。\
+\
+JF17_TVC\
 ",
     ["DictKey_descriptionBlueTask_3"] = "-= SRS 语音频道 =-\
 \
