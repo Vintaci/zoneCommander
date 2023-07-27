@@ -109,14 +109,14 @@ end
 local mission_restart_flag = "FLAG_MISSION_RESTART"
 
 local mission_list = {
-    ["攻占高加索_南部战区_春季_晴朗_1500.miz"] = 3,
-    ["攻占高加索_南部战区_夏季_无风_1500.miz"] = 3,
-    ["攻占高加索_南部战区_夏季_酷热_0600.miz"] = 2,
-    ["攻占高加索_南部战区_秋季_晴朗_1200.miz"] = 3,
-    ["攻占高加索_南部战区_秋季_下雨_0900.miz"] = 3,
-    ["攻占高加索_南部战区_冬季_强风_1200.miz"] = 2,
-    ["攻占高加索_南部战区_冬季_下雪_0900.miz"] = 3,
-    ["攻占高加索_南部战区_夜间_无风_0000.miz"] = 1,
+    ["攻占高加索_南部战区_春季_晴朗_1500"] = 3,
+    ["攻占高加索_南部战区_夏季_无风_1500"] = 3,
+    ["攻占高加索_南部战区_夏季_酷热_0600"] = 2,
+    ["攻占高加索_南部战区_秋季_晴朗_1200"] = 3,
+    ["攻占高加索_南部战区_秋季_下雨_0900"] = 3,
+    ["攻占高加索_南部战区_冬季_强风_1200"] = 2,
+    ["攻占高加索_南部战区_冬季_下雪_0900"] = 3,
+    ["攻占高加索_南部战区_夜间_无风_0000"] = 1,
 }
 
 local function get_random(tb)
@@ -160,7 +160,7 @@ local function mission_restart_check()
     local selected_mission = get_random(active_mission_list)
 
     -- Restart mission
-    net.load_mission(lfs.writedir() .. "Missions/" .. selected_mission)
+    net.load_mission(lfs.writedir() .. "Missions/" .. selected_mission .. ".miz")
 end
 
 

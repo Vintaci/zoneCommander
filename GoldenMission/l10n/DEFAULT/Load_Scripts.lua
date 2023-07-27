@@ -10,6 +10,7 @@ local script_list =
     "WeaponCooldown.lua",
     "zoneCommander.lua",
     "zoneSetup.lua",
+    "restart_timer.lua",
     "Hercules_Cargo.lua",
     -- "Splash_Damage_2_0.lua",
 }
