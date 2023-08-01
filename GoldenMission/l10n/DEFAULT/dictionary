@@ -61,5 +61,6 @@ JF17_TVC\
 \
 玩家可以使用无线电菜单的F10子菜单来查询区域状态或呼叫支援。\
 ",
+    ["DictKey_ActionText_88"] = "",
     ["DictKey_descriptionRedTask_2"] = "",
 } -- end of dictionary

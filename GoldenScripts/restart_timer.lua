@@ -23,7 +23,7 @@ end
 
 -- Server Restart Timer Function
 
-local function restartTimer(restartTime, restartHintTimeList, restartFlag, restartHint, restartHintLastsTime)
+local function restartTimer(restartTime, restartHintTimeList, restartFlag, restartHint, restartHintLastsTime, deleteSave)
     for key, value in pairs(restartHintTimeList) do -- Restart hint
         mist.scheduleFunction(function(event, sender)
             trigger.action.outText(string.format(restartHint, value / 60), restartHintLastsTime)
@@ -35,8 +35,12 @@ local function restartTimer(restartTime, restartHintTimeList, restartFlag, resta
     end, {}, timer.getTime() + restartTime - 15)
 
     mist.scheduleFunction(function(event, sender) -- Restart
+        if deleteSave == true and lfs then
+            os.remove(lfs.writedir() .. "Missions/Saves/Caucasus-S-Saved-Data.lua")
+        end
+
         trigger.action.setUserFlag(restartFlag, true)
-    end, {}, timer.getTime() + restartTime)
+    end, {}, timer.getTime() + restartTime + 15) -- Add 15s offset to avoid conflict with saving system
 end
 
 -- Server Restart Timer Function Done
@@ -48,7 +52,7 @@ local scheduledRestartHintTimeList = { 60, 180, 300, 600, 900, 1200, 1500, 1800 
 local scheduledRestartFlag = "FLAG_MISSION_RESTART"
 local scheduledRestartHint = "服务器将于 %d 分钟后定时重启！"
 
-restartTimer(scheduledRestartTime, scheduledRestartHintTimeList, scheduledRestartFlag, scheduledRestartHint, 90)
+restartTimer(scheduledRestartTime, scheduledRestartHintTimeList, scheduledRestartFlag, scheduledRestartHint, 90, false)
 
 -- Scheduled Restart Done
 
@@ -61,15 +65,9 @@ local missionCompleteCheck = function(event, sender)
         local restartTime = 60
         local restartHintTimeList = { 60 }
         local restartFlag = "FLAG_MISSION_RESTART"
-        local restartHint = "服务器将于 %d 分钟后清档重启！"
+        local restartHint = "任务完成！服务器将于 %d 分钟后清档重启！"
 
-        restartTimer(restartTime, restartHintTimeList, restartFlag, restartHint, 90)
-
-        mist.scheduleFunction(function(event, sender)
-            if lfs then
-                os.remove(lfs.writedir() .. "Missions/Saves/Caucasus-S-Saved-Data.lua")
-            end
-        end, {}, timer.getTime() + restartTime - 15)
+        restartTimer(restartTime, restartHintTimeList, restartFlag, restartHint, 90, true)
 
         mist.removeFunction(missionCompleteCheckScheduler)
     end
