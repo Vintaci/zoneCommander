@@ -1323,3 +1323,17 @@ mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 -- end, {}, timer.getTime() + 40, 1800)
 
 -- Server Info Hint Done
+
+-- Delete Ejected Pilots
+
+local event_handler = {}
+
+function event_handler:onEvent(event)
+	if event.id == world.event.S_EVENT_LANDING_AFTER_EJECTION and event.initiator and event.initiator:isExist() then
+		event.initiator:destroy()
+	end
+end
+
+world.addEventHandler(event_handler)
+
+-- Delete Ejected Pilots Done
