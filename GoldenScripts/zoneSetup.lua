@@ -41,7 +41,7 @@ local zoneUpgrades = {
 	},
 	sam = {
 		blue = blueUpgrades.normal,
-		red = { "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
+		red = { "r-defense-sam-ir", "r-defense-sam-cram", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	airfield = {
 		blue = blueUpgrades.airfield,
@@ -53,7 +53,7 @@ local zoneUpgrades = {
 	},
 	airfieldUltra = {
 		blue = blueUpgrades.airfield,
-		red = { "r-defense-sam-radar-close", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
+		red = { "r-defense-sam-cram", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
 	blueAirfield = {
 		blue = blueUpgrades.airfield,
