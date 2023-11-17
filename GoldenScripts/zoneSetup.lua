@@ -1551,7 +1551,7 @@ do
                         local detected = u:getController():getDetectedTargets(Controller.Detection.RADAR)
                         for _,d in ipairs(detected) do
                             if d and d.object and d.object.isExist and d.object:isExist() and 
-                                d.object:getCategory() == Object.Category.UNIT and
+								Object.getCategory(d.Object) == Object.Category.UNIT and -- Edited, fix for new getCategory behaviour since DCS version 2.9.1.48111(16.11.2023)
                                 d.object.getCoalition and
                                 d.object:getCoalition() == self.tgtSide then
                                     
