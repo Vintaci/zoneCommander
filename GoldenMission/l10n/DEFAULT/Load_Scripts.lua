@@ -11,6 +11,7 @@ local script_list =
     "zoneCommander.lua",
     "zoneSetup.lua",
     "restart_timer.lua",
+    "PretenseGCI.lua",
     "Hercules_Cargo.lua",
     -- "Splash_Damage_2_0.lua",
 }
