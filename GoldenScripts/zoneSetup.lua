@@ -602,7 +602,7 @@ Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
 bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 1500, function(sender)
 	local gr = Group.getByName('sead1')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return '防空压制任务仍在进行中'
 	end
 	mist.respawnGroup('sead1', true)
@@ -633,7 +633,7 @@ end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
 			local gr = Group.getByName('sead1')
-			if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+			if Utils.isGroupActive(gr) then
 				return '防空压制任务仍在进行中'
 			end
 
@@ -656,14 +656,14 @@ end,
 Group.getByName('sweep1'):destroy()
 bc:registerShopItem('sweep', 'F-14B 战斗机扫荡任务', 1500, function(sender)
 	local gr = Group.getByName('sweep1')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return '战斗机扫荡任务仍在进行中'
 	end
 	mist.respawnGroup('sweep1', true)
 end,
 	function(sender, params)
 		local gr = Group.getByName('sweep1')
-		if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+		if Utils.isGroupActive(gr) then
 			return '战斗机扫荡任务仍在进行中'
 		end
 		mist.respawnGroup('sweep1', true)
@@ -673,7 +673,7 @@ Group.getByName('cas1'):destroy()
 local casTargetMenu = nil
 bc:registerShopItem('cas', 'F-16CM 对地攻击任务', 1500, function(sender)
 	local gr = Group.getByName('cas1')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return '对地攻击任务仍在进行中'
 	end
 
@@ -707,7 +707,7 @@ end,
 	function(sender, params)
 		if params.zone and params.zone.side == 1 then
 			local gr = Group.getByName('cas1')
-			if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+			if Utils.isGroupActive(gr) then
 				return '对地攻击任务仍在进行中'
 			end
 
@@ -847,7 +847,7 @@ end,
 
 local spawn_awacs_e2d = function(sender)
 	local gr = Group.getByName('awacs-e2d-255am')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return 'E-2D 空中预警机 仍在执行任务\n呼号：Darkstar\n无线电频率：255.00 MHz AM'
 	end
 	mist.respawnGroup('awacs-e2d-255am', true)
@@ -859,7 +859,7 @@ bc:registerShopItem('awacs-e2d-255am', 'E-2D 空中预警机(AWACS)', 100, spawn
 
 local spawn_awacs_a50 = function(sender)
 	local gr = Group.getByName('awacs-a50-124am')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return 'A-50 空中预警机 仍在执行任务\n呼号：Overlord\n无线电频率：124.00 MHz AM'
 	end
 	mist.respawnGroup('awacs-a50-124am', true)
@@ -871,7 +871,7 @@ bc:registerShopItem('awacs-a50-124am', 'A-50 空中预警机(AWACS)', 100, spawn
 
 local spawnAirrefuelSoft = function(sender)
 	local gr = Group.getByName('airrefuel-soft')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return 'KC-135MPRS 空中加油机(软管) 仍在执行任务\n呼号：Texaco\n无线电频率：251.00 MHz AM'
 	end
 	mist.respawnGroup('airrefuel-soft', true)
@@ -883,7 +883,7 @@ bc:registerShopItem('airrefuel-soft', 'KC-135MPRS 空中加油机(软管)', 100,
 
 local spawnAirrefuelHard = function(sender)
 	local gr = Group.getByName('airrefuel-hard')
-	if gr and gr:getSize() > 0 and gr:getController():hasTask() then
+	if Utils.isGroupActive(gr) then
 		return 'KC-135 空中加油机(硬管) 仍在执行任务\n呼号：Arco\n无线电频率：252.00 MHz AM'
 	end
 	mist.respawnGroup('airrefuel-hard', true)
