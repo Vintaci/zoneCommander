@@ -1582,7 +1582,7 @@ do
 		
 		local ev = {}
 		function ev:onEvent(event)
-			if event.id==20 and event.initiator and Object.getCategory(event.initiator) == Object.Category.UNIT and (event.initiator:getDesc().category == Unit.Category.AIRPLANE or event.initiator:getDesc().category == Unit.Category.HELICOPTER)  then
+			if event.id==20 and event.initiator and Object.getCategory(event.initiator) == Object.Category.UNIT and (Unit.getCategory(event.initiator) == Unit.Category.AIRPLANE or Unit.getCategory(event.initiator) == Unit.Category.HELICOPTER)  then
 				local pname = event.initiator:getPlayerName()
 				if pname then
 					local gr = event.initiator:getGroup()
@@ -1715,7 +1715,7 @@ do
 		ev.default = defaultReward
 		function ev:onEvent(event)
 			local unit = event.initiator
-			if unit and Object.getCategory(unit) == Object.Category.UNIT and (unit:getDesc().category == Unit.Category.AIRPLANE or unit:getDesc().category == Unit.Category.HELICOPTER)then
+			if unit and Object.getCategory(unit) == Object.Category.UNIT and (Unit.getCategory(unit) == Unit.Category.AIRPLANE or Unit.getCategory(unit) == Unit.Category.HELICOPTER)then
 				local side = unit:getCoalition()
 				local groupid = unit:getGroup():getID()
 				local pname = unit:getPlayerName()
@@ -2466,6 +2466,18 @@ do
 		return false
 	end
 	
+	--disabled since it causes crashes over time
+	function ZoneCommander:clearWreckage()
+		-- local zn = trigger.misc.getZone(self.zone)
+		-- local pos =  {
+		-- 	x = zn.point.x, 
+		-- 	y = land.getHeight({x = zn.point.x, y = zn.point.z}), 
+		-- 	z= zn.point.z
+		-- }
+		-- local radius = zn.radius
+		-- world.removeJunk({id = world.VolumeType.SPHERE,params = {point = pos ,radius = radius}})
+	end
+	
 	function ZoneCommander:upgrade()
 		if self.active and self.side ~= 0 then
 			local upgrades
@@ -2484,6 +2496,7 @@ do
 					mist.respawnGroup(v, true)
 					if GlobalSettings.messages.repaired then trigger.action.outText('Group '..v..' at '..self.zone..' was repaired', 5) end
 					self:runTriggers('repaired')
+					self:clearWreckage()
 					complete = true
 					WeaponCooldown(v, "Ground", 90) -- Edited, add weapon cooldown on spawn
 					break
@@ -2498,6 +2511,7 @@ do
 						self.built[i] = gr.name
 						if GlobalSettings.messages.upgraded then trigger.action.outText(self.zone..' defenses upgraded', 5) end
 						self:runTriggers('upgraded')
+						self:clearWreckage()
 						break
 					end
 				end			
@@ -2570,6 +2584,11 @@ do
 		return false
 	end
 	
+	function GroupCommander:clearWreckage()
+		local tg = self.zoneCommander.battleCommander:getZoneByName(self.targetzone)
+		tg:clearWreckage()
+	end
+	
 	function GroupCommander:processAir()-- states: [inhangar, preparing, takeoff, inair, landed, dead]
 		local gr = Group.getByName(self.name)
 		local coalition = self.side
@@ -2594,6 +2613,7 @@ do
 		elseif self.state == 'preparing' then
 			if timer.getAbsTime() - self.lastStateTime > GlobalSettings.respawnTimers[coalition][self.mission].preparing then
 				if self:shouldSpawn() then
+					self:clearWreckage()
 					mist.respawnGroup(self.name,true)
 					self.state = 'takeoff'
 					self.lastStateTime = timer.getAbsTime()
@@ -2673,6 +2693,7 @@ do
 		elseif self.state == 'preparing' then
 			if timer.getAbsTime() - self.lastStateTime > GlobalSettings.respawnTimers[coalition][self.mission].preparing then
 				if self:shouldSpawn() then
+					self:clearWreckage()
 					mist.respawnGroup(self.name,true)
 					self.state = 'enroute'
 					self.lastStateTime = timer.getAbsTime()
