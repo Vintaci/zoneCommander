@@ -553,7 +553,7 @@ do
 			elseif self.target then
 				local un = Unit.getByName(self.target)
 				if un then
-					if un:ixExist() and un:getLife()>=1 then
+					if un:isExist() and un:getLife()>=1 then
 						self:setTarget(un)
 					else
 						self:searchTarget()
