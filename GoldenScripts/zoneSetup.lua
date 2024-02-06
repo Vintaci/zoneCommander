@@ -1138,7 +1138,7 @@ local redSupports = {
 		price = 1000,
 		random = 0,
 		groupNames = {
-			"r-support-bomber-kutaisi-senaki-tu22m3",
+			"r-support-bomber-kutaisi-senaki-b1b",
 			"r-support-bomber-kutaisi-senaki-f16c",
 		},
 		zones = {
