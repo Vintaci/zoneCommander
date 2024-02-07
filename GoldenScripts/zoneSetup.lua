@@ -1107,6 +1107,29 @@ local redSupports = {
 			text = "敌军正在派遣舰队攻击我方航母！\n起点：Batumi\n攻击目标：蓝方航母作战集群",
 		},
 	},
+	shipAttackingFromPortToSochi = {
+		name = "r-support-ship-port-sochi",
+		description = "Ship Attacking from Port to Sochi",
+		price = 1000,
+		random = 50, -- Any value <= 0 or >= 100 will always spawn all groups
+		groupNames = {
+			"r-support-ship-port-sochi-1",
+		},
+		zones = {
+			base = {
+				name = "Port",
+				side = 1,
+			},
+			target = {
+				name = "Sochi",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣舰队攻击我方起始机场！\n起点：Port\n攻击目标：Sochi",
+		},
+	},
 	antishipFromBatumiToCarrier = {
 		name = "r-support-antiship-batumi-carrier",
 		description = "Anti-Ship Attack from Batumi to Blue Carrier",
