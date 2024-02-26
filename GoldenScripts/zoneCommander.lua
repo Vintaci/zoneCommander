@@ -114,7 +114,7 @@ do
 	
 		local pnt = mist.getRandomPointInZone(spname)
 		local vars = {
-            validTerrain = {'LAND', 'ROAD', 'RUNWAY'}, -- Edited, allow ground groups spawn on more types of terrain
+            validTerrain = {'LAND', 'ROAD', 'RUNWAY', 'WATER'}, -- Edited, allow ground groups (including ships) spawn on all types of terrain
 			groupName = grname,
 			point = pnt,
 			action = 'clone',
