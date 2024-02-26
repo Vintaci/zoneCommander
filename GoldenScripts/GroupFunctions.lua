@@ -62,9 +62,14 @@ function GroupFunctions.areGroupsActiveByNames(names)
 end
 
 function GroupFunctions.isGroupDead(group)
-    if group ~= nil and (group:getSize() > 0 or group:isExist() == true) then
-        return false
-	else
+    if group ~= nil then
+		local units = group:getUnits()
+		for key, unit in pairs(units) do
+			if unit and unit:getLife() >= 1 then
+				return false
+			end
+		end
+
     	return true
 	end
 end

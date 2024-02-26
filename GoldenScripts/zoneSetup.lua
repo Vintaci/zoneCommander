@@ -1227,6 +1227,8 @@ local redCarrierPatrols = {
 	["r-cvn74"] = "r-patrol-rcvn74-rcvn74-f14b",
 }
 
+GroupFunctions.destroyGroupsByNames(redCarrierPatrols)
+
 local redCarrierAirGroupSpawn = function(event, sender)
 	for key, value in pairs(redCarrierPatrols) do
 		if not GroupFunctions.isGroupDeadByName(key) then -- Make sure the carrier is alive
@@ -1288,21 +1290,20 @@ local farpTrucks = {
 	["Sukhumi"] = "farp-trucks-sukhumi",
 }
 
+GroupFunctions.destroyGroupsByNames(farpTrucks)
+
 local function spawnFarpTrucks()
-	for i,v in pairs(farpTrucks) do
-		local farp = bc:getZoneByName(i)
+	for key, value in pairs(farpTrucks) do
+		local farp = bc:getZoneByName(key)
 		if farp ~= nil then
+			local group = Group.getByName(value)
 			if farp.side==2 then
-				local gr = Group.getByName(v)
-				if GroupFunctions.isGroupDead(gr) then
-					mist.respawnGroup(v)
-				elseif gr:getSize() < gr:getInitialSize() then
-					gr:destroy()
+				if GroupFunctions.isGroupDead(group) then
+					mist.respawnGroup(value)
 				end
 			else
-				local cr = Group.getByName(v)
-				if cr then
-					cr:destroy()
+				if group and not GroupFunctions.isGroupDead(group) then
+					group:destroy()
 				end
 			end
 		end
