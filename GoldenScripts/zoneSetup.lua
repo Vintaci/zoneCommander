@@ -598,7 +598,6 @@ InitZones()
 
 -- Blue Support
 
-Group.getByName('sead1'):destroy()
 local seadTargetMenu = nil
 bc:registerShopItem('sead', 'F/A-18C 防空压制任务', 1500, function(sender)
 	local gr = Group.getByName('sead1')
@@ -653,7 +652,6 @@ end,
 		end
 	end)
 
-Group.getByName('sweep1'):destroy()
 bc:registerShopItem('sweep', 'F-14B 战斗机扫荡任务', 1500, function(sender)
 	local gr = Group.getByName('sweep1')
 	if Utils.isGroupActive(gr) then
@@ -669,7 +667,6 @@ end,
 		mist.respawnGroup('sweep1', true)
 	end)
 
-Group.getByName('cas1'):destroy()
 local casTargetMenu = nil
 bc:registerShopItem('cas', 'F-16CM 对地攻击任务', 1500, function(sender)
 	local gr = Group.getByName('cas1')
@@ -759,7 +756,6 @@ end,
 	end)
 
 local JTAC = JTAC
-Group.getByName('jtacDrone'):destroy()
 local jtacTargetMenu = nil
 drone = JTAC:new({ name = 'jtacDrone' }) -- This MUST be global, as JTAC in zomeCommander.lua will directly refer to this value
 bc:registerShopItem('jtac', 'MQ-1A JTAC 侦查任务', 100, function(sender)
@@ -854,7 +850,6 @@ local spawn_awacs_e2d = function(sender)
 	trigger.action.outTextForCoalition(2, 'E-2D 空中预警机已上线\n呼号：Darkstar\n无线电频率：255.00 MHz AM', 60)
 	GroupFunctions.delayedDestroyGroupByName("awacs-e2d-255am", 3600, "E-2D 空中预警机 已离开空域")
 end
-Group.getByName('awacs-e2d-255am'):destroy()
 bc:registerShopItem('awacs-e2d-255am', 'E-2D 空中预警机(AWACS)', 100, spawn_awacs_e2d, spawn_awacs_e2d)
 
 local spawn_awacs_a50 = function(sender)
@@ -866,7 +861,6 @@ local spawn_awacs_a50 = function(sender)
 	trigger.action.outTextForCoalition(2, 'A-50 空中预警机已上线\n呼号：Overlord\n无线电频率：124.00 MHz AM', 60)
 	GroupFunctions.delayedDestroyGroupByName("awacs-a50-124am", 3600, "A-50 空中预警机 已离开空域")
 end
-Group.getByName('awacs-a50-124am'):destroy()
 bc:registerShopItem('awacs-a50-124am', 'A-50 空中预警机(AWACS)', 100, spawn_awacs_a50, spawn_awacs_a50)
 
 local spawnAirrefuelSoft = function(sender)
@@ -878,7 +872,6 @@ local spawnAirrefuelSoft = function(sender)
 	trigger.action.outTextForCoalition(2, 'KC-135MPRS 空中加油机(软管) 已上线\n呼号：Texaco\n无线电频率：251.00 MHz AM', 60)
 	GroupFunctions.delayedDestroyGroupByName("airrefuel-soft", 3600, "KC-135MPRS 空中加油机(软管) 已离开空域")
 end
-Group.getByName('airrefuel-soft'):destroy()
 bc:registerShopItem('airrefuel-soft', 'KC-135MPRS 空中加油机(软管)', 100, spawnAirrefuelSoft, spawnAirrefuelSoft)
 
 local spawnAirrefuelHard = function(sender)
@@ -890,10 +883,8 @@ local spawnAirrefuelHard = function(sender)
 	trigger.action.outTextForCoalition(2, 'KC-135 空中加油机(硬管) 已上线\n呼号：Arco\n无线电频率：252.00 MHz AM', 60)
 	GroupFunctions.delayedDestroyGroupByName("airrefuel-hard", 3600, "KC-135 空中加油机(硬管) 已离开空域")
 end
-Group.getByName('airrefuel-hard'):destroy()
 bc:registerShopItem('airrefuel-hard', 'KC-135 空中加油机(硬管)', 100, spawnAirrefuelHard, spawnAirrefuelHard)
 
-Group.getByName('ewAircraft'):destroy()
 local jamMenu = nil
 bc:registerShopItem('jam', '雷达干扰 (Radar Jamming)', 2500, function(sender)
 	local gr = Group.getByName('ewAircraft')
@@ -936,7 +927,6 @@ function(sender, params)
 	end
 end)
 
-Group.getByName('ca-tanks'):destroy()
 local tanksMenu = nil
 bc:registerShopItem('ca-tanks', '部署坦克', 150, function(sender)
 	if tanksMenu then
@@ -967,7 +957,6 @@ function(sender, params)
 	end
 end)
 
-Group.getByName('ca-arty'):destroy()
 local artyMenu = nil
 bc:registerShopItem('ca-arty', '部署火炮', 250, function(sender)
 	if artyMenu then
@@ -998,7 +987,6 @@ function(sender, params)
 	end
 end)
 
-Group.getByName('ca-supply'):destroy()
 local caSupplyMenu = nil
 bc:registerShopItem('ca-supply', '部署补给卡车', 100, function(sender)
 	if caSupplyMenu then
@@ -1029,7 +1017,6 @@ function(sender, params)
 	end
 end)
 
-Group.getByName('ca-airdef'):destroy()
 local airdefMenu = nil
 bc:registerShopItem('ca-airdef', '部署防空车', 300, function(sender)
 	if airdefMenu then
@@ -1190,7 +1177,6 @@ local function zoneMatch(zoneMatchList)
 end
 
 local function NewRedSupport(support)
-	GroupFunctions.destroyGroupsByNames(support.groupNames)
 	bc:registerShopItem(support.name, support.description, support.price, function(sender)
 		if not zoneMatch(support.zones) then
 			return "zones mismatch"
@@ -1240,8 +1226,6 @@ local redCarrierPatrols = {
 	["r-cvn73"] = "r-patrol-rcvn73-rcvn73-f18c",
 	["r-cvn74"] = "r-patrol-rcvn74-rcvn74-f14b",
 }
-
-GroupFunctions.destroyGroupsByNames(redCarrierPatrols)
 
 local redCarrierAirGroupSpawn = function(event, sender)
 	for key, value in pairs(redCarrierPatrols) do
@@ -1303,8 +1287,6 @@ local farpTrucks = {
 	["Gudauta"] = "farp-trucks-gudauta",
 	["Sukhumi"] = "farp-trucks-sukhumi",
 }
-
-GroupFunctions.destroyGroupsByNames(farpTrucks)
 
 local function spawnFarpTrucks()
 	for i,v in pairs(farpTrucks) do
