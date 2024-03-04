@@ -69,9 +69,9 @@ function GroupFunctions.isGroupDead(group)
 				return false
 			end
 		end
-
-    	return true
 	end
+	
+	return true
 end
 
 function GroupFunctions.isGroupDeadByName(name)
