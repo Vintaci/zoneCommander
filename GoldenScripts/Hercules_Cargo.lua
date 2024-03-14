@@ -10,18 +10,6 @@
 -- Cargo_Container_Enclosed = true: Cargo enclosed in container with parachute, need to be dropped from 100m (300ft) or more, except when parked on ground
 -- Cargo_Container_Enclosed = false: Open cargo with no parachute, need to be dropped from 10m (30ft) or less
 
--- Edited, make global variables local to improve performance
-local Object = Object
-local Group = Group
-local Unit = Unit
-local Weapon = Weapon
-local timer = timer
-local world = world
-local land = land
-local coord = coord
-local coalition = coalition
-local math = math
-
 Hercules_Cargo = {}
 Hercules_Cargo.Hercules_Cargo_Drop_Events = {}
 local GT_DisplayName = ""
