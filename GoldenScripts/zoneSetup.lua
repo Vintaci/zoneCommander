@@ -1091,14 +1091,14 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣舰队攻击我方航母！\n起点：Batumi\n攻击目标：蓝方航母作战集群",
+			text = "敌军正在派遣舰队攻击我方航母！\n起点: Batumi\n攻击目标: 蓝方航母作战集群",
 		},
 	},
 	shipAttackingFromPortToSochi = {
 		name = "r-support-ship-port-sochi",
 		description = "Ship Attacking from Port to Sochi",
-		price = 1000,
-		random = 50, -- Any value <= 0 or >= 100 will always spawn all groups
+		price = 750,
+		random = 0, -- Any value <= 0 or >= 100 will always spawn all groups
 		groupNames = {
 			"r-support-ship-port-sochi-1",
 		},
@@ -1114,7 +1114,7 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣舰队攻击我方起始机场！\n起点：Port\n攻击目标：Sochi",
+			text = "敌军正在派遣舰队攻击我方起始机场！\n起点: Port\n攻击目标: Sochi",
 		},
 	},
 	antishipFromBatumiToCarrier = {
@@ -1139,7 +1139,31 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣机队攻击我方航母！\n起点：Batumi\n攻击目标：蓝方航母作战集群",
+			text = "敌军正在派遣机队攻击我方航母！\n起点: Batumi\n攻击目标: 蓝方航母作战集群",
+		},
+	},
+	antishipFromKutaisiToCarrier = {
+		name = "r-support-antiship-kutaisi-carrier",
+		description = "Anti-Ship Attack from Kutaisi to Blue Carrier",
+		price = 1000,
+		random = 50,
+		groupNames = {
+			"r-support-antiship-kutaisi-carrier-tu22m",
+			"r-support-antiship-kutaisi-carrier-h6j",
+		},
+		zones = {
+			base = {
+				name = "Kutaisi",
+				side = 1,
+			},
+			target = {
+				name = "Carrier",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣机队攻击我方航母！\n起点: Kutaisi\n攻击目标: 蓝方航母作战集群",
 		},
 	},
 	bomberFromKutaisiToSenaki = {
@@ -1163,7 +1187,76 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点：Kutaisi\n攻击目标：Senaki",
+			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点: Kutaisi\n攻击目标: Senaki",
+		},
+	},
+	bomberFromKobuletiToSukhumi = {
+		name = "r-support-bomber-kobuleti-sukhumi",
+		description = "Bomber Attack from Kobuleti to Sukhumi",
+		price = 1000,
+		random = 0,
+		groupNames = {
+			"r-support-bomber-kobuleti-sukhumi-b52h"
+		},
+		zones = {
+			base = {
+				name = "Kobuleti",
+				side = 1,
+			},
+			target = {
+				name = "Sukhumi",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点: Kobuleti\n攻击目标: Sukhumi",
+		},
+	},
+	rocketFromAlphaToSochi = {
+		name = "r-support-alpha-sochi-rocket",
+		description = "Rocket Attack from Alpha to Sochi",
+		price = 100,
+		random = 0,
+		groupNames = {
+			"r-support-alpha-sochi-rocket"
+		},
+		zones = {
+			base = {
+				name = "Alpha",
+				side = 1,
+			},
+			target = {
+				name = "Sochi",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Alpha\n攻击目标: Sochi",
+		},
+	},
+	rocketFromRadioToSukhumi = {
+		name = "r-support-radio-sukhumi-rocket",
+		description = "Rocket Attack from Radio to Sukhumi",
+		price = 250,
+		random = 0,
+		groupNames = {
+			"r-support-radio-sukhumi-rocket"
+		},
+		zones = {
+			base = {
+				name = "Radio",
+				side = 1,
+			},
+			target = {
+				name = "Sukhumi",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Radio\n攻击目标: Sukhumi",
 		},
 	},
 }
