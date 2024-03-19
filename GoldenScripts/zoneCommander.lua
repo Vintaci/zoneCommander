@@ -616,7 +616,7 @@ GlobalSettings = {}
 do
 	GlobalSettings.blockedDespawnTime = 10*60 --used to despawn aircraft that are stuck taxiing for some reason
 	GlobalSettings.landedDespawnTime = 1*60
-	GlobalSettings.initialDelayVariance = 30 -- minutes
+	GlobalSettings.initialDelayVariance = 15 -- minutes -- Edited, decrease maximum delay before first spawn, resulting spawning more frequently, default = 30
 	
 	GlobalSettings.messages = {
 		grouplost = false,
