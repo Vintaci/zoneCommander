@@ -1578,7 +1578,7 @@ do
 		self:refreshShopMenuForCoalition(2)
 		
 		mist.scheduleFunction(self.update, {self}, timer.getTime() + 5, self.updateFrequency) -- Edited, increase first zone update latency, default = 1
-		mist.scheduleFunction(self.saveToDisk, {self}, timer.getTime() + 30, self.saveFrequency)
+		mist.scheduleFunction(self.saveToDisk, {self}, timer.getTime() + 15, self.saveFrequency) -- Edited, decrease first save latency, default = 30
 		
 		local ev = {}
 		function ev:onEvent(event)

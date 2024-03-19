@@ -20,7 +20,7 @@ end
 -- once <coalition> captures a zone, its <difficultyModifier> decreases <escalation>
 -- if every <difficultyModifier> hasn't been changed for <fadeTime> seconds, <difficultyModifier> will decreases <fade>
 local difficulty = { start = 1, min = 0, max = 7, escalation = 1, fade = 0.001, fadeTime = 30, coalition = 1 }
-bc = BattleCommander:new(filepath, 30, 90, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
+bc = BattleCommander:new(filepath, 30, 30, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
 
