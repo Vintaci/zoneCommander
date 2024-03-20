@@ -927,125 +927,125 @@ function(sender, params)
 	end
 end)
 
-local tanksMenu = nil
-bc:registerShopItem('ca-tanks', '部署坦克', 150, function(sender)
-	if tanksMenu then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployTanks = function(target)
-		if tanksMenu then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			local zn = CustomZone:getByName(target)
-			zn:spawnGroup('ca-tanks')
-			tanksMenu = nil
-			trigger.action.outTextForCoalition(2, '友方坦克已部署于 '..target, 60)
-		end
-	end
-	tanksMenu = bc:showTargetZoneMenu(2, '部署坦克 (请选择友方占领区域)', deployTanks, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		local zn = CustomZone:getByName(params.zone.zone)
-		zn:spawnGroup('ca-tanks')
-		trigger.action.outTextForCoalition(2, '友方坦克已部署于 '..params.zone.zone, 60)
-	else
-		return '只能在友方占领区部署地面单位'
-	end
-end)
+-- local tanksMenu = nil
+-- bc:registerShopItem('ca-tanks', '部署坦克', 150, function(sender)
+-- 	if tanksMenu then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployTanks = function(target)
+-- 		if tanksMenu then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			local zn = CustomZone:getByName(target)
+-- 			zn:spawnGroup('ca-tanks')
+-- 			tanksMenu = nil
+-- 			trigger.action.outTextForCoalition(2, '友方坦克已部署于 '..target, 60)
+-- 		end
+-- 	end
+-- 	tanksMenu = bc:showTargetZoneMenu(2, '部署坦克 (请选择友方占领区域)', deployTanks, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		local zn = CustomZone:getByName(params.zone.zone)
+-- 		zn:spawnGroup('ca-tanks')
+-- 		trigger.action.outTextForCoalition(2, '友方坦克已部署于 '..params.zone.zone, 60)
+-- 	else
+-- 		return '只能在友方占领区部署地面单位'
+-- 	end
+-- end)
 
-local artyMenu = nil
-bc:registerShopItem('ca-arty', '部署火炮', 250, function(sender)
-	if artyMenu then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployArty = function(target)
-		if artyMenu then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			local zn = CustomZone:getByName(target)
-			zn:spawnGroup('ca-arty')
-			artyMenu = nil
-			trigger.action.outTextForCoalition(2, '友方火炮已部署于 '..target, 60)
-		end
-	end
-	artyMenu = bc:showTargetZoneMenu(2, '部署火炮 (请选择友方占领区域)', deployArty, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		local zn = CustomZone:getByName(params.zone.zone)
-		zn:spawnGroup('ca-arty')
-		trigger.action.outTextForCoalition(2, '友方火炮已部署于 '..params.zone.zone, 60)
-	else
-		return '只能在友方占领区部署地面单位'
-	end
-end)
+-- local artyMenu = nil
+-- bc:registerShopItem('ca-arty', '部署火炮', 250, function(sender)
+-- 	if artyMenu then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployArty = function(target)
+-- 		if artyMenu then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			local zn = CustomZone:getByName(target)
+-- 			zn:spawnGroup('ca-arty')
+-- 			artyMenu = nil
+-- 			trigger.action.outTextForCoalition(2, '友方火炮已部署于 '..target, 60)
+-- 		end
+-- 	end
+-- 	artyMenu = bc:showTargetZoneMenu(2, '部署火炮 (请选择友方占领区域)', deployArty, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		local zn = CustomZone:getByName(params.zone.zone)
+-- 		zn:spawnGroup('ca-arty')
+-- 		trigger.action.outTextForCoalition(2, '友方火炮已部署于 '..params.zone.zone, 60)
+-- 	else
+-- 		return '只能在友方占领区部署地面单位'
+-- 	end
+-- end)
 
-local caSupplyMenu = nil
-bc:registerShopItem('ca-supply', '部署补给卡车', 100, function(sender)
-	if caSupplyMenu then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployRecon = function(target)
-		if caSupplyMenu then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			local zn = CustomZone:getByName(target)
-			zn:spawnGroup('ca-supply')
-			caSupplyMenu = nil
-			trigger.action.outTextForCoalition(2, "补给卡车已部署于 " .. target, 60)
-		end
-	end
-	caSupplyMenu = bc:showTargetZoneMenu(2, "部署补给卡车 (请选择友方占领区域)", deployRecon, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择补给卡车的部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		local zn = CustomZone:getByName(params.zone.zone)
-		zn:spawnGroup('ca-supply')
-		trigger.action.outTextForCoalition(2, "补给卡车已部署于 "..params.zone.zone, 60)
-	else
-		return "只能在友方占领区部署地面单位"
-	end
-end)
+-- local caSupplyMenu = nil
+-- bc:registerShopItem('ca-supply', '部署补给卡车', 100, function(sender)
+-- 	if caSupplyMenu then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployRecon = function(target)
+-- 		if caSupplyMenu then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			local zn = CustomZone:getByName(target)
+-- 			zn:spawnGroup('ca-supply')
+-- 			caSupplyMenu = nil
+-- 			trigger.action.outTextForCoalition(2, "补给卡车已部署于 " .. target, 60)
+-- 		end
+-- 	end
+-- 	caSupplyMenu = bc:showTargetZoneMenu(2, "部署补给卡车 (请选择友方占领区域)", deployRecon, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择补给卡车的部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		local zn = CustomZone:getByName(params.zone.zone)
+-- 		zn:spawnGroup('ca-supply')
+-- 		trigger.action.outTextForCoalition(2, "补给卡车已部署于 "..params.zone.zone, 60)
+-- 	else
+-- 		return "只能在友方占领区部署地面单位"
+-- 	end
+-- end)
 
-local airdefMenu = nil
-bc:registerShopItem('ca-airdef', '部署防空车', 300, function(sender)
-	if airdefMenu then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployAirDef = function(target)
-		if airdefMenu then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			local zn = CustomZone:getByName(target)
-			zn:spawnGroup('ca-airdef')
-			airdefMenu = nil
-			trigger.action.outTextForCoalition(2, '友方防空车已部署于 '..target, 60)
-		end
-	end
-	airdefMenu = bc:showTargetZoneMenu(2, '部署防空车 (请选择友方占领区域)', deployAirDef, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		local zn = CustomZone:getByName(params.zone.zone)
-		zn:spawnGroup('ca-airdef')
-		trigger.action.outTextForCoalition(2, '友方防空车已部署于 '..params.zone.zone, 60)
-	else
-		return '只能在友方占领区部署地面单位'
-	end
-end)
+-- local airdefMenu = nil
+-- bc:registerShopItem('ca-airdef', '部署防空车', 300, function(sender)
+-- 	if airdefMenu then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployAirDef = function(target)
+-- 		if airdefMenu then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			local zn = CustomZone:getByName(target)
+-- 			zn:spawnGroup('ca-airdef')
+-- 			airdefMenu = nil
+-- 			trigger.action.outTextForCoalition(2, '友方防空车已部署于 '..target, 60)
+-- 		end
+-- 	end
+-- 	airdefMenu = bc:showTargetZoneMenu(2, '部署防空车 (请选择友方占领区域)', deployAirDef, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		local zn = CustomZone:getByName(params.zone.zone)
+-- 		zn:spawnGroup('ca-airdef')
+-- 		trigger.action.outTextForCoalition(2, '友方防空车已部署于 '..params.zone.zone, 60)
+-- 	else
+-- 		return '只能在友方占领区部署地面单位'
+-- 	end
+-- end)
 
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
@@ -1058,10 +1058,10 @@ bc:addShopItem(2, 'awacs-a50-124am', -1)
 bc:addShopItem(2, 'airrefuel-soft', -1)
 bc:addShopItem(2, 'airrefuel-hard', -1)
 bc:addShopItem(2, 'jam', -1)
-bc:addShopItem(2, 'ca-tanks', -1)
-bc:addShopItem(2, 'ca-arty', -1)
-bc:addShopItem(2, 'ca-supply', -1)
-bc:addShopItem(2, 'ca-airdef', -1)
+-- bc:addShopItem(2, 'ca-tanks', -1)
+-- bc:addShopItem(2, 'ca-arty', -1)
+-- bc:addShopItem(2, 'ca-supply', -1)
+-- bc:addShopItem(2, 'ca-airdef', -1)
 
 -- bc:addFunds(2, 100000)
 
