@@ -102,16 +102,6 @@ Hercules_Cargo.types = {
 	["ART GVOZDIKA [34720lb]"] = {['name'] = "SAU Gvozdika", ['container'] = false},
 	["APC MTLB Air [26400lb]"] = {['name'] = "MTLB", ['container'] = true},
 	["APC MTLB Skid [26290lb]"] = {['name'] = "MTLB", ['container'] = false},
-	-- Edited, add more cargos
-	["Tor 9A331 Air [21624lb]"] = {['name'] = "Tor 9A331", ['container'] = true},
-	["Osa 9A33 ln Air [21624lb]"] = {['name'] = "Osa 9A33 ln", ['container'] = true},
-	["T-80UD Air [21624lb]"] = {['name'] = "T-80UD", ['container'] = true},
-	["M-1 Abrams Air [21624lb]"] = {['name'] = "M-1 Abrams", ['container'] = true},
-	["T-90 Air [21624lb]"] = {['name'] = "T-90", ['container'] = true},
-	["ZTZ96B Air [21624lb]"] = {['name'] = "ZTZ96B", ['container'] = true},
-	["bm-21-40 Air [21624lb]"] = {['name'] = "bm-21-40", ['container'] = true},
-	["cow Air [21624lb]"] = {['name'] = "cow", ['container'] = true},
-	["HEMTT_C-RAM_Phalanx Air [21624lb]"] = {['name'] = "HEMTT_C-RAM_Phalanx", ['container'] = true},
 	--["Generic Crate [20000lb]"] = {['name'] =  "Hercules_Container_Parachute", ['container'] = true}
 }
 function Hercules_Cargo.Soldier_SpawnGroup(Cargo_Drop_Position, Cargo_Type_name, CargoHeading, Cargo_Country, GroupSpacing)
