@@ -1214,39 +1214,16 @@ local redSupports = {
 		},
 	},
 	rocketFromAlphaToSochi = {
-		name = "r-support-alpha-sochi-rocket",
-		description = "Rocket Attack from Alpha to Sochi",
+		name = "r-support-senaki-sukhumi-rocket",
+		description = "Rocket Attack from Senaki to Sukhumi",
 		price = 100,
 		random = 0,
 		groupNames = {
-			"r-support-alpha-sochi-rocket"
+			"r-support-senaki-sukhumi-rocket"
 		},
 		zones = {
 			base = {
-				name = "Alpha",
-				side = 1,
-			},
-			target = {
-				name = "Sochi",
-				side = 2,
-			},
-		},
-		hint = {
-			side = 2,
-			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Alpha\n攻击目标: Sochi",
-		},
-	},
-	rocketFromRadioToSukhumi = {
-		name = "r-support-radio-sukhumi-rocket",
-		description = "Rocket Attack from Radio to Sukhumi",
-		price = 250,
-		random = 0,
-		groupNames = {
-			"r-support-radio-sukhumi-rocket"
-		},
-		zones = {
-			base = {
-				name = "Radio",
+				name = "Senaki",
 				side = 1,
 			},
 			target = {
@@ -1256,7 +1233,30 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Radio\n攻击目标: Sukhumi",
+			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Senaki\n攻击目标: Sukhumi",
+		},
+	},
+	rocketFromRadioToSukhumi = {
+		name = "r-support-radio-gudauta-rocket",
+		description = "Rocket Attack from Radio to Gudauta",
+		price = 250,
+		random = 0,
+		groupNames = {
+			"r-support-radio-gudauta-rocket"
+		},
+		zones = {
+			base = {
+				name = "Radio",
+				side = 1,
+			},
+			target = {
+				name = "Gudauta",
+				side = 2,
+			},
+		},
+		hint = {
+			side = 2,
+			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Radio\n攻击目标: Gudauta",
 		},
 	},
 }
