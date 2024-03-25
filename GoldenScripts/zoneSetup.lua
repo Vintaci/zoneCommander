@@ -1213,17 +1213,17 @@ local redSupports = {
 			text = "敌军正在派遣轰炸机机队攻击我方机场！\n起点: Kobuleti\n攻击目标: Sukhumi",
 		},
 	},
-	rocketFromAlphaToSochi = {
-		name = "r-support-senaki-sukhumi-rocket",
-		description = "Rocket Attack from Senaki to Sukhumi",
+	rocketFromDeltaToSukhumi = {
+		name = "r-support-delta-sukhumi-rocket",
+		description = "Rocket Attack from Delta to Sukhumi",
 		price = 100,
 		random = 0,
 		groupNames = {
-			"r-support-senaki-sukhumi-rocket"
+			"r-support-delta-sukhumi-rocket"
 		},
 		zones = {
 			base = {
-				name = "Senaki",
+				name = "Delta",
 				side = 1,
 			},
 			target = {
@@ -1233,20 +1233,20 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Senaki\n攻击目标: Sukhumi",
+			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Delta\n攻击目标: Sukhumi",
 		},
 	},
-	rocketFromRadioToSukhumi = {
-		name = "r-support-radio-gudauta-rocket",
-		description = "Rocket Attack from Radio to Gudauta",
+	rocketFromSukhumiToGudauta = {
+		name = "r-support-sukhumi-gudauta-rocket",
+		description = "Rocket Attack from Sukhumi to Gudauta",
 		price = 250,
 		random = 0,
 		groupNames = {
-			"r-support-radio-gudauta-rocket"
+			"r-support-sukhumi-gudauta-rocket"
 		},
 		zones = {
 			base = {
-				name = "Radio",
+				name = "Sukhumi",
 				side = 1,
 			},
 			target = {
@@ -1256,7 +1256,7 @@ local redSupports = {
 		},
 		hint = {
 			side = 2,
-			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Radio\n攻击目标: Gudauta",
+			text = "敌军正在派遣火箭发射车攻击我方机场！\n起点: Sukhumi\n攻击目标: Gudauta",
 		},
 	},
 }
