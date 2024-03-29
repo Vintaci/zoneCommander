@@ -86,7 +86,7 @@ local zoneUpgrades = {
 	},
 	-- For zones on sea, their "upgrades" MUST ONLY have one side
 	blueShip = {
-		blue = { "bShip", "bShip", "bShip" },
+		blue = { "bShip", "bShip", "bShip", "bShip", "bShip" },
 		red = {}
 	},
 	redShip = {
@@ -195,7 +195,7 @@ local zones = {
 		zoneCommanderProperties = {
 			zone = "Carrier",
 			side = 2, -- 0 = neutral, 1 = red, 2 = blue
-			level = 3,
+			level = 5,
 			upgrades = zoneUpgrades.blueShip,
 			crates = cargos_accepts.all,
 			flavorText = hint,
