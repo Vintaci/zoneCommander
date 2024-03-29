@@ -24,6 +24,31 @@ bc = BattleCommander:new(filepath, 30, 30, difficulty) -- This MUST be global, a
 
 -- BattleCommander Initialization Done
 
+-- Utility Functions for Cargo Lists
+
+local function merge(tbls)
+	local res = {}
+	for i,v in ipairs(tbls) do
+		for i2,v2 in ipairs(v) do
+			table.insert(res,v2)
+		end
+	end
+	
+	return res
+end
+
+local function allExcept(tbls, except)
+	local tomerge = {}
+	for i,v in pairs(tbls) do
+		if i~=except then
+			table.insert(tomerge, v)
+		end
+	end
+	return merge(tomerge)
+end
+
+-- Utility Functions for Cargo Lists Done
+
 -- Zone Definition
 
 local hint = "任务目标：占领所有区域！"
@@ -70,6 +95,101 @@ local zoneUpgrades = {
 	},
 }
 
+local cargos_all = {
+	["Sochi"] = {
+		"cargo-sochi-1",
+		"cargo-sochi-2",
+		"cargo-sochi-3",
+	},
+	["Gudauta"] = {
+		"cargo-gudauta-1",
+		"cargo-gudauta-2",
+		"cargo-gudauta-3",
+	},
+	["Sukhumi"] = {
+		"cargo-sukhumi-1",
+		"cargo-sukhumi-2",
+		"cargo-sukhumi-3",
+	},
+	["Senaki"] = {
+		"cargo-senaki-1",
+		"cargo-senaki-2",
+		"cargo-senaki-3",
+	},
+	["Kobuleti"] = {
+		"cargo-kobuleti-1",
+		"cargo-kobuleti-2",
+		"cargo-kobuleti-3",
+	},
+	["Kutaisi"] = {
+		"cargo-kutaisi-1",
+		"cargo-kutaisi-2",
+		"cargo-kutaisi-3",
+	},
+	["Radio"] = {
+		"cargo-radio-1",
+		"cargo-radio-2",
+		"cargo-radio-3",
+	},
+	["Port"] = {
+		"cargo-port-1",
+		"cargo-port-2",
+		"cargo-port-3",
+	},
+	["SAM"] = {
+		"cargo-sam-1",
+		"cargo-sam-2",
+	},
+	["Oil"] = {
+		"cargo-oil-1",
+		"cargo-oil-2",
+		"cargo-oil-3",
+	},
+	["Alpha"] = {
+		"cargo-alpha-1",
+		"cargo-alpha-2",
+		"cargo-alpha-3",
+	},
+	["Bravo"] = {
+		"cargo-bravo-1",
+		"cargo-bravo-2",
+		"cargo-bravo-3",
+	},
+	["Charlie"] = {
+		"cargo-charlie-1",
+		"cargo-charlie-2",
+		"cargo-charlie-3",
+	},
+	["Delta"] = {
+		"cargo-delta-1",
+		"cargo-delta-2",
+		"cargo-delta-3",
+	},
+	["Echo"] = {
+		"cargo-echo-1",
+		"cargo-echo-2",
+	},
+}
+
+local cargos_accepts = {
+	sochi = allExcept(cargos_all, 'Sochi'),
+	gudauta = allExcept(cargos_all, 'Gudauta'),
+	sukhumi = allExcept(cargos_all, 'Sukhumi'),
+	senaki = allExcept(cargos_all, 'Senaki'),
+	kobuleti = allExcept(cargos_all, 'Kobuleti'),
+	kutaisi = allExcept(cargos_all, 'Kutaisi'),
+	radio = allExcept(cargos_all, 'Radio'),
+	port = allExcept(cargos_all, 'Port'),
+	sam = allExcept(cargos_all, 'SAM'),
+	oil = allExcept(cargos_all, 'Oil'),
+	alpha = allExcept(cargos_all, 'Alpha'),
+	bravo = allExcept(cargos_all, 'Bravo'),
+	charlie = allExcept(cargos_all, 'Charlie'),
+	delta = allExcept(cargos_all, 'Delta'),
+	echo = allExcept(cargos_all, 'Echo'),
+	all = allExcept(cargos_all),
+}
+
 local zones = {
 	carrier = {
 		zoneCommanderProperties = {
@@ -77,7 +197,7 @@ local zones = {
 			side = 2, -- 0 = neutral, 1 = red, 2 = blue
 			level = 3,
 			upgrades = zoneUpgrades.blueShip,
-			crates = {},
+			crates = cargos_accepts.all,
 			flavorText = hint,
 			income = 0,
 		},
@@ -99,7 +219,7 @@ local zones = {
 			side = 2,
 			level = 5,
 			upgrades = zoneUpgrades.blueAirfield,
-			crates = {},
+			crates = cargos_accepts.sochi,
 			flavorText = hint,
 			income = 1,
 		},
@@ -123,7 +243,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = {},
+			crates = cargos_accepts.alpha,
 			flavorText = hint,
 			income = 0,
 		},
@@ -140,7 +260,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = {},
+			crates = cargos_accepts.gudauta,
 			flavorText = hint,
 			income = 1,
 		},
@@ -176,7 +296,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = {},
+			crates = cargos_accepts.bravo,
 			flavorText = hint,
 			income = 0,
 		},
@@ -194,7 +314,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = {},
+			crates = cargos_accepts.sukhumi,
 			flavorText = hint,
 			income = 1,
 		},
@@ -243,7 +363,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = {},
+			crates = cargos_accepts.radio,
 			flavorText = hint,
 			income = 1,
 		},
@@ -263,7 +383,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = {},
+			crates = cargos_accepts.charlie,
 			flavorText = hint,
 			income = 0,
 		},
@@ -282,7 +402,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = {},
+			crates = cargos_accepts.delta,
 			flavorText = hint,
 			income = 0,
 		},
@@ -300,7 +420,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = {},
+			crates = cargos_accepts.port,
 			flavorText = hint,
 			income = 1,
 		},
@@ -325,7 +445,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = {},
+			crates = cargos_accepts.senaki,
 			flavorText = hint,
 			income = 3,
 		},
@@ -382,7 +502,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.sam,
-			crates = {},
+			crates = cargos_accepts.sam,
 			flavorText = hint,
 			income = 1,
 		},
@@ -402,7 +522,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = {},
+			crates = cargos_accepts.kobuleti,
 			flavorText = hint,
 			income = 3,
 		},
@@ -442,7 +562,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfield,
-			crates = {},
+			crates = cargos_accepts.oil,
 			flavorText = hint,
 			income = 1,
 		},
@@ -462,7 +582,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldPlus,
-			crates = {},
+			crates = cargos_accepts.kutaisi,
 			flavorText = hint,
 			income = 3,
 		},
@@ -510,7 +630,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.normal,
-			crates = {},
+			crates = cargos_accepts.echo,
 			flavorText = hint,
 			income = 0,
 		},
@@ -526,7 +646,7 @@ local zones = {
 			side = 1,
 			level = 3,
 			upgrades = zoneUpgrades.airfieldUltra,
-			crates = {},
+			crates = cargos_accepts.all,
 			flavorText = hint,
 			income = 3,
 		},
@@ -1405,7 +1525,46 @@ end
 
 mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 
--- Spawn Cargo Supplies and FARP Trucks Done
+-- Spawn FARP Trucks Done
+
+-- Spawn Cargos
+
+-- Clear all cargos on mission start
+for i,v in pairs(cargos_all) do
+	for ix,vx in ipairs(v) do
+		local obj = StaticObject.getByName(vx.."-1")
+		if obj then
+			obj:destroy()
+		end
+	end
+end
+
+local function spawnCargos()
+	for i,v in pairs(cargos_all) do
+		local zone = bc:getZoneByName(i)
+		if zone then
+			if zone.side==2 then
+				for ix,vx in ipairs(v) do
+					local obj = StaticObject.getByName(vx)
+					if not obj then
+						mist.respawnGroup(vx)
+					end
+				end
+			else
+				for ix,vx in ipairs(v) do
+					local obj = StaticObject.getByName(vx.."-1")
+					if obj then
+						obj:destroy()
+					end
+				end
+			end
+		end
+	end
+end
+
+mist.scheduleFunction(spawnCargos, {}, timer.getTime() + 3, 90)
+
+-- Spawn Cargos Done
 
 -- Delete Ejected Pilots
 
