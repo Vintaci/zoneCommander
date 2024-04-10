@@ -49,7 +49,10 @@ dictionary =
 \
 敌方阵营会从占领区获得收入，他们也会花费积分来呼叫支援。\
 \
+\
 JF17_TVC\
+\
+MAGIC_IFF\
 ",
     ["DictKey_descriptionBlueTask_3"] = "-= SRS 语音频道 =-\
 \
