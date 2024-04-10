@@ -77,3 +77,16 @@ end
 function GroupFunctions.isGroupDeadByName(name)
     return GroupFunctions.isGroupDead(Group.getByName(name))
 end
+
+function GroupFunctions.spawnGroupInZone(groupName, zoneName)
+	local vars = {
+		validTerrain = {'LAND', 'ROAD', 'RUNWAY', 'WATER'},
+		groupName = groupName,
+		point = mist.getRandomPointInZone(zoneName),
+		action = 'respawn',
+		disperse = true,
+		initTasks = true
+	}
+
+	mist.teleportToPoint(vars)
+end
