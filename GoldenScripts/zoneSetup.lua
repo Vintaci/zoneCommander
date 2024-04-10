@@ -1530,39 +1530,39 @@ mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 -- Spawn Cargos
 
 -- Clear all cargos on mission start
-for i,v in pairs(cargos_all) do
-	for ix,vx in ipairs(v) do
-		local obj = StaticObject.getByName(vx.."-1")
-		if obj then
-			obj:destroy()
-		end
-	end
-end
+-- for i,v in pairs(cargos_all) do
+-- 	for ix,vx in ipairs(v) do
+-- 		local obj = StaticObject.getByName(vx.."-1")
+-- 		if obj then
+-- 			obj:destroy()
+-- 		end
+-- 	end
+-- end
 
-local function spawnCargos()
-	for i,v in pairs(cargos_all) do
-		local zone = bc:getZoneByName(i)
-		if zone then
-			if zone.side==2 then
-				for ix,vx in ipairs(v) do
-					local obj = StaticObject.getByName(vx)
-					if not obj then
-						mist.respawnGroup(vx)
-					end
-				end
-			else
-				for ix,vx in ipairs(v) do
-					local obj = StaticObject.getByName(vx.."-1")
-					if obj then
-						obj:destroy()
-					end
-				end
-			end
-		end
-	end
-end
+-- local function spawnCargos()
+-- 	for i,v in pairs(cargos_all) do
+-- 		local zone = bc:getZoneByName(i)
+-- 		if zone then
+-- 			if zone.side==2 then
+-- 				for ix,vx in ipairs(v) do
+-- 					local obj = StaticObject.getByName(vx)
+-- 					if not obj then
+-- 						mist.respawnGroup(vx)
+-- 					end
+-- 				end
+-- 			else
+-- 				for ix,vx in ipairs(v) do
+-- 					local obj = StaticObject.getByName(vx.."-1")
+-- 					if obj then
+-- 						obj:destroy()
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
 
-mist.scheduleFunction(spawnCargos, {}, timer.getTime() + 3, 90)
+-- mist.scheduleFunction(spawnCargos, {}, timer.getTime() + 3, 90)
 
 -- Spawn Cargos Done
 
