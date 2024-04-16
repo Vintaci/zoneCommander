@@ -1215,30 +1215,6 @@ local redSupports = {
 			text = "敌军正在派遣机队攻击我方航母！\n起点: Batumi\n攻击目标: 蓝方航母作战集群",
 		},
 	},
-	antishipFromKutaisiToCarrier = {
-		name = "r-support-antiship-kutaisi-carrier",
-		description = "Anti-Ship Attack from Kutaisi to Blue Carrier",
-		price = 1000,
-		random = 50,
-		groupNames = {
-			"r-support-antiship-kutaisi-carrier-tu22m",
-			"r-support-antiship-kutaisi-carrier-h6j",
-		},
-		zones = {
-			base = {
-				name = "Kutaisi",
-				side = 1,
-			},
-			target = {
-				name = "Carrier",
-				side = 2,
-			},
-		},
-		hint = {
-			side = 2,
-			text = "敌军正在派遣机队攻击我方航母！\n起点: Kutaisi\n攻击目标: 蓝方航母作战集群",
-		},
-	},
 	bomberFromKutaisiToSenaki = {
 		name = "r-support-bomber-kutaisi-senaki",
 		description = "Bomber Attack from Kutaisi to Senaki",
