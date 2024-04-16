@@ -80,7 +80,7 @@ end
 
 function GroupFunctions.spawnGroupInZone(groupName, zoneName)
 	local vars = {
-		validTerrain = {'LAND', 'ROAD', 'RUNWAY', 'WATER'},
+		validTerrain = {'LAND', 'ROAD', 'RUNWAY'},
 		groupName = groupName,
 		point = mist.getRandomPointInZone(zoneName),
 		action = 'respawn',
