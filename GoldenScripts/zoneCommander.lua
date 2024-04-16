@@ -1538,7 +1538,7 @@ do
 	end
 	
 	function BattleCommander:init()
-		self:startMonitorPlayerMarkers()
+		-- self:startMonitorPlayerMarkers() -- Edited, disable player marker monitoring
 		self:initializeRestrictedGroups()
 		
 		if self.difficulty then
