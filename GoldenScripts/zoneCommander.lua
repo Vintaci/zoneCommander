@@ -2733,6 +2733,7 @@ do
 				if timer.getAbsTime() - self.lastStateTime > GlobalSettings.landedDespawnTime then
 					local tg = self.zoneCommander.battleCommander:getZoneByName(self.targetzone)
 					if gr and tg and Utils.someOfGroupInZone(gr, tg.zone) then
+						EnableAutoAttackForGroup(self.name, 7500, 180, 15) -- Edited, Add auto attack script to ground attack groups
 						if tg.side == 0 then
 							tg:capture(self.side)
 							gr:destroy()
