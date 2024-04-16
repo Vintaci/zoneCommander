@@ -7,7 +7,7 @@ local MoveToNearestEnemy = nil
 local IsEnemyLeaderUnitDead = nil
 
 function EnableAutoAttackForGroup(currentGroupName, searchRange, searchDuration, initialDelay)
-    mist.scheduleFunction(MoveToNearestEnemy, { currentGroupName, searchRange, searchDuration }, timer.getTime() + initialDelay)
+    return mist.scheduleFunction(MoveToNearestEnemy, { currentGroupName, searchRange, searchDuration }, timer.getTime() + initialDelay)
 end
 
 MoveToNearestEnemy = function(currentGroupName, searchRange, searchDuration)
