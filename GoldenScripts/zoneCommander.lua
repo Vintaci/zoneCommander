@@ -1310,16 +1310,16 @@ do
 		end
 		
 		states.accounts = self.accounts
-		states.shops = self.shops
+		-- states.shops = self.shops -- Edited, do not save shop items
 		states.difficultyModifier = self.difficultyModifier
-		states.playerStats = {}
-		if self.playerStats then
-			for i,v in pairs(self.playerStats) do
-				local sanitized = i:gsub("\\","\\\\")
-				sanitized = sanitized:gsub("'","\\'")
-				states.playerStats[sanitized] = v
-			end
-		end
+		-- states.playerStats = {} -- Edited, do not save player status
+		-- if self.playerStats then
+		-- 	for i,v in pairs(self.playerStats) do
+		-- 		local sanitized = i:gsub("\\","\\\\")
+		-- 		sanitized = sanitized:gsub("'","\\'")
+		-- 		states.playerStats[sanitized] = v
+		-- 	end
+		-- end
 		
 		return states
 	end
@@ -1955,9 +1955,9 @@ do
 				self.accounts = zonePersistance.accounts
 			end
 			
-			if zonePersistance.shops then
-				self.shops = zonePersistance.shops
-			end
+			-- if zonePersistance.shops then -- Edited, do not load shop items
+			-- 	self.shops = zonePersistance.shops
+			-- end
 			
 			if zonePersistance.difficultyModifier then
 				self.difficultyModifier = zonePersistance.difficultyModifier
@@ -1966,9 +1966,9 @@ do
 				end
 			end
 			
-			if zonePersistance.playerStats then
-				self.playerStats = zonePersistance.playerStats
-			end
+			-- if zonePersistance.playerStats then -- Edited, do not load player status
+			-- 	self.playerStats = zonePersistance.playerStats
+			-- end
 		end
 	end
 end
