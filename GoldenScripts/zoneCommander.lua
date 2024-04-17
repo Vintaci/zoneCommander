@@ -629,9 +629,9 @@ do
 	
 	GlobalSettings.defaultRespawns = {}
 	GlobalSettings.defaultRespawns[1] = {
-		supply = { dead=12*60, hangar=5*60, preparing=3*60}, -- Edited, tweak spawning cooldown duration, default = 35*60, 20*60, 5*60
-		patrol = { dead=18*60, hangar=3*60, preparing=3*60}, -- Edited, tweak spawning cooldown duration, default = 38*60, 2*60, 2*60
-		attack = { dead=15*60, hangar=3*60, preparing=3*60} -- Edited, tweak spawning cooldown duration, default = 38*60, 2*60, 2*60
+		supply = { dead=15*60, hangar=5*60, preparing=3*60}, -- Edited, tweak spawning cooldown duration, default = 35*60, 20*60, 5*60
+		patrol = { dead=25*60, hangar=3*60, preparing=3*60}, -- Edited, tweak spawning cooldown duration, default = 38*60, 2*60, 2*60
+		attack = { dead=25*60, hangar=3*60, preparing=3*60} -- Edited, tweak spawning cooldown duration, default = 38*60, 2*60, 2*60
 	}
 	
 	GlobalSettings.defaultRespawns[2] = {
