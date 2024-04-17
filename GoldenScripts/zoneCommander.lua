@@ -2650,6 +2650,7 @@ do
 			if self.mission == 'supply' then
 				local tg = self.zoneCommander.battleCommander:getZoneByName(self.targetzone)
 				if tg and gr and Utils.someOfGroupInZone(gr, tg.zone) then
+					local group_position = mist.getLeadPos(self.name) -- Edited, spawn infantry groups if red supply helicopter landed in blue zones
 					gr:destroy()
 					self.state = 'inhangar'
 					self.lastStateTime = timer.getAbsTime()
@@ -2657,6 +2658,8 @@ do
 						tg:capture(self.side)
 					elseif tg.side == self.side then
 						tg:upgrade()
+					elseif 2 == tg.side then -- Edited, spawn infantry groups if red supply helicopter landed in blue zones
+						GroupFunctions.cloneGroupAtPoint('r-transport-infantry', group_position)
 					end
 				end
 			end
