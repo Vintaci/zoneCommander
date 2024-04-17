@@ -2545,6 +2545,7 @@ do
 		obj.zoneCommander = {}
 		obj.landsatcarrier = obj.type == 'carrier_air'
 		obj.side = 0
+		obj.autoAttack = false -- Edited, add auto attack script to ground groups
 		setmetatable(obj, self)
 		self.__index = self
 		return obj
@@ -2688,6 +2689,7 @@ do
 			if self.state ~= 'inhangar' and self.state ~= 'preparing' and self.state ~= 'dead' then
 				self.state = 'dead'
 				self.lastStateTime = timer.getAbsTime()
+				self.autoAttack = false -- Edited, add auto attack script to ground groups
 			end
 		end
 	
@@ -2715,30 +2717,39 @@ do
 				self.lastStateTime = timer.getAbsTime()
 			end
 		elseif self.state =='atdestination' then
-			if self.mission == 'supply' then
+			-- if self.mission == 'supply' then -- Edited, combine attack and supply group's 'atdestination' behavior
+			-- 	if timer.getAbsTime() - self.lastStateTime > GlobalSettings.landedDespawnTime then
+			-- 		local tg = self.zoneCommander.battleCommander:getZoneByName(self.targetzone)
+			-- 		if gr and tg and Utils.someOfGroupInZone(gr, tg.zone) then
+			-- 			gr:destroy()
+			-- 			self.state = 'inhangar'
+			-- 			self.lastStateTime = timer.getAbsTime()
+			-- 			if tg.side == 0 then
+			-- 				tg:capture(self.side)
+			-- 			elseif tg.side == self.side then
+			-- 				tg:upgrade()
+			-- 			end
+			-- 		end
+			-- 	end
+			if self.mission == 'attack' or self.mission == 'supply' then -- elseif self.mission == 'attack' then -- Edited, combine attack and supply group's 'atdestination' behavior
 				if timer.getAbsTime() - self.lastStateTime > GlobalSettings.landedDespawnTime then
 					local tg = self.zoneCommander.battleCommander:getZoneByName(self.targetzone)
 					if gr and tg and Utils.someOfGroupInZone(gr, tg.zone) then
-						gr:destroy()
-						self.state = 'inhangar'
-						self.lastStateTime = timer.getAbsTime()
-						if tg.side == 0 then
-							tg:capture(self.side)
-						elseif tg.side == self.side then
-							tg:upgrade()
-						end
-					end
-				end
-			elseif self.mission == 'attack' then
-				if timer.getAbsTime() - self.lastStateTime > GlobalSettings.landedDespawnTime then
-					local tg = self.zoneCommander.battleCommander:getZoneByName(self.targetzone)
-					if gr and tg and Utils.someOfGroupInZone(gr, tg.zone) then
-						EnableAutoAttackForGroup(self.name, 7500, 180, 15) -- Edited, Add auto attack script to ground attack groups
 						if tg.side == 0 then
 							tg:capture(self.side)
 							gr:destroy()
 							self.state = 'inhangar'
 							self.lastStateTime = timer.getAbsTime()
+						-- Edited, combine attack and supply group's 'atdestination' behavior and add auto attack script to ground groups
+						elseif tg.side == self.side then
+							tg:upgrade()
+							gr:destroy()
+							self.state = 'inhangar'
+							self.lastStateTime = timer.getAbsTime()
+						elseif false == self.autoAttack then
+							EnableAutoAttackForGroup(self.name, 7500, 180, 15)
+							self.autoAttack = true
+						-- Edited Done
 						end
 					end
 				end
