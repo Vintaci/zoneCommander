@@ -90,3 +90,16 @@ function GroupFunctions.spawnGroupInZone(groupName, zoneName)
 
 	mist.teleportToPoint(vars)
 end
+
+function GroupFunctions.cloneGroupAtPoint(groupName, point)
+	local vars = {
+		validTerrain = {'LAND', 'ROAD', 'RUNWAY'},
+		groupName = groupName,
+		point = point,
+		action = 'clone',
+		disperse = true,
+		initTasks = true
+	}
+
+	mist.teleportToPoint(vars)
+end
