@@ -61,6 +61,12 @@ local vip_list = {
         welcome_audio = "Rabbit_Welcome.ogg",
         online = false,
     },
+    -- 虚竹医疗
+    ["bc5c6d9bf7ff10c865400fc9fd0117dc"] = {
+        welcome_text = "欢迎 只会开苏27的 虚竹 进入服务器”",
+        welcome_audio = "XuZhu_Welcome.ogg",
+        online = false,
+    },
 }
 
 local welcome_text_prefix = "===== VIP 上线提醒 =====\\n"
