@@ -7,7 +7,7 @@ end
 
 MoveToNearestEnemy = function(currentGroupName, searchRange, searchDuration)
     local currentGroup = Group.getByName(currentGroupName)
-    if currentGroup == nil then return end
+    if currentGroup == nil or mist.groupIsDead(currentGroupName) == true then return end
 
     local enemyCoalition = (currentGroup:getCoalition() == 1 and 2) or 1
     local enemyGroupList = coalition.getGroups(enemyCoalition, Group.Category.GROUND)
