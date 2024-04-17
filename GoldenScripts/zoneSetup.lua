@@ -1050,7 +1050,7 @@ bc:registerShopItem('ca-armor-m1a2', '部署地面单位(M1A2)', 500, function(s
 				return "无法在航母上部署地面单位"
 			end
 			GroupFunctions.spawnGroupInZone('ca-armor-m1a2', target)
-			EnableAutoAttackForGroup('ca-armor-m1a2', 100000, 180, 90)
+			EnableAutoAttackForGroup('ca-armor-m1a2', 100000, 300, 90)
 			caMenuTankM1A2 = nil
 			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
 		end
@@ -1083,7 +1083,7 @@ bc:registerShopItem('ca-armor-t90', '部署地面单位(T90)', 500, function(sen
 				return "无法在航母上部署地面单位"
 			end
 			GroupFunctions.spawnGroupInZone('ca-armor-t90', target)
-			EnableAutoAttackForGroup('ca-armor-t90', 100000, 180, 90)
+			EnableAutoAttackForGroup('ca-armor-t90', 100000, 300, 90)
 			caMenuTankT90 = nil
 			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
 		end
@@ -1116,7 +1116,7 @@ bc:registerShopItem('ca-armor-btr82a', '部署地面单位(BTR82A)', 500, functi
 				return "无法在航母上部署地面单位"
 			end
 			GroupFunctions.spawnGroupInZone('ca-armor-btr82a', target)
-			EnableAutoAttackForGroup('ca-armor-btr82a', 100000, 180, 90)
+			EnableAutoAttackForGroup('ca-armor-btr82a', 100000, 300, 90)
 			caMenuTankBTR82A = nil
 			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
 		end
