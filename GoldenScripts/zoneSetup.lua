@@ -241,6 +241,8 @@ local zones = {
 
 			{ name = "r-attack-gudauta-alpha-ka50_3", mission = "attack", targetzone = "Alpha" },
 
+			{ name = "r-attack-gudauta-alpha-armor", mission = "attack", targetzone = "Alpha", type = "surface" },
+
 			{ name = "r-supply-gudauta-alpha-mi24p", mission = "supply", targetzone = "Alpha" },
 			{ name = "r-supply-gudauta-bravo-mi24p", mission = "supply", targetzone = "Bravo" },
 			{ name = "r-supply-gudauta-sukhumi-mi24p", mission = "supply", targetzone = "Sukhumi" },
@@ -295,6 +297,8 @@ local zones = {
 			{ name = "r-attack-sukhumi-sochi-a10c2", mission = "attack", targetzone = "Sochi" },
 
 			{ name = "r-attack-sukhumi-bravo-ah64d", mission = "attack", targetzone = "Bravo" },
+
+			{ name = "r-attack-sukhumi-bravo-armor", mission = "attack", targetzone = "Bravo", type = "surface" },
 
 			{ name = "r-patrol-sukhumi-sukhumi-j11a", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-sukhumi-gudauta-f15c", mission = "patrol", targetzone = "Gudauta" },
@@ -397,6 +401,10 @@ local zones = {
 			income = 1,
 		},
 		dispatches = {
+			{ name = "r-attack-port-charlie-armor", mission = "attack", targetzone = "Charlie", type = "surface" },
+			{ name = "r-attack-port-senaki-armor", mission = "attack", targetzone = "Senaki", type = "surface" },
+			{ name = "r-attack-port-kobuleti-armor", mission = "attack", targetzone = "Kobuleti", type = "surface" },
+
 			{ name = "r-supply-port-charlie-armor", mission = "supply", targetzone = "Charlie", type = "surface" },
 			{ name = "r-supply-port-senaki-armor", mission = "supply", targetzone = "Senaki", type = "surface" },
 			{ name = "r-supply-port-kobuleti-armor", mission = "supply", targetzone = "Kobuleti", type = "surface" },
@@ -430,6 +438,8 @@ local zones = {
 			{ name = "r-attack-senaki-charlie-ka50_3", mission = "attack", targetzone = "Charlie" },
 			{ name = "r-attack-senaki-sam-ah1w", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-senaki-kobuleti-ah1w", mission = "attack", targetzone = "Kobuleti" },
+
+			{ name = "r-attack-senaki-port-armor", mission = "attack", targetzone = "Port", type = "surface" },
 
 			{ name = "r-patrol-senaki-sukhumi-f16c", mission = "patrol", targetzone = "Sukhumi" },
 			{ name = "r-patrol-senaki-kutaisi-j11a", mission = "patrol", targetzone = "Kutaisi" },
@@ -567,6 +577,8 @@ local zones = {
 			{ name = "r-attack-kutaisi-oil-ka50_3", mission = "attack", targetzone = "Oil" },
 			{ name = "r-attack-kutaisi-sam-ah1w", mission = "attack", targetzone = "SAM" },
 			{ name = "r-attack-kutaisi-senaki-ah64d", mission = "attack", targetzone = "Senaki" },
+
+			{ name = "r-attack-kutaisi-sam-armor", mission = "attack", targetzone = "SAM", type = "surface" },
 
 			{ name = "r-patrol-kutaisi-kutaisi-jf17", mission = "patrol", targetzone = "Kutaisi" },
 
