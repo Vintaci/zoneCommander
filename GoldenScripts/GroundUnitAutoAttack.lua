@@ -1,8 +1,3 @@
-local timer = timer
-local coalition = coalition
-local Group = Group
-local mist = mist
-
 local MoveToNearestEnemy = nil
 local IsEnemyLeaderUnitDead = nil
 
