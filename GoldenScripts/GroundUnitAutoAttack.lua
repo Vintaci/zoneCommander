@@ -35,8 +35,8 @@ MoveToNearestEnemy = function(currentGroupName, searchRange, searchDuration)
 
     local nearestEnemyGroupPosition = mist.getLeadPos(nearestEnemyGroupName)
     local path = {}
-    path[#path + 1] = mist.ground.buildWP(currentGroupPosition, 'Rank', 15)
-    path[#path + 1] = mist.ground.buildWP(nearestEnemyGroupPosition, 'Rank', 15)
+    path[#path + 1] = mist.ground.buildWP(currentGroupPosition, 'Rank', 100)
+    path[#path + 1] = mist.ground.buildWP(nearestEnemyGroupPosition, 'Rank', 100)
 
     mist.goRoute(currentGroupName, path)
 
@@ -53,8 +53,8 @@ IsEnemyLeaderUnitDead = function(enemyLeaderUnit, currentGroupName, nearestEnemy
         local nearestEnemyGroupPosition = mist.getLeadPos(nearestEnemyGroupName)
 
         local path = {}
-        path[#path + 1] = mist.ground.buildWP(currentGroupPosition, 'Rank', 15)
-        path[#path + 1] = mist.ground.buildWP(nearestEnemyGroupPosition, 'Rank', 15)
+        path[#path + 1] = mist.ground.buildWP(currentGroupPosition, 'Rank', 100)
+        path[#path + 1] = mist.ground.buildWP(nearestEnemyGroupPosition, 'Rank', 100)
 
         mist.goRoute(currentGroupName, path)
 
