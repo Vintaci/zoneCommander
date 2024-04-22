@@ -13,6 +13,7 @@ local script_list =
     "restart_timer.lua",
     "PretenseGCI.lua",
     "Hercules_Cargo.lua",
+    "CTLD.lua",
     -- "Splash_Damage_2_0.lua",
 }
 
