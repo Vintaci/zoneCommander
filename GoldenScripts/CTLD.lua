@@ -39,23 +39,23 @@ ctld.alreadyInitialized = false -- if true, ctld.initialize() will not run
 -- ************************************************************************
 ctld.staticBugWorkaround = false --  DCS had a bug where destroying statics would cause a crash. If this happens again, set this to TRUE
 
-ctld.disableAllSmoke = false -- if true, all smoke is diabled at pickup and drop off zones regardless of settings below. Leave false to respect settings below
+ctld.disableAllSmoke = true -- if true, all smoke is diabled at pickup and drop off zones regardless of settings below. Leave false to respect settings below -- Edited, default = false
 
-ctld.hoverPickup = true --  if set to false you can load crates with the F10 menu instead of hovering... Only if not using real crates!
+ctld.hoverPickup = false --  if set to false you can load crates with the F10 menu instead of hovering... Only if not using real crates! -- Edited, default = true
 ctld.loadCrateFromMenu = false -- if set to true, you can load crates with the F10 menu OR hovering, in case of using choppers and planes for example.
 
 ctld.enableCrates = true -- if false, Helis will not be able to spawn or unpack crates so will be normal CTTS
-ctld.slingLoad = false -- if false, crates can be used WITHOUT slingloading, by hovering above the crate, simulating slingloading but not the weight...
+ctld.slingLoad = true -- if false, crates can be used WITHOUT slingloading, by hovering above the crate, simulating slingloading but not the weight... -- Edited, default = false
 -- There are some bug with Sling-loading that can cause crashes, if these occur set slingLoad to false
 -- to use the other method.
 -- Set staticBugFix  to FALSE if use set ctld.slingLoad to TRUE
 
-ctld.enableSmokeDrop = true -- if false, helis and c-130 will not be able to drop smoke
+ctld.enableSmokeDrop = false -- if false, helis and c-130 will not be able to drop smoke -- Edited, default = true
 
 ctld.maxExtractDistance = 125 -- max distance from vehicle to troops to allow a group extraction
 ctld.maximumDistanceLogistic = 200 -- max distance from vehicle to logistics to allow a loading or spawning operation
-ctld.maximumSearchDistance = 4000 -- max distance for troops to search for enemy
-ctld.maximumMoveDistance = 2000 -- max distance for troops to move from drop point if no enemy is nearby
+ctld.maximumSearchDistance = 100000 -- max distance for troops to search for enemy -- Edited, default = 4000
+ctld.maximumMoveDistance = 10000 -- max distance for troops to move from drop point if no enemy is nearby -- Edited, default = 2000
 
 ctld.minimumDeployDistance = 1000 -- minimum distance from a friendly pickup zone where you can deploy a crate
 
@@ -79,7 +79,7 @@ ctld.hawkLaunchers = 8 -- controls how many launchers to add to the hawk when it
 ctld.spawnRPGWithCoalition = true --spawns a friendly RPG unit with Coalition forces
 ctld.spawnStinger = false -- spawns a stinger / igla soldier with a group of 6 or more soldiers!
 
-ctld.enabledFOBBuilding = true -- if true, you can load a crate INTO a C-130 than when unpacked creates a Forward Operating Base (FOB) which is a new place to spawn (crates) and carry crates from
+ctld.enabledFOBBuilding = false -- if true, you can load a crate INTO a C-130 than when unpacked creates a Forward Operating Base (FOB) which is a new place to spawn (crates) and carry crates from -- Edited, default = true
 -- In future i'd like it to be a FARP but so far that seems impossible...
 -- You can also enable troop Pickup at FOBS
 
@@ -101,7 +101,7 @@ ctld.radioSoundFC3 = "beaconsilent.ogg" -- name of the second silent radio file,
 
 ctld.deployedBeaconBattery = 30 -- the battery on deployed beacons will last for this number minutes before needing to be re-deployed
 
-ctld.enabledRadioBeaconDrop = true -- if its set to false then beacons cannot be dropped by units
+ctld.enabledRadioBeaconDrop = false -- if its set to false then beacons cannot be dropped by units -- Edited, default = true
 
 ctld.allowRandomAiTeamPickups = false -- Allows the AI to randomize the loading of infantry teams (specified below) at pickup zones
 
@@ -132,7 +132,7 @@ ctld.AASystemLimitBLUE = 20 -- Blue side limit
 ctld.JTAC_LIMIT_RED = 10 -- max number of JTAC Crates for the RED Side
 ctld.JTAC_LIMIT_BLUE = 10 -- max number of JTAC Crates for the BLUE Side
 
-ctld.JTAC_dropEnabled = true -- allow JTAC Crate spawn from F10 menu
+ctld.JTAC_dropEnabled = false -- allow JTAC Crate spawn from F10 menu -- Edited, default = true
 
 ctld.JTAC_maxDistance = 10000 -- How far a JTAC can "see" in meters (with Line of Sight)
 
@@ -146,7 +146,7 @@ ctld.JTAC_smokeOffset_x = 0.0 -- distance in the X direction from target to smok
 ctld.JTAC_smokeOffset_y = 2.0 -- distance in the Y direction from target to smoke (meters)
 ctld.JTAC_smokeOffset_z = 0.0 -- distance in the z direction from target to smoke (meters)
 
-ctld.JTAC_jtacStatusF10 = true -- enables F10 JTAC Status menu
+ctld.JTAC_jtacStatusF10 = false -- enables F10 JTAC Status menu -- Edited, default = true
 
 ctld.JTAC_location = true -- shows location of target in JTAC message
 ctld.location_DMS = false -- shows coordinates as Degrees Minutes Seconds instead of Degrees Decimal minutes
@@ -177,221 +177,29 @@ ctld.JTAC_allow9Line = true -- if true, allow players to ask for a 9Line (indivi
 -- Flag Number - Optional last field. If set the current number of groups remaining can be obtained from the flag value
 
 --pickupZones = { "Zone name or Ship Unit Name", "smoke color", "limit (-1 unlimited)", "ACTIVE (yes/no)", "side (0 = Both sides / 1 = Red / 2 = Blue )", flag number (optional) }
-ctld.pickupZones = {
-    { "pickzone1", "blue", -1, "yes", 0 },
-    { "pickzone2", "red", -1, "yes", 0 },
-    { "pickzone3", "none", -1, "yes", 0 },
-    { "pickzone4", "none", -1, "yes", 0 },
-    { "pickzone5", "none", -1, "yes", 0 },
-    { "pickzone6", "none", -1, "yes", 0 },
-    { "pickzone7", "none", -1, "yes", 0 },
-    { "pickzone8", "none", -1, "yes", 0 },
-    { "pickzone9", "none", 5, "yes", 1 }, -- limits pickup zone 9 to 5 groups of soldiers or vehicles, only red can pick up
-    { "pickzone10", "none", 10, "yes", 2 },  -- limits pickup zone 10 to 10 groups of soldiers or vehicles, only blue can pick up
-
-    { "pickzone11", "blue", 20, "no", 2 },  -- limits pickup zone 11 to 20 groups of soldiers or vehicles, only blue can pick up. Zone starts inactive!
-    { "pickzone12", "red", 20, "no", 1 },  -- limits pickup zone 11 to 20 groups of soldiers or vehicles, only blue can pick up. Zone starts inactive!
-    { "pickzone13", "none", -1, "yes", 0 },
-    { "pickzone14", "none", -1, "yes", 0 },
-    { "pickzone15", "none", -1, "yes", 0 },
-    { "pickzone16", "none", -1, "yes", 0 },
-    { "pickzone17", "none", -1, "yes", 0 },
-    { "pickzone18", "none", -1, "yes", 0 },
-    { "pickzone19", "none", 5, "yes", 0 },
-    { "pickzone20", "none", 10, "yes", 0, 1000 }, -- optional extra flag number to store the current number of groups available in
-
-    { "USA Carrier", "blue", 10, "yes", 0, 1001 }, -- instead of a Zone Name you can also use the UNIT NAME of a ship
-}
+ctld.pickupZones = getPickupZonesList() -- Edited, construct ctld.pickupZones from zone defination
 
 
 -- dropOffZones = {"name","smoke colour",0,side 1 = Red or 2 = Blue or 0 = Both sides}
-ctld.dropOffZones = {
-    { "dropzone1", "green", 2 },
-    { "dropzone2", "blue", 2 },
-    { "dropzone3", "orange", 2 },
-    { "dropzone4", "none", 2 },
-    { "dropzone5", "none", 1 },
-    { "dropzone6", "none", 1 },
-    { "dropzone7", "none", 1 },
-    { "dropzone8", "none", 1 },
-    { "dropzone9", "none", 1 },
-    { "dropzone10", "none", 1 },
+ctld.dropOffZones = { -- Edited, clear default list
 }
 
 
 --wpZones = { "Zone name", "smoke color",  "ACTIVE (yes/no)", "side (0 = Both sides / 1 = Red / 2 = Blue )", }
-ctld.wpZones = {
-    { "wpzone1", "green","yes", 2 },
-    { "wpzone2", "blue","yes", 2 },
-    { "wpzone3", "orange","yes", 2 },
-    { "wpzone4", "none","yes", 2 },
-    { "wpzone5", "none","yes", 2 },
-    { "wpzone6", "none","yes", 1 },
-    { "wpzone7", "none","yes", 1 },
-    { "wpzone8", "none","yes", 1 },
-    { "wpzone9", "none","yes", 1 },
-    { "wpzone10", "none","no", 0 }, -- Both sides as its set to 0
+ctld.wpZones = { -- Edited, clear default list
 }
 
 
 -- ******************** Transports names **********************
 
 -- Use any of the predefined names or set your own ones
-ctld.transportPilotNames = {
-    "helicargo1",
-    "helicargo2",
-    "helicargo3",
-    "helicargo4",
-    "helicargo5",
-    "helicargo6",
-    "helicargo7",
-    "helicargo8",
-    "helicargo9",
-    "helicargo10",
-
-    "helicargo11",
-    "helicargo12",
-    "helicargo13",
-    "helicargo14",
-    "helicargo15",
-    "helicargo16",
-    "helicargo17",
-    "helicargo18",
-    "helicargo19",
-    "helicargo20",
-
-    "helicargo21",
-    "helicargo22",
-    "helicargo23",
-    "helicargo24",
-    "helicargo25",
-
-    "MEDEVAC #1",
-    "MEDEVAC #2",
-    "MEDEVAC #3",
-    "MEDEVAC #4",
-    "MEDEVAC #5",
-    "MEDEVAC #6",
-    "MEDEVAC #7",
-    "MEDEVAC #8",
-    "MEDEVAC #9",
-    "MEDEVAC #10",
-    "MEDEVAC #11",
-    "MEDEVAC #12",
-    "MEDEVAC #13",
-    "MEDEVAC #14",
-    "MEDEVAC #15",
-    "MEDEVAC #16",
-
-    "MEDEVAC RED #1",
-    "MEDEVAC RED #2",
-    "MEDEVAC RED #3",
-    "MEDEVAC RED #4",
-    "MEDEVAC RED #5",
-    "MEDEVAC RED #6",
-    "MEDEVAC RED #7",
-    "MEDEVAC RED #8",
-    "MEDEVAC RED #9",
-    "MEDEVAC RED #10",
-    "MEDEVAC RED #11",
-    "MEDEVAC RED #12",
-    "MEDEVAC RED #13",
-    "MEDEVAC RED #14",
-    "MEDEVAC RED #15",
-    "MEDEVAC RED #16",
-    "MEDEVAC RED #17",
-    "MEDEVAC RED #18",
-    "MEDEVAC RED #19",
-    "MEDEVAC RED #20",
-    "MEDEVAC RED #21",
-
-    "MEDEVAC BLUE #1",
-    "MEDEVAC BLUE #2",
-    "MEDEVAC BLUE #3",
-    "MEDEVAC BLUE #4",
-    "MEDEVAC BLUE #5",
-    "MEDEVAC BLUE #6",
-    "MEDEVAC BLUE #7",
-    "MEDEVAC BLUE #8",
-    "MEDEVAC BLUE #9",
-    "MEDEVAC BLUE #10",
-    "MEDEVAC BLUE #11",
-    "MEDEVAC BLUE #12",
-    "MEDEVAC BLUE #13",
-    "MEDEVAC BLUE #14",
-    "MEDEVAC BLUE #15",
-    "MEDEVAC BLUE #16",
-    "MEDEVAC BLUE #17",
-    "MEDEVAC BLUE #18",
-    "MEDEVAC BLUE #19",
-    "MEDEVAC BLUE #20",
-    "MEDEVAC BLUE #21",
-
-    -- *** AI transports names (different names only to ease identification in mission) ***
-
-    -- Use any of the predefined names or set your own ones
-
-    "transport1",
-    "transport2",
-    "transport3",
-    "transport4",
-    "transport5",
-    "transport6",
-    "transport7",
-    "transport8",
-    "transport9",
-    "transport10",
-
-    "transport11",
-    "transport12",
-    "transport13",
-    "transport14",
-    "transport15",
-    "transport16",
-    "transport17",
-    "transport18",
-    "transport19",
-    "transport20",
-
-    "transport21",
-    "transport22",
-    "transport23",
-    "transport24",
-    "transport25",
-}
+ctld.transportPilotNames = mist.getUnitsByAttribute({skill = 'human', coalition = "blue", category = 'helicopter'}, 3, false) -- Edited, construct ctld.transportPilotNames list from mission
 
 -- *************** Optional Extractable GROUPS *****************
 
 -- Use any of the predefined names or set your own ones
 
-ctld.extractableGroups = {
-    "extract1",
-    "extract2",
-    "extract3",
-    "extract4",
-    "extract5",
-    "extract6",
-    "extract7",
-    "extract8",
-    "extract9",
-    "extract10",
-
-    "extract11",
-    "extract12",
-    "extract13",
-    "extract14",
-    "extract15",
-    "extract16",
-    "extract17",
-    "extract18",
-    "extract19",
-    "extract20",
-
-    "extract21",
-    "extract22",
-    "extract23",
-    "extract24",
-    "extract25",
+ctld.extractableGroups = { -- Edited, clear default list
 }
 
 -- ************** Logistics UNITS FOR CRATE SPAWNING ******************
@@ -399,17 +207,22 @@ ctld.extractableGroups = {
 -- Use any of the predefined names or set your own ones
 -- When a logistic unit is destroyed, you will no longer be able to spawn crates
 
-ctld.logisticUnits = {
-    "logistic1",
-    "logistic2",
-    "logistic3",
-    "logistic4",
-    "logistic5",
-    "logistic6",
-    "logistic7",
-    "logistic8",
-    "logistic9",
-    "logistic10",
+ctld.logisticUnits = { -- Edited, use farps as spawn location
+    "farp-sochi-1",
+    "farp-gudauta-1",
+    "farp-sukhumi-1",
+    "farp-senaki-1",
+    "farp-kobuleti-1",
+    "farp-kutaisi-1",
+    "farp-alpha-1",
+    "farp-bravo-1",
+    "farp-charlie-1",
+    "farp-delta-1",
+    "farp-echo-1",
+    "farp-radio-1",
+    "farp-port-1",
+    "farp-sam-1",
+    "farp-oil-1",
 }
 
 -- ************** UNITS ABLE TO TRANSPORT VEHICLES ******************
@@ -461,6 +274,8 @@ ctld.unitActions = {
     -- ["SA342Mistral"] = {crates=true, troops=true},
     -- ["SA342L"] = {crates=false, troops=true},
     -- ["SA342M"] = {crates=false, troops=true},
+    ["AH-64D_BLK_II"] = {crates=false, troops=true}, -- Edited, AH-64D do not have sling loading capability
+    ["Ka-50_3"] = {crates=false, troops=true}, -- Edited, Ka-50_3 do not have sling loading capability
 
 }
 
@@ -495,21 +310,17 @@ ctld.JTAC_WEIGHT = 15 -- kg
 -- You must add a name to the group for it to work
 -- You can also add an optional coalition side to limit the group to one side
 -- for the side - 2 is BLUE and 1 is RED
-ctld.loadableGroups = {
-    {name = "Standard Group", inf = 6, mg = 2, at = 2 }, -- will make a loadable group with 6 infantry, 2 MGs and 2 anti-tank for both coalitions
-    {name = "Anti Air", inf = 2, aa = 3  },
-    {name = "Anti Tank", inf = 2, at = 6  },
-    {name = "Mortar Squad", mortar = 6 },
-    {name = "JTAC Group", inf = 4, jtac = 1 }, -- will make a loadable group with 4 infantry and a JTAC soldier for both coalitions
-    {name = "Single JTAC", jtac = 1 }, -- will make a loadable group witha single JTAC soldier for both coalitions
-    -- {name = "Mortar Squad Red", inf = 2, mortar = 5, side =1 }, --would make a group loadable by RED only
+ctld.loadableGroups = { -- Edited, define our own troop types
+    { name = "Standard Group", inf = 2, mg = 2, at = 1, aa = 1, side = 2 },
+    { name = "Anti Air", inf = 1, mg = 1, aa = 4, side = 2 },
+    { name = "Anti Tank", inf = 1, mg = 1, at = 4, side = 2 },
 }
 
 -- ************** SPAWNABLE CRATES ******************
 -- Weights must be unique as we use the weight to change the cargo to the correct unit
 -- when we unpack
 --
-ctld.spawnableCrates = {
+ctld.spawnableCrates = { -- Edited, define our own cargo types
     -- name of the sub menu on F10 for spawning crates
     ["Ground Forces"] = {
         --crates you can spawn
@@ -519,67 +330,22 @@ ctld.spawnableCrates = {
         -- cratesRequired - if set requires that many crates of the same type within 100m of each other in order build the unit
         -- side is optional but 2 is BLUE and 1 is RED
         -- dont use that option with the HAWK Crates
-        { weight = 500, desc = "HMMWV - TOW", unit = "M1045 HMMWV TOW", side = 2 },
-        { weight = 505, desc = "HMMWV - MG", unit = "M1043 HMMWV Armament", side = 2 },
-
-        { weight = 510, desc = "BTR-D", unit = "BTR_D", side = 1 },
-        { weight = 515, desc = "BRDM-2", unit = "BRDM-2", side = 1 },
-
-        { weight = 520, desc = "HMMWV - JTAC", unit = "Hummer", side = 2, }, -- used as jtac and unarmed, not on the crate list if JTAC is disabled
-        { weight = 525, desc = "SKP-11 - JTAC", unit = "SKP-11", side = 1, }, -- used as jtac and unarmed, not on the crate list if JTAC is disabled
-
-        { weight = 100, desc = "2B11 Mortar", unit = "2B11 mortar" },
-
-        { weight = 250, desc = "SPH 2S19 Msta", unit = "SAU Msta", side = 1, cratesRequired = 3 },
-        { weight = 255, desc = "M-109", unit = "M-109", side = 2, cratesRequired = 3 },
-
-        { weight = 252, desc = "Ural-375 Ammo Truck", unit = "Ural-375", side = 1, cratesRequired = 2 },
-        { weight = 253, desc = "M-818 Ammo Truck", unit = "M 818", side = 2, cratesRequired = 2 },
-
-        { weight = 800, desc = "FOB Crate - Small", unit = "FOB-SMALL" }, -- Builds a FOB! - requires 3 * ctld.cratesRequiredForFOB
+        { weight = 750, desc = "HMMWV - MG", unit = "M1043 HMMWV Armament", side = 2 },
+        { weight = 900, desc = "BTR-D", unit = "BTR_D", side = 2 },
+        { weight = 800, desc = "BRDM-2", unit = "BRDM-2", side = 2 },
     },
-    ["AA short range"] = {
-        { weight = 50, desc = "Stinger", unit = "Soldier stinger", side = 2 },
-        { weight = 55, desc = "Igla", unit = "SA-18 Igla manpad", side = 1 },
-
-        { weight = 405, desc = "Strela-1 9P31", unit = "Strela-1 9P31", side = 1, cratesRequired = 3 },
-        { weight = 400, desc = "M1097 Avenger", unit = "M1097 Avenger", side = 2, cratesRequired = 3 },
+    ["AA Short Range"] = {
+        { weight = 950, desc = "Strela-10M3", unit = "Strela-10M3", side = 2 },
+        { weight = 950, desc = "Roland ADS", unit = "Roland ADS", side = 2 },
+        { weight = 850, desc = "Strela-1 9P31", unit = "Strela-1 9P31", side = 2 },
+        { weight = 900, desc = "Avenger", unit = "M1097 Avenger", side = 2 },
     },
-    ["AA mid range"] = {
-        -- HAWK System
-        { weight = 540, desc = "HAWK Launcher", unit = "Hawk ln", side = 2},
-        { weight = 545, desc = "HAWK Search Radar", unit = "Hawk sr", side = 2 },
-        { weight = 546, desc = "HAWK Track Radar", unit = "Hawk tr", side = 2 },
-        { weight = 547, desc = "HAWK PCP", unit = "Hawk pcp" , side = 2 }, -- Remove this if on 1.2
-        { weight = 548, desc = "HAWK CWAR", unit = "Hawk cwar" , side = 2 }, -- Remove this if on 2.5    
-        { weight = 549, desc = "HAWK Repair", unit = "HAWK Repair" , side = 2 },
-        -- End of HAWK
-
-        -- KUB SYSTEM
-        { weight = 560, desc = "KUB Launcher", unit = "Kub 2P25 ln", side = 1},
-        { weight = 565, desc = "KUB Radar", unit = "Kub 1S91 str", side = 1 },
-        { weight = 570, desc = "KUB Repair", unit = "KUB Repair", side = 1},
-        -- End of KUB
-
-        -- BUK System
-        --        { weight = 575, desc = "BUK Launcher", unit = "SA-11 Buk LN 9A310M1"},
-        --        { weight = 580, desc = "BUK Search Radar", unit = "SA-11 Buk SR 9S18M1"},
-        --        { weight = 585, desc = "BUK CC Radar", unit = "SA-11 Buk CC 9S470M1"},
-        --        { weight = 590, desc = "BUK Repair", unit = "BUK Repair"},
-        -- END of BUK
-    },
-    ["AA long range"] = {
-        -- Patriot System
-        { weight = 555, desc = "Patriot Launcher", unit = "Patriot ln", side = 2 },
-        { weight = 556, desc = "Patriot Radar", unit = "Patriot str" , side = 2 },
-        { weight = 557, desc = "Patriot ECS", unit = "Patriot ECS", side = 2 },
-        -- { weight = 553, desc = "Patriot ICC", unit = "Patriot cp", side = 2 },
-        -- { weight = 554, desc = "Patriot EPP", unit = "Patriot EPP", side = 2 },
-        { weight = 558, desc = "Patriot AMG (optional)", unit = "Patriot AMG" , side = 2 },
-        { weight = 559, desc = "Patriot Repair", unit = "Patriot Repair" , side = 2 },
-        -- End of Patriot
-
-        { weight = 595, desc = "Early Warning Radar", unit = "1L13 EWR", side = 1 }, -- cant be used by BLUE coalition
+    ["Support Vehicles"] = {
+        { weight = 850, desc = "Ural-375 Ammo Truck", unit = "Ural-375", side = 2 },
+        { weight = 850, desc = "M-818 Ammo Truck", unit = "M 818", side = 2 },
+        { weight = 750, desc = "HL-B8M1", unit = "HL_B8M1", side = 2 },
+        { weight = 1100, desc = "BM-27", unit = "Uragan_BM-27", side = 2 },
+        { weight = 1200, desc = "Grad-URAL", unit = "Grad-URAL", side = 2 },
     },
 }
 
@@ -1395,47 +1161,47 @@ end
 -- A New system added here also needs the launcher added
 ctld.AASystemTemplate = {
 
-    {
-        name = "HAWK AA System",
-        count = 4,
-        parts = {
-            {name = "Hawk ln", desc = "HAWK Launcher", launcher = true},
-            {name = "Hawk tr", desc = "HAWK Track Radar"},
-            {name = "Hawk sr", desc = "HAWK Search Radar"},
-            {name = "Hawk pcp", desc = "HAWK PCP"},
-            {name = "Hawk cwar", desc = "HAWK CWAR"},
-        },
-        repair = "HAWK Repair",
-    },
-    {
-        name = "Patriot AA System",
-        count = 4,
-        parts = {
-            {name = "Patriot ln", desc = "Patriot Launcher", launcher = true},
-            {name = "Patriot ECS", desc = "Patriot Control Unit"},
-            {name = "Patriot str", desc = "Patriot Search and Track Radar"},
-        },
-        repair = "Patriot Repair",
-    },
-    {
-        name = "BUK AA System",
-        count = 3,
-        parts = {
-            {name = "SA-11 Buk LN 9A310M1", desc = "BUK Launcher" , launcher = true},
-            {name = "SA-11 Buk CC 9S470M1", desc = "BUK CC Radar"},
-            {name = "SA-11 Buk SR 9S18M1", desc = "BUK Search Radar"},
-        },
-        repair = "BUK Repair",
-    },
-    {
-        name = "KUB AA System",
-        count = 2,
-        parts = {
-            {name = "Kub 2P25 ln", desc = "KUB Launcher", launcher = true},
-            {name = "Kub 1S91 str", desc = "KUB Radar"},
-        },
-        repair = "KUB Repair",
-    },
+    -- { -- Edited, disable AA systems
+    --     name = "HAWK AA System",
+    --     count = 4,
+    --     parts = {
+    --         {name = "Hawk ln", desc = "HAWK Launcher", launcher = true},
+    --         {name = "Hawk tr", desc = "HAWK Track Radar"},
+    --         {name = "Hawk sr", desc = "HAWK Search Radar"},
+    --         {name = "Hawk pcp", desc = "HAWK PCP"},
+    --         {name = "Hawk cwar", desc = "HAWK CWAR"},
+    --     },
+    --     repair = "HAWK Repair",
+    -- },
+    -- {
+    --     name = "Patriot AA System",
+    --     count = 4,
+    --     parts = {
+    --         {name = "Patriot ln", desc = "Patriot Launcher", launcher = true},
+    --         {name = "Patriot ECS", desc = "Patriot Control Unit"},
+    --         {name = "Patriot str", desc = "Patriot Search and Track Radar"},
+    --     },
+    --     repair = "Patriot Repair",
+    -- },
+    -- {
+    --     name = "BUK AA System",
+    --     count = 3,
+    --     parts = {
+    --         {name = "SA-11 Buk LN 9A310M1", desc = "BUK Launcher" , launcher = true},
+    --         {name = "SA-11 Buk CC 9S470M1", desc = "BUK CC Radar"},
+    --         {name = "SA-11 Buk SR 9S18M1", desc = "BUK Search Radar"},
+    --     },
+    --     repair = "BUK Repair",
+    -- },
+    -- {
+    --     name = "KUB AA System",
+    --     count = 2,
+    --     parts = {
+    --         {name = "Kub 2P25 ln", desc = "KUB Launcher", launcher = true},
+    --         {name = "Kub 1S91 str", desc = "KUB Radar"},
+    --     },
+    --     repair = "KUB Repair",
+    -- },
 }
 
 
@@ -1724,7 +1490,7 @@ function ctld.spawnCrate(_arguments)
 
             local _heli = ctld.getTransportUnit(_args[1])
 
-            local _point = ctld.getPointAt12Oclock(_heli, 30)
+            local _point = ctld.getPointAt12Oclock(_heli, 200) -- Edited, increase cargo spawn distance, default = 30
 
             local _unitId = ctld.getNextUnitId()
 
@@ -4828,7 +4594,7 @@ end
 function ctld.addF10MenuOptions()
     -- Loop through all Heli units
 
-    timer.scheduleFunction(ctld.addF10MenuOptions, nil, timer.getTime() + 10)
+    timer.scheduleFunction(ctld.addF10MenuOptions, nil, timer.getTime() + 5) -- Edited, decrease check duration, default = 10
 
     for _, _unitName in pairs(ctld.transportPilotNames) do
 
@@ -4947,15 +4713,15 @@ function ctld.addF10MenuOptions()
                             missionCommands.addCommandForGroup(_groupId, "Drop Green Smoke", _smokeMenu, ctld.dropSmoke, { _unitName, trigger.smokeColor.Green })
                         end
 
-                        if ctld.enabledRadioBeaconDrop then
-                            local _radioCommands = missionCommands.addSubMenuForGroup(_groupId, "Radio Beacons", _rootPath)
-                            missionCommands.addCommandForGroup(_groupId, "List Beacons", _radioCommands, ctld.listRadioBeacons, { _unitName })
-                            missionCommands.addCommandForGroup(_groupId, "Drop Beacon", _radioCommands, ctld.dropRadioBeacon, { _unitName })
-                            missionCommands.addCommandForGroup(_groupId, "Remove Closet Beacon", _radioCommands, ctld.removeRadioBeacon, { _unitName })
-                        elseif ctld.deployedRadioBeacons ~= {} then
-                            local _radioCommands = missionCommands.addSubMenuForGroup(_groupId, "Radio Beacons", _rootPath)
-                            missionCommands.addCommandForGroup(_groupId, "List Beacons", _radioCommands, ctld.listRadioBeacons, { _unitName })
-                        end
+                        -- if ctld.enabledRadioBeaconDrop then -- Edited, disable beacon menu
+                        --     local _radioCommands = missionCommands.addSubMenuForGroup(_groupId, "Radio Beacons", _rootPath)
+                        --     missionCommands.addCommandForGroup(_groupId, "List Beacons", _radioCommands, ctld.listRadioBeacons, { _unitName })
+                        --     missionCommands.addCommandForGroup(_groupId, "Drop Beacon", _radioCommands, ctld.dropRadioBeacon, { _unitName })
+                        --     missionCommands.addCommandForGroup(_groupId, "Remove Closet Beacon", _radioCommands, ctld.removeRadioBeacon, { _unitName })
+                        -- elseif ctld.deployedRadioBeacons ~= {} then -- Edited, disable beacon menu
+                        --     local _radioCommands = missionCommands.addSubMenuForGroup(_groupId, "Radio Beacons", _rootPath)
+                        --     missionCommands.addCommandForGroup(_groupId, "List Beacons", _radioCommands, ctld.listRadioBeacons, { _unitName })
+                        -- end
 
                         ctld.addedTo[tostring(_groupId)] = true
                     end

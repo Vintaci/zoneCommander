@@ -1497,3 +1497,17 @@ end
 world.addEventHandler(event_handler)
 
 -- Delete Ejected Pilots Done
+
+-- Construct ctld.pickupZones from Zone Defination
+
+function getPickupZonesList()
+	local pickup_zones_list = {}
+
+	for key, value in pairs(zones) do
+		table.insert(pickup_zones_list, {value.zoneCommanderProperties.zone, "blue", -1, "yes", 2})
+	end
+	
+	return pickup_zones_list
+end
+
+-- Construct ctld.pickupZones from Zone Defination Done
