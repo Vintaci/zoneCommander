@@ -276,6 +276,8 @@ ctld.unitActions = {
     -- ["SA342M"] = {crates=false, troops=true},
     ["AH-64D_BLK_II"] = {crates=false, troops=true}, -- Edited, AH-64D do not have sling loading capability
     ["Ka-50_3"] = {crates=false, troops=true}, -- Edited, Ka-50_3 do not have sling loading capability
+    ["SA342L"] = {crates=false, troops=true}, -- Edited, SA342L do not have sling loading capability
+    ["SA342M"] = {crates=false, troops=true}, -- Edited, SA342M do not have sling loading capability
 
 }
 
