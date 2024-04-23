@@ -1408,6 +1408,12 @@ HercCargoDropSupply.init(bc)
 -- Spawn FARP Trucks
 
 local farpTrucks = {
+	["Sochi"] = "farp-trucks-sochi",
+	["Gudauta"] = "farp-trucks-gudauta",
+	["Sukhumi"] = "farp-trucks-sukhumi",
+	["Senaki"] = "farp-trucks-senaki",
+	["Kobuleti"] = "farp-trucks-kobuleti",
+	["Kutaisi"] = "farp-trucks-kutaisi",
 	["Alpha"] = "farp-trucks-alpha",
 	["Bravo"] = "farp-trucks-bravo",
 	["Radio"] = "farp-trucks-radio",
@@ -1417,8 +1423,6 @@ local farpTrucks = {
 	["SAM"] = "farp-trucks-sam",
 	["Oil"] = "farp-trucks-oil",
 	["Echo"] = "farp-trucks-echo",
-	["Gudauta"] = "farp-trucks-gudauta",
-	["Sukhumi"] = "farp-trucks-sukhumi",
 }
 
 GroupFunctions.destroyGroupsByNames(farpTrucks)
