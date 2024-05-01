@@ -1032,106 +1032,106 @@ function(sender, params)
 end)
 
 -- Late activated ground groups must be destroyed first due to ED's bug, or it's dead status will mismatch real status
-GroupFunctions.destroyGroupsByNames({'ca-armor-m1a2', 'ca-armor-t90', 'ca-armor-btr82a'})
+-- GroupFunctions.destroyGroupsByNames({'ca-armor-m1a2', 'ca-armor-t90', 'ca-armor-btr82a'})
 
-local caMenuTankM1A2 = nil
-bc:registerShopItem('ca-armor-m1a2', '部署地面单位(M1A2)', 500, function(sender)
-	local gr = Group.getByName('ca-armor-m1a2')
-	if gr and not GroupFunctions.isGroupDead(gr) then
-		return '先前部署的单位仍然存活'
-	end
-	if caMenuTankM1A2 then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployTanks = function(target)
-		if caMenuTankM1A2 then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			GroupFunctions.spawnGroupInZone('ca-armor-m1a2', target)
-			EnableAutoAttackForGroup('ca-armor-m1a2', 100000, 300, 90)
-			caMenuTankM1A2 = nil
-			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
-		end
-	end
-	caMenuTankM1A2 = bc:showTargetZoneMenu(2, '部署M1A2 (请选择友方占领区域)', deployTanks, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		GroupFunctions.spawnGroupInZone('ca-armor-m1a2', target)
-		trigger.action.outTextForCoalition(2, '地面单位已部署于 '..params.zone.zone, 60)
-	else
-		return '只能在友方占领区部署地面单位'
-	end
-end)
+-- local caMenuTankM1A2 = nil
+-- bc:registerShopItem('ca-armor-m1a2', '部署地面单位(M1A2)', 500, function(sender)
+-- 	local gr = Group.getByName('ca-armor-m1a2')
+-- 	if gr and not GroupFunctions.isGroupDead(gr) then
+-- 		return '先前部署的单位仍然存活'
+-- 	end
+-- 	if caMenuTankM1A2 then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployTanks = function(target)
+-- 		if caMenuTankM1A2 then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			GroupFunctions.spawnGroupInZone('ca-armor-m1a2', target)
+-- 			EnableAutoAttackForGroup('ca-armor-m1a2', 100000, 300, 90)
+-- 			caMenuTankM1A2 = nil
+-- 			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
+-- 		end
+-- 	end
+-- 	caMenuTankM1A2 = bc:showTargetZoneMenu(2, '部署M1A2 (请选择友方占领区域)', deployTanks, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		GroupFunctions.spawnGroupInZone('ca-armor-m1a2', target)
+-- 		trigger.action.outTextForCoalition(2, '地面单位已部署于 '..params.zone.zone, 60)
+-- 	else
+-- 		return '只能在友方占领区部署地面单位'
+-- 	end
+-- end)
 
-local caMenuTankT90 = nil
-bc:registerShopItem('ca-armor-t90', '部署地面单位(T90)', 500, function(sender)
-	local gr = Group.getByName('ca-armor-t90')
-	if gr and not GroupFunctions.isGroupDead(gr) then
-		return '先前部署的单位仍然存活'
-	end
-	if caMenuTankT90 then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployTanks = function(target)
-		if caMenuTankT90 then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			GroupFunctions.spawnGroupInZone('ca-armor-t90', target)
-			EnableAutoAttackForGroup('ca-armor-t90', 100000, 300, 90)
-			caMenuTankT90 = nil
-			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
-		end
-	end
-	caMenuTankT90 = bc:showTargetZoneMenu(2, '部署T90 (请选择友方占领区域)', deployTanks, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		GroupFunctions.spawnGroupInZone('ca-armor-t90', target)
-		trigger.action.outTextForCoalition(2, '地面单位已部署于 '..params.zone.zone, 60)
-	else
-		return '只能在友方占领区部署地面单位'
-	end
-end)
+-- local caMenuTankT90 = nil
+-- bc:registerShopItem('ca-armor-t90', '部署地面单位(T90)', 500, function(sender)
+-- 	local gr = Group.getByName('ca-armor-t90')
+-- 	if gr and not GroupFunctions.isGroupDead(gr) then
+-- 		return '先前部署的单位仍然存活'
+-- 	end
+-- 	if caMenuTankT90 then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployTanks = function(target)
+-- 		if caMenuTankT90 then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			GroupFunctions.spawnGroupInZone('ca-armor-t90', target)
+-- 			EnableAutoAttackForGroup('ca-armor-t90', 100000, 300, 90)
+-- 			caMenuTankT90 = nil
+-- 			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
+-- 		end
+-- 	end
+-- 	caMenuTankT90 = bc:showTargetZoneMenu(2, '部署T90 (请选择友方占领区域)', deployTanks, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		GroupFunctions.spawnGroupInZone('ca-armor-t90', target)
+-- 		trigger.action.outTextForCoalition(2, '地面单位已部署于 '..params.zone.zone, 60)
+-- 	else
+-- 		return '只能在友方占领区部署地面单位'
+-- 	end
+-- end)
 
-local caMenuTankBTR82A = nil
-bc:registerShopItem('ca-armor-btr82a', '部署地面单位(BTR82A)', 500, function(sender)
-	local gr = Group.getByName('ca-armor-btr82a')
-	if gr and not GroupFunctions.isGroupDead(gr) then
-		return '先前部署的单位仍然存活'
-	end
-	if caMenuTankBTR82A then
-		return "请使用 F10 菜单选择部署区域"
-	end
-	local deployTanks = function(target)
-		if caMenuTankBTR82A then
-			if "Carrier" == target then
-				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
-				return "无法在航母上部署地面单位"
-			end
-			GroupFunctions.spawnGroupInZone('ca-armor-btr82a', target)
-			EnableAutoAttackForGroup('ca-armor-btr82a', 100000, 300, 90)
-			caMenuTankBTR82A = nil
-			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
-		end
-	end
-	caMenuTankBTR82A = bc:showTargetZoneMenu(2, '部署BTR82A (请选择友方占领区域)', deployTanks, 2)
-	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
-end,
-function(sender, params)
-	if params.zone and params.zone.side == 2 then
-		GroupFunctions.spawnGroupInZone('ca-armor-btr82a', target)
-		trigger.action.outTextForCoalition(2, '地面单位已部署于 '..params.zone.zone, 60)
-	else
-		return '只能在友方占领区部署地面单位'
-	end
-end)
+-- local caMenuTankBTR82A = nil
+-- bc:registerShopItem('ca-armor-btr82a', '部署地面单位(BTR82A)', 500, function(sender)
+-- 	local gr = Group.getByName('ca-armor-btr82a')
+-- 	if gr and not GroupFunctions.isGroupDead(gr) then
+-- 		return '先前部署的单位仍然存活'
+-- 	end
+-- 	if caMenuTankBTR82A then
+-- 		return "请使用 F10 菜单选择部署区域"
+-- 	end
+-- 	local deployTanks = function(target)
+-- 		if caMenuTankBTR82A then
+-- 			if "Carrier" == target then
+-- 				trigger.action.outTextForCoalition(2, "无法在航母上部署地面单位", 60)
+-- 				return "无法在航母上部署地面单位"
+-- 			end
+-- 			GroupFunctions.spawnGroupInZone('ca-armor-btr82a', target)
+-- 			EnableAutoAttackForGroup('ca-armor-btr82a', 100000, 300, 90)
+-- 			caMenuTankBTR82A = nil
+-- 			trigger.action.outTextForCoalition(2, '地面单位已部署于 '..target, 60)
+-- 		end
+-- 	end
+-- 	caMenuTankBTR82A = bc:showTargetZoneMenu(2, '部署BTR82A (请选择友方占领区域)', deployTanks, 2)
+-- 	trigger.action.outTextForCoalition(2, "请使用 F10 菜单选择部署区域", 60)
+-- end,
+-- function(sender, params)
+-- 	if params.zone and params.zone.side == 2 then
+-- 		GroupFunctions.spawnGroupInZone('ca-armor-btr82a', target)
+-- 		trigger.action.outTextForCoalition(2, '地面单位已部署于 '..params.zone.zone, 60)
+-- 	else
+-- 		return '只能在友方占领区部署地面单位'
+-- 	end
+-- end)
 
 bc:addShopItem(2, 'sead', -1)
 bc:addShopItem(2, 'sweep', -1)
@@ -1144,9 +1144,9 @@ bc:addShopItem(2, 'awacs-a50-124am', -1)
 bc:addShopItem(2, 'airrefuel-soft', -1)
 bc:addShopItem(2, 'airrefuel-hard', -1)
 bc:addShopItem(2, 'jam', -1)
-bc:addShopItem(2, 'ca-armor-m1a2', -1)
-bc:addShopItem(2, 'ca-armor-t90', -1)
-bc:addShopItem(2, 'ca-armor-btr82a', -1)
+-- bc:addShopItem(2, 'ca-armor-m1a2', -1)
+-- bc:addShopItem(2, 'ca-armor-t90', -1)
+-- bc:addShopItem(2, 'ca-armor-btr82a', -1)
 
 -- bc:addFunds(2, 100000)
 
