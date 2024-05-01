@@ -333,23 +333,21 @@ ctld.spawnableCrates = { -- Edited, define our own cargo types, note that cargo 
         -- side is optional but 2 is BLUE and 1 is RED
         -- dont use that option with the HAWK Crates
         { weight = 750, desc = "HMMWV - MG", unit = "M1043 HMMWV Armament", side = 2 },
-        { weight = 900, desc = "BTR-D", unit = "BTR_D", side = 2 },
         { weight = 800, desc = "BRDM-2", unit = "BRDM-2", side = 2 },
         { weight = 1050, desc = "BTR-82A", unit = "BTR-82A", side = 2 },
-        { weight = 1200, desc = "T-90", unit = "T-90", side = 2, cratesRequired = 2  },
+        { weight = 1200, desc = "T-90", unit = "T-90", side = 2  },
     },
     ["AA Short Range"] = {
-        { weight = 825, desc = "Strela-1 9P31", unit = "Strela-1 9P31", side = 2 },
-        { weight = 925, desc = "Avenger", unit = "M1097 Avenger", side = 2 },
-        { weight = 1075, desc = "HQ-7", unit = "HQ-7_LN_P", side = 2 },
-        { weight = 1100, desc = "M6 Linebacker", unit = "M6 Linebacker", side = 2, cratesRequired = 2 },
+        { weight = 850, desc = "Avenger", unit = "M1097 Avenger", side = 2 },
+        { weight = 1000, desc = "2S6 Tunguska", unit = "2S6 Tunguska", side = 2 },
+        { weight = 1100, desc = "M6 Linebacker", unit = "M6 Linebacker", side = 2 },
+        { weight = 900, desc = " Tor 9A331", unit = " Tor 9A331", side = 2 },
     },
     ["Support Vehicles"] = {
-        { weight = 875, desc = "Ural-375 Ammo Truck", unit = "Ural-375", side = 2 },
-        { weight = 850, desc = "M-818 Ammo Truck", unit = "M 818", side = 2 },
-        { weight = 775, desc = "HL-B8M1", unit = "HL_B8M1", side = 2 },
-        { weight = 1125, desc = "BM-27", unit = "Uragan_BM-27", side = 2 },
-        { weight = 1150, desc = "Grad-URAL", unit = "Grad-URAL", side = 2 },
+        { weight = 825, desc = "Ural-375 Ammo Truck", unit = "Ural-375", side = 2 },
+        { weight = 875, desc = "BM-27", unit = "Uragan_BM-27", side = 2 },
+        { weight = 925, desc = "BM-30", unit = "Smerch_HE", side = 2 },
+        { weight = 975, desc = "SPH T155 Firtna", unit = "T155_Firtina", side = 2 },
     },
 }
 
