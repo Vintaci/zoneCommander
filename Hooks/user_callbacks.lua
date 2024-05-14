@@ -67,6 +67,12 @@ local vip_list = {
         welcome_audio = "XuZhu_Welcome.ogg",
         online = false,
     },
+    -- 麻辣兔兔抽
+    ["7a61afd79db1a52dddc2c38617e2fc52"] = {
+        welcome_text = "没吃过麻辣兔头的麻辣兔兔柚来了",
+        welcome_audio = "TuTuChou_Welcome.ogg",
+        online = false,
+    },
 }
 
 local welcome_text_prefix = "===== VIP 上线提醒 =====\\n"
