@@ -1,4 +1,4 @@
--- Hotfix for Group.getByName() function malfunction
+-- Edited, Hotfix for Group.getByName() function malfunction
 Group.getByNameBase = Group.getByName
 function Group.getByName(name)
     local g = Group.getByNameBase(name)
@@ -1668,7 +1668,41 @@ do -- the main scope
         log:warn('Init time: $1', timer.getTime())
 
 		-- call main the first time therafter it reschedules itself.
-		mist.main()
+		-- mist.main() -- Edited, refactor the main loop, start
+		timer.scheduleFunction(function()
+			checkSpawnedEventsNew()
+			
+			if not coroutines.updateDBTables then
+				coroutines.updateDBTables = coroutine.create(updateDBTables)
+			end
+
+			coroutine.resume(coroutines.updateDBTables)
+
+			if coroutine.status(coroutines.updateDBTables) == 'dead' then
+				coroutines.updateDBTables = nil
+			end
+
+			return timer.getTime() + 0.25
+		end, {}, timer.getTime() + 0.25)
+
+		timer.scheduleFunction(function()
+			if not coroutines.updateAliveUnits then
+				coroutines.updateAliveUnits = coroutine.create(updateAliveUnits)
+			end
+
+			coroutine.resume(coroutines.updateAliveUnits)
+
+			if coroutine.status(coroutines.updateAliveUnits) == 'dead' then
+				coroutines.updateAliveUnits = nil
+			end
+
+			return timer.getTime() + 0.1
+		end, {}, timer.getTime() + 0.1)
+
+		timer.scheduleFunction(function()
+			doScheduledFunctions()
+			return timer.getTime() + 0.5
+		end, {}, timer.getTime() + 0.5) -- Edited, refactor the main loop, end
 		--log:msg('MIST version $1.$2.$3 loaded', mist.majorVersion, mist.minorVersion, mist.build)
         
         mist.scheduleFunction(verifyDB, {}, timer.getTime() + 1)
