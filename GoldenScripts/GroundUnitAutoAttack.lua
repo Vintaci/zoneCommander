@@ -70,7 +70,7 @@ IsEnemyLeaderUnitDead = function(params)
 
         timer.scheduleFunction(IsEnemyLeaderUnitDead, { enemyLeaderUnit, currentGroupName, nearestEnemyGroupName, searchRange, searchDuration }, timer.getTime() + searchDuration)
     else
-        MoveToNearestEnemy(currentGroupName, searchRange, searchDuration)
+        MoveToNearestEnemy({ currentGroupName, searchRange, searchDuration })
     end
     
     return nil
