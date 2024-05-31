@@ -7,9 +7,9 @@ if lfs then
 	filepath = dir..filepath
 	env.info('Foothold - Save file path: '..filepath)
 
-	if (file.exists(filepath)) then
-		file.copy(filepath, filepath..".bak")
-	end
+	-- if (file.exists(filepath)) then
+	-- 	file.copy(filepath, filepath..".bak")
+	-- end
 end
 
 -- Difficulty scaling
