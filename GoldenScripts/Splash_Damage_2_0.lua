@@ -7,7 +7,7 @@ FrozenDroid:
 - Added some extra checks to which weapons to handle, make sure they actually have a warhead (how come S-8KOM's don't have a warhead field...?)
 
 28 October 2020
-FrozenDroid: 
+FrozenDroid:
 - Uncommented error logging, actually made it an error log which shows a message box on error.
 - Fixed the too restrictive weapon filter (took out the HE warhead requirement)
 
@@ -22,18 +22,24 @@ spencershepard (GRIMM):
  -damage model for ground units that will disable their weapons and ability to move with partial damage before they are killed
  -added options table to allow easy adjustments before release
  -general refactoring and restructure
- 
+
  31 December 2021
  spencershepard (GRIMM):
 -added many new weapons
 -added filter for weapons.shells events
 -fixed mission weapon message option
 -changed default for damage_model option
- 
+
  16 April 2022
  spencershepard (GRIMM):
  added new/missing weapons to explTable
  added new option rocket_multiplier
+
+ 06 mars 2023 (Kerv)
+ Add some data for new ammunition
+
+ 03 mai 2023 (KERV)
+ correction AGM 154 (https://forum.dcs.world/topic/289290-splash-damage-20-script-make-explosions-better/page/5/#comment-5207760)
 
  31 July 2023
  Dzsek (Dzsekeb):
@@ -42,6 +48,12 @@ spencershepard (GRIMM):
  2 August 2023
  Dzsek (Dzsekeb):
  - fake the weapon object in the kill event entirely to improve compatibility with scripts
+
+ 20 january 2024
+  by JGi | Quéton 1-1
+  - added missing weapons to explTable
+  - Sort weapons in explTable by type
+  - added aircraft type in log when missing
 --]]
 
 ----[[ ##### SCRIPT CONFIGURATION ##### ]]----
@@ -50,10 +62,10 @@ splash_damage_options = {
   ["static_damage_boost"] = 2000, --apply extra damage to Unit.Category.STRUCTUREs with wave explosions
   ["wave_explosions"] = true, --secondary explosions on top of game objects, radiating outward from the impact point and scaled based on size of object and distance from weapon impact point
   ["larger_explosions"] = true, --secondary explosions on top of weapon impact points, dictated by the values in the explTable
-  ["damage_model"] = false, --allow blast wave to affect ground unit movement and weapons
+  ["damage_model"] = true, --allow blast wave to affect ground unit movement and weapons
   ["blast_search_radius"] = 100, --this is the max size of any blast wave radius, since we will only find objects within this zone
   ["cascade_damage_threshold"] = 0.1, --if the calculated blast damage doesn't exeed this value, there will be no secondary explosion damage on the unit.  If this value is too small, the appearance of explosions far outside of an expected radius looks incorrect.
-  ["game_messages"] = true, --enable some messages on screen
+  ["game_messages"] = false, --enable some messages on screen
   ["blast_stun"] = false, --not implemented
   ["unit_disabled_health"] = 30, --if health is below this value after our explosions, disable its movement 
   ["unit_cant_fire_health"] = 50, --if health is below this value after our explosions, set ROE to HOLD to simulate damage weapon systems
@@ -70,90 +82,8 @@ refreshRate = 0.1
 ----[[ ##### End of SCRIPT CONFIGURATION ##### ]]----
 
 explTable = {
-  ["FAB_100"] = 45,
-  ["FAB_250"] = 100,
-  ["FAB_250M54TU"]= 100,
-  ["FAB_500"] = 213,
-  ["FAB_1500"]  = 675,
-  ["BetAB_500"] = 98,
-  ["BetAB_500ShP"]= 107,
-  ["KH-66_Grom"]  = 108,
-  ["M_117"] = 201,
-  ["Mk_81"] = 60,
-  ["Mk_82"] = 118,
-  ["Mk_82Y"] = 118,
-  ["AN_M64"]  = 121,
-  ["Mk_83"] = 274,
-  ["Mk_84"] = 582,
-  ["MK_82AIR"]  = 118,
-  ["MK_82SNAKEYE"]= 118,
-  ["GBU_10"]  = 582,
-  ["GBU_12"]  = 118,
-  ["GBU_16"]  = 274,
-  ["KAB_1500Kr"]  = 675,
-  ["KAB_500Kr"] = 213,
-  ["KAB_500"] = 213,
-  ["GBU_31"]  = 582,
-  ["GBU_31_V_3B"] = 582,
-  ["GBU_31_V_2B"] = 582,
-  ["GBU_31_V_4B"] = 582,
-  ["GBU_32_V_2B"] = 274,
-  ["GBU_38"] = 118,
-  ["GBU_39"] = 89,
-  ["AGM_62"]  = 400,
-  ["GBU_24"]  = 582,
-  ["X_23"]  = 111,
-  ["X_23L"] = 111,
-  ["X_28"]  = 160,
-  ["X_25ML"]  = 89,
-  ["X_25MP"]  = 89,
-  ["X_25MR"]  = 140,
-  ["X_58"]  = 140,
-  ["X_29L"] = 320,
-  ["X_29T"] = 320,
-  ["X_29TE"]  = 320,
-  ["AGM_84D"] = 582,
-  ["AGM_84E"] = 274,
-  ["AGM_84H"] = 274,
-  ["AGM_88C"] = 89,
-  ["AGM_122"] = 15,
-  ["AGM_123"] = 274,
-  ["AGM_130"] = 582,
-  ["AGM_119"] = 176,
-  ["AGM_154A"] = 32,
-  ["AGM_154C"]  = 118,
-  ["AGM_154"] = 118,
-  ["S-24A"] = 24,
-  ["S-24B"] = 123,
-  ["S-25OF"]  = 194,
-  ["S-25OFM"] = 150,
-  ["S-25O"] = 150,
-  ["S_25L"] = 190,
-  ["S-5M"]  = 1,
-  ["C_8"]   = 4,
-  ["C_8OFP2"] = 3,
-  ["C_13"]  = 21,
-  ["C_24"]  = 123,
-  ["C_25"]  = 151,
-  ["HYDRA_70M15"] = 3,
-  ["Zuni_127"]  = 5,
-  ["ARAKM70BHE"]  = 4,
-  ["BR_500"]  = 118,
-  ["Rb 05A"]  = 217,
-  -- ["RBK_500AO"]  = 256,
-  -- ["RBK_250"]  = 128,
-  ["HEBOMB"]  = 40,
-  ["HEBOMBD"] = 40,
-  ["MK-81SE"] = 60,
-  ["AN-M57"]  = 56,
-  ["AN-M64"]  = 180,
-  ["AN-M65"]  = 295,
-  ["AN-M66A2"]  = 536,
-  ["HYDRA_70_M151"] = 4,
-  ["HYDRA_70_MK5"] = 4,
-  ["HYDRA_70_M282"] = 4,
-  ["HYDRA_70_M229"] = 8,
-  ["Vikhr_M"] = 11,
+
+  --*** WWII BOMBS ***
   ["British_GP_250LB_Bomb_Mk1"] = 100,           --("250 lb GP Mk.I")
   ["British_GP_250LB_Bomb_Mk4"] = 100,           --("250 lb GP Mk.IV")
   ["British_GP_250LB_Bomb_Mk5"] = 100,           --("250 lb GP Mk.V")
@@ -170,12 +100,7 @@ explTable = {
   ["British_AP_25LBNo1_3INCHNo1"] = 4,           --("RP-3 25lb AP Mk.I")
   ["British_HE_60LBSAPNo2_3INCHNo1"] = 4,        --("RP-3 60lb SAP No2 Mk.I")
   ["British_HE_60LBFNo1_3INCHNo1"] = 4,          --("RP-3 60lb F No1 Mk.I")
-  ["WGr21"] = 4,                                 --("Werfer-Granate 21 - 21 cm UnGd air-to-air rocket")
-  ["3xM8_ROCKETS_IN_TUBES"] = 4,                 --("4.5 inch M8 UnGd Rocket")
-  ["AN_M30A1"] = 45,                             --("AN-M30A1 - 100lb GP Bomb LD")
-  ["AN_M57"] = 100,                              --("AN-M57 - 250lb GP Bomb LD")
-  ["AN_M65"] = 400,                              --("AN-M65 - 1000lb GP Bomb LD")
-  ["AN_M66"] = 800,                              --("AN-M66 - 2000lb GP Bomb LD")
+
   ["SC_50"] = 20,                                --("SC 50 - 50kg GP Bomb LD")
   ["ER_4_SC50"] = 20,                            --("4 x SC 50 - 50kg GP Bomb LD")
   ["SC_250_T1_L2"] = 100,                        --("SC 250 Type 1 L2 - 250kg GP Bomb LD")
@@ -185,62 +110,276 @@ explTable = {
   ["SC_500_L2"] = 213,                           --("SC 500 L2 - 500kg GP Bomb LD")
   ["SD_250_Stg"] = 100,                          --("SD 250 Stg - 250kg GP Bomb LD")
   ["SD_500_A"] = 213,                            --("SD 500 A - 500kg GP Bomb LD")
+
+  --*** WWII CBU ***
+  -- /!\ Use with caution, may explode your aircraft
   ["AB_250_2_SD_2"] = 100,                       --("AB 250-2 - 144 x SD-2, 250kg CBU with HE submunitions")
   ["AB_250_2_SD_10A"] = 100,                     --("AB 250-2 - 17 x SD-10A, 250kg CBU with 10kg Frag/HE submunitions")
   ["AB_500_1_SD_10A"] = 213,                     --("AB 500-1 - 34 x SD-10A, 500kg CBU with 10kg Frag/HE submunitions")
-  ["AGM_114K"] = 10,
-  ["AGM_65D"] = 38,
+
+  --*** WWII ROCKETS ***
+  ["3xM8_ROCKETS_IN_TUBES"] = 4,                 --("4.5 inch M8 UnGd Rocket")
+
+  ["WGr21"] = 4,                                 --("Werfer-Granate 21 - 21 cm UnGd air-to-air rocket")
+
+  --*** UNGUIDED BOMBS (UGB) ***
+  -- 500lbs or 250Kg bombs initial value : 118, replaced by 100
+  ["M_117"] = 201, -- F-86F, 750lbs
+
+  ["AN_M30A1"] = 45, -- A-4E, ("AN-M30A1 - 100lb GP Bomb LD")
+  ["AN_M57"] = 100, -- A-4E, ("AN-M57 - 250lb GP Bomb LD")
+  ["AN_M64"]  = 121, -- A-4E | F-86F, 500lbs
+  ["AN_M65"] = 400,-- A-4E, ("AN-M65 - 1000lb GP Bomb LD")
+  ["AN_M66"] = 800,-- ? ("AN-M66 - 2000lb GP Bomb LD")
+  ["AN-M66A2"]  = 536, -- A-4E
+  ["AN-M81"] = 100,-- A-4E, 
+  ["AN-M88"] = 100,-- A-4E,
+
+  ["Mk_81"] = 60, -- 250lbs
+  ["MK-81SE"] = 60,
+  ["Mk_82"] = 100, -- 500lbs
+  ["MK_82AIR"]  = 100,
+  ["MK_82SNAKEYE"]= 100,
+  ["Mk_83"] = 274, -- 1000lbs
+  ["Mk_84"] = 582, -- 2000lbs
+
+  ["HEBOMB"]  = 40, -- Viggen ?
+  ["HEBOMBD"] = 40, -- Viggen ?
+
+  ["SAMP125LD"] = 60, -- F1, 250lbs
+  ["SAMP250LD"] = 118, -- F1, 500lbs
+  ["SAMP250HD"] = 118,
+  ["SAMP400LD"] = 274, -- F1, 1000lbs
+  ["SAMP400HD"] = 274,
+
+  ["BR_250"] = 100,
+  ["BR_500"]  = 100,
+
+  ["FAB_100"] = 45,
+  ["FAB_250"] = 118,
+  ["FAB_250M54TU"] = 118,
+  ["FAB-250-M62"] = 118,
+  ["FAB_500"] = 213,
+  ["FAB_1500"]  = 675,
+
+  --*** UNGUIDED BOMBS WITH PENETRATOR / ANTI-RUNWAY ***
+  ["Durandal"] = 64,
+  ["BLU107B_DURANDAL"] = 64,
+
+  ["BAP_100"] = 32, -- M-2000
+  ["BAP-100"] = 32, -- M-339A
+  ["BAT-120"] = 32, -- M-339A
+
+  ["TYPE-200A"] = 107,
+
+  ["BetAB_500"] = 98,
+  ["BetAB_500ShP"]= 107,
+  
+  --*** GUIDED BOMBS (GBU) ***
+  ["GBU_10"]  = 582, -- 2000lbs
+  ["GBU_12"]  = 100, -- 500lbs
+  ["GBU_16"]  = 274, -- 1000lbs
+  ["GBU_24"]  = 582, -- 2000lbs
+  ["KAB_1500Kr"]  = 675, -- Su-30 mod
+  ["KAB_500Kr"] = 213, -- Su-25T
+  ["KAB_500"] = 213, -- ?
+
+  --*** CLUSTER BOMBS (CBU) ***
+  -- /!\ Use with caution, may explode your aircraft
+  -- Ammunition dispersion count as a hit, that's why value = 0
+
+  -- ["CBU_52B"] = 0, -- F-5E, explode aircraft
+  ["CBU_99"] = 0, -- Mk20 Rockeye, various US aircraft
+  ["ROCKEYE"] = 0, -- Mk20 Rockeye, various US aircraft
+  ["BLU_3B_GROUP"] = 0, -- A-4E
+  ["MK77mod0-WPN"] = 0, -- A-4E
+  ["MK77mod1-WPN"] = 0, -- A-4E
+  ["CBU_87"] = 0, -- A-10C | F-16CM | F/A-18C
+  ["CBU_103"] = 0, -- A-10C | F-16CM, CBU-87 with wind correction
+  ["CBU_97"] = 0, -- A-10C | F-16CM | F/A-18C
+  ["CBU_105"] = 0, -- A-10C | F-16CM, CBU-97 with wind correction
+
+  ["BELOUGA"] = 0, -- M-2000C | F1
+  ["BLG66_BELOUGA"] = 0, -- M-2000C | F1 | MB-339A
+  ["BL_755"] = 0, -- MB-339A
+
+  ["RBK_250"] = 0, -- FC3, RBK
+  ["RBK_250_275_AO_1SCH"] = 0, -- FC3, RBK
+  ["RBK_500"] = 0, -- FC3, RBK
+  ["RBK_500U"] = 0, --FC3, RBK
+  ["RBK_500AO"] = 0, --FC3, RBK
+  ["RBK_500U_OAB_2_5RT"] = 0, --FC3, RBK
+  -- ["BKF_AO2_5RT"] = 0, --FC3, KMGU, explode aircraft
+  -- ["BKF_PTAB2_5KO"] = 0, --FC3, KMGU, explode aircraft
+
+  --*** INS/GPS BOMBS (JDAM) ***
+  ["GBU_31"]  = 582, -- F/A-18C, 2000lbs
+  ["GBU_31_V_3B"] = 582,
+  ["GBU_31_V_2B"] = 582,
+  ["GBU_31_V_4B"] = 582,
+  ["GBU_32_V_2B"] = 202, -- F/A-18C, 1000lbs
+
+  ["GBU_38"]  = 100, -- F/A-18C, 500lbs
+  ["GBU_54_V_1B"] = 100, -- Harrier, 500lbs
+
+  --*** GLIDE BOMBS (JSOW) ***
+  ["AGM_154A"]  = 0, -- F-16CM | F/A-18C, Cluster
+  ["AGM_154C"]  = 305, -- F-16CM | F/A-18C
+
+  ["BK90_MJ1"] = 0, -- Viggen, Mjolnir
+  ["BK90_MJ1_MJ2"] = 0, -- Viggen, Mjolnir
+  ["BK90_MJ2"] = 0, -- Viggen, Mjolnir
+
+  ["LS-6-100"] = 45, -- JF-17
+  ["LS-6-250"] = 100, -- JF-17
+  ["LS-6-500"] = 274, -- JF-17
+  ["GB-6"] = 0, -- JF-17, Cluster
+  ["GB-6-HE"] = 0, -- JF-17, Cluster
+  ["GB-6-SFW"] = 0, -- JF-17, Cluster
+
+  --*** AIR GROUND MISSILE (AGM) ***
+  ["AGM_62"]  = 400, -- F/A-18C, WallEye
+  ["AGM_65D"] = 38, -- Mavericks
   ["AGM_65E"] = 80,
   ["AGM_65F"] = 80,
   ["AGM_65G"] = 80,
   ["AGM_65H"] = 38,
   ["AGM_65K"] = 80,
   ["AGM_65L"] = 80,
-  ["HOT3"] = 15,
-  ["AGR_20A"] = 8,
-  ["AGR_20_M282"] = 8,                           -- A10C APKWS
-  ["GBU_54_V_1B"] = 118,
-  -- ["CBU_52B"] = 32,                           -- CBUs
-  -- ["CBU_87"] = 32,
-  ["CBU_97"] = 32,
-  -- ["CBU_99"] = 32,
-  ["CBU_105"] = 32,
-  -- ["ROCKEYE"] = 32,
-  ["MATRA_F4_SNEBT251"] = 8,                     -- Mirage F1 Section
+  ["AGM_123"] = 274,
+  ["AGM_130"] = 582,
+  ["AGM_119"] = 176,
+  ["AGM_114"] = 10, -- AH-64D, HellFire L
+  ["AGM_114K"] = 10, -- AH-64D, Hellfire K
+
+  ["Rb 05A"]  = 217, --Viggen
+  ["RB75A"] = 38, -- Viggen, Maverick A        /!\ TO TEST
+  ["RB75B"] = 38, -- Viggen, Maverick B
+  ["RB75T"] = 80, -- Viggen, Maverick T        /!\ TO TEST
+  ["HOT3_MBDA"] = 15, -- Gazelle
+  ["C-701T"] = 38, --JF-17, Maverick
+  ["C-701IR"] = 38, --JF-17, Maverick
+
+  ["Vikhr_M"] = 11, -- Ka-50 | Su25T
+  ["Vikhr_9M127_1"] = 11, -- Ka-50 | Su25T
+  ["AT_6"] = 11, --Mi-24P
+  ["Ataka_9M120"] = 11, --Mi-24P
+  ["Ataka_9M120F"] = 11, --Mi-24P
+  ["P_9M117"] = 0, --?
+
+  ["KH-66_Grom"]  = 108, -- MiG-21Bis
+  ["X_23"]  = 111,
+  ["X_23L"] = 111,
+  ["X_28"]  = 160,
+  ["X_25ML"]  = 89,
+  ["X_25MR"]  = 140,
+  ["X_29L"] = 320,
+  ["X_29T"] = 320,
+  ["X_29TE"]  = 320,
+
+  --*** ANTI-RADAR MISSILE (ARM) ***
+  ["AGM_88C"] = 89, -- F/A-18C?
+  ["AGM_88"] = 89, -- F-16CM
+  ["AGM_122"] = 15, -- Harrier
+  ["LD-10"] = 89, -- JF-17
+  ["AGM_45A"] = 38, -- A-4E, Shrike       /!\ TO TEST
+
+  ["X_58"] = 140, -- Su-25T, Kh-58
+  ["X_25MP"] = 89, -- Su-25T, Kh-25MP/MPU
+
+  --*** ANTI-SHIP MISSILE (ASh) ***
+  ["AGM_84D"] = 488, -- F/A-18C, Harpoon
+  ["Rb 15F"] = 500, -- Viggen
+  ["C-802AK"] = 500, -- JF-17
+
+  --*** CRUISE MISSILE ***
+  ["CM-802AKG"] = 488, -- JF-17       /!\ TO TEST
+  ["AGM_84E"] = 488, -- F/A-18C, SLAM       /!\ TO TEST
+  ["AGM_84H"] = 488, -- F/A-18C, SLAM-ER       /!\ TO TEST
+  ["X_59M"] = 488, -- Su-30 or Mods       /!\ TO TEST
+
+  --*** ROCKETS ***
+  -- HE / HEI : 5
+  -- AP / HEAT : 8
+
+  ["HYDRA_70M15"] = 5,  -- ?
+  ["HYDRA_70_MK1"] = 5, -- UH-1H, HE
+  ["HYDRA_70_MK5"] = 8, -- UH-1H, HEAT
+  -- HYDRA_70_MK61 : Practice Smoke
+
+  ["HYDRA_70_M151"] = 5, -- AH-64D, HE
+  ["HYDRA_70_M151_M433"] = 5, -- AH-64D, HE
+  ["HYDRA_70_M229"] = 5, --AH-64D, HE
+  -- HYDRA_70_M156 : Practice Smoke
+  -- HYDRA_70_M257 : IL
+  -- HYDRA_70_M274 : Practice Smoke
+  -- HYDRA_70_WTU1B : Practice Smoke
+
+  ["FFAR Mk1 HE"] = 5, -- F-5E | A-4E, HE
+  ["FFAR Mk5 HEAT"] = 8, -- F-5E | A-4E, HEAT
+  -- FFAR M156, M257, M274 : Target Marking
+
+  ["HVAR"] = 5, -- F-86, HE
+
+  ["Zuni_127"]  = 8,
+
+  ["ARAKM70BHE"]  = 5, -- Viggen
+  ["ARAKM70BAP"]  = 8, -- Viggen
+
+  ["SNEB_TYPE251_F1B"] = 4,
+  ["SNEB_TYPE252_F1B"] = 4,
+  ["SNEB_TYPE253_F1B"] = 5,
+  ["SNEB_TYPE256_F1B"] = 6,
+  ["SNEB_TYPE257_F1B"] = 8,
+  ["SNEB_TYPE251_F4B"] = 4,
+  ["SNEB_TYPE252_F4B"] = 4,
+  ["SNEB_TYPE253_F4B"] = 5,
+  ["SNEB_TYPE256_F4B"] = 6,
+  ["SNEB_TYPE257_F4B"] = 8,
+  ["SNEB_TYPE251_H1"] = 4,
+  ["SNEB_TYPE252_H1"] = 4,
+  ["SNEB_TYPE253_H1"] = 5,
+  ["SNEB_TYPE256_H1"] = 6,
+  ["SNEB_TYPE257_H1"] = 8,
+
+  ["MATRA_F4_SNEBT251"] = 8, -- F1
   ["MATRA_F4_SNEBT253"] = 8,
   ["MATRA_F4_SNEBT256"] = 8,
   ["MATRA_F1_SNEBT253"] = 8,
   ["MATRA_F1_SNEBT256"] = 8,
-  ["SNEB_TYPE251_F1B"] = 8,
-  ["SNEB_TYPE252_F1B"] = 8,
-  ["SNEB_TYPE253_F1B"] = 8,
-  ["SNEB_TYPE256_F1B"] = 8,
-  ["SNEB_TYPE257_F1B"] = 8,
-  ["SAMP400LD"] = 274,
-  ["SAMP400HD"] = 274,
-  ["SAMP250LD"] = 118,
-  ["SAMP250HD"] = 118,
-  ["SAMP125LD"] = 64,
-  ["BR_250"] = 118,
-  -- ["BELOUGA"] = 32,
-  -- ["BLG66_BELOUGA"] = 32,
-  ["Durandal"] = 64,
-  ["BLU107B_DURANDAL"] = 64,
-  ["FFAR Mk5 HEAT"] = 8,                         -- Rockets
-  ["FFAR Mk1 HE"] = 8,
-  ["C5"] = 8,                                    -- Mig19P Rockets
-  ["GB-6"] = 32,
-  ["GB-6-HE"] = 305,
-  ["GB-6-SFW"] = 32,
-  ["LS-6-100"] = 60,
-  ["LS-6-250"] = 118,
-  ["LS-6-500"] = 274,
-  ["BRM-1_90MM"] = 8,
-  ["C-701IR"] = 38,
-  ["C-701T"] = 38,
-  ["LD-10"] = 89,
-  ["BGM_109B"] = 274,
-  ["CM-802AKG"] = 274,
+
+  ["TELSON8_SNEBT251"] = 4, -- Gazelle, HE
+  ["TELSON8_SNEBT253"] = 8, -- Gazelle, HEAT
+  ["TELSON8_SNEBT256"] = 4, -- Gazelle, HE/FRAG
+  ["TELSON8_SNEBT257"] = 6, -- Gazelle, HE/FRAG lg
+  -- 250, 252, 254, 259E : Practice
+
+  ["ARF8M3API"] = 8, -- MB-339A, API
+
+  ["UG_90MM"] = 8, -- JF-17, HEAT
+
+  ["S-24A"] = 24,
+  --["S-24B"] = 123,
+  ["S-25OF"]  = 194,
+  ["S-25OFM"] = 150,
+  ["S-25O"] = 150,
+  ["S-25-O"] = 150,
+  ["S_25L"] = 190,
+  ["S-5M"]  = 1,
+  ["C_5"] = 8, -- Su-25T, S-5
+  ["C5"] = 5, -- MiG-19P, S-5
+  ["C_8"]   = 4,
+  ["C_8OFP2"] = 3,
+  ["C_13"]  = 21,
+  ["C_24"]  = 123,
+  ["C_25"]  = 151,
+
+  --*** LASER ROCKETS ***
+  ["AGR_20"] = 8, -- ?        /!\ TO TEST
+  ["AGR_20A"] = 8, -- ?        /!\ TO TEST
+  ["AGR_20_M282"] = 8, -- A10C, APKWS        /!\ TO TEST
+  ["Hydra_70_M282_MPP"] = 8, -- ?         /!\ TO TEST
+  ["BRM-1_90MM"] = 8, -- JF-17
 }
 
 
