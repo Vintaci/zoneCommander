@@ -949,6 +949,8 @@ do -- the main scope
 			local units_per_run = math.ceil(#lunits/20)
 			if units_per_run < 5 then
 				units_per_run = 5
+			elseif units_per_run > 25 then -- Edited, add max limit for units_per_run
+				units_per_run = 25
 			end
 
 			for i = 1, #lunits do
@@ -1431,7 +1433,7 @@ do -- the main scope
 					writeGroups[x] = nil
 				end
 			end
-			if x%savesPerRun == 0 then
+			if i%savesPerRun == 0 then -- Edited, fix wrong counter variable, default = x%savesPerRun == 0
 				coroutine.yield()
 			end
 			if timer.getTime() > lastUpdateTime then
@@ -1668,41 +1670,7 @@ do -- the main scope
         log:warn('Init time: $1', timer.getTime())
 
 		-- call main the first time therafter it reschedules itself.
-		-- mist.main() -- Edited, refactor the main loop, start
-		timer.scheduleFunction(function()
-			checkSpawnedEventsNew()
-			
-			if not coroutines.updateDBTables then
-				coroutines.updateDBTables = coroutine.create(updateDBTables)
-			end
-
-			coroutine.resume(coroutines.updateDBTables)
-
-			if coroutine.status(coroutines.updateDBTables) == 'dead' then
-				coroutines.updateDBTables = nil
-			end
-
-			return timer.getTime() + 0.25
-		end, {}, timer.getTime() + 0.25)
-
-		timer.scheduleFunction(function()
-			if not coroutines.updateAliveUnits then
-				coroutines.updateAliveUnits = coroutine.create(updateAliveUnits)
-			end
-
-			coroutine.resume(coroutines.updateAliveUnits)
-
-			if coroutine.status(coroutines.updateAliveUnits) == 'dead' then
-				coroutines.updateAliveUnits = nil
-			end
-
-			return timer.getTime() + 0.1
-		end, {}, timer.getTime() + 0.1)
-
-		timer.scheduleFunction(function()
-			doScheduledFunctions()
-			return timer.getTime() + 0.5
-		end, {}, timer.getTime() + 0.5) -- Edited, refactor the main loop, end
+		mist.main()
 		--log:msg('MIST version $1.$2.$3 loaded', mist.majorVersion, mist.minorVersion, mist.build)
         
         mist.scheduleFunction(verifyDB, {}, timer.getTime() + 1)
@@ -1713,10 +1681,10 @@ do -- the main scope
 	-- Run 100 times per second.
 	-- You shouldn't call this function.
 	function mist.main()
-		timer.scheduleFunction(mist.main, {}, timer.getTime() + 0.01)	--reschedule first in case of Lua error
+		-- timer.scheduleFunction(mist.main, {}, timer.getTime() + 0.01)	--reschedule first in case of Lua error -- Edited, reschedule last to avoid server not keeping up
 
 		updateTenthSecond = updateTenthSecond + 1
-		if updateTenthSecond == 20 then
+		if updateTenthSecond == 5 then -- Edited, change schedule duration, default = 20
 			updateTenthSecond = 0
 
 			checkSpawnedEventsNew()
@@ -1733,9 +1701,9 @@ do -- the main scope
 		end
 
 		--updating alive units
-		updateAliveUnitsCounter = updateAliveUnitsCounter + 1
-		if updateAliveUnitsCounter == 5 then
-			updateAliveUnitsCounter = 0
+		-- updateAliveUnitsCounter = updateAliveUnitsCounter + 1 -- Edited, change schedule duration
+		-- if updateAliveUnitsCounter == 5 then
+		-- 	updateAliveUnitsCounter = 0
 
 			if not coroutines.updateAliveUnits then
 				coroutines.updateAliveUnits = coroutine.create(updateAliveUnits)
@@ -1746,9 +1714,10 @@ do -- the main scope
 			if coroutine.status(coroutines.updateAliveUnits) == 'dead' then
 				coroutines.updateAliveUnits = nil
 			end
-		end
+		-- end -- Edited, change schedule duration
         
 		doScheduledFunctions()
+		timer.scheduleFunction(mist.main, {}, timer.getTime() + 0.05) -- Edited, reschedule last to avoid server not keeping up, change schedule duration, default = 0.01
 	end -- end of mist.main
 
 	--- Returns next unit id.
