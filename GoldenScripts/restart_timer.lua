@@ -70,6 +70,6 @@ local function missionEnd()
     end
 end
 
-missionEndScheduler = mist.scheduleFunction(missionEnd, {}, timer.getTime() + 90, 90)
+missionEndScheduler = mist.scheduleFunction(missionEnd, {}, timer.getTime() + 30, 30)
 
 -- Mission Complete Restart Done
