@@ -1431,11 +1431,12 @@ do -- the main scope
 					writeGroups[x] = nil
 				else
 					writeGroups[x] = nil
+                end
+			-- end -- Edited, fix counter variable x out of scope
+				if x%savesPerRun == 0 then
+					coroutine.yield()
 				end
-			end
-			if i%savesPerRun == 0 then -- Edited, fix wrong counter variable, default = x%savesPerRun == 0
-				coroutine.yield()
-			end
+            end -- Edited, fix counter variable x out of scope
 			if timer.getTime() > lastUpdateTime then
 				lastUpdateTime = timer.getTime()
 			end
