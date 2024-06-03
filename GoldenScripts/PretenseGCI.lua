@@ -206,7 +206,7 @@ do
             end
 
             self.radars = radars
-            env.info("GCI - tracking "..#radars.." radar enabled units")
+            -- env.info("GCI - tracking "..#radars.." radar enabled units") -- Edited, remove log because this script is quite stable
 
             return time+10
         end, {context = self}, timer.getTime()+1)
@@ -223,7 +223,7 @@ do
                 end
             end
 
-            env.info("GCI - reporting to "..plyCount.." players")
+            -- env.info("GCI - reporting to "..plyCount.." players") -- Edited, remove log because this script is quite stable
             if plyCount >0 then
                 local dect = {}
                 local dcount = 0
@@ -245,7 +245,7 @@ do
                     end
                 end
                 
-                env.info("GCI - aware of "..dcount.." enemy units")
+                -- env.info("GCI - aware of "..dcount.." enemy units") -- Edited, remove log because this script is quite stable
 
                 for name, data in pairs(self.players) do
                     if data.unit and data.unit:isExist() then
@@ -295,7 +295,7 @@ do
                             end
                         end
 
-                        env.info("GCI - "..#closeUnits.." enemy units within "..wr.."m of "..name)
+                        -- env.info("GCI - "..#closeUnits.." enemy units within "..wr.."m of "..name) -- Edited, remove log because this script is quite stable
                         if #closeUnits > 0 then
                             table.sort(closeUnits, function(a, b) return a.range < b.range end)
 
