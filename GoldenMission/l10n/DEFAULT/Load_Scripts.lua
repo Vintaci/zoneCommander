@@ -19,6 +19,7 @@ local script_list =
     "WeaponCooldown.lua",
     "zoneCommander.lua",
     "zoneSetup.lua",
+    "unlock_slots_in_zones.lua",
     "restart_timer.lua",
     "PretenseGCI.lua",
     "Hercules_Cargo.lua",
