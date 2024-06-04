@@ -51,58 +51,27 @@ local zoneUpgrades = {
 		blue = blueUpgrades.airfield,
 		red = { "r-defense-sam-cram", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-defense-sam-radar-medium", "r-defense-sam-radar-far" }
 	},
-	blueAirfield = {
-		blue = blueUpgrades.airfield,
-		red = {}
+	port = {
+		blue = blueUpgrades.normal,
+		red = { "r-defense-mech", "r-defense-sam-ir", "r-defense-sam-radar-close", "r-defense-sam-radar-medium", "r-ship" }
 	},
-	-- For zones on sea, their "upgrades" MUST ONLY have one side
-	blueShip = {
-		blue = { "bShip", "bShip", "bShip", "bShip", "bShip" },
-		red = {}
-	},
-	redShip = {
-		blue = {},
-		red = { "rShip", "rShip", "rShip" }
-	},
-}
-
 }
 
 local zones = {
-	carrier = {
-		zoneCommanderProperties = {
-			zone = "Carrier",
-			side = 2, -- 0 = neutral, 1 = red, 2 = blue
-			level = 5,
-			upgrades = zoneUpgrades.blueShip,
-			crates = cargos_accepts.all,
-			flavorText = hint,
-			income = 0,
-		},
-		dispatches = {
-			{
-				name = "b-patrol-cvn73-cvn73-f18c",
-				mission = "patrol", -- patrol, supply, attack
-				targetzone = "Carrier",
-				type = "carrier_air" -- air, carrier_air, surface
-			},
-		},
-		criticalObjects = {},
-		connections = {},
-	},
-
 	sochi = {
 		zoneCommanderProperties = {
 			zone = "Sochi",
-			side = 2,
+			side = 2, -- 0 = neutral, 1 = red, 2 = blue
 			level = 5,
-			upgrades = zoneUpgrades.blueAirfield,
+			upgrades = zoneUpgrades.airfield,
 			crates = cargos_accepts.sochi,
 			flavorText = hint,
 			income = 1,
 		},
 		dispatches = {
-			{ name = "b-attack-sochi-gudauta-av8b", mission = "attack", targetzone = "Gudauta" },
+			-- mission: "patrol", "supply", "attack"
+			-- type: "air", "carrier_air", "surface"
+			{ name = "b-attack-sochi-gudauta-av8b", mission = "attack", targetzone = "Gudauta", type = "air" },
 
 			{ name = "b-patrol-sochi-sochi-f18c", mission = "patrol", targetzone = "Sochi" },
 
@@ -301,7 +270,7 @@ local zones = {
 			zone = "Port",
 			side = 1,
 			level = 3,
-			upgrades = zoneUpgrades.airfield,
+			upgrades = zoneUpgrades.port,
 			crates = cargos_accepts.port,
 			flavorText = hint,
 			income = 1,
@@ -959,10 +928,6 @@ local redSupports = {
 				name = "Batumi",
 				side = 1,
 			},
-			target = {
-				name = "Carrier",
-				side = 2,
-			},
 		},
 		hint = {
 			side = 2,
@@ -1006,10 +971,6 @@ local redSupports = {
 			base = {
 				name = "Batumi",
 				side = 1,
-			},
-			target = {
-				name = "Carrier",
-				side = 2,
 			},
 		},
 		hint = {
@@ -1139,19 +1100,20 @@ BudgetCommander:new({ battleCommander = bc, side = 1, decissionFrequency = 15 * 
 
 -- Red Support Done
 
--- Red Carrier Patrols
+-- Spawn Carrier Patrols
 -- This is special as the zone is not registed as a normal zone
 
-local redCarrierPatrols = {
+local carrierPatrols = {
 	["r-cvn61"] = "r-patrol-rcvn61-rcvn61-su33",
 	["r-cvn73"] = "r-patrol-rcvn73-rcvn73-f18c",
 	["r-cvn74"] = "r-patrol-rcvn74-rcvn74-f14b",
+	["b-cvn73"] = "b-patrol-bcvn73-bcvn73-f18c",
 }
 
-GroupFunctions.destroyGroupsByNames(redCarrierPatrols)
+GroupFunctions.destroyGroupsByNames(carrierPatrols)
 
-local redCarrierAirGroupSpawn = function(event, sender)
-	for key, value in pairs(redCarrierPatrols) do
+local carrierAirGroupSpawn = function(event, sender)
+	for key, value in pairs(carrierPatrols) do
 		if not GroupFunctions.isGroupDeadByName(key) then -- Make sure the carrier is alive
 			local group = Group.getByName(value)
 			if GroupFunctions.isGroupDead(group) then
@@ -1165,9 +1127,9 @@ local redCarrierAirGroupSpawn = function(event, sender)
 	end
 end
 
-mist.scheduleFunction(redCarrierAirGroupSpawn, {}, timer.getTime() + 300, 900) -- The detect duration should allow aircrafts' first-time take off, at least 60 seconds
+mist.scheduleFunction(carrierAirGroupSpawn, {}, timer.getTime() + 300, 900) -- The detect duration should allow aircrafts' first-time take off, at least 60 seconds
 
--- Red Carrier Patrols Done
+-- Spawn Carrier Patrols Done
 
 -- Logistics Functions
 -- Pilot rescue, cargo transport, etc. in F10 Radio Menu
