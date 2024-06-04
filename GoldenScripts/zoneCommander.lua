@@ -684,7 +684,7 @@ do
 		GlobalSettings.resetDifficultyScaling()
 		for i,v in pairs(GlobalSettings.respawnTimers[coalition]) do
 			for i2,v2 in pairs(v) do
-				GlobalSettings.respawnTimers[coalition][i][i2] = math.floor(GlobalSettings.respawnTimers[coalition][i][i2] / value) -- Edited, default = math.floor(GlobalSettings.respawnTimers[coalition][i][i2] * value)
+				GlobalSettings.respawnTimers[coalition][i][i2] = math.floor(GlobalSettings.respawnTimers[coalition][i][i2] / math.max(0.1, value)) -- Edited, default = math.floor(GlobalSettings.respawnTimers[coalition][i][i2] * value)
 			end
 		end
 	end
