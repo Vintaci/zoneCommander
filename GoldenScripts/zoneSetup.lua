@@ -6,10 +6,6 @@ if lfs then
 	lfs.mkdir(dir)
 	filepath = dir..filepath
 	env.info('Foothold - Save file path: '..filepath)
-
-	-- if (file.exists(filepath)) then
-	-- 	file.copy(filepath, filepath..".bak")
-	-- end
 end
 
 -- Difficulty scaling
@@ -23,31 +19,6 @@ local difficulty = { start = 1, min = 0, max = 7, escalation = 1, fade = 0.001, 
 bc = BattleCommander:new(filepath, 30, 30, difficulty) -- This MUST be global, as zoneCommander.lua gets zone list though it for support menu to work
 
 -- BattleCommander Initialization Done
-
--- Utility Functions for Cargo Lists
-
-local function merge(tbls)
-	local res = {}
-	for i,v in ipairs(tbls) do
-		for i2,v2 in ipairs(v) do
-			table.insert(res,v2)
-		end
-	end
-	
-	return res
-end
-
-local function allExcept(tbls, except)
-	local tomerge = {}
-	for i,v in pairs(tbls) do
-		if i~=except then
-			table.insert(tomerge, v)
-		end
-	end
-	return merge(tomerge)
-end
-
--- Utility Functions for Cargo Lists Done
 
 -- Zone Definition
 
@@ -690,16 +661,6 @@ InitZones()
 
 -- Zone Initialization Done
 
--- Resource Point Triggers
-
--- local showCredIncrease = function(event, sender)
--- 	trigger.action.outTextForCoalition(sender.side, sender.zoneCommanderProperties.name .. " 已被我方占领！\n收入增加：" .. math.floor(sender.income * 360) .. " 点数/每小时", 90)
--- end
-
--- zones.gudauta.zoneCommander:registerTrigger('captured', showCredIncrease, 'gudauta-captured')
-
--- Resource Point Triggers Done
-
 -- Blue Support
 
 local seadTargetMenu = nil
@@ -891,7 +852,6 @@ end,
 			return '仅允许侦查敌方占领区'
 		end
 	end)
-
 
 local smoketargets = function(tz)
 	local units = {}
@@ -1343,45 +1303,6 @@ end
 mist.scheduleFunction(spawnFarpTrucks, {}, timer.getTime() + 5, 90)
 
 -- Spawn FARP Trucks Done
-
--- Spawn Cargos
-
--- Clear all cargos on mission start
--- for i,v in pairs(cargos_all) do
--- 	for ix,vx in ipairs(v) do
--- 		local obj = StaticObject.getByName(vx.."-1")
--- 		if obj then
--- 			obj:destroy()
--- 		end
--- 	end
--- end
-
--- local function spawnCargos()
--- 	for i,v in pairs(cargos_all) do
--- 		local zone = bc:getZoneByName(i)
--- 		if zone then
--- 			if zone.side==2 then
--- 				for ix,vx in ipairs(v) do
--- 					local obj = StaticObject.getByName(vx)
--- 					if not obj then
--- 						mist.respawnGroup(vx)
--- 					end
--- 				end
--- 			else
--- 				for ix,vx in ipairs(v) do
--- 					local obj = StaticObject.getByName(vx.."-1")
--- 					if obj then
--- 						obj:destroy()
--- 					end
--- 				end
--- 			end
--- 		end
--- 	end
--- end
-
--- mist.scheduleFunction(spawnCargos, {}, timer.getTime() + 3, 90)
-
--- Spawn Cargos Done
 
 -- Delete Ejected Pilots
 
