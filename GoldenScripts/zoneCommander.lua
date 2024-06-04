@@ -2198,7 +2198,7 @@ do
 				end
 			end
 			
-			self:weedOutRemainingUnits()
+			-- self:weedOutRemainingUnits() -- Edited, an attempt to solve mission progress loading failure
 		else
 			if Utils.getTableSize(self.built) < self.level then
 				for i,v in pairs(upgrades) do
