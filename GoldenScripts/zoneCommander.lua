@@ -99,11 +99,18 @@ do
 	function CustomZone:spawnGroup(grname, forceFirst)
 		local spname = self.name
 		local spawnzone = nil
+		local disperse = true -- Edited, spawn ships with disperse disabled
 		
 		if forceFirst and trigger.misc.getZone(spname..'-0')then
 			spawnzone = spname..'-0'
 		end
-		
+
+		-- Edited, support spawning ships on sea
+		if nil ~= string.find(grname, "ship") then
+			spawnzone = spname .. "-Ship"
+			disperse = false
+		end
+
 		if not spawnzone then
 			spawnzone = self:getRandomSpawnZone()
 		end
@@ -111,21 +118,21 @@ do
 		if spawnzone then
 			spname = spawnzone
 		end
-	
+		
 		local pnt = mist.getRandomPointInZone(spname)
 		local vars = {
             validTerrain = {'LAND', 'ROAD', 'RUNWAY', 'WATER'}, -- Edited, allow ground groups (including ships) spawn on all types of terrain
 			groupName = grname,
 			point = pnt,
 			action = 'clone',
-			disperse = true,
+			disperse = disperse, -- Edited, spawn ships with disperse disabled, default = true
 			initTasks = true
 		}
 		
 		local newgr = mist.teleportToPoint(vars)
 		
 		if not newgr then
-			newgr = mist.cloneInZone(grname, spname, true, nil, {initTasks = true})
+			newgr = mist.cloneInZone(grname, spname, disperse, nil, {initTasks = true, anyTerrain = true}) -- Edited, spawn ships with disperse disabled, ignore terrain validation if first spawn attempt failed, default = {grname, spname, true, nil, {initTasks = true}}
 		end
 		
 		return newgr
