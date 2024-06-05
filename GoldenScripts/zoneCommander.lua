@@ -2297,7 +2297,7 @@ do
 		for i,v in pairs(self.built) do
 			local gr = Group.getByName(v)
 			local st = StaticObject.getByName(v)
-			if mist.groupIsDead(v) then -- Edited, use mist.groupIsDead() instead, default = gr and gr:getSize() == 0
+			if gr and gr:getSize() == 0 then
 				gr:destroy()
 			end
 			
@@ -2312,7 +2312,7 @@ do
 				if GlobalSettings.messages.grouplost then trigger.action.outText(self.zone..' lost group '..v, 5) end
 			end		
 			
-			if mist.groupIsDead(v) then -- Edited, use mist.groupIsDead() instead, default = gr and gr:getSize() == 0
+			if gr and gr:getSize() == 0 then
 				self.built[i] = nil
 				if GlobalSettings.messages.grouplost then trigger.action.outText(self.zone..' lost group '..v, 5) end
 			end	
