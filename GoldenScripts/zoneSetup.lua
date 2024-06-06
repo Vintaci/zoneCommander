@@ -1150,6 +1150,7 @@ local farpTrucks = {
 	["Senaki"] = "farp-trucks-senaki",
 	["Kobuleti"] = "farp-trucks-kobuleti",
 	["Kutaisi"] = "farp-trucks-kutaisi",
+	["Batumi"] = "farp-trucks-batumi",
 	["Alpha"] = "farp-trucks-alpha",
 	["Bravo"] = "farp-trucks-bravo",
 	["Radio"] = "farp-trucks-radio",

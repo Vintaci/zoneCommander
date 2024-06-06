@@ -214,6 +214,7 @@ ctld.logisticUnits = { -- Edited, use farps as spawn location
     "farp-senaki-1",
     "farp-kobuleti-1",
     "farp-kutaisi-1",
+    "farp-batumi-1",
     "farp-alpha-1",
     "farp-bravo-1",
     "farp-charlie-1",
