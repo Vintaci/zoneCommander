@@ -902,10 +902,9 @@ local redSupports = {
 		name = "r-support-ship-batumi-carrier",
 		description = "Ship Attacking from Batumi to Blue Carrier",
 		price = 1000,
-		random = 50, -- Any value <= 0 or >= 100 will always spawn all groups
+		random = 0,
 		groupNames = {
 			"r-support-ship-batumi-carrier-1",
-			"r-support-ship-batumi-carrier-2",
 		},
 		zones = {
 			base = {
@@ -921,7 +920,7 @@ local redSupports = {
 	shipAttackingFromPortToSochi = {
 		name = "r-support-ship-port-sochi",
 		description = "Ship Attacking from Port to Sochi",
-		price = 750,
+		price = 1000,
 		random = 0, -- Any value <= 0 or >= 100 will always spawn all groups
 		groupNames = {
 			"r-support-ship-port-sochi-1",
@@ -1012,7 +1011,7 @@ local redSupports = {
 	rocketFromSukhumiToGudauta = {
 		name = "r-support-sukhumi-gudauta-rocket",
 		description = "Rocket Attack from Sukhumi to Gudauta",
-		price = 250,
+		price = 100,
 		random = 0,
 		groupNames = {
 			"r-support-sukhumi-gudauta-rocket"
