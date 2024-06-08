@@ -2895,6 +2895,7 @@ do
 	LogisticCommander.allowedTypes['UH-1H'] = true
 	LogisticCommander.allowedTypes['Mi-8MT'] = true
 	LogisticCommander.allowedTypes['Hercules'] = true
+	LogisticCommander.allowedTypes['OH58D'] = true -- Edited, add OH-58D to logistic menu
 	
 	LogisticCommander.maxCarriedPilots = 4
 	
