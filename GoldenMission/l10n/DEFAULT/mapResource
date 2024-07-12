@@ -2,7 +2,7 @@ mapResource =
 {
     ["ResKey_ImageBriefing_90"] = "donation.jpg",
     ["ResKey_ImageBriefing_93"] = "annoucement.jpg",
-    ["ResKey_Action_85"] = "Load_Scripts_Buta.lua",
+    ["ResKey_Action_85"] = "Load_Scripts.lua",
     ["ResKey_ImageBriefing_89"] = "donation.jpg",
     ["ResKey_ImageBriefing_91"] = "annoucement.jpg",
     ["ResKey_ImageBriefing_92"] = "annoucement.jpg",
