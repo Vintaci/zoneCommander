@@ -1143,13 +1143,13 @@ HercCargoDropSupply.init(bc)
 -- Spawn FARP Trucks
 
 local farpTrucks = {
-	["Sochi"] = "farp-trucks-sochi",
-	["Gudauta"] = "farp-trucks-gudauta",
-	["Sukhumi"] = "farp-trucks-sukhumi",
-	["Senaki"] = "farp-trucks-senaki",
-	["Kobuleti"] = "farp-trucks-kobuleti",
-	["Kutaisi"] = "farp-trucks-kutaisi",
-	["Batumi"] = "farp-trucks-batumi",
+	-- ["Sochi"] = "farp-trucks-sochi",
+	-- ["Gudauta"] = "farp-trucks-gudauta",
+	-- ["Sukhumi"] = "farp-trucks-sukhumi",
+	-- ["Senaki"] = "farp-trucks-senaki",
+	-- ["Kobuleti"] = "farp-trucks-kobuleti",
+	-- ["Kutaisi"] = "farp-trucks-kutaisi",
+	-- ["Batumi"] = "farp-trucks-batumi",
 	["Alpha"] = "farp-trucks-alpha",
 	["Bravo"] = "farp-trucks-bravo",
 	["Radio"] = "farp-trucks-radio",

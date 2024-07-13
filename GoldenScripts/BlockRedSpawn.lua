@@ -15,7 +15,7 @@ function ev:onEvent(event)
                     end
                 end
 
-            end,unit,timer.getTime()+20)
+            end,unit,timer.getTime()+10)
         end
     end
 end
