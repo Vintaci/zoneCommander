@@ -1,9 +1,7 @@
 mapResource = 
 {
     ["ResKey_ImageBriefing_90"] = "donation.jpg",
-    ["ResKey_ImageBriefing_93"] = "annoucement.jpg",
-    ["ResKey_Action_85"] = "Load_Scripts.lua",
+    ["ResKey_ImageBriefing_95"] = "banner2_1000x210.png.jpg",
     ["ResKey_ImageBriefing_89"] = "donation.jpg",
-    ["ResKey_ImageBriefing_91"] = "annoucement.jpg",
-    ["ResKey_ImageBriefing_92"] = "annoucement.jpg",
+    ["ResKey_Action_85"] = "Load_Scripts.lua",
 } -- end of mapResource
