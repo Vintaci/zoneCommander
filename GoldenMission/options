@@ -373,18 +373,10 @@ options =
             ["GUNPAC_Cold"] = 0.1,
             ["GUNPAC_Air"] = 0.2,
         }, -- end of ["A-10C_2"]
-        ["FC3"] = 
+        ["UH1M"] = 
         {
-            ["CPLocalList_Su-25"] = "default",
-            ["CPLocalList_Su-27"] = "default",
-            ["CPLocalList_A-10A"] = "default",
-            ["CPLocalList_Su-33"] = "default",
-            ["CPLocalList_F-15C"] = "default",
-            ["CPLocalList_MiG-29A"] = "default",
-            ["CPLocalList_J-11A"] = "default",
-            ["CPLocalList_MiG-29G"] = "default",
-            ["CPLocalList_MiG-29S"] = "default",
-        }, -- end of ["FC3"]
+            ["UNSPRUNG_CYCLIC"] = false,
+        }, -- end of ["UH1M"]
         ["A-10C"] = 
         {
             ["GUNPAC_Cold"] = 0.1,
@@ -468,10 +460,18 @@ options =
             ["AFTERBURNER_DETENT_VALUE"] = 70,
             ["AFTERBURNER_DETENT_DEADZONE"] = 10,
         }, -- end of ["F-14"]
-        ["UH1M"] = 
+        ["FC3"] = 
         {
-            ["UNSPRUNG_CYCLIC"] = false,
-        }, -- end of ["UH1M"]
+            ["CPLocalList_Su-25"] = "default",
+            ["CPLocalList_Su-27"] = "default",
+            ["CPLocalList_A-10A"] = "default",
+            ["CPLocalList_Su-33"] = "default",
+            ["CPLocalList_F-15C"] = "default",
+            ["CPLocalList_MiG-29A"] = "default",
+            ["CPLocalList_J-11A"] = "default",
+            ["CPLocalList_MiG-29G"] = "default",
+            ["CPLocalList_MiG-29S"] = "default",
+        }, -- end of ["FC3"]
         ["VRFree"] = 
         {
             ["handUseThrottle"] = false,

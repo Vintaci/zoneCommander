@@ -15,6 +15,7 @@ local script_list =
     "PretenseGCI.lua",
     "Hercules_Cargo.lua",
     "CTLD.lua",
+    "BlockRedSpawn.lua",
     -- "Splash_Damage_2_0.lua",
 }
 
